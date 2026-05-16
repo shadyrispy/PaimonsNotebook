@@ -1,0 +1,32 @@
+{
+  "name": "PaimonsNotebook Android Dev",
+  "image": "mcr.microsoft.com/devcontainers/android:1-35",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "17",
+      "maven": "true",
+      "gradle": "true"
+    }
+  },
+  "forwardPorts": [5005,
+    8080],
+  "postCreateCommand": "android-sdk update sdk --no-ui --filter build-tools-35.0.0,platforms;android-35 --use-http --all",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "mathIASon.gradle-language",
+        "richardwillis.vscode-gradle-language-support",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "remoteEnv": {
+    "ANDROID_HOME": "/usr/local/lib/android/sdk",
+    "ANDROID_SDK_ROOT": "/usr/local/lib/android/sdk"
+  },
+  "remoteUser": "root",
+  "runArgs": [
+    "--privileged"
+  ]
+}
