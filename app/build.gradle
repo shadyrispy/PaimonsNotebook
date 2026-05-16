@@ -43,7 +43,7 @@ android {
 
         //配置app center key
         configureEach {
-            it.buildConfigField("String", "APPCENTER_SECRET", key)
+            it.buildConfigField("String", "APPCENTER_SECRET", "\"" + (key ?: "") + "\"")
         }
     }
     compileOptions {
