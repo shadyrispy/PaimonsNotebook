@@ -2,14 +2,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.2.2'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24'
     }
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+}
 plugins {
     id 'com.android.application' version '8.2.2' apply false
     id 'com.android.library' version '8.2.2' apply false
@@ -18,20 +16,13 @@ plugins {
 }
 
 ext{
-    //compose 版本
     compose_version = '1.6.7'
     compose_compiler_version = '1.5.14'
-
-    //sdk版本
     compile_sdk = 35
     min_sdk = 26
     target_sdk = 34
-
-    //派蒙笔记本主程序版本信息
     paimons_notebook_version = 13
     paimons_notebook_version_name = '1.8.0'
-
-    //呜呜呜呜伯程序版本信息
     wubbaboo_version = 1
     wubbaboo_version_name = '1.0-beta'
 }

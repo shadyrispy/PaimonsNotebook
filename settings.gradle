@@ -2,11 +2,7 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
         gradlePluginPortal()
-        maven { url 'https://jitpack.io' }
     }
 }
 dependencyResolutionManagement {
@@ -14,8 +10,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://jitpack.io' }
     }
 }
