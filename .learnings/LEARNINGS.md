@@ -130,3 +130,64 @@ Android SDK 包含：
 - Last-Seen: 2026-05-16
 
 ---
+
+## [LRN-20260516-005] knowledge_gap
+
+**Logged**: 2026-05-16T01:05:00Z
+**Priority**: medium
+**Status**: pending
+**Area**: infra
+
+### Summary
+mise-android-sdk 插件存在 yq 版本兼容性问题
+
+### Details
+在尝试使用 mise-android-sdk 插件时，由于系统安装的 yq (3.1.0) 与插件期望的 yq 4.41.1+
+存在兼容性问题，导致无法正确解析 Android SDK 工具元数据。
+
+### Suggested Action
+1. 尝试使用兼容的 yq 版本
+2. 或直接下载 Android SDK Command-line Tools 并手动安装 SDK 组件
+
+### Metadata
+- Source: error
+- Related Files: .tool-versions
+- Tags: mise, android, sdk, yq, plugin
+- Pattern-Key: mise.plugin.compatibility
+- Recurrence-Count: 1
+- First-Seen: 2026-05-16
+- Last-Seen: 2026-05-16
+
+---
+
+## [LRN-20260516-006] best_practice
+
+**Logged**: 2026-05-16T01:10:00Z
+**Priority**: high
+**Status**: pending
+**Area**: infra
+
+### Summary
+使用 sdkmanager 可以有效地管理和安装 Android SDK 组件
+
+### Details
+在 Android SDK Command-line Tools 中，sdkmanager 是一个强大的工具，可以：
+- 安装特定的 SDK 平台（如 platforms;android-34）
+- 安装特定的 build-tools 版本
+- 安装 platform-tools
+- 接受所有许可证
+- 查看已安装和可用的包
+
+### Suggested Action
+对于 Android SDK 的管理，直接使用 sdkmanager 是一个可靠且灵活的选择
+
+### Metadata
+- Source: success
+- Related Files: local.properties
+- Tags: android, sdk, sdkmanager
+- Pattern-Key: sdk.management
+- Recurrence-Count: 1
+- First-Seen: 2026-05-16
+- Last-Seen: 2026-05-16
+
+---
