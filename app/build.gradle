@@ -37,9 +37,16 @@ android {
             //debug app共存
             applicationIdSuffix ".dev"
         }
-        def localProperties = new Properties()
-        localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-        def key = localProperties.getProperty("appcenter.secret")
+        def key = "\"\""
+        def localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            def localProperties = new Properties()
+            localProperties.load(new FileInputStream(localPropertiesFile))
+            def appCenterSecret = localProperties.getProperty("appcenter.secret")
+            if (appCenterSecret != null) {
+                key = "\"${appCenterSecret}\""
+            }
+        }
 
         //配置app center key
         configureEach {
