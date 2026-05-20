@@ -2,7 +2,6 @@ package com.lianyi.paimonsnotebook.common.web.hoyolab.api_sdk.combo_panda
 
 import com.lianyi.paimonsnotebook.common.core.enviroment.CoreEnvironment
 import com.lianyi.paimonsnotebook.common.data.EmptyData
-import com.lianyi.paimonsnotebook.common.extension.request.setDeviceInfoHeaders
 import com.lianyi.paimonsnotebook.common.extension.request.setHost
 import com.lianyi.paimonsnotebook.common.extension.request.setReferer
 import com.lianyi.paimonsnotebook.common.util.request.buildRequest
@@ -16,14 +15,9 @@ import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.auth.GameTokenData
 
 class QRCodeClient {
 
-    //请求二维码
+    //请求二维码 (按照 PizzaHelperUnited 的方式，不发送额外请求头)
     suspend fun fetch() = buildRequest {
         url(ApiEndpoints.getQRCodeFetch())
-
-        addHeader("x-rpc-game_biz", "bbs_cn")
-        addHeader("x-rpc-aigis", "")
-        addHeader("x-rpc-sdk_version", CoreEnvironment.SDKVersion)
-        setDeviceInfoHeaders(CoreEnvironment.DeviceId40)
 
         buildMap {
             put("app_id", CoreEnvironment.APP_ID)
@@ -32,14 +26,9 @@ class QRCodeClient {
 
     }.getAsJson<QrcodeFetchData>(emptyOkHttpClient)
 
+    //轮询查询二维码状态 (按照 PizzaHelperUnited 的方式，不发送额外请求头)
     suspend fun query(ticket: String) = buildRequest {
         url(ApiEndpoints.getQRCodeQuery())
-
-        addHeader("x-rpc-game_biz", "bbs_cn")
-        addHeader("x-rpc-aigis", "")
-        addHeader("x-rpc-sdk_version", CoreEnvironment.SDKVersion)
-
-        setDeviceInfoHeaders(CoreEnvironment.DeviceId40)
 
         buildMap {
             put("app_id", CoreEnvironment.APP_ID)
@@ -47,9 +36,9 @@ class QRCodeClient {
             put("ticket", ticket)
         }.post(this)
 
-    }.getAsJson<QrcodeQueryData>()
+    }.getAsJson<QrcodeQueryData>(emptyOkHttpClient)
 
-    //扫码
+    //扫码 (扫描其他APP的二维码，用于我们的APP作为扫码器的场景)
     suspend fun scan(param: QRCodeParamData) =
         buildRequest {
             url(ApiEndpoints.getQRCodeScan(param.gameBiz))
@@ -60,12 +49,12 @@ class QRCodeClient {
                 put("ticket", param.ticket)
             }.post(this)
 
-            setHost(ApiEndpoints.ApiSdkHost)
+            setHost(ApiEndpoints.Hk4eSdkHost)
             setReferer(ApiEndpoints.AppMihoyoReferer)
 
         }.getAsJson<EmptyData>()
 
-    //确认登录
+    //确认登录 (用于我们的APP作为扫码器时，确认登录)
     suspend fun confirm(
         aid: String,
         gameTokenData: GameTokenData,
@@ -86,7 +75,7 @@ class QRCodeClient {
                 put("ticket", param.ticket)
             }.post(this)
 
-            setHost(ApiEndpoints.ApiSdkHost)
+            setHost(ApiEndpoints.Hk4eSdkHost)
             setReferer(ApiEndpoints.AppMihoyoReferer)
 
         }.getAsJson<EmptyData>()

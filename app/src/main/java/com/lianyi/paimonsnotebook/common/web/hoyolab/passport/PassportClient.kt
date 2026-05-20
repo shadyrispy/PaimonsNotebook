@@ -77,14 +77,11 @@ class PassportClient {
     }.getAsJson<LoginResultData>(carryResponseHeaders = true)
 
 
+    //通过 GameToken 获取 SToken (按照 PizzaHelperUnited 的方式，只发送 x-rpc-app_id)
     suspend fun getTokenByGameToken(accountId: Int, gameToken: String) = buildRequest {
         url(ApiEndpoints.getTokenByGameToken)
 
-        addHeader("x-rpc-game_biz", "bbs_cn")
-        addHeader("x-rpc-aigis", "")
-        addHeader("x-rpc-sdk_version", CoreEnvironment.SDKVersion)
-
-        setDeviceInfoHeaders(CoreEnvironment.DeviceId40)
+        addHeader("x-rpc-app_id", "bll8iq97cem8")
 
         buildMap {
             put("account_id", accountId)

@@ -34,13 +34,14 @@ class GameRecordClient {
         challenge: String = "",
     ) = getDailyNote(user, PlayerUid(role.game_uid, role.region), challenge)
 
+    // GameRecord 统一使用 X4+Gen2（与 Snap.Hutao/PizzaHelperUnited 一致）
     suspend fun getDailyNoteForWidget(
         user: UserEntity
     ) = buildRequest {
         url(ApiEndpoints.CardWidgetDataV2)
 
         setUser(user, CookieHelper.Type.Ltoken or CookieHelper.Type.Stoken)
-        setDynamicSecret(DynamicSecret.SaltType.K2)
+        setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
     }.getAsJson<DailyNoteWidgetData>()
 
     private suspend fun getDailyNote(
@@ -53,7 +54,7 @@ class GameRecordClient {
         setUser(user = user, cookieType = CookieHelper.Type.Ltoken)
 
         setDynamicSecret(
-            saltType = DynamicSecret.SaltType.X6,
+            saltType = DynamicSecret.SaltType.X4,
             version = DynamicSecret.Version.Gen2
         )
 
@@ -70,8 +71,7 @@ class GameRecordClient {
         url(ApiEndpoints.gameRecordSpiralAbyss(scheduleType = scheduleType, uid = user.playerUid))
 
         setUser(user.userEntity, CookieHelper.Type.Cookie)
-        //client_type = 5时使用 X4
-        setDynamicSecret(DynamicSecret.SaltType.X6, DynamicSecret.Version.Gen2)
+        setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
     }.getAsJson<SpiralAbyssData>()
 
     suspend fun getCharacterList(
@@ -83,6 +83,7 @@ class GameRecordClient {
         setUser(user.userEntity, CookieHelper.Type.Cookie)
 
         setXRpcClientType(EnvironmentClientType.WEB)
+        setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
 
         buildMap {
             put("server", user.playerUid.region)
@@ -101,6 +102,7 @@ class GameRecordClient {
         setUser(user.userEntity, CookieHelper.Type.Cookie)
 
         setXRpcClientType(EnvironmentClientType.WEB)
+        setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
 
         buildMap {
             put("role_id", user.playerUid.value)

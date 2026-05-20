@@ -20,8 +20,15 @@ class BindingClient {
             url(ApiEndpoints.UserGameRolesByStoken)
 
             setUser(user, CookieHelper.Type.Stoken)
-            //x-rpc-client_type为5时使用LK2
-            setDynamicSecret(DynamicSecret.SaltType.K2, DynamicSecret.Version.Gen1, true)
+            setDynamicSecret(DynamicSecret.SaltType.LK2, DynamicSecret.Version.Gen1, true)
+
+        }.getAsJson<UserGameRoleData>()
+
+    suspend fun getUserGameRolesByCookie(user: User) =
+        buildRequest {
+            url(ApiEndpoints.UserGameRolesByCookie)
+
+            setUser(user, CookieHelper.Type.Cookie)
 
         }.getAsJson<UserGameRoleData>()
 

@@ -5,7 +5,7 @@ import okhttp3.Request
 
 fun Request.Builder.setDynamicSecret(
     saltType: DynamicSecret.SaltType,
-    version: DynamicSecret.Version = DynamicSecret.Version.Gen1,
+    version: DynamicSecret.Version = DynamicSecret.Version.Gen2,  // 更新为 Gen2
     includeChars: Boolean = false,
     query: String = "",
     body: String = "",

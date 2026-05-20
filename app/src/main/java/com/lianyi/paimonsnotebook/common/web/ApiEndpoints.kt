@@ -191,17 +191,17 @@ object ApiEndpoints {
 
     //二维码扫码
     fun getQRCodeScan(gameBiz: String) =
-        "${ApiSDK}/${gameBiz}/combo/panda/qrcode/scan"
+        "${Hk4eSdk}/${gameBiz}/combo/panda/qrcode/scan"
 
     //二维码确认
     fun getQRCodeConfirm(gameBiz: String) =
-        "${ApiSDK}/${gameBiz}/combo/panda/qrcode/confirm"
+        "${Hk4eSdk}/${gameBiz}/combo/panda/qrcode/confirm"
 
     fun getQRCodeFetch() =
-        "${ApiSDK}/hk4e_cn/combo/panda/qrcode/fetch"
+        "${Hk4eSdk}/bh2_cn/combo/panda/qrcode/fetch"
 
     fun getQRCodeQuery() =
-        "${ApiSDK}/hk4e_cn/combo/panda/qrcode/query"
+        "${Hk4eSdk}/bh2_cn/combo/panda/qrcode/query"
 
 
     /// <summary>
@@ -322,6 +322,7 @@ object ApiEndpoints {
 
     //HOST
     const val ApiSdkHost = "api-sdk.mihoyo.com"
+    const val Hk4eSdkHost = "hk4e-sdk.mihoyo.com"
 
 
     /// <summary>

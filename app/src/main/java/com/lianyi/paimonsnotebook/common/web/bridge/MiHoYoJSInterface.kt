@@ -131,7 +131,7 @@ class MiHoYoJSInterface(
                 "x-rpc-device_id" to CoreEnvironment.DeviceId,
                 "x-rpc-app_version" to CoreEnvironment.XrpcVersion,
                 "x-rpc-app_id" to "bll8iq97cem8",
-                "x-rpc-sdk_version" to "2.20.2",
+                "x-rpc-sdk_version" to CoreEnvironment.SDKVersion,
                 "x-rpc-device_fp" to CoreEnvironment.DeviceFp,
                 "Content-Type" to "application/json",
 

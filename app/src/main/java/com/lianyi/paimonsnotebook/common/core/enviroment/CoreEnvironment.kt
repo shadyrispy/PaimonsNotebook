@@ -89,8 +89,8 @@ object CoreEnvironment {
     //原神游戏id
     const val GameBizGenshin = "hk4e_cn"
 
-    // 米游社 Rpc 版本
-    const val XrpcVersion = "2.75.2"
+    // 米游社 Rpc 版本（与 K2/LK2 Salt 绑定）
+    const val XrpcVersion = "2.95.1"
 
     const val ClientType = EnvironmentClientType.BBS
 
@@ -105,8 +105,8 @@ object CoreEnvironment {
     //TODO 添加版本限制(maybe)
     const val PaimonsNotebookUA = "PaimonsNotebook/${PaimonsNotebookApplication.version}"
 
-    //原神4 星铁8 ZZZ 12
-    const val APP_ID = "8"
+    //原神4 星铁8 ZZZ 12, 崩坏2是7
+    const val APP_ID = "7"
 
     var DeviceFp = ""
         private set
