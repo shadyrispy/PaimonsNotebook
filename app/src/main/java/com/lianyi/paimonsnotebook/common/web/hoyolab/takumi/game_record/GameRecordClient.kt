@@ -6,7 +6,10 @@ import com.lianyi.paimonsnotebook.common.data.hoyolab.user.UserAndUid
 import com.lianyi.paimonsnotebook.common.extension.request.setDynamicSecret
 import com.lianyi.paimonsnotebook.common.extension.request.setUser
 import com.lianyi.paimonsnotebook.common.extension.request.setXRpcChallenge
+import com.lianyi.paimonsnotebook.common.extension.request.setXRpcChallengeGame
+import com.lianyi.paimonsnotebook.common.extension.request.setXRpcChallengePath
 import com.lianyi.paimonsnotebook.common.extension.request.setXRpcClientType
+import com.lianyi.paimonsnotebook.common.extension.request.setXRpcToolVersion
 import com.lianyi.paimonsnotebook.common.util.hoyolab.DynamicSecret
 import com.lianyi.paimonsnotebook.common.util.json.JSON
 import com.lianyi.paimonsnotebook.common.util.request.buildRequest
@@ -58,8 +61,12 @@ class GameRecordClient {
             version = DynamicSecret.Version.Gen2
         )
 
+        setXRpcToolVersion()
+
         if (challenge.isNotBlank() && challenge != "error") {
             setXRpcChallenge(challenge)
+            setXRpcChallengeGame()
+            setXRpcChallengePath("/ys/daily/")
         }
 
     }.getAsJson<DailyNoteData>()
@@ -72,6 +79,7 @@ class GameRecordClient {
 
         setUser(user.userEntity, CookieHelper.Type.Cookie)
         setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
+        setXRpcToolVersion()
     }.getAsJson<SpiralAbyssData>()
 
     suspend fun getCharacterList(
@@ -84,6 +92,7 @@ class GameRecordClient {
 
         setXRpcClientType(EnvironmentClientType.WEB)
         setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
+        setXRpcToolVersion()
 
         buildMap {
             put("server", user.playerUid.region)
@@ -103,6 +112,7 @@ class GameRecordClient {
 
         setXRpcClientType(EnvironmentClientType.WEB)
         setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
+        setXRpcToolVersion()
 
         buildMap {
             put("role_id", user.playerUid.value)
