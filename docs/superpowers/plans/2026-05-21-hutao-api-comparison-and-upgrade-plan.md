@@ -2,7 +2,8 @@
 
 > **创建日期:** 2026-05-21  
 > **分析对象:** PaimonsNotebook vs Snap.Hutao.Remastered  
-> **参考项目:** https://github.com/SnapHutaoRemasteringProject/Snap.Hutao.Remastered
+> **参考项目:** https://github.com/SnapHutaoRemasteringProject/Snap.Hutao.Remastered  
+> **备注:** 仅保留核心 API 更新（不包含 Hutao Cloud 服务，采用本地存储方案）
 
 ---
 
@@ -11,11 +12,12 @@
 ### 1.1 当前项目 (PaimonsNotebook)
 - **平台:** Android (Kotlin + Jetpack Compose)
 - **主要功能:** 原神游戏数据查询、实时便笺、抽卡记录等
+- **数据存储:** 本地存储
 - **API 来源:** 基于 Snap.Hutao 早期版本的 API 定义
 
 ### 1.2 参考项目 (Snap.Hutao.Remastered)
 - **平台:** Windows (C# + WinUI 3)
-- **主要功能:** 原神工具箱，包含游戏启动器、数据同步、祈愿记录等
+- **主要功能:** 原神工具箱
 - **最新更新:** 持续更新中，使用最新的 API 版本
 
 ---
@@ -47,7 +49,7 @@
 | **深渊信息** | `spiralAbyss` | 保持一致 | ✅ 无差异 |
 | **游戏记录主页** | `index` | 保持一致 | ✅ 无差异 |
 
-#### 2.1.3 Hutao 云服务 API (关键差异)
+#### 2.1.3 Hutao 元数据 API (关键差异)
 
 | API 端点 | PaimonsNotebook | Snap.Hutao.Remastered | 差异说明 |
 |---------|----------------|----------------------|---------|
@@ -55,28 +57,6 @@
 | **静态资源** | `api.snaphutaorp.org/static/raw` | `api.snaphutaorp.org/static/raw` | ✅ 无差异 |
 | **元数据文件** | `Genshin/{locale}/{fileName}` | `metadata/Genshin/{locale}/{fileName}` | ⚠️ **需升级** |
 | **元数据模板** | ❌ 无 | `metadata/template` | ⚠️ **需新增** |
-
-#### 2.1.4 Hutao 后端服务 API
-
-| API 端点 | PaimonsNotebook | Snap.Hutao.Remastered | 差异说明 |
-|---------|----------------|----------------------|---------|
-| **祈愿记录-获取** | ❌ 无 | `GachaLog/Retrieve` | ⚠️ **需新增** |
-| **祈愿记录-上传** | ❌ 无 | `GachaLog/Upload` | ⚠️ **需新增** |
-| **祈愿记录-列表** | ❌ 无 | `GachaLog/Entries` | ⚠️ **需新增** |
-| **祈愿记录-删除** | ❌ 无 | `GachaLog/Delete` | ⚠️ **需新增** |
-| **深渊记录-检查** | ❌ 无 | `Record/Check` | ⚠️ **需新增** |
-| **深渊记录-排行** | ❌ 无 | `Record/Rank` | ⚠️ **需新增** |
-| **深渊记录-上传** | ❌ 无 | `Record/Upload` | ⚠️ **需新增** |
-| **统计-总览** | ❌ 无 | `Statistics/Overview` | ⚠️ **需新增** |
-| **统计-角色出场率** | ❌ 无 | `Statistics/Avatar/AttendanceRate` | ⚠️ **需新增** |
-| **统计-角色使用率** | ❌ 无 | `Statistics/Avatar/UtilizationRate` | ⚠️ **需新增** |
-| **统计-角色搭配** | ❌ 无 | `Statistics/Avatar/AvatarCollocation` | ⚠️ **需新增** |
-| **统计-角色持有率** | ❌ 无 | `Statistics/Avatar/HoldingRate` | ⚠️ **需新增** |
-| **统计-武器搭配** | ❌ 无 | `Statistics/Weapon/WeaponCollocation` | ⚠️ **需新增** |
-| **统计-队伍组合** | ❌ 无 | `Statistics/Team/Combination` | ⚠️ **需新增** |
-| **Passport-验证** | ❌ 无 | `Passport/v2/Verify` | ⚠️ **需新增** |
-| **Passport-登录** | ❌ 无 | `Passport/v2/Login` | ⚠️ **需新增** |
-| **Passport-用户信息** | ❌ 无 | `Passport/v2/UserInfo` | ⚠️ **需新增** |
 
 ---
 
@@ -120,74 +100,9 @@
 
 ---
 
-## 4. API 架构差异
+## 4. 升级计划
 
-### 4.1 项目结构对比
-
-#### PaimonsNotebook 结构
-```
-common/web/
-├── ApiEndpoints.kt       # 米游社 API 端点
-├── HutaoEndpoints.kt     # Hutao 元数据端点
-└── UIGFApiEndpoints.kt   # UIGF API 端点
-```
-
-#### Snap.Hutao.Remastered 结构
-```
-Web/
-├── Endpoint/
-│   ├── Hoyolab/
-│   │   ├── IApiEndpoints.cs              # API 端点接口
-│   │   ├── ApiEndpointsForChinese.cs     # 国服实现
-│   │   ├── ApiEndpointsForOversea.cs     # 海外实现
-│   │   ├── ApiEndpointsKind.cs           # API 类型枚举
-│   │   └── ApiEndpointsFactory.cs        # 工厂类
-│   └── Hutao/
-│       ├── IHutaoEndpoints.cs            # Hutao 端点接口
-│       ├── IHomaEndpoints.cs             # Homa 端点接口
-│       ├── IHomaGachaLogEndpoints.cs     # 祈愿记录端点
-│       ├── IHomaSpiralAbyssEndpoints.cs  # 深渊统计端点
-│       ├── IHomaPassportEndpoints.cs     # Passport 端点
-│       ├── IHomaServiceEndpoints.cs      # 服务端点
-│       ├── IHomaRoleCombatEndpoints.cs    # 战绩端点
-│       ├── IHomaRedeemCodeEndpoints.cs   # 兑换码端点
-│       └── IInfrastructure*.cs           # 基础设施端点
-├── Request/
-│   ├── Builder/
-│   │   ├── HttpRequestMessageBuilder.cs
-│   │   └── HttpHeadersBuilderExtension.cs
-│   └── Abstraction/
-│       └── IHttpHeadersBuilder.cs
-├── Hoyolab/
-│   ├── DataSigning/
-│   │   ├── DataSignAlgorithm.cs          # DS 签名算法
-│   │   ├── SaltType.cs                   # Salt 类型枚举
-│   │   └── DataSignOptions.cs
-│   └── Takumi/GameRecord/
-│       ├── GameRecordClient.cs
-│       └── CardClient.cs
-└── Hutao/
-    ├── GachaLog/
-    └── Passport/
-```
-
-### 4.2 核心差异
-
-| 特性 | PaimonsNotebook | Snap.Hutao.Remastered |
-|------|----------------|----------------------|
-| **语言** | Kotlin | C# |
-| **API 端点组织** | 单文件 object | 接口+实现分离 |
-| **工厂模式** | ❌ 无 | ✅ 完整实现 |
-| **依赖注入** | ❌ 基础 | ✅ 完整 DI |
-| **请求构建器** | 基础 OkHttp | 完整的 Builder 模式 |
-| **DS 签名** | 基础实现 | 多 Salt 类型支持 |
-| **Hutao Cloud** | ❌ 无 | ✅ 完整支持 |
-
----
-
-## 5. 升级计划
-
-### 5.1 升级优先级
+### 4.1 升级优先级
 
 #### 🔴 高优先级 (必须升级)
 
@@ -195,20 +110,9 @@ Web/
 2. **新增 DS Salt 类型支持**
 3. **新增特定功能请求头**
 
-#### 🟡 中优先级 (建议升级)
-
-4. **新增 Hutao Cloud API 端点**
-5. **新增 Passport 认证端点**
-6. **新增统计 API 端点**
-
-#### 🟢 低优先级 (可选升级)
-
-7. **祈愿记录云同步功能**
-8. **深渊数据云同步功能**
-
 ---
 
-### 5.2 详细升级任务
+### 4.2 详细升级任务
 
 #### 任务 1: 更新 Hutao 元数据 API 端点
 
@@ -284,72 +188,7 @@ object RequestHeaders {
 
 ---
 
-#### 任务 4: 新增 Hutao Cloud API 端点
-
-**文件:** 新建 `app/src/main/java/com/lianyi/paimonsnotebook/common/web/hutao/HutaoCloudEndpoints.kt`
-
-**新增内容:**
-```kotlin
-object HutaoCloudEndpoints {
-    private const val ROOT = "https://homa.snaphutaorp.org"
-    private const val INFRA_ROOT = "https://api.snaphutaorp.org"
-    
-    // 祈愿记录
-    fun gachaLogRetrieve() = "$ROOT/GachaLog/Retrieve"
-    fun gachaLogUpload() = "$ROOT/GachaLog/Upload"
-    fun gachaLogEntries() = "$ROOT/GachaLog/Entries"
-    fun gachaLogDelete(uid: String) = "$ROOT/GachaLog/Delete?Uid=$uid"
-    
-    // 深渊记录
-    fun recordCheck(uid: String) = "$ROOT/Record/Check?Uid=$uid"
-    fun recordRank(uid: String) = "$ROOT/Record/Rank?Uid=$uid"
-    fun recordUpload() = "$ROOT/Record/Upload"
-    
-    // 统计
-    fun statisticsOverview(last: Boolean = false) = "$ROOT/Statistics/Overview?Last=$last"
-    fun avatarAttendanceRate(last: Boolean = false) = "$ROOT/Statistics/Avatar/AttendanceRate?Last=$last"
-    fun avatarUtilizationRate(last: Boolean = false) = "$ROOT/Statistics/Avatar/UtilizationRate?Last=$last"
-    
-    // Passport
-    fun passportVerify() = "$ROOT/Passport/v2/Verify"
-    fun passportLogin() = "$ROOT/Passport/v2/Login"
-    fun passportUserInfo() = "$ROOT/Passport/v2/UserInfo"
-    
-    // 元数据
-    fun metadata(locale: String, fileName: String) = "$INFRA_ROOT/metadata/Genshin/$locale/$fileName"
-    fun metadataTemplate() = "$INFRA_ROOT/metadata/template"
-}
-```
-
----
-
-#### 任务 5: 新增 Passport 认证端点
-
-**文件:** 新建 `app/src/main/java/com/lianyi/paimonsnotebook/common/web/hoyolab/PassportClient.kt`
-
-**功能:**
-- 用户验证
-- 用户登录
-- 用户信息获取
-- Token 刷新
-
----
-
-#### 任务 6: 新增统计 API 客户端
-
-**文件:** 新建 `app/src/main/java/com/lianyi/paimonsnotebook/common/web/hutao/StatisticsClient.kt`
-
-**功能:**
-- 获取深渊统计总览
-- 获取角色出场率
-- 获取角色使用率
-- 获取角色搭配
-- 获取武器搭配
-- 获取队伍组合
-
----
-
-### 5.3 升级检查清单
+### 4.3 升级检查清单
 
 - [ ] 更新 `HutaoEndpoints.kt` 中的元数据基础 URL
 - [ ] 新增 `/metadata/Genshin/` 路径前缀
@@ -358,17 +197,14 @@ object HutaoCloudEndpoints {
 - [ ] 更新 `GameRecordClient` 使用正确的 Salt
 - [ ] 新增签到请求头 `x-rpc-signgame`
 - [ ] 新增工具版本请求头 `x-rpc-tool_verison`
-- [ ] 新增 Hutao Cloud API 端点类
-- [ ] 新增 Passport 认证客户端
-- [ ] 新增统计 API 客户端
 - [ ] 测试所有 API 端点正常工作
 - [ ] 测试 DS 签名正确生成
 
 ---
 
-## 6. API 端点完整列表
+## 5. API 端点完整列表
 
-### 6.1 Snap.Hutao.Remastered 完整端点
+### 5.1 核心 API 端点
 
 #### Hoyolab API
 ```
@@ -391,36 +227,7 @@ object HutaoCloudEndpoints {
 - /game_record/app/card/wapi/verifyVerification
 ```
 
-#### Hutao API
-```
-基础 URL: https://homa.snaphutaorp.org
-- /GachaLog/Retrieve
-- /GachaLog/Upload
-- /GachaLog/Entries
-- /GachaLog/Delete
-- /GachaLog/Statistics/CurrentEventStatistics
-- /GachaLog/Statistics/Distribution/{type}
-- /Record/Check
-- /Record/Rank
-- /Record/Upload
-- /Statistics/Overview
-- /Statistics/Avatar/AttendanceRate
-- /Statistics/Avatar/UtilizationRate
-- /Statistics/Avatar/AvatarCollocation
-- /Statistics/Avatar/HoldingRate
-- /Statistics/Weapon/WeaponCollocation
-- /Statistics/Team/Combination
-- /Passport/v2/Verify
-- /Passport/v2/Register
-- /Passport/v2/Login
-- /Passport/v2/UserInfo
-- /Passport/v2/RefreshToken
-- /Service/Announcement/List
-- /Service/GachaLog/Compensation
-- /Service/GachaLog/Designation
-```
-
-#### 基础设施 API
+#### Hutao 元数据 API
 ```
 基础 URL: https://api.snaphutaorp.org
 - /metadata/Genshin/{locale}/{fileName}
@@ -428,15 +235,13 @@ object HutaoCloudEndpoints {
 - /static/raw/{category}/{fileName}
 - /static/zip/{fileName}.zip
 - /static/size
-- /ip
-- /ips
 ```
 
 ---
 
-## 7. 请求头完整列表
+## 6. 请求头完整列表
 
-### 7.1 Snap.Hutao.Remastered 完整请求头
+### 6.1 核心请求头
 
 #### 标准请求头
 | 请求头 | 值 | 说明 |
@@ -466,16 +271,15 @@ object HutaoCloudEndpoints {
 
 ---
 
-## 8. 总结
+## 7. 总结
 
-### 8.1 主要差异
+### 7.1 主要差异
 
 1. **API 端点 URL 变化:** Hutao 元数据从 `hutao-metadata-pages.snapgenshin.cn` 迁移到 `api.snaphutaorp.org`
-2. **新增大量 Hutao Cloud API:** 包括祈愿记录、深渊统计、Passport 等
-3. **请求头增强:** 新增多个 x-rpc 请求头和 Salt 类型
-4. **架构优化:** 从单文件 object 模式转向接口+实现分离模式
+2. **新增请求头:** 新增多个 x-rpc 请求头和 Salt 类型
+3. **数据存储:** 保持本地存储，不引入 Hutao Cloud 服务
 
-### 8.2 升级建议
+### 7.2 升级建议
 
 1. **分阶段升级:** 优先完成高优先级任务，确保基础功能正常
 2. **保持兼容性:** 新增 API 应向后兼容现有功能
@@ -484,5 +288,6 @@ object HutaoCloudEndpoints {
 
 ---
 
-**文档生成时间:** 2026-05-21
-**分析工具:** DeepWiki + 源码分析
+**文档生成时间:** 2026-05-21  
+**分析工具:** DeepWiki + 源码分析  
+**备注:** 已移除 Hutao Cloud 服务相关内容，仅保留核心 API 更新
