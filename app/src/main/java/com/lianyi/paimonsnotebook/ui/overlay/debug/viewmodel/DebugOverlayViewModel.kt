@@ -9,6 +9,10 @@ class DebugOverlayViewModel {
         put(DynamicSecret.SaltType.LK2, DynamicSecret.LK2)
         put(DynamicSecret.SaltType.X4, DynamicSecret.X4)
         put(DynamicSecret.SaltType.X6, DynamicSecret.X6)
+        put(DynamicSecret.SaltType.OSK2, DynamicSecret.OSK2)
+        put(DynamicSecret.SaltType.OSLK2, DynamicSecret.OSLK2)
+        put(DynamicSecret.SaltType.OSX4, DynamicSecret.OSX4)
+        put(DynamicSecret.SaltType.OSX6, DynamicSecret.OSX6)
     }
     val dsVersion = buildMap {
         put(DynamicSecret.Version.Gen1, "Gen1")
