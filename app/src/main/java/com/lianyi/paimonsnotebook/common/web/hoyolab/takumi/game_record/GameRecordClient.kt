@@ -52,26 +52,30 @@ class GameRecordClient {
         user: UserEntity,
         playerUid: PlayerUid,
         challenge: String = "",
-    ) = buildRequest {
-        url(ApiEndpoints.GameRecordDailyNote(playerUid))
+    ): ResultData<DailyNoteData> {
+        val result = buildRequest {
+            url(ApiEndpoints.GameRecordDailyNote(playerUid))
 
-        setUser(user = user, cookieType = CookieHelper.Type.Cookie)
-        setReferer("https://webstatic.mihoyo.com/")
+            setUser(user = user, cookieType = CookieHelper.Type.Cookie)
+            setReferer("https://webstatic.mihoyo.com/")
 
-        setDynamicSecret(
-            saltType = DynamicSecret.SaltType.X4,
-            version = DynamicSecret.Version.Gen2
-        )
+            setDynamicSecret(
+                saltType = DynamicSecret.SaltType.X4,
+                version = DynamicSecret.Version.Gen2
+            )
 
-        setXRpcToolVersion()
+            setXRpcToolVersion()
 
-        if (challenge.isNotBlank() && challenge != "error") {
-            setXRpcChallenge(challenge)
-            setXRpcChallengeGame()
-            setXRpcChallengePath("/game_record/genshin/aapi/widget/v2")
-        }
+            if (challenge.isNotBlank() && challenge != "error") {
+                setXRpcChallenge(challenge)
+                setXRpcChallengeGame()
+                setXRpcChallengePath("/game_record/genshin/aapi/widget/v2")
+            }
 
-    }.getAsJson<DailyNoteData>()
+        }.getAsJson<DailyNoteData>()
+
+        return result
+    }
 
     suspend fun getSpiralAbyssData(
         user: UserAndUid,
@@ -125,5 +129,33 @@ class GameRecordClient {
         }.post(this)
 
     }.getAsJson<CharacterDetailData>()
+
+    suspend fun getPlayerInfo(
+        user: UserAndUid,
+        challenge: String = ""
+    ) = buildRequest {
+        url(ApiEndpoints.GameRecordIndex(user.playerUid))
+
+        setUser(user.userEntity, CookieHelper.Type.Cookie)
+        setReferer("https://webstatic.mihoyo.com/")
+        setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
+        setXRpcToolVersion()
+
+        if (challenge.isNotBlank() && challenge != "error") {
+            setXRpcChallenge(challenge)
+            setXRpcChallengeGame()
+            setXRpcChallengePath("/game_record/genshin/aapi/widget/v2")
+        }
+    }.getAsJson<Any>()
+
+    suspend fun getRoleBasicInfo(
+        user: UserAndUid
+    ) = buildRequest {
+        url(ApiEndpoints.GameRecordRoleBasicInfo(user.playerUid))
+
+        setUser(user.userEntity, CookieHelper.Type.Cookie)
+        setReferer("https://webstatic.mihoyo.com/")
+        setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
+    }.getAsJson<Any>()
 
 }
