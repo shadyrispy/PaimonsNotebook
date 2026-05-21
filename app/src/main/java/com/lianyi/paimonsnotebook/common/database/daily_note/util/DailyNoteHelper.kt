@@ -179,6 +179,14 @@ object DailyNoteHelper {
         user: UserEntity,
         playerUid: PlayerUid
     ): ResultData<DailyNoteData> {
+        return getDailyNoteResultData(user, playerUid, "")
+    }
+
+    suspend fun getDailyNoteResultData(
+        user: UserEntity,
+        playerUid: PlayerUid,
+        challenge: String
+    ): ResultData<DailyNoteData> {
         val localDailyNote = dailyNoteDao.getDailyNoteByGameRoleUid(uid = playerUid.value)
         if (localDailyNote != null && System.currentTimeMillis() - localDailyNote.updateTime < UPDATE_INTERVAL) {
             return ResultData.getSuccessResult(localDailyNote.dailyNote)
@@ -188,7 +196,8 @@ object DailyNoteHelper {
             userEntity = user,
             playerUid = playerUid
         )
-        val result = gameRecordClient.getDailyNote(userAndUid)
+        
+        val result = gameRecordClient.getDailyNote(userAndUid, challenge)
 
         if (result.success) {
             dailyNoteDao.upsert(
