@@ -6,21 +6,20 @@ import com.lianyi.paimonsnotebook.common.core.enviroment.CoreEnvironment
 *
 * */
 object HutaoEndpoints {
-    // 更新：使用新的元数据基础 URL
-    private const val HutaoMetadataBaseUrl = "https://hutao-metadata-pages.snapgenshin.cn"
-    
-    // 静态资源 URL（根据您的说明和示例）
-    // 示例: https://api.snaphutaorp.org/static/raw/AvatarIcon/UI_AvatarIcon_Side_None.png
+    // 更新：使用新的元数据基础 URL (api.snaphutaorp.org)
+    private const val HutaoMetadataBaseUrl = "https://api.snaphutaorp.org"
+
+    // 静态资源 URL
     private const val ApiSnapHutao = "https://api.snaphutaorp.org"
-    
-    // 元数据 API 路径
-    private const val ApiSnapGenshinMetadata = "${HutaoMetadataBaseUrl}/Genshin"
-    
-    // 静态资源路径（使用 api.snaphutaorp.org）
+
+    // 元数据 API 路径 - 更新为 /metadata/Genshin 前缀
+    private const val ApiSnapGenshinMetadata = "${HutaoMetadataBaseUrl}/metadata/Genshin"
+
+    // 静态资源路径
     const val ApiSnapGenshinStaticRaw = "${ApiSnapHutao}/static/raw"
     const val ApiSnapGenshinStaticZip = "${ApiSnapHutao}/static/zip"
-    
-    private const val Host = "hutao-metadata-pages.snapgenshin.cn"
+
+    private const val Host = "api.snaphutaorp.org"
 
     //请求元数据时的header
     val Headers by lazy {
@@ -38,6 +37,12 @@ object HutaoEndpoints {
     /// <returns>路径</returns>
     fun metadata(locale: String, fileName: String): String =
         "${ApiSnapGenshinMetadata}/${locale}/${fileName}"
+
+    /// <summary>
+    /// 胡桃元数据模板
+    /// </summary>
+    /// <returns>路径</returns>
+    fun metadataTemplate(): String = "${HutaoMetadataBaseUrl}/metadata/template"
 
     /// <summary>
     /// 图片资源
