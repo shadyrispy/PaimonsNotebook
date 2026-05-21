@@ -10,6 +10,7 @@ import com.lianyi.paimonsnotebook.common.extension.request.setXRpcChallengeGame
 import com.lianyi.paimonsnotebook.common.extension.request.setXRpcChallengePath
 import com.lianyi.paimonsnotebook.common.extension.request.setXRpcClientType
 import com.lianyi.paimonsnotebook.common.extension.request.setXRpcToolVersion
+import com.lianyi.paimonsnotebook.common.extension.request.setReferer
 import com.lianyi.paimonsnotebook.common.util.hoyolab.DynamicSecret
 import com.lianyi.paimonsnotebook.common.util.json.JSON
 import com.lianyi.paimonsnotebook.common.util.request.buildRequest
@@ -54,7 +55,8 @@ class GameRecordClient {
     ) = buildRequest {
         url(ApiEndpoints.GameRecordDailyNote(playerUid))
 
-        setUser(user = user, cookieType = CookieHelper.Type.Ltoken)
+        setUser(user = user, cookieType = CookieHelper.Type.Cookie)
+        setReferer("https://webstatic.mihoyo.com/")
 
         setDynamicSecret(
             saltType = DynamicSecret.SaltType.X4,
@@ -66,7 +68,7 @@ class GameRecordClient {
         if (challenge.isNotBlank() && challenge != "error") {
             setXRpcChallenge(challenge)
             setXRpcChallengeGame()
-            setXRpcChallengePath("/ys/daily/")
+            setXRpcChallengePath("/game_record/genshin/aapi/widget/v2")
         }
 
     }.getAsJson<DailyNoteData>()
@@ -78,6 +80,7 @@ class GameRecordClient {
         url(ApiEndpoints.gameRecordSpiralAbyss(scheduleType = scheduleType, uid = user.playerUid))
 
         setUser(user.userEntity, CookieHelper.Type.Cookie)
+        setReferer("https://webstatic.mihoyo.com/")
         setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
         setXRpcToolVersion()
     }.getAsJson<SpiralAbyssData>()
@@ -89,6 +92,7 @@ class GameRecordClient {
         url(ApiEndpoints.gameRecordCharacterList)
 
         setUser(user.userEntity, CookieHelper.Type.Cookie)
+        setReferer("https://webstatic.mihoyo.com/")
 
         setXRpcClientType(EnvironmentClientType.WEB)
         setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)
@@ -97,7 +101,6 @@ class GameRecordClient {
         buildMap {
             put("server", user.playerUid.region)
             put("role_id", user.playerUid.value)
-            put("sort_type", sortType)
         }.post(this)
 
     }.getAsJson<CharacterListData>()
@@ -109,6 +112,7 @@ class GameRecordClient {
         url(ApiEndpoints.gameRecordCharacterDetail)
 
         setUser(user.userEntity, CookieHelper.Type.Cookie)
+        setReferer("https://webstatic.mihoyo.com/")
 
         setXRpcClientType(EnvironmentClientType.WEB)
         setDynamicSecret(DynamicSecret.SaltType.X4, DynamicSecret.Version.Gen2)

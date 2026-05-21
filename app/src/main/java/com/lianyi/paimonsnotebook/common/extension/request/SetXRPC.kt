@@ -27,6 +27,8 @@ fun Request.Builder.setXRpcSigngame(value:String = "hk4e") = this.header("x-rpc-
 
 fun Request.Builder.setXRpcToolVersion(value:String = "v5.0.1-ys") = this.header("x-rpc-tool_verison",value)
 
-fun Request.Builder.setXRpcChallengeGame(value:String = "genshin") = this.header("x-rpc-challenge_game",value)
+fun Request.Builder.setXRpcChallengeGame(value:Int = 2) = this.header("x-rpc-challenge_game", value.toString())
 
 fun Request.Builder.setXRpcChallengePath(value:String) = this.header("x-rpc-challenge_path",value)
+
+fun Request.Builder.setReferer(value:String) = this.header("Referer", value)
