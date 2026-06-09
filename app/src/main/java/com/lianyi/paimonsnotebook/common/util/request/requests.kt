@@ -55,6 +55,22 @@ val emptyOkHttpClient by lazy {
     OkHttpClient.Builder().build()
 }
 
+val gameRecordOkHttpClient by lazy {
+    OkHttpClient.Builder().apply {
+        retryOnConnectionFailure(true)
+        connectTimeout(30, TimeUnit.SECONDS)
+        readTimeout(30, TimeUnit.SECONDS)
+        writeTimeout(30, TimeUnit.SECONDS)
+
+        addInterceptor {
+            val request = it.request().newBuilder()
+            request.addHeader("x-rpc-sys_version", Build.VERSION.RELEASE)
+            request.addHeader("x-rpc-channel", "miyousheluodi")
+            it.proceed(request.build())
+        }
+    }.build()
+}
+
 val applicationOkHttpClient by lazy {
     OkHttpClient.Builder().apply {
         retryOnConnectionFailure(true)

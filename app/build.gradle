@@ -39,11 +39,11 @@ android {
         }
         def localProperties = new Properties()
         localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-        def key = localProperties.getProperty("appcenter.secret")
+        def key = localProperties.getProperty("appcenter.secret", "")
 
         //配置app center key
         configureEach {
-            it.buildConfigField("String", "APPCENTER_SECRET", key)
+            it.buildConfigField("String", "APPCENTER_SECRET", "\"${key}\"")
         }
     }
     compileOptions {

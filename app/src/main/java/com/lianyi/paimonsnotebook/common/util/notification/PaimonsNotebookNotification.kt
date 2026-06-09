@@ -35,10 +35,10 @@ object PaimonsNotebookNotification {
         )
 
         CoroutineScope(Dispatchers.Unconfined).launch {
-            mutex.withLock {  }
-
-            withContextMain {
-                notifications.add(data)
+            mutex.withLock {
+                withContextMain {
+                    notifications.add(data)
+                }
             }
 
             //设置自动消失

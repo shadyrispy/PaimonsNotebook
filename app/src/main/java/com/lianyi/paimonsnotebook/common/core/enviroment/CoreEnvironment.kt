@@ -63,6 +63,10 @@ object CoreEnvironment {
                         PreferenceKeys.DeviceIdSeedTime.editValue(System.currentTimeMillis())
                     }
 
+                    if (DeviceId53.isBlank()) {
+                        DeviceId53 = getRandomChars(53)
+                    }
+
                     DeviceFp = it[PreferenceKeys.DeviceFp] ?: ""
                     setFp(DeviceFp)
                 }
@@ -89,14 +93,17 @@ object CoreEnvironment {
     //原神游戏id
     const val GameBizGenshin = "hk4e_cn"
 
-    // 米游社 Rpc 版本
-    const val XrpcVersion = "2.75.2"
+    // 米游社 Rpc 版本（与 K2/LK2 Salt 绑定）
+    const val XrpcVersion = "2.95.1"
 
     const val ClientType = EnvironmentClientType.BBS
 
     // 米游社移动端请求UA
     val HoyolabMobileUA =
         "Mozilla/5.0 (Linux; Android ${Build.VERSION.RELEASE}; ${Build.MODEL} Build/${Build.USER}; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/95.0.4638.74 Mobile Safari/537.36 miHoYoBBS/$XrpcVersion"
+
+    val HoyolabGameRecordUA =
+        "Mozilla/5.0 (Linux; Android 15) Mobile miHoYoBBS/$XrpcVersion"
 
     //米游社移动端网页UA
     const val HoyolabMobileWebUA =
@@ -105,8 +112,8 @@ object CoreEnvironment {
     //TODO 添加版本限制(maybe)
     const val PaimonsNotebookUA = "PaimonsNotebook/${PaimonsNotebookApplication.version}"
 
-    //原神4 星铁8 ZZZ 12
-    const val APP_ID = "8"
+    //原神4 星铁8 ZZZ 12, 崩坏2是7
+    const val APP_ID = "7"
 
     var DeviceFp = ""
         private set
@@ -115,6 +122,9 @@ object CoreEnvironment {
         private set
 
     var DeviceId40 = ""
+        private set
+
+    var DeviceId53 = ""
         private set
 
     var BBSDeviceId = ""
@@ -128,7 +138,9 @@ object CoreEnvironment {
 
     //生成米游社设备id
     private suspend fun generateDeviceId() {
-        PreferenceKeys.DeviceId.editValue(UUID.randomUUID().toString())
+        val id = "fb27dd0a-7c6b-4b5a-8c8a-5e3d4f2a1b0c"
+        DeviceId = id
+        PreferenceKeys.DeviceId.editValue(id)
     }
 
     //扫码登录设备Id
@@ -144,11 +156,14 @@ object CoreEnvironment {
         val sha1Digest = MessageDigest.getInstance("SHA-1")
         val hashBytes = sha1Digest.digest(uuidBytes)
 
-        PreferenceKeys.DeviceId40.editValue(hashBytes.joinToString("") { "%02x".format(it) })
+        val id40 = hashBytes.joinToString("") { "%02x".format(it) }
+        DeviceId40 = id40
+        PreferenceKeys.DeviceId40.editValue(id40)
     }
 
     private suspend fun generateBBSDeviceId() {
         val id = getRandomChars(16)
+        BBSDeviceId = id
         PreferenceKeys.BBSDeviceId.editValue(id)
     }
 
@@ -182,17 +197,21 @@ object CoreEnvironment {
     private suspend fun setFp(fp: String) {
         publicDataApiClient.getExtList()
 
-        val result = publicDataApiClient.getFp(fp)
+        val data = publicDataApiClient.deviceFpClient
+            .buildDefaultDeviceFpData(currentFp = fp)
 
-        val newFp = if (result.success) {
-            result.data.device_fp
-        } else {
-            "${(1000000000..9999999999).random()}"
-        }
+        val result = publicDataApiClient.deviceFpClient.getFingerprintAsync(data)
+        val apiFp = result.data.device_fp.takeIf { it.isNotBlank() }
+
+        val newFp = apiFp ?: getRandomHex(13)
         DeviceFp = newFp
 
         PreferenceKeys.DeviceFp.editValue(newFp)
     }
+
+    private fun getRandomHex(times: Int) = (1..times)
+        .map { "0123456789abcdef".random() }
+        .joinToString("")
 
     private fun getRandomChars(times: Int) = with(StringBuilder()) {
         val range = "abcdefghijklmnopqrstuvwxyz1234567890"

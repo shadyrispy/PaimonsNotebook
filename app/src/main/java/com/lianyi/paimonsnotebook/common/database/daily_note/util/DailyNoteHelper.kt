@@ -171,7 +171,7 @@ object DailyNoteHelper {
     }
 
     /*
-    * 获取实时便笺请求结果
+    * 获取每日便笺请求结果
     *
     * 获取时同时更新本地缓存
     * */
@@ -184,11 +184,8 @@ object DailyNoteHelper {
             return ResultData.getSuccessResult(localDailyNote.dailyNote)
         }
 
-        val userAndUid = UserAndUid(
-            userEntity = user,
-            playerUid = playerUid
-        )
-        val result = gameRecordClient.getDailyNote(userAndUid)
+        // 使用两步获取机制：先尝试完整 API，失败后尝试 Widget API
+        val result = gameRecordClient.getDailyNoteWithFallback(user, playerUid)
 
         if (result.success) {
             dailyNoteDao.upsert(

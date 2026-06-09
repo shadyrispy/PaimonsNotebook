@@ -20,6 +20,58 @@ data class DailyNoteData(
     val transformer: Transformer
 ) {
 
+    companion object {
+        /**
+         * 将 WidgetData 转换为完整的 DailyNoteData
+         */
+        fun fromWidgetData(widgetData: DailyNoteWidgetData): DailyNoteData {
+            return DailyNoteData(
+                calendar_url = widgetData.note_url,
+                current_expedition_num = widgetData.current_expedition_num,
+                current_home_coin = widgetData.current_home_coin,
+                current_resin = widgetData.current_resin,
+                daily_task = widgetData.daily_task ?: DailyTask(
+                    attendance_rewards = emptyList(),
+                    attendance_visible = false,
+                    finished_num = widgetData.finished_task_num,
+                    is_extra_task_reward_received = widgetData.is_extra_task_reward_received,
+                    task_rewards = emptyList(),
+                    total_num = widgetData.total_task_num
+                ),
+                expeditions = widgetData.expeditions.map { widgetExp ->
+                    Expedition(
+                        avatar_side_icon = widgetExp.avatar_side_icon,
+                        remained_time = "",
+                        status = widgetExp.status
+                    )
+                },
+                finished_task_num = widgetData.finished_task_num,
+                home_coin_recovery_time = "",
+                is_extra_task_reward_received = widgetData.is_extra_task_reward_received,
+                max_expedition_num = widgetData.max_expedition_num,
+                max_home_coin = widgetData.max_home_coin,
+                max_resin = widgetData.max_resin,
+                remain_resin_discount_num = 3,
+                resin_discount_num_limit = 3,
+                resin_recovery_time = widgetData.resin_recovery_time,
+                total_task_num = widgetData.total_task_num,
+                transformer = Transformer(
+                    latest_job_id = "",
+                    noticed = false,
+                    obtained = false,
+                    recovery_time = RecoveryTime(
+                        Day = 0,
+                        Hour = 0,
+                        Minute = 0,
+                        Second = 0,
+                        reached = true
+                    ),
+                    wiki = ""
+                )
+            )
+        }
+    }
+
     data class DailyTask(
         val attendance_rewards: List<AttendanceReward>,
         val attendance_visible: Boolean,

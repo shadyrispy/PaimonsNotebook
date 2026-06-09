@@ -33,11 +33,13 @@ fun DebugDeviceFpContent() {
 
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
-                val res = PublicDataApiClient().getFp(
-                    dataStoreValuesFirstLambda {
+                val client = PublicDataApiClient().deviceFpClient
+                val data = client.buildDefaultDeviceFpData(
+                    currentFp = dataStoreValuesFirstLambda {
                         this[PreferenceKeys.DeviceFp] ?: ""
                     }
                 )
+                val res = client.getFingerprintAsync(data)
                 content = JSON.stringify(res)
             }
         }) {

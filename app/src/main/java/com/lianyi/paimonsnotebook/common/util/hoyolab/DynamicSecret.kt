@@ -10,8 +10,10 @@ import kotlin.math.pow
 *
 * */
 object DynamicSecret {
-    const val K2 = "oqrJbPCoFhWhFBNDvVRuldbrbiVxyWsP"
-    const val LK2 = "zZDfHqEcwTqvvKDmqRcHyqqurxGgLfBV"
+    // Salt 与 x-rpc-app_version 绑定，当前对应 2.95.1
+    // 参考: https://github.com/UIGF-org/mihoyo-api-collect
+    const val K2 = "sfYPEgpxkOe1I3XVMLdwp1Lyt9ORgZsq"
+    const val LK2 = "sidQFEglajEz7FA0Aj7HQPV88zpf17SO"
     const val X4 = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs"
     const val X6 = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v"
     const val PROD = "JwYDpKvLj6MrMqqYU6jTKF17KNO2PXoS"
@@ -62,7 +64,10 @@ object DynamicSecret {
         return "${t},${r},${check}"
     }
 
-    private fun getRs2(): String = (100000..200000).random().toString()
+    private fun getRs2(): String {
+        val rand = (100000..200000).random()
+        return if (rand == 100000) "642367" else rand.toString()
+    }
 
     private fun getRs1(): String {
         val range = "abcdefghijklmnopqrstuvwxyz1234567890"

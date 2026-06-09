@@ -6,21 +6,24 @@ object CookieHelper {
         const val CookieToken = "cookie_token"
         const val AccountID = "account_id"
         const val LoginTicket = "login_ticket"
-        const val Login_UID = "login_uid"
+        const val LoginUID = "login_uid"
         const val Mid = "mid"
 
         const val LToken = "ltoken"
         const val LTuid = "ltuid"
         const val SToken = "stoken"
         const val STuid = "stuid"
+
+        const val DEVICEFP = "DEVICEFP"
     }
 
     object Type {
+        const val None = 0x0000
         const val CookieToken = 0x0001
-        const val Ltoken = 0x0010
-        const val Stoken = 0x0100
-        const val None = 0x00000
-        const val Cookie = CookieToken or Ltoken
+        const val LToken = 0x0002
+        const val SToken = 0x0004
+        const val Cookie = CookieToken or LToken
+        const val All = CookieToken or LToken or SToken
     }
 
     //连接字符串并转换为cookie

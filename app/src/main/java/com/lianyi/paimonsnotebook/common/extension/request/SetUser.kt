@@ -13,14 +13,15 @@ fun Request.Builder.setUser(accountData: AccountData, cookieType: Int) {
     if ((cookieType and CookieHelper.Type.CookieToken) == CookieHelper.Type.CookieToken) {
         stringBuild.append(accountData.CookieToken.cookieString)
     }
-    if ((cookieType and CookieHelper.Type.Stoken) == CookieHelper.Type.Stoken) {
+    if ((cookieType and CookieHelper.Type.SToken) == CookieHelper.Type.SToken) {
         stringBuild.append(accountData.Stoken.cookieString)
     }
-    if ((cookieType and CookieHelper.Type.Ltoken) == CookieHelper.Type.Ltoken) {
+    if ((cookieType and CookieHelper.Type.LToken) == CookieHelper.Type.LToken) {
         stringBuild.append(accountData.Ltoken.cookieString)
     }
 
-    this.addHeader("Cookie", stringBuild.toString())
+    removeHeader("Cookie")
+    addHeader("Cookie", stringBuild.toString())
 }
 
 fun Request.Builder.setUser(user: User, cookieType: Int) {
@@ -30,12 +31,18 @@ fun Request.Builder.setUser(user: User, cookieType: Int) {
     if ((cookieType and CookieHelper.Type.CookieToken) == CookieHelper.Type.CookieToken) {
         stringBuild.append(user.cookieToken.toString())
     }
-    if ((cookieType and CookieHelper.Type.Stoken) == CookieHelper.Type.Stoken) {
+    if ((cookieType and CookieHelper.Type.SToken) == CookieHelper.Type.SToken) {
         stringBuild.append(user.stoken.toString())
     }
-    if ((cookieType and CookieHelper.Type.Ltoken) == CookieHelper.Type.Ltoken) {
+    if ((cookieType and CookieHelper.Type.LToken) == CookieHelper.Type.LToken) {
         stringBuild.append(user.ltoken.toString())
     }
 
-    this.addHeader("Cookie", stringBuild.toString())
+    removeHeader("Cookie")
+    addHeader("Cookie", stringBuild.toString())
+}
+
+fun Request.Builder.setFp(fp: String) {
+    removeHeader("x-rpc-device_fp")
+    addHeader("x-rpc-device_fp", fp)
 }

@@ -63,6 +63,9 @@ object ApiEndpoints {
     private const val PassportApiAccountMaCnSession = "${PassportApi}/account/ma-cn-session"
     private const val PassportApiAccountMaCnPassport = "${PassportApi}/account/ma-cn-passport"
 
+    const val AccountCreateQrLogin = "${PassportApiAccountMaCnPassport}/app/createQRLogin"
+    const val AccountQueryQrLoginStatus = "${PassportApiAccountMaCnPassport}/app/queryQRLoginStatus"
+
     private const val PassportApiMaCnVerifier = "${PassportApi}/account/ma-cn-verifier"
 
     private const val PassportApiStatic = "https://passport-api-static.mihoyo.com"
@@ -154,7 +157,7 @@ object ApiEndpoints {
     /// <summary>
     /// 用户游戏角色
     /// </summary>
-    const val UserGameRolesByStoken = "${ApiTakumiMiYouSheBindingApi}/getUserGameRolesByStoken"
+    const val UserGameRolesByStoken = "${ApiTaKumiBindingApi}/getUserGameRolesByStoken"
 
     /// <summary>
     /// AuthKey
@@ -191,17 +194,17 @@ object ApiEndpoints {
 
     //二维码扫码
     fun getQRCodeScan(gameBiz: String) =
-        "${ApiSDK}/${gameBiz}/combo/panda/qrcode/scan"
+        "${Hk4eSdk}/${gameBiz}/combo/panda/qrcode/scan"
 
     //二维码确认
     fun getQRCodeConfirm(gameBiz: String) =
-        "${ApiSDK}/${gameBiz}/combo/panda/qrcode/confirm"
+        "${Hk4eSdk}/${gameBiz}/combo/panda/qrcode/confirm"
 
     fun getQRCodeFetch() =
-        "${ApiSDK}/hk4e_cn/combo/panda/qrcode/fetch"
+        "${Hk4eSdk}/bh2_cn/combo/panda/qrcode/fetch"
 
     fun getQRCodeQuery() =
-        "${ApiSDK}/hk4e_cn/combo/panda/qrcode/query"
+        "${Hk4eSdk}/bh2_cn/combo/panda/qrcode/query"
 
 
     /// <summary>
@@ -215,7 +218,12 @@ object ApiEndpoints {
     /// <summary>
     /// 角色信息
     /// </summary>
-    const val GameRecordCharacter = "${ApiTakumiRecordApi}/character"
+    const val GameRecordCharacter = "${ApiTakumiRecordApi}/character/list"
+
+    /// <summary>
+    /// 角色详情
+    /// </summary>
+    const val GameRecordCharacterDetail = "${ApiTakumiRecordApi}/character/detail"
 
     /// <summary>
     /// 游戏记录实时便笺
@@ -322,6 +330,7 @@ object ApiEndpoints {
 
     //HOST
     const val ApiSdkHost = "api-sdk.mihoyo.com"
+    const val Hk4eSdkHost = "hk4e-sdk.mihoyo.com"
 
 
     /// <summary>

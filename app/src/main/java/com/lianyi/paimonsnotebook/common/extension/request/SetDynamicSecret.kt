@@ -2,33 +2,36 @@ package com.lianyi.paimonsnotebook.common.extension.request
 
 import com.lianyi.paimonsnotebook.common.util.hoyolab.DynamicSecret
 import okhttp3.Request
+import java.net.URLDecoder
 
 fun Request.Builder.setDynamicSecret(
     saltType: DynamicSecret.SaltType,
-    version: DynamicSecret.Version = DynamicSecret.Version.Gen1,
+    version: DynamicSecret.Version = DynamicSecret.Version.Gen2,
     includeChars: Boolean = false,
-    query: String = "",
-    body: String = "",
 ) {
-    val build = this.build()
-    val urls = build.url.toString().split("?")
+    val built = this.build()
+    val url = built.url.toString()
+    val urlParts = url.split("?")
+
+    val query = if (urlParts.size > 1) {
+        URLDecoder.decode(urlParts.last(), "UTF-8")
+            .split("&")
+            .sortedBy { it }
+            .joinToString("&")
+    } else {
+        ""
+    }
+
+    val body = built.body?.let {
+        val buffer = okio.Buffer()
+        it.writeTo(buffer)
+        buffer.readUtf8()
+    } ?: ""
 
     val b = if (saltType == DynamicSecret.SaltType.PROD) "{}" else body
 
-    if (urls.size > 1) {
-        val parameters = urls.last().split("&").sortedBy { it }.joinToString(separator = "&") { it }
-        this.addHeader("DS",
-            DynamicSecret.getDynamicSecret(version,
-                saltType,
-                includeChars,
-                parameters,
-                b))
-    } else {
-        this.addHeader("DS",
-            DynamicSecret.getDynamicSecret(version,
-                saltType,
-                includeChars,
-                query,
-                b))
-    }
+    this.addHeader(
+        "DS",
+        DynamicSecret.getDynamicSecret(version, saltType, includeChars, query, b)
+    )
 }

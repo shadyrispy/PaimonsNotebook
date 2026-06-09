@@ -50,7 +50,7 @@ fun DebugDynamicSecretContent(
         mutableStateOf(DynamicSecret.SaltType.X4)
     }
     var currentVersion by remember {
-        mutableStateOf(DynamicSecret.Version.Gen1)
+        mutableStateOf(DynamicSecret.Version.Gen2)
     }
     var includeChars by remember {
         mutableStateOf(false)

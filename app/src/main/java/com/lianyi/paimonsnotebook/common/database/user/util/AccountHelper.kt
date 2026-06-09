@@ -152,6 +152,17 @@ object AccountHelper {
     ): List<UserGameRoleData.Role> {
         val roles = mutableListOf<UserGameRoleData.Role>()
 
+        val userGameRoleByCookieResult = bindingClient.getUserGameRolesByCookie(user)
+
+        if (userGameRoleByCookieResult.success) {
+            userGameRoleByCookieResult.data.list.forEach { role ->
+                if (role.game_biz == CoreEnvironment.GameBizGenshin) {
+                    roles += role
+                }
+            }
+            return roles
+        }
+
         val userGameRoleBySTokenResult = bindingClient.getUserGameRolesByStoken(user)
 
         if (userGameRoleBySTokenResult.success) {

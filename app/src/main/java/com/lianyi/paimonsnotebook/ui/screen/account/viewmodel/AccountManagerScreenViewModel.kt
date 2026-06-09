@@ -407,64 +407,51 @@ class AccountManagerScreenViewModel : ViewModel() {
         showQRCodePopup = true
 
         viewModelScope.launchIO {
-            val res = qrCodeClient.fetch()
+            val res = qrCodeClient.createQrLogin()
             if (!res.success) {
                 "获取二维码失败:${res.message}".errorNotify()
                 return@launchIO
             }
-            val ticket = res.data.url.takeValueFromUrl("ticket")
 
+            val ticket = res.data.ticket
             if (ticket.isEmpty()) {
                 "没有获取到ticket".errorNotify()
                 return@launchIO
             }
             loginQrCodeBitmap = createQrCode(res.data.url, 200)
 
-            loopQueryQrCodeState(ticket)
+            loopQueryQrLoginStatus(ticket)
         }
     }
 
-    //循环检查二维码状态
-    private suspend fun loopQueryQrCodeState(ticket: String) {
+    private suspend fun loopQueryQrLoginStatus(ticket: String) {
         while (true) {
             delay(3000)
 
-            val queryRes = qrCodeClient.query(ticket)
+            val queryRes = qrCodeClient.queryQrLoginStatus(ticket)
 
-            //请求不成功时处理,可能是二维码失效
             if (!queryRes.success) {
                 "二维码已失效".errorNotify()
                 return
             }
 
-            //未完成登录
-            if (!queryRes.data.payload.success) continue
+            if (!queryRes.data.isConfirmed) continue
 
-            val raw = queryRes.data.payload.getRawData()
-            getCookieByGameToken(raw.uid, raw.token)
+            val sToken = queryRes.data.sToken
+            val aid = queryRes.data.user_info?.aid ?: ""
+            val mid = queryRes.data.user_info?.mid ?: ""
 
+            if (sToken.isNullOrEmpty() || aid.isEmpty() || mid.isEmpty()) {
+                "登录信息不完整".errorNotify()
+                return
+            }
+
+            addUserBySTokenString(sToken, mid, aid)
+
+            onRequestQRCodePopupDismiss()
+            loginQrCodeBitmap = null
             return
         }
-    }
-
-    //通过gameToken获取cookie
-    private suspend fun getCookieByGameToken(uid: String, token: String) {
-        val uidNumber = uid.toIntOrNull() ?: 0
-        val sTokenRes = passportClient.getTokenByGameToken(uidNumber, token)
-
-        if (!sTokenRes.success) {
-            "获取stoken失败".errorNotify()
-            return
-        }
-
-        addUserBySTokenString(
-            sTokenRes.data.token.token,
-            sTokenRes.data.user_info.mid,
-            sTokenRes.data.user_info.aid,
-        )
-
-        onRequestQRCodePopupDismiss()
-        loginQrCodeBitmap = null
     }
 
     //前往米游社个人界面
