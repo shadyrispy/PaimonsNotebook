@@ -113,6 +113,10 @@ val Quality3Color = Color(0XFF8CB5E7)
 val Quality4Color = Color(0XFFA88AEC)
 val Quality5Color = Color(0XFFD6AD81)
 
+// DividerText 颜色
+val DividerTextColor = Color(0x4D000000)
+val DividerLineColor = Color(0x33000000)
+
 
 
 

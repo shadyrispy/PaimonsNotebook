@@ -8,7 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
+import com.lianyi.paimonsnotebook.common.data.repository.UserRepository
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.entity.AppWidgetBinding
 import com.lianyi.paimonsnotebook.common.extension.scope.launchMain
 import com.lianyi.paimonsnotebook.common.util.data_store.PreferenceKeys
@@ -22,8 +23,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AppWidgetScreenViewModel : ViewModel() {
-    private val appWidgetBindingDao = PaimonsNotebookDatabase.database.appWidgetBindingDao
-    private val userDao = PaimonsNotebookDatabase.database.userDao
+    private val appWidgetBindingDao = AppWidgetRepository.appWidgetBindingDao
+    private val userDao = UserRepository.userDao
 
     val appWidgetBindingList = mutableStateListOf<AppWidgetAlreadyData>()
 

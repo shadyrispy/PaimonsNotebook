@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.common.data.popup.IconTitleInformationPopupWindowData
 import com.lianyi.paimonsnotebook.common.data.popup.PopupWindowPositionProvider
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.CultivateRepository
 import com.lianyi.paimonsnotebook.common.extension.list.takeFirstIf
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
@@ -113,9 +113,9 @@ class CultivationMaterialScreenViewModel : ViewModel() {
     //确保养成计划监听只启动一次
     private var cultivateListenerStarted = false
 
-    private val cultivateProjectDao by lazy { PaimonsNotebookDatabase.database.cultivateProjectDao }
-    private val cultivateEntityDao by lazy { PaimonsNotebookDatabase.database.cultivateEntityDao }
-    private val cultivateItemsDao by lazy { PaimonsNotebookDatabase.database.cultivateItemsDao }
+    private val cultivateProjectDao by lazy { CultivateRepository.cultivateProjectDao }
+    private val cultivateEntityDao by lazy { CultivateRepository.cultivateEntityDao }
+    private val cultivateItemsDao by lazy { CultivateRepository.cultivateItemsDao }
 
 
     val dropMenuList by lazy {

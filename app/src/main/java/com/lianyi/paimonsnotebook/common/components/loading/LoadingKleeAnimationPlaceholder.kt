@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
+import com.lianyi.paimonsnotebook.ui.theme.LoadingKleeAccent
+import com.lianyi.paimonsnotebook.ui.theme.LoadingKleeBackground
 import com.lianyi.paimonsnotebook.ui.theme.White
 
 @Composable
@@ -52,7 +54,7 @@ fun LoadingAnimationPlaceholder(
             Modifier
                 .fillMaxWidth()
                 .height(height)
-                .background(Color(0xff1B65A5))
+                .background(LoadingKleeBackground)
         ) {
 
             if(maxWidth < 160.dp){
@@ -105,7 +107,7 @@ fun LoadingAnimationPlaceholder(
                     .fillMaxWidth()
                     .height(35.dp)
                     .clip(RoundedCornerShape(10.dp, 10.dp, 0.dp, 0.dp))
-                    .background(Color(0xff13ABDC))
+                    .background(LoadingKleeAccent)
                     .align(Alignment.BottomStart)
             )
 

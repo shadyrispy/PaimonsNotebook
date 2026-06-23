@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.RemoteViews
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
 import com.lianyi.paimonsnotebook.common.view.HoyolabWebActivity
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.view.AppWidgetConfigurationScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 * */
 open class BaseAppWidget : AppWidgetProvider() {
     private val dao by lazy {
-        PaimonsNotebookDatabase.database.appWidgetBindingDao
+        AppWidgetRepository.appWidgetBindingDao
     }
     private val context by lazy {
         PaimonsNotebookApplication.context

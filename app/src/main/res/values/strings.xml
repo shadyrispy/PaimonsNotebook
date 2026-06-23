@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">派蒙笔记本</string>
 
-    <string name="title_activity_typography_screen">TypographyScreen</string>
     <string name="title_activity_character_list_screen">CharacterListScreen</string>
 
     <string name="url_home_screen_domain">https://bbs-api.mihoyo.com</string>
@@ -9,7 +8,6 @@
     <string name="title_activity_web_view_screen">WebViewScreen</string>
     <string name="title_activity_components_testing">ComponentsTesting</string>
     <string name="title_activity_video_play_screen">VideoPlayScreen</string>
-    <string name="title_activity_guide_screen">GuideScreen</string>
     <string name="title_activity_login_screen">LoginScreen</string>
     <string name="title_activity_launch_screen">派蒙笔记本-Preview</string>
     <string name="title_activity_account_manager_screen">AccountManagerScreen</string>

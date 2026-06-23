@@ -7,7 +7,7 @@ import com.lianyi.paimonsnotebook.common.data.hoyolab.PlayerUid
 import com.lianyi.paimonsnotebook.common.data.hoyolab.game_record.DailyNote
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.UserAndUid
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.DailyNoteRepository
 import com.lianyi.paimonsnotebook.common.database.daily_note.entity.DailyNoteWidget
 import com.lianyi.paimonsnotebook.common.database.user.util.AccountHelper
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
@@ -29,9 +29,9 @@ object DailyNoteHelper {
     //更新最小的间隔时间(毫秒)
     private const val UPDATE_INTERVAL = 300000
 
-    private val dailyNoteDao = PaimonsNotebookDatabase.database.dailyNoteDao
+    private val dailyNoteDao = DailyNoteRepository.dailyNoteDao
 
-    private val dailyNoteWidgetDao = PaimonsNotebookDatabase.database.dailyNoteWidgetDao
+    private val dailyNoteWidgetDao = DailyNoteRepository.dailyNoteWidgetDao
 
     //实时便笺数据流
     private val DailyNoteListFlow = MutableStateFlow<List<DailyNote>>(listOf())

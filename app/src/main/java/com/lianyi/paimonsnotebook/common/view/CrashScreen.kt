@@ -1,6 +1,7 @@
 package com.lianyi.paimonsnotebook.common.view
 
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,10 +37,9 @@ class CrashScreen : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        registerPressedCallback()
-
         setContent {
             PaimonsNotebookTheme {
+                BackHandler { }
                 ContentSpacerLazyColumn(
                     modifier = Modifier
                         .background(BackGroundColor)

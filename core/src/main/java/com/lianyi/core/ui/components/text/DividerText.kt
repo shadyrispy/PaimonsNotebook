@@ -16,16 +16,18 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lianyi.core.ui.theme.DividerLineColor
+import com.lianyi.core.ui.theme.DividerTextColor
 
 @Composable
 fun DividerText(
     modifier: Modifier = Modifier,
     text: String,
-    textColor: Color = Color(0x4D000000),
+    textColor: Color = DividerTextColor,
     textSpacer: Dp = 10.dp,
     dividerWidth: Dp = 20.dp,
     dividerHeight: Dp = 1.dp,
-    dividerColor: Color = Color(0x33000000),
+    dividerColor: Color = DividerLineColor,
     fontSize: TextUnit = 13.sp,
 ) {
     Row(

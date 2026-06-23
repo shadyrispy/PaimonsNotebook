@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.UserRepository
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.data.AppWidgetConfiguration
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.type_converter.AppWidgetConfigurationConverter
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.type_converter.SetRemoteViewsTypeConverter
@@ -44,7 +44,7 @@ data class AppWidgetBinding(
 ) {
     companion object {
         private val userDao by lazy {
-            PaimonsNotebookDatabase.database.userDao
+            UserRepository.userDao
         }
     }
 

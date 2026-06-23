@@ -2,7 +2,7 @@ package com.lianyi.paimonsnotebook.ui.screen.achievement.service
 
 import androidx.sqlite.db.SupportSQLiteStatement
 import com.google.gson.stream.JsonReader
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.Achievements
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
@@ -16,11 +16,9 @@ import java.io.File
 import java.io.InputStreamReader
 
 /*
-* 祈愿记录导入服务
+* 成就记录导入服务
 * */
-class AchievementImportService(
-    val database: PaimonsNotebookDatabase = PaimonsNotebookDatabase.database,
-) {
+class AchievementImportService {
 
     /*
     * 缓存条数最大值: 999 / 5 = 199.8
@@ -244,7 +242,7 @@ class AchievementImportService(
             }
 
             //缓存stmt
-            database.compileStatement(sb.toString()).apply {
+            AchievementRepository.compileStatement(sb.toString()).apply {
                 stmtMap[list.size] = this
             }
         }

@@ -34,12 +34,14 @@ import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.theme.Black
+import com.lianyi.paimonsnotebook.ui.theme.FoldTextBackgroundColor
+import com.lianyi.paimonsnotebook.ui.theme.Gray_F0
 
 @Composable
 fun FoldTextContent(
     modifier: Modifier = Modifier,
-    borderColor: Color = Color(0xfff0f0f0),
-    backgroundColor: Color = Color(0xFFFBFBFB),
+    borderColor: Color = Gray_F0,
+    backgroundColor: Color = FoldTextBackgroundColor,
     titleSlot: @Composable RowScope.() -> Unit,
     contentSlot: @Composable ColumnScope.() -> Unit,
 ) {
@@ -108,8 +110,8 @@ fun FoldTextContent(
     title: String,
     fontSize: TextUnit = 15.sp,
     textColor: Color = Black,
-    borderColor: Color = Color(0xfff0f0f0),
-    backgroundColor: Color = Color(0xFFFBFBFB),
+    borderColor: Color = Gray_F0,
+    backgroundColor: Color = FoldTextBackgroundColor,
     contentSlot: @Composable ColumnScope.() -> Unit,
 ) {
     var isUnfold by remember {

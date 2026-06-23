@@ -21,7 +21,7 @@ import com.lianyi.core.ui.components.text.InfoText
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
 import com.lianyi.paimonsnotebook.common.components.dialog.ConfirmDialog
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.DiskCacheRepository
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
@@ -385,7 +385,7 @@ class SettingScreenViewModel : ViewModel() {
         viewModelScope.launchIO {
             "开始清理失效图片".notify()
 
-            val dao = PaimonsNotebookDatabase.database.diskCacheDao
+            val dao = DiskCacheRepository.diskCacheDao
             var count = 0
             val list = dao.getAllData().first()
             val deleteUrls = mutableListOf<String>()

@@ -25,7 +25,7 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.DiskCacheRepository
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.data.AppWidgetConfiguration
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.database.disk_cache.util.DiskCacheDataType
@@ -62,7 +62,7 @@ open class BaseRemoteViews(
 ) : RemoteViews(PaimonsNotebookApplication.context.packageName, layout) {
 
     private val diskCacheDao by lazy {
-        PaimonsNotebookDatabase.database.diskCacheDao
+        DiskCacheRepository.diskCacheDao
     }
 
     protected val context by lazy {

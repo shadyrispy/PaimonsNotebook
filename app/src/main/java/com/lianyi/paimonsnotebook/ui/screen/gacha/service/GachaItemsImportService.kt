@@ -3,7 +3,7 @@ package com.lianyi.paimonsnotebook.ui.screen.gacha.service
 import androidx.sqlite.db.SupportSQLiteStatement
 import com.google.gson.stream.JsonReader
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.GachaRepository
 import com.lianyi.paimonsnotebook.common.database.gacha.entity.GachaItems
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.file.createJsonReader
@@ -22,13 +22,10 @@ import java.io.InputStreamReader
 
 /*
 * 祈愿记录导入
-* database:数据库
 * */
-class GachaItemsImportService(
-    val database: PaimonsNotebookDatabase = PaimonsNotebookDatabase.database,
-) {
+class GachaItemsImportService {
 
-    private val dao = database.gachaItemsDao
+    private val dao = GachaRepository.gachaItemsDao
 
     /*
     * 祈愿记录导入时缓存条数
@@ -516,7 +513,7 @@ class GachaItemsImportService(
                 sb.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
             }
 
-            database.compileStatement(sb.toString()).apply {
+            GachaRepository.compileStatement(sb.toString()).apply {
                 stmtMap[size] = this
             }
         }

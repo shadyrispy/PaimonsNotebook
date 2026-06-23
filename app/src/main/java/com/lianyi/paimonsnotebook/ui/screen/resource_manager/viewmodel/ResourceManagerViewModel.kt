@@ -9,7 +9,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.DiskCacheRepository
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
@@ -26,7 +26,7 @@ import java.io.File
 
 class ResourceManagerViewModel : ViewModel() {
 
-    private val dao = PaimonsNotebookDatabase.database.diskCacheDao
+    private val dao = DiskCacheRepository.diskCacheDao
 
     val tabs = arrayOf("全部", "计划删除")
 

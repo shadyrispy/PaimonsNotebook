@@ -145,9 +145,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.screen.guide.view.GuideScreen"
-            android:theme="@style/Theme.PaimonsNotebook" />
-        <activity
             android:name=".common.view.VideoPlayScreen"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.PaimonsNotebookNoTranslucent"
@@ -170,19 +167,6 @@
         <activity
             android:name=".ui.screen.items.view.CultivationMaterialScreen"
             android:theme="@style/Theme.PaimonsNotebook" />
-        <activity
-            android:name=".ui.screen.develop.TypographyScreen"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.PaimonsNotebook">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-<!--                <data android:scheme="mdk_e45a5ea9b62b87aa" />-->
-<!--                <data android:scheme="mdk_47f91e6080ef9670"/>-->
-            </intent-filter>
-        </activity>
-
         <activity
             android:name=".ui.screen.home.view.HomeScreen"
             android:theme="@style/Theme.PaimonsNotebook" />

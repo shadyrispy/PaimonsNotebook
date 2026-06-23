@@ -4,7 +4,6 @@ package com.lianyi.paimonsnotebook.ui.screen.home.util
 * 功能页面枚举,跳转用
 * */
 enum class FunctionPages {
-    TypographyScreen,
     AccountManager,
     DebugPanel,
     ComponentsTesting,

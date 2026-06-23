@@ -20,7 +20,7 @@ import com.lianyi.paimonsnotebook.ui.theme.Primary_7
 import com.lianyi.paimonsnotebook.ui.theme.White
 
 @Composable
-internal fun DailyNoteCard(
+internal fun HomeDailyNoteCard(
     item: DailyNote,
 ) {
     Column {

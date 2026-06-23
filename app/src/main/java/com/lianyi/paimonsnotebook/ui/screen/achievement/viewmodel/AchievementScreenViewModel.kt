@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.AchievementUser
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
@@ -43,8 +43,8 @@ class AchievementScreenViewModel : ViewModel() {
     //成就分类map,key = id , value = overview data
     private val achievementGoalMap = mutableMapOf<Int, AchievementGoalOverviewData>()
 
-    private val achievementsDao = PaimonsNotebookDatabase.database.achievementsDao
-    private val achievementUserDao = PaimonsNotebookDatabase.database.achievementUserDao
+    private val achievementsDao = AchievementRepository.achievementsDao
+    private val achievementUserDao = AchievementRepository.achievementUserDao
 
     //当前用户
     var selectedUser by mutableStateOf<AchievementUser?>(null)

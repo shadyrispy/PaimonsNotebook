@@ -17,7 +17,7 @@ import coil.disk.DiskCache
 import com.lianyi.paimonsnotebook.BuildConfig
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.core.enviroment.CoreEnvironment
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.DiskCacheRepository
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.util.builder.imageLoader
 import com.lianyi.paimonsnotebook.common.util.coil.MergeInterceptor
@@ -170,7 +170,7 @@ class PaimonsNotebookApplication : Application(), ImageLoaderFactory {
 
                 if (!autoClean) return@launchIO
 
-                PaimonsNotebookDatabase.database.diskCacheDao.apply {
+                DiskCacheRepository.diskCacheDao.apply {
                     updateAllDataPlanDeleteStatus(System.currentTimeMillis(), deleteTimeStampLimit)
 
                     getPlanDeleteData().first().forEach {

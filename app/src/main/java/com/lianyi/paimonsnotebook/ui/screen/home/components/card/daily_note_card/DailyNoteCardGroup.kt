@@ -38,7 +38,7 @@ internal fun DailyNoteCardGroup(
                 state = state
             ) {
                 Row(modifier = Modifier.padding(12.dp, 0.dp)) {
-                    DailyNoteCard(list[it])
+                    HomeDailyNoteCard(list[it])
                 }
             }
         }

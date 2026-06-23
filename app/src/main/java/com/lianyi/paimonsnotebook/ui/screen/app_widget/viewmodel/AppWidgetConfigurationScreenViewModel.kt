@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
 import com.lianyi.paimonsnotebook.common.database.user.util.AccountHelper
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.list.takeFirstIf
@@ -41,6 +41,18 @@ import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
 import com.lianyi.paimonsnotebook.ui.screen.setting.util.SettingsHelper
 import com.lianyi.paimonsnotebook.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerAmber
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerBlue
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerGreen
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerLightBlue
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerLightGreen
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerLightOrange
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerOrange
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerPink
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerPurple1
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerPurple2
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerRed
+import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerTeal
 import com.lianyi.paimonsnotebook.ui.widgets.common.data.RemoteViewsInfo
 import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetHelper
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsIndexes
@@ -51,7 +63,7 @@ import kotlinx.coroutines.launch
 
 class AppWidgetConfigurationScreenViewModel : ViewModel() {
     private val dao by lazy {
-        PaimonsNotebookDatabase.database.appWidgetBindingDao
+        AppWidgetRepository.appWidgetBindingDao
     }
 
     var firstEntry by mutableStateOf(false)
@@ -83,18 +95,18 @@ class AppWidgetConfigurationScreenViewModel : ViewModel() {
     val defaultColorList = mutableStateListOf(
         Black,
         White,
-        Color(0xFFDC4E5B),
-        Color(0xFFFFC5F6),
-        Color(0xFFCC93EA),
-        Color(0xFFCC93E8),
-        Color(0xFF95B8EC),
-        Color(0xFF42A6FF),
-        Color(0xFFF2743D),
-        Color(0xFFFFB08D),
-        Color(0xFFFFBE46),
-        Color(0xFFB1EA7A),
-        Color(0xFF66CF46),
-        Color(0xFF79D5D5)
+        WidgetColorPickerRed,
+        WidgetColorPickerPink,
+        WidgetColorPickerPurple1,
+        WidgetColorPickerPurple2,
+        WidgetColorPickerLightBlue,
+        WidgetColorPickerBlue,
+        WidgetColorPickerOrange,
+        WidgetColorPickerLightOrange,
+        WidgetColorPickerAmber,
+        WidgetColorPickerLightGreen,
+        WidgetColorPickerGreen,
+        WidgetColorPickerTeal
     )
 
     var showColorPickerPopup by mutableStateOf(false)

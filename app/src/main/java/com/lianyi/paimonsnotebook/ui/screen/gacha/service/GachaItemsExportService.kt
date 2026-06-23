@@ -2,7 +2,7 @@ package com.lianyi.paimonsnotebook.ui.screen.gacha.service
 
 import com.google.gson.stream.JsonWriter
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.GachaRepository
 import com.lianyi.paimonsnotebook.common.database.gacha.entity.GachaItems
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
 import com.lianyi.paimonsnotebook.common.util.data_store.DataStoreHelper
@@ -17,11 +17,8 @@ import java.io.FileWriter
 * 祈愿导出
 * currentGameUid:目标uid
 * saveFile:保存的文件
-* database:数据库
 * */
-class GachaItemsExportService(
-    val database: PaimonsNotebookDatabase = PaimonsNotebookDatabase.database,
-) {
+class GachaItemsExportService {
 
     /*
     * 祈愿记录一页条数
@@ -29,7 +26,7 @@ class GachaItemsExportService(
     private val queryPageSize = 2000
 
     private val dao by lazy {
-        database.gachaItemsDao
+        GachaRepository.gachaItemsDao
     }
 
     //导出当前用户的祈愿记录

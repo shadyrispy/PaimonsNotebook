@@ -123,6 +123,27 @@ val Quality3Color = Color(0XFF8CB5E7)
 val Quality4Color = Color(0XFFA88AEC)
 val Quality5Color = Color(0XFFD6AD81)
 
+// AppWidget 颜色选择器默认颜色
+val WidgetColorPickerRed = Color(0xFFDC4E5B)
+val WidgetColorPickerPink = Color(0xFFFFC5F6)
+val WidgetColorPickerPurple1 = Color(0xFFCC93EA)
+val WidgetColorPickerPurple2 = Color(0xFFCC93E8)
+val WidgetColorPickerLightBlue = Color(0xFF95B8EC)
+val WidgetColorPickerBlue = Color(0xFF42A6FF)
+val WidgetColorPickerOrange = Color(0xFFF2743D)
+val WidgetColorPickerLightOrange = Color(0xFFFFB08D)
+val WidgetColorPickerAmber = Color(0xFFFFBE46)
+val WidgetColorPickerLightGreen = Color(0xFFB1EA7A)
+val WidgetColorPickerGreen = Color(0xFF66CF46)
+val WidgetColorPickerTeal = Color(0xFF79D5D5)
+
+// LoadingKlee 动画占位符颜色
+val LoadingKleeBackground = Color(0xFF1B65A5)
+val LoadingKleeAccent = Color(0xFF13ABDC)
+
+// FoldTextContent 颜色
+val FoldTextBackgroundColor = Color(0xFFFBFBFB)
+
 
 
 

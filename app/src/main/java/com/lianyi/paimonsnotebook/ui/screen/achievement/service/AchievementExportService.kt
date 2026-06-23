@@ -2,7 +2,7 @@ package com.lianyi.paimonsnotebook.ui.screen.achievement.service
 
 import com.google.gson.stream.JsonWriter
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.AchievementUser
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.Achievements
 import com.lianyi.paimonsnotebook.common.util.metadata.genshin.uiaf.UIAFHelper
@@ -14,7 +14,7 @@ import java.io.FileWriter
 
 class AchievementExportService {
 
-    private val achievementsDao = PaimonsNotebookDatabase.database.achievementsDao
+    private val achievementsDao = AchievementRepository.achievementsDao
 
     private val queryPageSize = 2000
 

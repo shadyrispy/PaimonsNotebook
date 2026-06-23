@@ -1,6 +1,7 @@
 package com.lianyi.paimonsnotebook.ui.screen.home.view
 
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResult
 import androidx.compose.animation.Crossfade
@@ -51,7 +52,6 @@ class HomeScreen : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.startActivity = registerStartActivityForResult()
-        registerPressedCallback()
         registerRequestPermissionsResult()
 
         viewModel.load()
@@ -59,6 +59,12 @@ class HomeScreen : BaseActivity() {
 
         setContent {
             PaimonsNotebookTheme {
+                BackHandler {
+                    viewModel.onBackPressed {
+                        moveTaskToBack(false)
+                    }
+                }
+
                 val coroutineScope = rememberCoroutineScope()
                 val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
@@ -168,13 +174,6 @@ class HomeScreen : BaseActivity() {
                     )
                 }
             }
-        }
-    }
-
-    override fun onBackPressedCallback() {
-        viewModel.onBackPressed {
-            //返回桌面
-            moveTaskToBack(false)
         }
     }
 

@@ -6,35 +6,18 @@ import android.net.Uri
 import android.os.Build
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
-import com.lianyi.paimonsnotebook.common.components.dialog.LazyColumnDialog
-import com.lianyi.paimonsnotebook.common.components.dialog.PropertiesDialog
-import com.lianyi.paimonsnotebook.common.components.widget.InputTextFiled
 import com.lianyi.paimonsnotebook.common.data.hoyolab.PlayerUid
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.UserAndUid
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.GachaRepository
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
@@ -54,17 +37,19 @@ import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.BindingClien
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.GameAuthKeyData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.GenAuthKeyData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
-import com.lianyi.paimonsnotebook.ui.screen.account.components.dialog.UserGameRolesDialog
+import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordAboutUIGFVersionSlot
+import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordCurrentGameUidSlot
+import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordExportArrowSlot
+import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordExportV3SwitchSlot
+import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordImportResultSlot
+import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordInputUrlSlot
+import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordSelectAccountSlot
 import com.lianyi.paimonsnotebook.ui.screen.gacha.service.GachaItemsExportService
 import com.lianyi.paimonsnotebook.ui.screen.gacha.service.GachaItemsImportService
 import com.lianyi.paimonsnotebook.ui.screen.gacha.service.GachaLogService
 import com.lianyi.paimonsnotebook.ui.screen.gacha.view.GachaRecordExportDataScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
-import com.lianyi.paimonsnotebook.ui.screen.setting.components.widgets.SettingsOptionSwitch
 import com.lianyi.paimonsnotebook.ui.screen.setting.data.OptionListData
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-import com.lianyi.paimonsnotebook.ui.theme.Gray_F5
-import com.lianyi.paimonsnotebook.ui.theme.Primary_2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -81,7 +66,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
     lateinit var startActivity: ActivityResultLauncher<Intent>
 
     private val dao by lazy {
-        PaimonsNotebookDatabase.database.gachaItemsDao
+        GachaRepository.gachaItemsDao
     }
 
 
@@ -172,31 +157,18 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
                 }
             },
             slot = {
-                Box(contentAlignment = Alignment.TopEnd) {
-                    Text(text = currentGameUid, fontSize = 14.sp, color = Primary_2)
-
-                    DropdownMenu(
-                        expanded = expandedCurrentGameUidDropMenu,
-                        onDismissRequest = { expandedCurrentGameUidDropMenu = false }
-                    ) {
-                        gachaRecordGameUidList.forEach {
-                            Text(
-                                text = it,
-                                fontSize = 16.sp,
-                                modifier = Modifier
-                                    .clickable {
-                                        expandedCurrentGameUidDropMenu = false
-                                        viewModelScope.launch {
-                                            PreferenceKeys.GachaRecordCurrentGameUid.editValue(
-                                                it
-                                            )
-                                        }
-                                    }
-                                    .padding(12.dp)
-                            )
+                GachaRecordCurrentGameUidSlot(
+                    currentGameUid = currentGameUid,
+                    expanded = expandedCurrentGameUidDropMenu,
+                    gachaRecordGameUidList = gachaRecordGameUidList,
+                    onUidSelected = {
+                        expandedCurrentGameUidDropMenu = false
+                        viewModelScope.launch {
+                            PreferenceKeys.GachaRecordCurrentGameUid.editValue(it)
                         }
-                    }
-                }
+                    },
+                    onDismissRequest = { expandedCurrentGameUidDropMenu = false }
+                )
             }
         ),
         OptionListData(
@@ -206,11 +178,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
                 goGachaRecordExportDataListScreen()
             },
             slot = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_chevron_right),
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp)
-                )
+                GachaRecordExportArrowSlot()
             }
         ),
 //        OptionListData(
@@ -241,7 +209,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
             },
             slot = {
                 if (showSelectAccountGameRoleDialog) {
-                    UserGameRolesDialog(
+                    GachaRecordSelectAccountSlot(
                         onButtonClick = {
                             showSelectAccountGameRoleDialog = false
                         },
@@ -267,36 +235,15 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
             },
             slot = {
                 if (showInputUrlDialog) {
-                    LazyColumnDialog(
-                        title = "请输入祈愿记录Url",
-                        titleSpacer = 20.dp,
-                        onClickButton = {
-                            if (it == 1) {
-                                showLoadingDialog = true
-                                getGaLogFromUrl()
-                            }
-                            showInputUrlDialog = false
+                    GachaRecordInputUrlSlot(
+                        inputValue = inputDialogValue,
+                        onValueChange = { inputDialogValue = it },
+                        onConfirm = {
+                            showLoadingDialog = true
+                            getGaLogFromUrl()
                         },
-                        titleTextSize = 16.sp,
-                        buttons = arrayOf("取消", "确定"),
-                        onDismissRequest = { showInputUrlDialog = false }) {
-                        item {
-                            InputTextFiled(
-                                value = inputDialogValue,
-                                onValueChange = this@GachaRecordOptionScreenViewModel::inputDialogValue::set,
-                                inputFieldHeight = 200.dp,
-                                backgroundColor = Gray_F5,
-                                padding = PaddingValues(8.dp),
-                                placeholder = {
-                                    Text(
-                                        text = "请输入祈愿记录Url,并确保各个参数的有效性",
-                                        fontSize = 14.sp,
-                                        color = Black_60
-                                    )
-                                }
-                            )
-                        }
-                    }
+                        onDismissRequest = { showInputUrlDialog = false }
+                    )
                 }
             }
         ),
@@ -308,15 +255,10 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
             },
             slot = {
                 if (showImportUIGFJsonResultDialog) {
-                    PropertiesDialog(
-                        title = "UIGF Json信息",
+                    GachaRecordImportResultSlot(
                         properties = importUIGFJsonPropertyList,
-                        onDismissRequest = { showImportUIGFJsonResultDialog = false },
-                        buttons = arrayOf("取消", "确认导入"),
-                        onButtonClick = {
-                            if (it == 1) saveGachaLogToDB()
-                            showImportUIGFJsonResultDialog = false
-                        }
+                        onConfirm = { saveGachaLogToDB() },
+                        onDismissRequest = { showImportUIGFJsonResultDialog = false }
                     )
                 }
             }
@@ -348,7 +290,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
                 }
             },
             slot = {
-                SettingsOptionSwitch(
+                GachaRecordExportV3SwitchSlot(
                     checked = gachaRecordExportToUIGFV3
                 )
             }
@@ -363,7 +305,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
                 "${PaimonsNotebookApplication.name}当前的UIGF版本是${UIGFHelper.UIGF_VERSION}".notify()
             },
             slot = {
-                com.lianyi.core.ui.components.text.InfoText(text = UIGFHelper.UIGF_VERSION)
+                GachaRecordAboutUIGFVersionSlot(version = UIGFHelper.UIGF_VERSION)
             }
         ),
         OptionListData(

@@ -1,12 +1,12 @@
 package com.lianyi.paimonsnotebook.ui.screen.achievement.util.helper
 
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.extension.list.split
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.achievement.AchievementData
 
 object AchievementHelper {
 
-    private val achievementsDao = PaimonsNotebookDatabase.database.achievementsDao
+    private val achievementsDao = AchievementRepository.achievementsDao
 
     //ids的最大个数
     private const val IDS_MAX_COUNT = 900

@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.DiskCacheRepository
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
@@ -23,7 +23,7 @@ import java.io.File
 class ImageDetailScreenViewModel : ViewModel() {
 
     private val dao =
-        PaimonsNotebookDatabase.database.diskCacheDao
+        DiskCacheRepository.diskCacheDao
 
     var cacheFile: File? = null
         private set

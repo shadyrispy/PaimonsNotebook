@@ -1,7 +1,7 @@
 package com.lianyi.paimonsnotebook.ui.screen.account.view
 
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
@@ -58,14 +58,6 @@ class AccountManagerScreen : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                viewModel.onBackPressed {
-                    finish()
-                }
-            }
-        })
-
         viewModel.checkStoragePermission = this::checkStoragePermission
         viewModel.requestStoragePermission = this::requestStoragePermission
 
@@ -73,6 +65,12 @@ class AccountManagerScreen : BaseActivity() {
 
         setContent {
             PaimonsNotebookTheme(this) {
+                BackHandler {
+                    viewModel.onBackPressed {
+                        finish()
+                    }
+                }
+
                 val state = rememberLazyListState()
                 BoxWithConstraints(
                     modifier = Modifier

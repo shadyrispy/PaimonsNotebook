@@ -9,16 +9,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
-import com.lianyi.paimonsnotebook.common.database.cultivate.data.CultivateEntityType
+import com.lianyi.paimonsnotebook.common.data.repository.CultivateRepository
 import com.lianyi.paimonsnotebook.common.database.cultivate.data.CultivateItemType
-import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateEntity
-import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateItemMaterials
-import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateItems
 import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateProject
 import com.lianyi.paimonsnotebook.common.database.user.util.AccountHelper
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
-import com.lianyi.paimonsnotebook.common.extension.list.takeFirstIf
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.extension.string.notify
@@ -26,12 +21,12 @@ import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.event.calculate.BatchCalculatePromotionDetail
-import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.event.calculate.BatchComputeData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.event.calculate.CalculateClient
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.view.CultivateProjectOptionScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.data.cultivate.CultivateConfigData
+import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemComputeHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 
 /*
@@ -88,19 +83,19 @@ open class ItemBaseViewModel<T>(private val observeCurrentItemState: Boolean = t
     }
 
     private val projectDao by lazy {
-        PaimonsNotebookDatabase.database.cultivateProjectDao
+        CultivateRepository.cultivateProjectDao
     }
 
     private val cultivateEntityDao by lazy {
-        PaimonsNotebookDatabase.database.cultivateEntityDao
+        CultivateRepository.cultivateEntityDao
     }
 
     private val cultivateItemsDao by lazy {
-        PaimonsNotebookDatabase.database.cultivateItemsDao
+        CultivateRepository.cultivateItemsDao
     }
 
     private val cultivateItemMaterialsDao by lazy {
-        PaimonsNotebookDatabase.database.cultivateItemMaterialsDao
+        CultivateRepository.cultivateItemMaterialsDao
     }
 
     private val calculateClient by lazy {
@@ -289,248 +284,38 @@ open class ItemBaseViewModel<T>(private val observeCurrentItemState: Boolean = t
             }
 
             try {
-                saveAvatarComputeResult(res.data, promotionDetail)
-                saveWeaponComputeResult(res.data, promotionDetail)
+                val projectId = currentSelectedCultivateProjectCache?.projectId
+                    ?: return@launchIO
+
+                ItemComputeHelper.saveAvatarComputeResult(
+                    result = res.data,
+                    promotionDetail = promotionDetail,
+                    projectId = projectId,
+                    itemAlreadyAdded = itemAddedToCurrentCultivateProject,
+                    cultivateEntityDao = cultivateEntityDao,
+                    cultivateItemsDao = cultivateItemsDao,
+                    cultivateItemMaterialsDao = cultivateItemMaterialsDao
+                )?.let { avatarId ->
+                    onDataAddSuccess("角色", avatarId)
+                }
+
+                ItemComputeHelper.saveWeaponComputeResult(
+                    result = res.data,
+                    promotionDetail = promotionDetail,
+                    projectId = projectId,
+                    itemAlreadyAdded = itemAddedToCurrentCultivateProject,
+                    cultivateEntityDao = cultivateEntityDao,
+                    cultivateItemsDao = cultivateItemsDao,
+                    cultivateItemMaterialsDao = cultivateItemMaterialsDao
+                )?.let { weaponId ->
+                    onDataAddSuccess("武器", weaponId)
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
 
                 "添加数据至数据库时出现错误:${e.message}".errorNotify()
             }
         }
-    }
-
-    private suspend fun saveAvatarComputeResult(
-        result: BatchComputeData,
-        promotionDetail: BatchCalculatePromotionDetail
-    ) {
-        if (result.items.isEmpty()) return
-
-        /*
-        * TODO 支持一次性添加多名角色
-        * 获取第一个角色id不为空的数据
-        * */
-        val avatarPromotion = promotionDetail.items.takeFirstIf { it.avatar_id != null } ?: return
-        val avatarId = avatarPromotion.avatar_id ?: return
-        val projectId = currentSelectedCultivateProjectCache?.projectId ?: return
-
-        val firstResult = result.items.first()
-        /*
-        * 全部材料类型,包含缺少的数量
-        *
-        * cultivateItemId = 负的角色id
-        * */
-        val overallMaterials = result.overall_consume.map {
-            CultivateItemMaterials(
-                itemId = it.id,
-                cultivateItemId = -avatarId,
-                projectId = projectId,
-                count = it.num,
-                lackCount = it.lack_num,
-                status = if (it.lack_num > 0) {
-                    0
-                } else {
-                    1
-                }
-            )
-        }
-
-        /*
-        * 角色突破所需材料
-        *
-        * item id = 材料id
-        * cultivateItemId = 角色id
-        * */
-        val avatarMaterials = firstResult.avatar_consume.map {
-            CultivateItemMaterials(
-                itemId = it.id,
-                cultivateItemId = avatarId,
-                projectId = projectId,
-                count = it.num,
-                lackCount = 0,
-                status = 0
-            )
-        }
-
-        /*
-        * 技能突破所需材料
-        *
-        * 约束的id始终为当前角色的元素爆发技能id,如果后续接口返回每个技能的材料则改为每个技能的id
-        * itemId = 材料id
-        * cultivateItemId = 角色技能id
-        * */
-        val avatarSkillMaterials = firstResult.skills_consume.map { skillConsume ->
-            skillConsume.consume_list.map { consume ->
-                CultivateItemMaterials(
-                    itemId = consume.id,
-                    cultivateItemId = skillConsume.skill_info.id.toInt(),
-                    projectId = projectId,
-                    count = consume.num,
-                    lackCount = 0,
-                    status = 0
-                )
-            }
-        }.flatten()
-
-        if (overallMaterials.isEmpty() && avatarMaterials.isEmpty() && avatarSkillMaterials.isEmpty()) {
-            error("当前角色养成配置没有所需的养成材料")
-        }
-
-        /*
-        * 如果已经添加过了,需要更新数据库
-        * 为避免不同等级产生不同数量的材料(lv1跟lv10所需要的材料数量是不同的)
-        * 这里直接把原来的给删了,重新添加
-        * 外键约束会自动删除引用的表的数据
-        * */
-        if (itemAddedToCurrentCultivateProject) {
-            cultivateEntityDao.deleteEntityByItemIdAndProjectId(avatarId, projectId)
-        }
-
-        /*
-        * 创建角色养成计划实体
-        * */
-        val avatarEntity = CultivateEntity(
-            itemId = avatarId,
-            projectId = projectId,
-            type = CultivateEntityType.Avatar,
-            status = 0
-        )
-
-        cultivateEntityDao.insert(avatarEntity)
-
-        /*
-        * 全部材料计算项(存储全部材料的数量与所需个数)
-        * */
-        val overallItems = CultivateItems(
-            itemId = -avatarId,
-            entityItemId = avatarId,
-            projectId = projectId,
-            itemType = CultivateItemType.Overall,
-            fromLevel = 0,
-            toLevel = 0,
-            status = 0
-        )
-
-
-        /*
-        * 角色养成计算项
-        *
-        * item id = 角色id
-        * entity id = 角色id
-        * item type = 角色,区分角色养成计算项与技能养成计算项
-        * */
-        val avatarItem = CultivateItems(
-            itemId = avatarId,
-            entityItemId = avatarId,
-            projectId = projectId,
-            itemType = CultivateItemType.Avatar,
-            fromLevel = avatarPromotion.avatar_level_current ?: 0,
-            toLevel = avatarPromotion.avatar_level_target ?: 0,
-            status = 0
-        )
-
-        /*
-        * 创建角色技能计算项
-        *
-        * item id = 技能id
-        * entity id = 角色id
-        * item type = 技能,区分角色养成计算项与技能养成计算项
-        * */
-        val skillList = avatarPromotion.skill_list ?: listOf()
-        val avatarSkillItems = skillList.map {
-            CultivateItems(
-                itemId = it.id,
-                entityItemId = avatarId,
-                projectId = projectId,
-                itemType = CultivateItemType.Skill,
-                fromLevel = it.level_current,
-                toLevel = it.level_target,
-                status = 0
-            )
-        }
-
-        cultivateItemsDao.insert(overallItems)
-        cultivateItemsDao.insert(avatarItem)
-        cultivateItemsDao.insert(avatarSkillItems)
-
-
-
-        cultivateItemMaterialsDao.insert(overallMaterials)
-        cultivateItemMaterialsDao.insert(avatarMaterials)
-        cultivateItemMaterialsDao.insert(avatarSkillMaterials)
-
-        onDataAddSuccess("角色", avatarId)
-    }
-
-    private suspend fun saveWeaponComputeResult(
-        result: BatchComputeData,
-        promotionDetail: BatchCalculatePromotionDetail
-    ) {
-        if (result.items.isEmpty()) return
-
-        val weapon = promotionDetail.items.takeFirstIf { it.weapon != null }?.weapon ?: return
-        val projectId = currentSelectedCultivateProjectCache?.projectId ?: return
-
-        val weaponMaterials = result.overall_consume.map {
-            CultivateItemMaterials(
-                itemId = it.id,
-                cultivateItemId = -weapon.id,
-                projectId = projectId,
-                count = it.num,
-                lackCount = it.lack_num,
-                status = if (it.lack_num <= 0) {
-                    1
-                } else {
-                    0
-                }
-            )
-        }
-
-
-        //检查材料是否为空
-        if (weaponMaterials.isEmpty()) {
-            error("当前武器养成配置没有所需的养成材料")
-        }
-
-        if (itemAddedToCurrentCultivateProject) {
-            cultivateEntityDao.deleteEntityByItemIdAndProjectId(weapon.id, projectId)
-        }
-
-        val weaponEntity = CultivateEntity(
-            itemId = weapon.id,
-            projectId = projectId,
-            type = CultivateEntityType.Weapon,
-            status = 0
-        )
-
-        cultivateEntityDao.insert(weaponEntity)
-
-        val overallItem = CultivateItems(
-            itemId = -weapon.id,
-            entityItemId = weapon.id,
-            projectId = projectId,
-            itemType = CultivateItemType.Overall,
-            fromLevel = 0,
-            toLevel = 0,
-            status = 0
-        )
-
-        val weaponItem = CultivateItems(
-            itemId = weapon.id,
-            entityItemId = weapon.id,
-            projectId = projectId,
-            itemType = CultivateItemType.Weapon,
-            fromLevel = weapon.level_current,
-            toLevel = weapon.level_target,
-            status = 0
-        )
-
-        cultivateItemsDao.insert(overallItem)
-        cultivateItemsDao.insert(weaponItem)
-
-
-        cultivateItemMaterialsDao.insert(weaponMaterials)
-
-        onDataAddSuccess("武器", weapon.id)
     }
 
     private suspend fun onDataAddSuccess(tag: String, id: Int) {

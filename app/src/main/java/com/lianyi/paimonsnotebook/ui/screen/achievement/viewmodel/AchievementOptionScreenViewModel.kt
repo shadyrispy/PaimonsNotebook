@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.core.ui.components.text.InfoText
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.AchievementUser
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
@@ -49,7 +49,7 @@ class AchievementOptionScreenViewModel : ViewModel() {
 
     val userList = mutableListOf<AchievementUser>()
 
-    private val achievementUserDao = PaimonsNotebookDatabase.database.achievementUserDao
+    private val achievementUserDao = AchievementRepository.achievementUserDao
 
     fun load() {
         viewModelScope.launchMain {

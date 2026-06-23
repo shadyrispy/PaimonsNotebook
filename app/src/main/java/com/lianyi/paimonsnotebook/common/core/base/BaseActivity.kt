@@ -10,7 +10,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.lianyi.paimonsnotebook.common.core.listener.ScreenOrientationEventListener
@@ -93,13 +92,6 @@ open class BaseActivity(
             onStartActivityForResult(ActivityResult(it.resultCode, intent))
         }
 
-    protected fun registerPressedCallback() =
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                onBackPressedCallback()
-            }
-        })
-
     //检查存储权限
     protected fun checkStoragePermission() = checkPermissions(storagePermissions)
 
@@ -139,7 +131,4 @@ open class BaseActivity(
 
     //Activity返回结果
     protected open fun onStartActivityForResult(result: ActivityResult) {}
-
-    //当点击返回时
-    protected open fun onBackPressedCallback() {}
 }

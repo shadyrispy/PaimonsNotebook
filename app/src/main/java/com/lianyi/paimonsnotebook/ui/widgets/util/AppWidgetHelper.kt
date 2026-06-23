@@ -6,7 +6,7 @@ import android.net.Uri
 import androidx.compose.ui.graphics.toArgb
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
 import com.lianyi.paimonsnotebook.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.Transparent
 import com.lianyi.paimonsnotebook.ui.theme.White
@@ -17,7 +17,7 @@ object AppWidgetHelper {
     }
 
     private val dao by lazy {
-        PaimonsNotebookDatabase.database.appWidgetBindingDao
+        AppWidgetRepository.appWidgetBindingDao
     }
 
     private const val PACKAGE_NAME = "com.lianyi.paimonsnotebook.appwidget"

@@ -5,13 +5,11 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.common.data.popup.IconTitleInformationPopupWindowData
 import com.lianyi.paimonsnotebook.common.data.popup.PopupWindowPositionProvider
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
-import com.lianyi.paimonsnotebook.common.database.cultivate.data.CultivateEntityType
+import com.lianyi.paimonsnotebook.common.data.repository.CultivateRepository
 import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateEntity
 import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateItemMaterials
 import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateItems
@@ -26,11 +24,11 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.common.service.Avatar
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.common.service.MaterialService
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.common.service.WeaponService
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
-import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Materials
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.CultivateItemInfoData
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.EntityBaseInfo
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.MaterialBaseInfo
+import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.util.CultivateProjectCalculator
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.view.CultivateProjectOptionScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
 import kotlinx.coroutines.Job
@@ -39,7 +37,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.math.abs
 
 class CultivateProjectScreenViewModel : ViewModel() {
 
@@ -72,11 +69,11 @@ class CultivateProjectScreenViewModel : ViewModel() {
     private val avatarIdMap = mutableMapOf<Int, AvatarData>()
     private val weaponIdMap = mutableMapOf<Int, WeaponData>()
 
-    private val cultivateProjectDao = PaimonsNotebookDatabase.database.cultivateProjectDao
-    private val cultivateEntityDao = PaimonsNotebookDatabase.database.cultivateEntityDao
-    private val cultivateItemsDao = PaimonsNotebookDatabase.database.cultivateItemsDao
+    private val cultivateProjectDao = CultivateRepository.cultivateProjectDao
+    private val cultivateEntityDao = CultivateRepository.cultivateEntityDao
+    private val cultivateItemsDao = CultivateRepository.cultivateItemsDao
     private val cultivateItemMaterialsDao =
-        PaimonsNotebookDatabase.database.cultivateItemMaterialsDao
+        CultivateRepository.cultivateItemMaterialsDao
 
     /*
     * 材料总览分组
@@ -376,157 +373,14 @@ class CultivateProjectScreenViewModel : ViewModel() {
         //如果当前没有选中养成计划就直接返回
         if (currentSelectedProjectId == -1) return
 
-        //五星突破水晶id
-        val gemIds = Materials.AvatarPromotionGemSimpleItems
-
-        var currentMaterialBaseInfoGroup = mutableListOf<MaterialBaseInfo>()
-
-        val tempPairList = cultivateEntityMapList.toList().sortedBy {
-            if (cultivateProjectSortByEntityType) {
-                it.first.type.ordinal.toLong()
-            } else {
-                it.first.addTime
-            }
-        }
-
-        val tempOverallMaterialBaseInfoGroupList = mutableListOf<List<MaterialBaseInfo>>()
-
-        val tempOverallEntityBaseInfoMap =  mutableMapOf<Int, MutableList<EntityBaseInfo>>()
-
-
-        /*
-        * 将所有养成实体的材料列表根据itemId分类
-        *
-        * */
-        tempPairList.asSequence().map { (cultivateEntity, _) ->
-            itemsMaterialsMap[-cultivateEntity.itemId] ?: listOf()
-        }.flatten()
-            .groupBy { it.itemId }
-            .map { map ->
-                val material = getMaterialData(map.key)
-                //最小的缺少材料的数量
-                val minLackCountMaterials = map.value.minBy { it.lackCount }
-
-                val lackCount = minLackCountMaterials.lackCount
-                val count = minLackCountMaterials.count
-
-                //所需的材料数量
-                val totalMaterialsCount = map.value.sumOf { it.count }
-
-                /*
-                * 获取材料可用数量
-                * lackCount小于0代表这个材料多余所需数量
-                * 大于0代表持有数量少于所需数量
-                * */
-                val availableCount = if (lackCount < 0) {
-                    abs(lackCount - count)
-                } else {
-                    count - lackCount
-                }
-
-                MaterialBaseInfo(
-                    material = material,
-                    count = totalMaterialsCount,
-                    availableCount = availableCount
-                )
-            }.sortedBy { it.material.Id }.toList()
-            .forEach { materialBaseInfo ->
-                if (currentMaterialBaseInfoGroup.isEmpty()) {
-                    currentMaterialBaseInfoGroup += materialBaseInfo
-                } else {
-                    val first = currentMaterialBaseInfoGroup.first().material
-                    val last = currentMaterialBaseInfoGroup.last().material
-                    val material = materialBaseInfo.material
-                    //智识之冕(104319)单独进行判断,其次添加至组别的材料只能为五星以下的材料,如果为五星材料则需要判断第一个添加的材料是否是二星
-                    if ((material.RankLevel < 5 || first.RankLevel == 2 || gemIds.contains(material.Id)) && last.Id + 1 == material.Id && last.RankLevel + 1 == material.RankLevel && material.Id != 104319) {
-                        currentMaterialBaseInfoGroup += materialBaseInfo
-                    } else {
-                        tempOverallMaterialBaseInfoGroupList += currentMaterialBaseInfoGroup
-                        currentMaterialBaseInfoGroup = mutableListOf(materialBaseInfo)
-                    }
-                }
-            }
-        if (currentMaterialBaseInfoGroup.isNotEmpty()) {
-            tempOverallMaterialBaseInfoGroupList += currentMaterialBaseInfoGroup
-        }
-
-        //养成实体所需的材料分类后再将对应材料的id取出
-        val materialGroupListItemIdsList = tempOverallMaterialBaseInfoGroupList.map {
-            it.map { baseInfo ->
-                baseInfo.material.Id
-            }.toSet()
-        }
-
-        tempPairList.forEach { (cultivateEntity, _) ->
-
-            //获取养成材料总览材料列表id集合
-            val itemIds =
-                (itemsMaterialsMap[-cultivateEntity.itemId] ?: return@forEach).fastMap { it.itemId }
-
-            //遍历set判断养成实体是否需要对应的材料
-            materialGroupListItemIdsList.forEach { baseInfoMaterialIdsSet ->
-                //判断养成材料id集合与分组材料集合是否有交际
-                val add = itemIds.any { it in baseInfoMaterialIdsSet }
-
-                var list = tempOverallEntityBaseInfoMap[baseInfoMaterialIdsSet.first()]
-
-                if (list == null) {
-                    list = mutableListOf()
-                    tempOverallEntityBaseInfoMap[baseInfoMaterialIdsSet.first()] = list
-                }
-
-                if (add) {
-                    if (cultivateEntity.type == CultivateEntityType.Avatar) {
-                        val avatar = getAvatarData(cultivateEntity.itemId) ?: return
-                        list.add(
-                            EntityBaseInfo(
-                                id = avatar.id,
-                                name = avatar.name,
-                                iconUrl = avatar.iconUrl,
-                                star = avatar.quality
-                            )
-                        )
-                    }
-
-                    if (cultivateEntity.type == CultivateEntityType.Weapon) {
-                        val weapon = getWeaponData(cultivateEntity.itemId) ?: return
-                        list.add(
-                            EntityBaseInfo(
-                                id = weapon.id,
-                                name = weapon.name,
-                                iconUrl = weapon.iconUrl,
-                                star = weapon.rankLevel
-                            )
-                        )
-                    }
-                }
-            }
-        }
-
-        /*
-        * 分组数据排序
-        * 长度最长并且未完成数量最多的集合排到最前面
-        * */
-        tempOverallMaterialBaseInfoGroupList.sortWith(
-            compareBy<List<MaterialBaseInfo>> {
-                it.all { baseInfo -> baseInfo.lackCount <= 0 }
-            }.thenByDescending { it.size }
-                .thenBy { it.count { baseInfo -> baseInfo.lackCount <= 0 } }
-        )
-
-        val tempOverallMaterialBaseInfoGroupListFlatten =
-            tempOverallMaterialBaseInfoGroupList.flatten()
-                .sortedBy {
-                    it.lackCount <= 1
-                }
-
-        /*
-        * 分组数据实体排序
-        * 根据星级排序,星级最大的在最前方
-        * */
-        overallEntityBaseInfoMap.forEach { (_, u) ->
-            u.sortByDescending { it.star }
-        }
+        val result = CultivateProjectCalculator.calculateMaterialOverallGroup(
+            cultivateEntityMapList = cultivateEntityMapList,
+            itemsMaterialsMap = itemsMaterialsMap,
+            sortByEntityType = cultivateProjectSortByEntityType,
+            getMaterialData = ::getMaterialData,
+            getAvatarData = ::getAvatarData,
+            getWeaponData = ::getWeaponData
+        ) ?: return
 
         /*
         * 更新数据集与加载状态
@@ -537,10 +391,10 @@ class CultivateProjectScreenViewModel : ViewModel() {
             overallEntityBaseInfoMap.clear()
             entityCultivateItemsPairList.clear()
 
-            overallMaterialBaseInfoGroupList += tempOverallMaterialBaseInfoGroupList
-            overallMaterialBaseInfoGroupListFlatten += tempOverallMaterialBaseInfoGroupListFlatten
-            overallEntityBaseInfoMap += tempOverallEntityBaseInfoMap
-            entityCultivateItemsPairList += tempPairList
+            overallMaterialBaseInfoGroupList += result.materialBaseInfoGroups
+            overallMaterialBaseInfoGroupListFlatten += result.materialBaseInfoGroupsFlatten
+            overallEntityBaseInfoMap += result.entityBaseInfoMap
+            entityCultivateItemsPairList += result.sortedEntityItemsPairList
 
             loadingState = LoadingState.Success
         }

@@ -9,7 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.CultivateRepository
 import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateProject
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
@@ -28,8 +28,8 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
     var currentSelectedProject: CultivateProject? by mutableStateOf(null)
         private set
 
-    private val cultivateProjectDao = PaimonsNotebookDatabase.database.cultivateProjectDao
-    private val cultivateEntityDao = PaimonsNotebookDatabase.database.cultivateEntityDao
+    private val cultivateProjectDao = CultivateRepository.cultivateProjectDao
+    private val cultivateEntityDao = CultivateRepository.cultivateEntityDao
 
     val cultivateProjectList = mutableStateListOf<CultivateProject>()
 

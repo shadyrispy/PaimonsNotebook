@@ -4,7 +4,8 @@ import androidx.compose.runtime.mutableStateListOf
 import com.lianyi.paimonsnotebook.common.core.enviroment.CoreEnvironment
 import com.lianyi.paimonsnotebook.common.data.ResultData
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
+import com.lianyi.paimonsnotebook.common.data.repository.UserRepository
 import com.lianyi.paimonsnotebook.common.extension.list.takeFirstIf
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.user.BbsUserClient
@@ -52,10 +53,10 @@ object AccountHelper {
 //
 //    val hasUserFlow = HasUserFlow.asStateFlow()
 
-    private val dao = PaimonsNotebookDatabase.database.userDao
+    private val dao = UserRepository.userDao
 
     private val appWidgetBindingDao by lazy {
-        PaimonsNotebookDatabase.database.appWidgetBindingDao
+        AppWidgetRepository.appWidgetBindingDao
     }
 
     //用户数据流

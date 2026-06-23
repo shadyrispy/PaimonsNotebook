@@ -9,7 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.Achievements
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
@@ -48,7 +48,7 @@ class AchievementGoalScreenViewModel : ViewModel() {
         }
     }
 
-    private val achievementsDao = PaimonsNotebookDatabase.database.achievementsDao
+    private val achievementsDao = AchievementRepository.achievementsDao
 
     var goalOverviewData by mutableStateOf<AchievementGoalOverviewData?>(null)
         private set

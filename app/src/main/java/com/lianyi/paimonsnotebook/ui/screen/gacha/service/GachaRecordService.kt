@@ -1,6 +1,6 @@
 package com.lianyi.paimonsnotebook.ui.screen.gacha.service
 
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.GachaRepository
 import com.lianyi.paimonsnotebook.common.database.gacha.data.GachaRecordOverview
 import com.lianyi.paimonsnotebook.common.util.data_store.PreferenceKeys
 import com.lianyi.paimonsnotebook.common.util.data_store.dataStoreValues
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class GachaRecordService {
-    private val dao = PaimonsNotebookDatabase.database.gachaItemsDao
+    private val dao = GachaRepository.gachaItemsDao
 
     //祈愿记录总览数据流
     private val GachaRecordOverviewListFlow =
