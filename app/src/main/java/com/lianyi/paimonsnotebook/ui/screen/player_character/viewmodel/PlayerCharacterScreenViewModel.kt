@@ -24,6 +24,8 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.common.service.Weapon
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.format.FightPropertyFormat
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
+import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemSearchOptionHelper
+import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.filter.ItemFilterViewModel
 import com.lianyi.paimonsnotebook.ui.screen.player_character.view.PlayerCharacterDetailScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -73,6 +75,18 @@ class PlayerCharacterScreenViewModel : ViewModel() {
 
     //显示的角色列表
     val avatarDataList = mutableStateListOf<AvatarData>()
+
+    var itemFilterViewModel: ItemFilterViewModel<AvatarData> by mutableStateOf(
+        ItemFilterViewModel(
+            items = emptyList(),
+            searchOptionList = emptyList(),
+            getFilteredItemList = { _, _ -> emptyList() },
+            itemSortCompareBy = { _, _ -> 0L },
+            showLayoutToggle = false,
+            initialViewState = ItemFilterViewModel.ViewState.LIST
+        )
+    )
+        private set
 
     private fun onMissingFile() {
         loadingState = LoadingState.Error
@@ -125,6 +139,12 @@ class PlayerCharacterScreenViewModel : ViewModel() {
 
         this.characterList += characterListData.list
 
+        // 初始化筛选 ViewModel
+        itemFilterViewModel = ItemSearchOptionHelper.getPlayerCharacterItemFilterVieModel(
+            list = avatarDataList,
+            getCharacterListDataById = this::getCharacterListDataById
+        )
+
         loadingState = LoadingState.Success
     }
 
@@ -146,6 +166,10 @@ class PlayerCharacterScreenViewModel : ViewModel() {
             level = i,
             promoted = b
         )
+    }
+
+    fun getCharacterListDataById(id: Int): CharacterListData.CharacterData? {
+        return characterList.find { it.id == id }
     }
 
     fun onClickListItem(characterData: CharacterListData.CharacterData) {

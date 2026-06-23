@@ -14,3 +14,6 @@
 .cxx
 local.properties
 temp/
+.learnings/
+docs/
+build_and_publish.sh

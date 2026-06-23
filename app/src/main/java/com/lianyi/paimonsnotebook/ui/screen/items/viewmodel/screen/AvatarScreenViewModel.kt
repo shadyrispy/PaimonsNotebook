@@ -21,6 +21,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemSearchOptionHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.base.ItemBaseViewModel
+import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.filter.ItemFilterViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -41,7 +42,9 @@ class AvatarScreenViewModel : ItemBaseViewModel<AvatarData>() {
         private set
 
     val itemFilterViewModel by lazy {
-        ItemSearchOptionHelper.getAvatarItemFilterViewModel(avatarService = avatarService)
+        ItemSearchOptionHelper.getAvatarItemFilterViewModel(avatarService = avatarService).also {
+            it.showListView()
+        }
     }
 
     private val avatarService by lazy {
@@ -60,9 +63,19 @@ class AvatarScreenViewModel : ItemBaseViewModel<AvatarData>() {
         viewModelScope.launch(Dispatchers.IO) {
             val list = avatarService.avatarList
 
-            if (list.isNotEmpty()) {
-                val avatar = ItemHelper.getItemFromIntent(intent, list) { it.id }
-                onClickItem(avatar)
+            // 从 intent 读取 item ID，如果有则直接进入详情
+            val itemId = intent.getIntExtra(ItemHelper.PARAM_INT_ITEM_ID, -1)
+            if (itemId != -1) {
+                val item = list.firstOrNull { it.id == itemId }
+                if (item != null) {
+                    currentItem = item
+                    updateProperty()
+                    updateSkill()
+                    updateTalent()
+                    updateMaterial()
+                    super.updateCurrentItemSelectedState(item.id)
+                    itemFilterViewModel.showDetailView()
+                }
             }
 
             if (loadingState == LoadingState.Loading) {
@@ -147,15 +160,19 @@ class AvatarScreenViewModel : ItemBaseViewModel<AvatarData>() {
 
     //当点击角色时
     override fun onClickItem(item: AvatarData) {
-        if (item.id == currentItem?.id) return
-
         if (selectCompareItem) {
             compareItem = item
             updateCompareAvatarProperty()
             selectCompareItem = false
-
-            itemFilterViewModel.showResultList()
         } else {
+            if (item.id == currentItem?.id) {
+                // 同一角色在列表视图时切换到详情
+                if (itemFilterViewModel.viewState == ItemFilterViewModel.ViewState.LIST) {
+                    itemFilterViewModel.showDetailView()
+                }
+                return
+            }
+
             currentItem = item
             resetCompareItem()
 
@@ -169,9 +186,8 @@ class AvatarScreenViewModel : ItemBaseViewModel<AvatarData>() {
             viewModelScope.launchIO {
                 PreferenceKeys.LastViewAvatarId.editValue(item.id)
             }
+            itemFilterViewModel.showDetailView()
         }
-
-        itemFilterViewModel.dismissFilterContent()
     }
 
     //当点击比对角色时
@@ -179,7 +195,7 @@ class AvatarScreenViewModel : ItemBaseViewModel<AvatarData>() {
         selectCompareItem = compareItem == null
 
         if (selectCompareItem) {
-            toggleFilterContent()
+            showListView()
         } else {
             resetCompareItem()
         }
@@ -198,12 +214,13 @@ class AvatarScreenViewModel : ItemBaseViewModel<AvatarData>() {
         updateCompareAvatarProperty(promoted)
     }
 
-    override fun toggleFilterContent() {
-        itemFilterViewModel.toggleFilterContent()
+    override fun showListView() {
+        itemFilterViewModel.showListView()
+        resetCompareItem()
+    }
 
-        if (!itemFilterViewModel.showFilterContent) {
-            resetCompareItem()
-        }
+    override fun showDetailView() {
+        itemFilterViewModel.showDetailView()
     }
 
     //获取角色显示的数据内容

@@ -19,13 +19,20 @@ import kotlinx.coroutines.launch
 *
 * 此处负责处理筛选条件的状态与更新
 *
+* 注意：Kotlin 按源码顺序初始化属性和 init 块，
+* 因此所有属性声明必须在 init 块之前，
+* 否则 init 中调用的方法访问未初始化的属性会导致 NPE。
 * */
 class ItemFilterViewModel<T>(
     private val items: List<T>,
     val searchOptionList: List<Pair<String, List<SearchOptionData>>>,
     val getFilteredItemList: (ItemFilterViewModel<T>, List<T>) -> List<T>,
-    private val itemSortCompareBy: (T, type: ItemFilterType) -> Long
+    private val itemSortCompareBy: (T, type: ItemFilterType) -> Long,
+    val showLayoutToggle: Boolean = true,
+    initialViewState: ViewState = ViewState.DETAIL,
 ) {
+
+    enum class ViewState { LIST, DETAIL }
 
     //物品列表
     var itemList by mutableStateOf(items)
@@ -33,21 +40,6 @@ class ItemFilterViewModel<T>(
 
     //筛选的选项映射
     private val selectedOptionMap = mutableStateMapOf<ItemFilterType, Set<Int>>()
-
-
-    init {
-        searchOptionList.forEach { pair ->
-            val data = pair.second.first()
-
-            //为列表布局与排序设置默认选中项
-            when (data.sortBy) {
-                ItemFilterType.ListLayout, ItemFilterType.Default -> selectedOptionMap[data.sortBy] =
-                    mutableSetOf(data.value)
-
-                else -> {}
-            }
-        }
-    }
 
     //判断是否显示清楚按钮时的忽略选项
     private val onShowClearFilterIgnoreTypeSet = setOf(
@@ -64,16 +56,8 @@ class ItemFilterViewModel<T>(
         ItemFilterType.ActiveConstellation
     )
 
-    //是否显示过滤条件内容
-    var showFilterContent: Boolean by mutableStateOf(false)
-        private set
-
     //是否显示清除过滤条件选项
     var showClearFilter: Boolean by mutableStateOf(false)
-        private set
-
-    //是否显示过滤结果内容
-    var showResultList: Boolean by mutableStateOf(false)
         private set
 
     //输入的文本
@@ -83,9 +67,6 @@ class ItemFilterViewModel<T>(
     //搜索结果列表样式
     var itemListLayoutStyle: ListLayoutStyle by mutableStateOf(ListLayoutStyle.ListVertical)
         private set
-
-    //是否更新列表标记,防止筛选条件不变的情况下开关列表导致重复筛选排序
-    private var updateList = true
 
     //当前排序类型,通过该值对列表进行排序
     var currentOrderByKeyType = ItemFilterType.Default
@@ -99,28 +80,43 @@ class ItemFilterViewModel<T>(
     val lazyGridState = LazyGridState()
     val lazyListState = LazyListState()
 
-    //开关筛选结果列表
-    fun toggleFilterResultList() {
-        showResultList = !showResultList
+    var viewState by mutableStateOf(initialViewState)
+        private set
 
-        if (showResultList) {
-            showResultList()
+    var showSortFilterPanel by mutableStateOf(false)
+        private set
+
+    init {
+        searchOptionList.forEach { pair ->
+            val data = pair.second.first()
+
+            //为列表布局与排序设置默认选中项
+            when (data.sortBy) {
+                ItemFilterType.ListLayout, ItemFilterType.Default -> selectedOptionMap[data.sortBy] =
+                    mutableSetOf(data.value)
+
+                else -> {}
+            }
         }
-    }
 
-    fun showResultList() {
-        if (updateList) {
-            onShowResultList()
-
-            listScrollToFirstItem()
-            updateList = false
-        }
-    }
-
-    //当显示结果列表时
-    private fun onShowResultList() {
         filterItem()
         sortItem()
+    }
+
+    fun showListView() { viewState = ViewState.LIST }
+    fun showDetailView() { viewState = ViewState.DETAIL }
+    fun toggleSortFilterPanel() { showSortFilterPanel = !showSortFilterPanel }
+    fun dismissSortFilterPanel() { showSortFilterPanel = false }
+
+    fun setListLayoutStyle(style: ListLayoutStyle) {
+        itemListLayoutStyle = style
+        selectedOptionMap[ItemFilterType.ListLayout] = setOf(style.ordinal)
+    }
+
+    fun applyFilterAndSort() {
+        filterItem()
+        sortItem()
+        resetListState()
     }
 
     //根据过滤方法获取过滤后的列表
@@ -145,27 +141,12 @@ class ItemFilterViewModel<T>(
         itemList = list
     }
 
-    //开关筛选内容
-    fun toggleFilterContent() {
-        showFilterContent = !showFilterContent
-    }
-
-    //关闭筛选内容
-    fun dismissFilterContent() {
-        showFilterContent = false
-    }
-
     //当输入的名称值发生变化
     fun onInputTextNameValueChange(str: String) {
         inputNameValue = str
-
         filterItem()
-
-        if (showResultList) {
-            sortItem()
-            resetListState()
-        }
-
+        sortItem()
+        resetListState()
         checkShowClearFilter()
     }
 
@@ -174,25 +155,20 @@ class ItemFilterViewModel<T>(
     fun resetFilter() {
         selectedOptionMap.keys.forEach { type ->
             when (type) {
-                ItemFilterType.ListLayout, ItemFilterType.Default -> {
-                }
-
+                ItemFilterType.ListLayout, ItemFilterType.Default -> {}
                 else -> selectedOptionMap.remove(type)
             }
         }
 
         inputNameValue = ""
-        updateList = true
-        onShowResultList()
-        checkShowClearFilter()
-
+        filterItem()
+        sortItem()
         resetListState()
+        checkShowClearFilter()
     }
 
     //重置列表状态
     private fun resetListState() {
-        if (!showResultList) return
-
         listScrollToFirstItem()
     }
 
@@ -261,8 +237,9 @@ class ItemFilterViewModel<T>(
             }
         }
 
-        //当进行选项时,标记列表更新为true
-        updateList = true
+        filterItem()
+        sortItem()
+        resetListState()
         checkShowClearFilter()
     }
 

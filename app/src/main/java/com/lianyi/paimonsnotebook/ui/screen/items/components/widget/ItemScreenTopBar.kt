@@ -30,6 +30,7 @@ import kotlin.math.roundToInt
 @Composable
 internal fun BoxWithConstraintsScope.ItemScreenTopBar(
     text: String = "",
+    iconResId: Int = R.drawable.ic_navigation,
     lazyListState: LazyListState,
     added: Boolean = false,
     showAddButton:Boolean = true,
@@ -78,7 +79,7 @@ internal fun BoxWithConstraintsScope.ItemScreenTopBar(
         ) {
 
             ItemActionButton(
-                iconResId = R.drawable.ic_navigation,
+                iconResId = iconResId,
                 text = text,
                 onClick = onClickListButton
             )

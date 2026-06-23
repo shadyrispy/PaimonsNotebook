@@ -26,6 +26,7 @@ import com.lianyi.core.ui.components.text.AutoSizeText
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
 import com.lianyi.paimonsnotebook.ui.theme.Black_10
+import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.paimonsnotebook.ui.theme.White
 
 
@@ -34,7 +35,8 @@ fun <T> ItemGridListCard(
     data: T,
     itemListCardData: ItemListCardData,
     dataContent: String,
-    onClick: (T) -> Unit
+    onClick: (T) -> Unit,
+    highlight: Boolean = false,
 ) {
 
     Box(contentAlignment = Alignment.Center) {
@@ -42,7 +44,11 @@ fun <T> ItemGridListCard(
             modifier = Modifier
                 .radius(4.dp)
                 .size(60.dp, 80.dp)
-                .border(1.dp, Black_10, RoundedCornerShape(4.dp))
+                .border(
+                    width = if (highlight) 2.dp else 1.dp,
+                    color = if (highlight) Primary else Black_10,
+                    shape = RoundedCornerShape(4.dp)
+                )
                 .clickable {
                     onClick.invoke(data)
                 }

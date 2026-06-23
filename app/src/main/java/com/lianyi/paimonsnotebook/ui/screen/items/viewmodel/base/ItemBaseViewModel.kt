@@ -123,7 +123,10 @@ open class ItemBaseViewModel<T>(private val observeCurrentItemState: Boolean = t
     open fun onPromotedChange(promoted: Boolean) {
     }
 
-    open fun toggleFilterContent() {
+    open fun showListView() {
+    }
+
+    open fun showDetailView() {
     }
 
     fun dismissNoCultivateProjectNoticeDialog() {

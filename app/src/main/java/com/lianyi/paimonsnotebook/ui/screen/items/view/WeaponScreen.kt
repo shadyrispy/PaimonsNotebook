@@ -4,41 +4,66 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
+import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.dialog.ConfirmDialog
 import com.lianyi.paimonsnotebook.common.components.dialog.LazyColumnDialog
+import com.lianyi.paimonsnotebook.common.components.lazy.ContentSpacerLazyColumn
+import com.lianyi.paimonsnotebook.common.components.media.FullScreenImage
 import com.lianyi.paimonsnotebook.common.components.layout.blur_card.widget.ItemLevelSlider
+import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpacer
 import com.lianyi.paimonsnotebook.ui.screen.items.components.content.ItemScreenContent
 import com.lianyi.paimonsnotebook.ui.screen.items.components.cultivate.WeaponCultivateConfigCard
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
+import com.lianyi.paimonsnotebook.ui.screen.items.components.item.base.ItemBaseInfo
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.material.ItemMaterialContent
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.property.ItemPropertyContent
 import com.lianyi.paimonsnotebook.ui.screen.items.components.layout.ItemInformationCardLayout
+import com.lianyi.paimonsnotebook.ui.screen.items.components.layout.ItemInformationContentLayout
 import com.lianyi.paimonsnotebook.ui.screen.items.components.state.ItemScreenLoadingState
+import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.ItemActionButton
+import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.ItemScreenTopBar
+import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.ItemTabLayout
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
+import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.screen.WeaponScreenViewModel
+import com.lianyi.paimonsnotebook.ui.theme.Error
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import androidx.compose.material.Text
 
 class WeaponScreen : ComponentActivity() {
 
     private val viewModel by lazy {
         ViewModelProvider(this)[WeaponScreenViewModel::class.java]
+    }
+
+    // 是否从外部直接进入详情（如养成材料页），此时返回应关闭 Activity
+    private val isDeepLink by lazy {
+        intent?.getIntExtra(ItemHelper.PARAM_INT_ITEM_ID, -1) != -1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,17 +76,8 @@ class WeaponScreen : ComponentActivity() {
                 ItemScreenLoadingState(loadingState = viewModel.loadingState) {
 
                     ItemScreenContent(
-                        backgroundImgUrl = viewModel.currentItem!!.gachaEquipImg,
-                        itemImageContentScale = ContentScale.FillHeight,
                         listButtonText = "武器列表",
-                        enabledItemShadow = true,
-                        itemBackgroundResId = viewModel.currentItem!!.weaponGachaTypeBgResId,
-                        baseInfoName = viewModel.currentItem!!.name,
-                        baseInfoStarCount = viewModel.currentItem!!.rankLevel,
-                        baseInfoIconUrl = viewModel.currentItem!!.weaponIconUrl,
-                        tabs = viewModel.tabs,
                         itemFilterViewModel = viewModel.itemFilterViewModel,
-                        onClickListButton = viewModel::toggleFilterContent,
                         getListItemDataContent = viewModel::getItemDataContent,
                         listVerticalEndInformationContentSlot = { weapon ->
                             InformationItem(
@@ -71,13 +87,92 @@ class WeaponScreen : ComponentActivity() {
                             )
                         },
                         getItemListCardData = ItemListCardData::fromWeapon,
+                        getItemName = { it.name },
                         onClickListItemCard = viewModel::onClickItem,
-                        onClickAddButton = viewModel::addCurrentItemToCultivateProject,
-                        itemAddedCurrentCultivateProject = viewModel.itemAddedToCurrentCultivateProject,
-                        cardContent = {
-                            CardContent(it)
+                        onDetailBack = if (isDeepLink) ({ finish() }) else null,
+                    ) {
+                        // detailContent — 只在 DETAIL 视图时执行，此时 currentItem 一定非 null
+                        var showFullScreenImg by remember { mutableStateOf(false) }
+
+                        ItemInformationContentLayout(
+                            imgUrl = viewModel.currentItem!!.gachaEquipImg,
+                            enabledItemShadow = true,
+                            itemBackgroundResId = viewModel.currentItem!!.weaponGachaTypeBgResId,
+                            itemImageContentScale = ContentScale.FillHeight,
+                        ) {
+                            val lazyListState = rememberLazyListState()
+
+                            ContentSpacerLazyColumn(
+                                modifier = Modifier.fillMaxSize(),
+                                state = lazyListState,
+                                statusBarPaddingEnabled = false
+                            ) {
+                                item {
+                                    Column {
+                                        StatusBarPaddingSpacer()
+                                        Spacer(
+                                            modifier = Modifier
+                                                .height(this@ItemInformationContentLayout.maxHeight * .6f)
+                                                .background(Error)
+                                        )
+                                    }
+                                }
+
+                                item {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(10.dp, 0.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+                                        Spacer(modifier = Modifier.width(1.dp))
+                                        ItemActionButton(
+                                            iconResId = R.drawable.ic_arrow_expand
+                                        ) {
+                                            showFullScreenImg = true
+                                        }
+                                    }
+                                }
+
+                                item {
+                                    ItemInformationCardLayout {
+                                        ItemBaseInfo(
+                                            name = viewModel.currentItem!!.name,
+                                            starCount = viewModel.currentItem!!.rankLevel,
+                                            iconUrl = viewModel.currentItem!!.weaponIconUrl,
+                                        )
+
+                                        var currentTabIndex by remember {
+                                            mutableIntStateOf(0)
+                                        }
+
+                                        ItemTabLayout(
+                                            tabs = viewModel.tabs,
+                                            currentIndex = currentTabIndex,
+                                            onClick = { currentTabIndex = it }
+                                        )
+
+                                        CardContent(currentTabIndex)
+                                    }
+                                }
+                            }
+
+                            ItemScreenTopBar(
+                                onClickListButton = if (isDeepLink) ({ finish() }) else viewModel::showListView,
+                                iconResId = R.drawable.ic_arrow_left,
+                                lazyListState = lazyListState,
+                                text = if (isDeepLink) "返回" else "武器列表",
+                                onClickAddButton = viewModel::addCurrentItemToCultivateProject,
+                                added = viewModel.itemAddedToCurrentCultivateProject,
+                            )
+
+                            if (showFullScreenImg) {
+                                FullScreenImage(url = viewModel.currentItem!!.gachaEquipImg) {
+                                    showFullScreenImg = false
+                                }
+                            }
                         }
-                    )
+                    }
                 }
 
                 if (viewModel.showItemConfigDialog && viewModel.currentItem != null) {

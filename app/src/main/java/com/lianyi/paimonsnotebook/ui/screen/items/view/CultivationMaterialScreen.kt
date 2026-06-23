@@ -113,7 +113,8 @@ class CultivationMaterialScreen : BaseActivity() {
                                         viewModel.weaponList.forEach { pair ->
                                             materialTitle(
                                                 pair.first,
-                                                viewModel::onClickMaterialItem
+                                                viewModel::onClickMaterialItem,
+                                                highlight = viewModel.hasActiveProject && pair.first.any { it.Id in viewModel.highlightMaterialIds }
                                             )
 
                                             items(pair.second, key = { it.id }) { weapon ->
@@ -124,7 +125,8 @@ class CultivationMaterialScreen : BaseActivity() {
                                                         quality = weapon.rankLevel
                                                     ),
                                                     dataContent = weapon.name,
-                                                    onClick = viewModel::onClickWeapon
+                                                    onClick = viewModel::onClickWeapon,
+                                                    highlight = viewModel.hasActiveProject && weapon.id in viewModel.highlightEntityIds
                                                 )
                                             }
                                         }
@@ -134,7 +136,8 @@ class CultivationMaterialScreen : BaseActivity() {
                                         viewModel.avatarList.forEach { pair ->
                                             materialTitle(
                                                 pair.first,
-                                                viewModel::onClickMaterialItem
+                                                viewModel::onClickMaterialItem,
+                                                highlight = viewModel.hasActiveProject && pair.first.any { it.Id in viewModel.highlightMaterialIds }
                                             )
 
                                             items(pair.second, key = { it.id }) { weapon ->
@@ -145,7 +148,8 @@ class CultivationMaterialScreen : BaseActivity() {
                                                         quality = weapon.starCount
                                                     ),
                                                     dataContent = weapon.name,
-                                                    onClick = viewModel::onClickAvatar
+                                                    onClick = viewModel::onClickAvatar,
+                                                    highlight = viewModel.hasActiveProject && weapon.id in viewModel.highlightEntityIds
                                                 )
                                             }
                                         }

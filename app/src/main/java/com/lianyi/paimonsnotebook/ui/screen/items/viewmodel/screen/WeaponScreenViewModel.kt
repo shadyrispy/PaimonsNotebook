@@ -21,6 +21,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemSearchOptionHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.base.ItemBaseViewModel
+import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.filter.ItemFilterViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -50,18 +51,27 @@ class WeaponScreenViewModel : ItemBaseViewModel<WeaponData>() {
         private set
 
     val itemFilterViewModel by lazy {
-        ItemSearchOptionHelper.getWeaponFilterItemViewModel(weaponService = weaponService)
+        ItemSearchOptionHelper.getWeaponFilterItemViewModel(weaponService = weaponService).also {
+            it.showListView()
+        }
     }
 
     override fun init(intent: Intent) {
         viewModelScope.launch(Dispatchers.IO) {
             val list = weaponService.weaponList
 
-            if (list.isNotEmpty()) {
-                val weapon =
-                    ItemHelper.getItemFromIntent(intent, weaponService.weaponList) { it.id }
-
-                onClickItem(weapon)
+            // 从 intent 读取 item ID，如果有则直接进入详情
+            val itemId = intent.getIntExtra(ItemHelper.PARAM_INT_ITEM_ID, -1)
+            if (itemId != -1) {
+                val item = list.firstOrNull { it.id == itemId }
+                if (item != null) {
+                    currentItem = item
+                    updateProperty()
+                    updateSkill()
+                    updateMaterial()
+                    super.updateCurrentItemSelectedState(item.id)
+                    itemFilterViewModel.showDetailView()
+                }
             }
 
             if (loadingState == LoadingState.Loading) {
@@ -125,15 +135,19 @@ class WeaponScreenViewModel : ItemBaseViewModel<WeaponData>() {
     }
 
     override fun onClickItem(item: WeaponData) {
-        if (item.id == currentItem?.id) return
-
         if (selectCompareItem) {
             compareItem = item
             updateCompareAvatarProperty()
             selectCompareItem = false
-
-            itemFilterViewModel.showResultList()
         } else {
+            if (item.id == currentItem?.id) {
+                // 同一武器在列表视图时切换到详情
+                if (itemFilterViewModel.viewState == ItemFilterViewModel.ViewState.LIST) {
+                    itemFilterViewModel.showDetailView()
+                }
+                return
+            }
+
             currentItem = item
             resetCompareItem()
 
@@ -144,18 +158,15 @@ class WeaponScreenViewModel : ItemBaseViewModel<WeaponData>() {
             viewModelScope.launchIO {
                 PreferenceKeys.LastViewWeaponId.editValue(item.id)
             }
+            itemFilterViewModel.showDetailView()
         }
-
-        itemFilterViewModel.dismissFilterContent()
-
-
     }
 
     override fun onClickCompareItem() {
         selectCompareItem = compareItem == null
 
         if (selectCompareItem) {
-            toggleFilterContent()
+            showListView()
         } else {
             resetCompareItem()
         }
@@ -174,12 +185,13 @@ class WeaponScreenViewModel : ItemBaseViewModel<WeaponData>() {
         updateCompareAvatarProperty(promoted)
     }
 
-    override fun toggleFilterContent() {
-        itemFilterViewModel.toggleFilterContent()
+    override fun showListView() {
+        itemFilterViewModel.showListView()
+        resetCompareItem()
+    }
 
-        if (!itemFilterViewModel.showFilterContent) {
-            resetCompareItem()
-        }
+    override fun showDetailView() {
+        itemFilterViewModel.showDetailView()
     }
 
     override fun getItemDataContent(

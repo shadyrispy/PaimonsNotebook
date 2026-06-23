@@ -66,7 +66,9 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
                 avatarService.avatarMap[it.id]
             },
             getCharacterListDataById = this::getCharacterListDataById
-        )
+        ).also {
+            it.showDetailView()
+        }
     }
 
     var showReliquarySetInfoPopupWindow by mutableStateOf(false)
@@ -223,8 +225,12 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         }
     }
 
-    override fun toggleFilterContent() {
-        itemFilterViewModel.toggleFilterContent()
+    override fun showListView() {
+        itemFilterViewModel.showListView()
+    }
+
+    override fun showDetailView() {
+        itemFilterViewModel.showDetailView()
     }
 
     override fun getItemDataContent(

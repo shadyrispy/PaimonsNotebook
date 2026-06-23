@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.common.data.popup.IconTitleInformationPopupWindowData
 import com.lianyi.paimonsnotebook.common.data.popup.PopupWindowPositionProvider
+import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
 import com.lianyi.paimonsnotebook.common.extension.list.takeFirstIf
+import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
 import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.avatar.AvatarData
@@ -27,7 +29,9 @@ import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.view.AvatarScreen
 import com.lianyi.paimonsnotebook.ui.screen.items.view.WeaponScreen
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 
 class CultivationMaterialScreenViewModel : ViewModel() {
@@ -51,6 +55,30 @@ class CultivationMaterialScreenViewModel : ViewModel() {
         setWeekData(LocalDateTime.now().dayOfWeek.value)
     }
 
+    /*
+    * 在数据加载成功后启动养成计划监听
+    * 此时数据库已初始化完成
+    * */
+    private fun startCultivateProjectHighlightListener() {
+        if (cultivateListenerStarted) return
+        cultivateListenerStarted = true
+        viewModelScope.launchIO {
+            try {
+                cultivateProjectDao.getSelectedProjectFlow().collectLatest { project ->
+                    if (project == null) {
+                        hasActiveProject = false
+                        highlightMaterialIds = emptySet()
+                        highlightEntityIds = emptySet()
+                    } else {
+                        hasActiveProject = true
+                        updateHighlightData(project.projectId)
+                    }
+                }
+            } catch (_: Exception) {
+            }
+        }
+    }
+
     private val weaponService by lazy {
         WeaponService {
             onMissingFile()
@@ -68,6 +96,25 @@ class CultivationMaterialScreenViewModel : ViewModel() {
 
     var weekName by mutableStateOf("")
         private set
+
+    //养成计划高亮：所需材料ID集合
+    var highlightMaterialIds by mutableStateOf<Set<Int>>(emptySet())
+        private set
+
+    //养成计划高亮：养成实体(角色/武器)ID集合
+    var highlightEntityIds by mutableStateOf<Set<Int>>(emptySet())
+        private set
+
+    //是否有活跃的养成计划
+    var hasActiveProject by mutableStateOf(false)
+        private set
+
+    //确保养成计划监听只启动一次
+    private var cultivateListenerStarted = false
+
+    private val cultivateProjectDao by lazy { PaimonsNotebookDatabase.database.cultivateProjectDao }
+    private val cultivateEntityDao by lazy { PaimonsNotebookDatabase.database.cultivateEntityDao }
+    private val cultivateItemsDao by lazy { PaimonsNotebookDatabase.database.cultivateItemsDao }
 
 
     val dropMenuList by lazy {
@@ -132,6 +179,7 @@ class CultivationMaterialScreenViewModel : ViewModel() {
                     viewModelScope.launch(Dispatchers.Main) {
                         weekName = TimeHelper.getWeekName(result.second)
                         loadingState = LoadingState.Success
+                        startCultivateProjectHighlightListener()
                     }
                 }
             }
@@ -215,6 +263,43 @@ class CultivationMaterialScreenViewModel : ViewModel() {
         popupWindowData = material.getShowPopupWindowInfo()
 
         showMaterialPopupWindow = true
+    }
+
+    /*
+    * 更新养成计划高亮数据
+    * 从养成计划中获取所有实体ID和所需材料ID
+    * */
+    private fun updateHighlightData(projectId: Int) {
+        //监听养成实体变化
+        viewModelScope.launchIO {
+            try {
+                cultivateEntityDao.getCultivateEntityMapListFlowByProjectId(projectId)
+                    .collectLatest { entityMap ->
+                        val entityIds = entityMap.keys.map { it.itemId }.toSet()
+                        withContext(Dispatchers.Main) {
+                            highlightEntityIds = entityIds
+                        }
+                    }
+            } catch (_: Exception) {
+            }
+        }
+
+        //监听养成材料变化
+        viewModelScope.launchIO {
+            try {
+                cultivateItemsDao.getCultivateIdsMaterialsMapFlowByProjectId(projectId)
+                    .collectLatest { materialsMap ->
+                        val materialIds = materialsMap.values
+                            .flatten()
+                            .map { it.itemId }
+                            .toSet()
+                        withContext(Dispatchers.Main) {
+                            highlightMaterialIds = materialIds
+                        }
+                    }
+            } catch (_: Exception) {
+            }
+        }
     }
 
 }

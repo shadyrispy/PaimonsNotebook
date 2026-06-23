@@ -1,5 +1,6 @@
 package com.lianyi.paimonsnotebook.ui.screen.items.components.item.material
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -22,10 +23,12 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
+import com.lianyi.paimonsnotebook.ui.theme.Primary_9
 
 fun LazyGridScope.materialTitle(
     list: List<Material>,
     onClickMaterial: (Material, IntSize, Offset) -> Unit,
+    highlight: Boolean = false,
 ) {
     item(span = {
         GridItemSpan(this.maxLineSpan)
@@ -33,7 +36,12 @@ fun LazyGridScope.materialTitle(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
+                .padding(vertical = 8.dp)
+                .then(
+                    if (highlight) Modifier.background(Primary_9, androidx.compose.foundation.shape.RoundedCornerShape(4.dp))
+                    else Modifier
+                )
+                .padding(horizontal = if (highlight) 4.dp else 0.dp, vertical = if (highlight) 4.dp else 0.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
