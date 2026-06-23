@@ -20,6 +20,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
 import com.lianyi.paimonsnotebook.common.components.helper_text.data.HelperTextData
+import com.lianyi.paimonsnotebook.common.data.ResultData
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.database.disk_cache.util.DiskCacheDataType
@@ -47,6 +48,7 @@ import com.lianyi.paimonsnotebook.ui.screen.account.data.LoginByCaptchaCache
 import com.lianyi.paimonsnotebook.ui.screen.account.util.CaptchaCallbackType
 import com.lianyi.paimonsnotebook.ui.screen.account.util.GT3ListenerImpl
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -427,30 +429,52 @@ class AccountManagerScreenViewModel : ViewModel() {
     private suspend fun loopQueryQrLoginStatus(ticket: String) {
         while (true) {
             delay(3000)
+            try {
+                val res = qrCodeClient.queryQrLoginStatus(ticket)
+                when (res.retcode) {
+                    ResultData.SUCCESS_CODE -> {
+                        when (res.data?.status) {
+                            "Confirmed" -> {
+                                val sToken = res.data.tokens
+                                    ?.firstOrNull { it.token_type == 1 }
+                                    ?.token
+                                    ?: res.data.sToken
+                                val aid = res.data.user_info?.aid.orEmpty()
+                                val mid = res.data.user_info?.mid.orEmpty()
 
-            val queryRes = qrCodeClient.queryQrLoginStatus(ticket)
+                                if (sToken.isNullOrEmpty() || aid.isEmpty() || mid.isEmpty()) {
+                                    "登录信息不完整".errorNotify()
+                                    return
+                                }
 
-            if (!queryRes.success) {
-                "二维码已失效".errorNotify()
-                return
+                                addUserBySTokenString(sToken, mid, aid)
+                                onRequestQRCodePopupDismiss()
+                                loginQrCodeBitmap = null
+                                return
+                            }
+                            "Scanned" -> "已扫码,请在手机上确认".notify()
+                            "Init" -> { /* 等待扫码,继续轮询 */ }
+                            else -> { /* 未知状态,继续轮询 */ }
+                        }
+                    }
+                    ResultData.RET_QR_URL_EXPIRED -> {
+                        "二维码已失效,请重新获取".errorNotify()
+                        return
+                    }
+                    ResultData.NETWORK_ERROR,
+                    ResultData.RESPONSE_CONVERT_EXCEPTION,
+                    ResultData.UNKNOWN_EXCEPTION -> {
+                        // 瞬态错误(网络抖动/响应解析失败),静默继续轮询
+                    }
+                    else -> {
+                        // 其它服务端错误(retcode 非 0 也非 -3501),继续轮询,不向用户提示"已失效"
+                    }
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                // 真正漏网的异常:不打断用户,继续轮询
             }
-
-            if (!queryRes.data.isConfirmed) continue
-
-            val sToken = queryRes.data.sToken
-            val aid = queryRes.data.user_info?.aid ?: ""
-            val mid = queryRes.data.user_info?.mid ?: ""
-
-            if (sToken.isNullOrEmpty() || aid.isEmpty() || mid.isEmpty()) {
-                "登录信息不完整".errorNotify()
-                return
-            }
-
-            addUserBySTokenString(sToken, mid, aid)
-
-            onRequestQRCodePopupDismiss()
-            loginQrCodeBitmap = null
-            return
         }
     }
 
