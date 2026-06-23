@@ -53,7 +53,8 @@ open class BaseActivity(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 setTranslucent(enableGesture)
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

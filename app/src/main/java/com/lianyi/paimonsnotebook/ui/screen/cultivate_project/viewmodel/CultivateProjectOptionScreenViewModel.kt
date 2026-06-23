@@ -35,7 +35,7 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
 
     private var cultivateProjectSortByEntityType by mutableStateOf(false)
 
-    init {
+    fun load() {
         viewModelScope.launchIO {
             launchIO {
                 cultivateProjectDao.getSelectedProjectFlow().collect {

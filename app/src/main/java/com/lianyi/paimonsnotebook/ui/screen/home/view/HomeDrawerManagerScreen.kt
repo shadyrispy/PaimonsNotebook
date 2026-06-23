@@ -54,6 +54,8 @@ class HomeDrawerManagerScreen : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel.load()
+
         setContent {
             val lazyListState = rememberLazyListState()
             val dragAndDropListState = rememberDragAndDropListState(

@@ -44,6 +44,7 @@ class CultivateProjectScreen : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.load()
         setContent {
             PaimonsNotebookTheme(this) {
                 ContentLoadingLayout(

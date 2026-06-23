@@ -51,7 +51,7 @@ class AchievementOptionScreenViewModel : ViewModel() {
 
     private val achievementUserDao = PaimonsNotebookDatabase.database.achievementUserDao
 
-    init {
+    fun load() {
         viewModelScope.launchMain {
             launchMain {
                 achievementUserDao.getSelectedUserFlow().collect {

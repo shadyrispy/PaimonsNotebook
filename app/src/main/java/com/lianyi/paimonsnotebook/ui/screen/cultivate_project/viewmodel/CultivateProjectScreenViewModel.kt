@@ -106,7 +106,7 @@ class CultivateProjectScreenViewModel : ViewModel() {
 
     private var cultivateEntityMapList = mutableMapOf<CultivateEntity, List<CultivateItems>>()
 
-    init {
+    fun load() {
         loadingState = LoadingState.Loading
 
         viewModelScope.launchIO {

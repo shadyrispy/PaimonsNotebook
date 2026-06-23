@@ -54,6 +54,7 @@ class HomeScreen : BaseActivity() {
         registerPressedCallback()
         registerRequestPermissionsResult()
 
+        viewModel.load()
         viewModel.init()
 
         setContent {

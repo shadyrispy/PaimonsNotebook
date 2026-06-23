@@ -31,7 +31,7 @@ class HomeDrawerManagerScreenViewModel : ViewModel() {
 
     val showModalItems = mutableStateListOf<HomeCustomDrawerData>()
 
-    init {
+    fun load() {
         viewModelScope.launchMain {
             viewModelScope.launchMain {
                 dataStoreValues {

@@ -24,7 +24,7 @@ open class FileOperationScreenViewModel : ViewModel() {
 
     var showLoadingDialog by mutableStateOf(false)
 
-    init {
+    fun load() {
         updateFileList()
     }
 

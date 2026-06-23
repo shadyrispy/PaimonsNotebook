@@ -140,7 +140,8 @@ object RichTextParser {
     ): List<PostStructuredContent> {
         val arrays = try {
             JSONArray(structuredContent)
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
             JSONArray()
         }
 
@@ -154,8 +155,8 @@ object RichTextParser {
                     list += content.imgs.map {
                         PostStructuredContent.getImageItem(it)
                     }
-                } catch (_: Exception) {
-
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
 
@@ -184,7 +185,8 @@ object RichTextParser {
                     //尝试获取属性
                     val attributes = try {
                         JSON.parse<StructuredContentAttributes>((objMap[RichTextParser.attributes] as JSONObject).toString())
-                    } catch (_: Exception) {
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                         null
                     }
 
@@ -222,13 +224,15 @@ object RichTextParser {
                                     try {
                                         insert.getJSONObject(fold)
                                         structType = StructuredContentType.Fold
-                                    } catch (_: Exception) {
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
                                     }
 
                                     try {
                                         insert.getJSONObject(lottery)
                                         structType = StructuredContentType.Lottery
-                                    } catch (_: Exception) {
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
                                     }
 
 

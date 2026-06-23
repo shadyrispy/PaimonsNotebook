@@ -35,6 +35,7 @@ class CultivateProjectOptionScreen : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.init(intent)
+        viewModel.load()
 
         setContent {
             PaimonsNotebookTheme(this) {

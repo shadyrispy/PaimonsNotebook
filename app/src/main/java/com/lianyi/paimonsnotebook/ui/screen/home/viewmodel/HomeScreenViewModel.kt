@@ -69,7 +69,7 @@ class HomeScreenViewModel : ViewModel() {
     val modalItems = mutableStateListOf<ModalItemData>()
 
 
-    init {
+    fun load() {
         viewModelScope.launch(Dispatchers.IO) {
             launch {
                 SettingsHelper.configurationFlow.collect {

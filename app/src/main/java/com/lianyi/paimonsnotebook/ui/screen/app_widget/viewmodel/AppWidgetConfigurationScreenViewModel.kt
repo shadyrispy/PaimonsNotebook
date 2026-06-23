@@ -504,7 +504,8 @@ class AppWidgetConfigurationScreenViewModel : ViewModel() {
             if (configuration.add) {
                 context.unregisterReceiver(addWidgetSuccessBroadcast)
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

@@ -74,7 +74,8 @@ class CultivationMaterialScreenViewModel : ViewModel() {
                         updateHighlightData(project.projectId)
                     }
                 }
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
@@ -280,7 +281,8 @@ class CultivationMaterialScreenViewModel : ViewModel() {
                             highlightEntityIds = entityIds
                         }
                     }
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
 
@@ -297,7 +299,8 @@ class CultivationMaterialScreenViewModel : ViewModel() {
                             highlightMaterialIds = materialIds
                         }
                     }
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

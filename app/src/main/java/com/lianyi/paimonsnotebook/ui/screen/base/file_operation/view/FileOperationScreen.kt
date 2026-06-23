@@ -46,6 +46,7 @@ open class FileOperationScreen : BaseActivity() {
     @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.load()
         setContent {
             PaimonsNotebookTheme(this) {
                 ContentSpacerLazyColumn(

@@ -42,6 +42,8 @@ class AchievementOptionScreen : BaseActivity() {
 
         viewModel.checkStoragePermission = this::checkStoragePermission
 
+        viewModel.load()
+
         setContent {
             PaimonsNotebookTheme(this) {
                 ContentSpacerLazyColumn(
