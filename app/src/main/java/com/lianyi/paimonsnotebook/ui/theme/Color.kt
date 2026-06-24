@@ -144,6 +144,12 @@ val LoadingKleeAccent = Color(0xFF13ABDC)
 // FoldTextContent 颜色
 val FoldTextBackgroundColor = Color(0xFFFBFBFB)
 
+/** ProgressBar 轨道色 */
+val ProgressBarTrackColor = Color(0XFFDCE0F3)
+
+/** 角色信息内容背景色 */
+val AvatarInfoBackgroundColor = Color(0XFFF2ECE3)
+
 
 
 

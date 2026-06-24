@@ -10,13 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import com.lianyi.paimonsnotebook.ui.theme.ProgressBarTrackColor
 
 @Composable
 fun ProgressBar(
     modifier: Modifier = Modifier,
     progress: Float,
     progressColor: Color,
-    trackColor: Color = Color(0XFFDCE0F3),
+    trackColor: Color = ProgressBarTrackColor,
 ) {
     val pro = if (progress == 0f) 0.001f else progress
     val p = 1 - pro

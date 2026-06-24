@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.components.widget.ProgressBar
 import com.lianyi.paimonsnotebook.ui.theme.Black_60
+import com.lianyi.paimonsnotebook.ui.theme.ProgressBarTrackColor
 
 @Composable
 fun ChartProgressBarLegend(
@@ -15,7 +16,7 @@ fun ChartProgressBarLegend(
     value:String,
     progress:Float,
     progressColor: Color,
-    trackColor:Color = Color(0XFFDCE0F3),
+    trackColor:Color = ProgressBarTrackColor,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(

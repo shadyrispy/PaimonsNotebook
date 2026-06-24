@@ -31,6 +31,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.conveter.AvatarCardCo
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.conveter.AvatarIconConverter
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.AssociationType
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
+import com.lianyi.paimonsnotebook.ui.theme.AvatarInfoBackgroundColor
 import com.lianyi.paimonsnotebook.ui.theme.Black_10
 import com.lianyi.paimonsnotebook.ui.theme.White_40
 
@@ -145,7 +146,7 @@ internal fun AvatarInformationContent(
                             modifier = Modifier
                                 .size(60.dp)
                                 .radius(4.dp)
-                                .background(Color(0XFFF2ECE3))
+                                .background(AvatarInfoBackgroundColor)
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Column {
