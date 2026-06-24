@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.database.util.PaimonsNoteBookDatabaseHelper
 import com.lianyi.paimonsnotebook.common.util.builder.requestOf
@@ -44,7 +45,9 @@ fun NetworkImage(
     }
     Box(modifier = modifier) {
         AsyncImage(
-            model = requestOf(url = url, headers = headers),
+            model = ImageRequest.Builder(requestOf(url = url, headers = headers))
+                .crossfade(true)
+                .build(),
             modifier = Modifier.fillMaxWidth(),
             contentDescription = contentDescription,
             contentScale = contentScale,
