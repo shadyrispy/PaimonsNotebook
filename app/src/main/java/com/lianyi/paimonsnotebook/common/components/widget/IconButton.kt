@@ -55,7 +55,7 @@ fun IconButton(
                         block()
                     }
                     .background(backgroundColor)
-                    .padding(12.dp, 5.dp),
+                    .padding(12.dp, 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
