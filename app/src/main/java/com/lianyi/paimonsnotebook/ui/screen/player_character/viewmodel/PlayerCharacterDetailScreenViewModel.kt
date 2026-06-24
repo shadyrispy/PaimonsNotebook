@@ -28,6 +28,8 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.conveter.RelicIconCon
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.ReliquaryType
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.reliquary.ReliquaryData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
+import com.lianyi.paimonsnotebook.common.database.cultivate.data.CultivateItemType
+import com.lianyi.paimonsnotebook.ui.screen.items.data.cultivate.CultivateConfigData
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.base.ItemBaseViewModel
 import com.lianyi.paimonsnotebook.ui.screen.player_character.view.PlayerCharacterDetailScreen
@@ -211,6 +213,60 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         viewModelScope.launchIO {
             setCharacterDetail(item.id)
         }
+    }
+
+    override fun onShowItemConfigDialog() {
+        super.onShowItemConfigDialog()
+
+        val avatar = this.currentItem ?: return
+
+        // 角色与技能等级起点用角色实际值（来自米游社角色详情）
+        val characterLevel = currentCharacterDetail?.base?.level ?: 1
+        val skillLevelMap = currentCharacterDetail?.skills?.associate {
+            it.skill_id to it.level
+        } ?: emptyMap()
+
+        //TODO 角色等级上限提升至100
+        val avatarMaxLevel = 90
+        val skillMaxLevel = 10
+
+        cultivateConfigList += CultivateConfigData(
+            name = "角色等级",
+            iconUrl = avatar.iconUrl,
+            fromLevel = characterLevel,
+            maxLevel = avatarMaxLevel,
+            tintIcon = false,
+            type = CultivateItemType.Avatar,
+            id = avatar.id,
+            itemTypeId = avatar.fetterInfo.elementType
+        ).apply {
+            avatarEnergySkillId = avatar.skillDepot.EnergySkill.GroupId
+        }
+
+        avatar.skillDepot.Skills.forEachIndexed { index, skill ->
+            val name = if (index == 0) "普通攻击" else "元素战技"
+            // skill_id 对应胡桃元数据中的 Id（技能本身），GroupId 是技能族
+            val actualLevel = skillLevelMap[skill.Id] ?: 1
+            cultivateConfigList += CultivateConfigData(
+                name = name,
+                iconUrl = skill.iconUrl,
+                fromLevel = actualLevel,
+                maxLevel = skillMaxLevel,
+                type = CultivateItemType.Skill,
+                id = skill.GroupId
+            )
+        }
+
+        val energySkill = avatar.skillDepot.EnergySkill
+        val energyActualLevel = skillLevelMap[energySkill.Id] ?: 1
+        cultivateConfigList += CultivateConfigData(
+            name = "元素爆发",
+            iconUrl = energySkill.iconUrl,
+            fromLevel = energyActualLevel,
+            maxLevel = skillMaxLevel,
+            type = CultivateItemType.Skill,
+            id = energySkill.GroupId
+        )
     }
 
     override fun getItemDataContent(

@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import com.lianyi.paimonsnotebook.common.components.dialog.ConfirmDialog
-import com.lianyi.paimonsnotebook.common.components.dialog.InputDialog
 import com.lianyi.paimonsnotebook.common.components.dialog.LazyColumnDialog
 import com.lianyi.paimonsnotebook.common.components.lazy.ContentSpacerLazyColumn
 import com.lianyi.paimonsnotebook.common.core.base.BaseActivity
@@ -82,16 +81,6 @@ class CultivateProjectOptionScreen : BaseActivity() {
                                 )
                             }
                         }, onClickButton = viewModel::onClickChooseCultivateProjectDialogButton
-                    )
-                }
-
-                if (viewModel.showAddCultivateProjectDialog) {
-                    InputDialog(
-                        title = "添加养成计划",
-                        placeholder = "养成计划名称长度不能超过10",
-                        onConfirm = viewModel::confirmAddProjectCultivateProject,
-                        onCancel = viewModel::dismissAddCultivateProjectDialog,
-                        textMaxLength = 10
                     )
                 }
 

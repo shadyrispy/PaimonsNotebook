@@ -11,13 +11,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.common.data.repository.CultivateRepository
 import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateProject
+import com.lianyi.paimonsnotebook.common.database.user.util.AccountHelper
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.scope.withContextMain
 import com.lianyi.paimonsnotebook.common.extension.string.notify
-import com.lianyi.paimonsnotebook.common.extension.string.show
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
-import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.data_store.PreferenceKeys
 import com.lianyi.paimonsnotebook.common.util.data_store.dataStoreValues
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.widgets.SettingsOptionSwitch
@@ -51,6 +50,11 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
                         cultivateProjectList.clear()
                         cultivateProjectList += it
                     }
+
+                    // 如果没有养成计划，自动为当前账号UID创建
+                    if (it.isEmpty()) {
+                        ensureDefaultProject()
+                    }
                 }
             }
 
@@ -73,9 +77,6 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
     var showConfirmDeleteCultivateProjectSuccessEntityDialog by mutableStateOf(false)
         private set
 
-    var showAddCultivateProjectDialog by mutableStateOf(false)
-        private set
-
     private var deleteSelectedCultivateProject = false
 
 
@@ -85,28 +86,14 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
 
     val cultivateProjectSettings = listOf(
         OptionListData(
-            name = "当前养成计划",
-            description = "用于显示不同的养成计划",
+            name = "当前账号",
+            description = "切换养成计划关联的账号",
             onClick = {
                 showChooseCultivateProjectDialog = true
             },
             slot = {
                 Text(
                     text = currentSelectedProject?.projectName ?: "",
-                    fontSize = 14.sp,
-                    color = Primary_2
-                )
-            }
-        ),
-        OptionListData(
-            name = "添加养成计划",
-            description = "添加一个新的养成计划",
-            onClick = {
-                showAddCultivateProjectDialog = true
-            },
-            slot = {
-                Text(
-                    text = dialogSelectedCultivateProject?.projectName ?: "",
                     fontSize = 14.sp,
                     color = Primary_2
                 )
@@ -159,7 +146,22 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
     )
 
     fun init(intent: Intent?) {
-        showAddCultivateProjectDialog = intent?.getBooleanExtra(Routes.EXTRA_ADD_FLAG, false) ?: false
+        // 保留空函数以兼容旧调用入口；添加养成计划入口已移除
+    }
+
+    private fun ensureDefaultProject() {
+        viewModelScope.launchIO {
+            val currentUser = AccountHelper.selectedUserFlow.value
+            val uid = currentUser?.getSelectedGameRole()?.game_uid
+            if (uid != null && !cultivateProjectDao.hasSameNameCultivateProject(uid)) {
+                cultivateProjectDao.insert(
+                    CultivateProject(
+                        projectName = uid,
+                        isSelected = true
+                    )
+                )
+            }
+        }
     }
 
     fun dismissConfirmDeleteCultivateProjectDialog() {
@@ -256,38 +258,5 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
 
     fun onClickChooseCultivateProjectDialogButton(i: Int) {
         dismissChooseCultivateProjectDialog()
-    }
-
-    fun confirmAddProjectCultivateProject(value: String) {
-        if (value.isBlank()) {
-            "还没有输入养成计划名称".show()
-            return
-        }
-
-        viewModelScope.launchIO {
-            val hasSameName = cultivateProjectDao.hasSameNameCultivateProject(value)
-
-            if (hasSameName) {
-                withContextMain {
-                    "已经有相同名称的养成计划".show()
-                }
-                return@launchIO
-            }
-
-            cultivateProjectDao.insert(
-                CultivateProject(
-                    projectName = value,
-                    isSelected = currentSelectedProject == null
-                )
-            )
-
-            "养成计划[${value}]添加成功".notify()
-
-            dismissAddCultivateProjectDialog()
-        }
-    }
-
-    fun dismissAddCultivateProjectDialog() {
-        showAddCultivateProjectDialog = false
     }
 }

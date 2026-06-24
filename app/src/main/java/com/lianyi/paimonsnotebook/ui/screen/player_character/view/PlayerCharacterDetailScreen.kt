@@ -22,11 +22,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import com.lianyi.paimonsnotebook.R
+import com.lianyi.paimonsnotebook.common.components.dialog.ConfirmDialog
+import com.lianyi.paimonsnotebook.common.components.dialog.LazyColumnDialog
 import com.lianyi.paimonsnotebook.common.components.lazy.ContentSpacerLazyColumn
 import com.lianyi.paimonsnotebook.common.components.popup.IconTitleInformationPopupWindow
 import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpacer
 import com.lianyi.paimonsnotebook.common.core.base.BaseActivity
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.ElementType
+import com.lianyi.paimonsnotebook.ui.screen.items.components.cultivate.AvatarCultivateConfigCard
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.base.ItemBaseInfo
 import com.lianyi.paimonsnotebook.ui.screen.items.components.layout.ItemInformationCardLayout
@@ -138,7 +141,9 @@ class PlayerCharacterDetailScreen : BaseActivity() {
                             iconResId = R.drawable.ic_arrow_left,
                             lazyListState = lazyListState,
                             text = "返回",
-                            showAddButton = false,
+                            showAddButton = true,
+                            added = viewModel.itemAddedToCurrentCultivateProject,
+                            onClickAddButton = viewModel::addCurrentItemToCultivateProject,
                         )
                     }
 
@@ -149,6 +154,31 @@ class PlayerCharacterDetailScreen : BaseActivity() {
                             onDismissRequest = viewModel::onPopupWindowDismissRequest
                         )
                     }
+                }
+
+                if (viewModel.showItemConfigDialog && viewModel.currentItem != null) {
+                    LazyColumnDialog(
+                        title = if (viewModel.itemAddedToCurrentCultivateProject) "更新当前养成计划" else "添加到当前养成计划",
+                        buttons = viewModel.itemConfigDialogButtons,
+                        onDismissRequest = viewModel::showItemConfigDialogRequestDismiss,
+                        onClickButton = viewModel::onClickItemConfigDialogButton
+                    ) {
+                        item {
+                            AvatarCultivateConfigCard(
+                                avatarData = viewModel.currentItem!!,
+                                list = viewModel.cultivateConfigList
+                            )
+                        }
+                    }
+                }
+
+                if (viewModel.showNoCultivateProjectNoticeDialog) {
+                    ConfirmDialog(
+                        title = "养成计划",
+                        content = "没有找到养成计划,点击确定跳转养成计划设置页面进行添加",
+                        onConfirm = viewModel::goCultivateProjectOptionScreen,
+                        onCancel = viewModel::dismissNoCultivateProjectNoticeDialog
+                    )
                 }
             }
         }
