@@ -204,7 +204,7 @@ private fun Content(
             }
         }
 
-        items(currentAbyssRecord.floors) { floor ->
+        items(currentAbyssRecord.floors, key = { it.index }) { floor ->
             MaterialCard {
                 FloorItem(
                     floor = floor,

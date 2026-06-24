@@ -55,7 +55,8 @@ internal fun ItemSortFilterSheet(
                 items(
                     itemFilterViewModel.searchOptionList.filter { pair ->
                         pair.second.first().sortBy != ItemFilterType.ListLayout
-                    }
+                    },
+                    key = { it.first }
                 ) { pair ->
                     SearchOptionGroup(
                         name = pair.first,

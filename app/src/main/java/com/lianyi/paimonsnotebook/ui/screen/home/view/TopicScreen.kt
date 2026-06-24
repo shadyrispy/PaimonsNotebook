@@ -149,7 +149,7 @@ class TopicScreen : BaseActivity() {
                                 }
                             }
                         } else {
-                            items(viewModel.getCurrentList()) { item ->
+                            items(viewModel.getCurrentList(), key = { it.id }) { item ->
                                 TopicPostItem(
                                     item = item,
                                     onClickPostListItem = viewModel::onClickPostListItem,

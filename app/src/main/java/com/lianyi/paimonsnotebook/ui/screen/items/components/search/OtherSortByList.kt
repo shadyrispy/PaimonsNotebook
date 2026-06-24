@@ -29,7 +29,7 @@ internal fun OtherSortByList(
 ) {
     if(expanded){
         LazyColumnDialog(title = "其他选项", onDismissRequest = onDismissRequest, content = {
-            items(otherOptionList){optionData->
+            items(otherOptionList, key = { it.sortBy }){optionData->
                 val (backgroundColor, textColor) = remember(selectedOption) {
                     if (selectedOption.sortBy == optionData.sortBy) {
                         Black to White

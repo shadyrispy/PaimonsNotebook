@@ -74,7 +74,7 @@ internal fun RemoteViewsPickerPopup(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(start = 12.dp, end = 12.dp, top = 6.dp)
                     ) {
-                        items(list) { pair ->
+                        items(list, key = { it.first }) { pair ->
                             Column(
                                 Modifier.fillMaxWidth(),
                                 verticalArrangement = Arrangement.spacedBy(6.dp)
@@ -117,7 +117,7 @@ internal fun RemoteViewsPickerPopup(
                         StatusBarPaddingSpacer()
 
                         Icon(painter = painterResource(id = R.drawable.ic_dismiss),
-                            contentDescription = null,
+                            contentDescription = "关闭",
                             modifier = Modifier
                                 .radius(2.dp)
                                 .size(32.dp)

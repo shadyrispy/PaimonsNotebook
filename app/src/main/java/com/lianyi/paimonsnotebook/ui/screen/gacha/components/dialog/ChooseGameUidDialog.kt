@@ -53,7 +53,7 @@ fun ChooseGameUidDialog(
         verticalSpacedBy = 4.dp,
         content = {
 
-            items(uidList) { uid ->
+            items(uidList, key = { it }) { uid ->
                 val selected = selectedUidList.indexOf(uid) != -1
                 Row(
                     modifier = Modifier

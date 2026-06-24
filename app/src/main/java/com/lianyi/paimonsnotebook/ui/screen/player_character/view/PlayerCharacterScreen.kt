@@ -79,7 +79,7 @@ class PlayerCharacterScreen : BaseActivity() {
                                 ) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_user_outline),
-                                        contentDescription = null,
+                                        contentDescription = "切换账号",
                                         modifier = Modifier.size(24.dp)
                                     )
 
@@ -145,7 +145,7 @@ class PlayerCharacterScreen : BaseActivity() {
                             statusBarPaddingEnabled = false
                         ) {
 
-                            items(viewModel.itemFilterViewModel.itemList) { avatarData ->
+                            items(viewModel.itemFilterViewModel.itemList, key = { it.id }) { avatarData ->
                                 val characterData = viewModel.getCharacterListDataById(avatarData.id)
                                 if (characterData != null) {
                                     PlayerCharacterListCard(

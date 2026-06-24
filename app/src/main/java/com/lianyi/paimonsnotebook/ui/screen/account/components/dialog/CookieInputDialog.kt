@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -61,14 +61,14 @@ fun CookieInputDialog(
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        items(helperTextHints.split(2)) {
+        itemsIndexed(helperTextHints.split(2), key = { index, _ -> index }) { _, split ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .paddingBottom(5.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                it.forEach {
+                split.forEach {
                     HelperText(
                         modifier = Modifier.weight(1f),
                         text = it.text,

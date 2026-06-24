@@ -17,10 +17,10 @@ import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
 import com.lianyi.paimonsnotebook.common.extension.value.dpToPx
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.AppWidgetEditData
-import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.AppWidgetTransformData
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.binding.AppWidgetBindingService
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.binding.AppWidgetFieldBindingData
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.config.AppWidgetEditValueConfigData
+import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.AppWidgetAlignmentHelper
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.enums.ComponentAlignType
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.enums.ComponentSelectType
 import com.lianyi.paimonsnotebook.ui.theme.Error
@@ -386,96 +386,7 @@ class AppWidgetEditActionViewModel(
 
         recordHistory()
 
-        val transform = getComponentsTransformData(actionComponents)
-
-        val sortedXComponents = actionComponents.sortedBy { it.baseComponent.x }
-        val sortedYComponents = actionComponents.sortedBy { it.baseComponent.y }
-
-        when (type) {
-            //取最小的x来对齐
-            ComponentAlignType.Start -> {
-                actionComponents.forEach { it.baseComponent.x = transform.minX }
-            }
-
-            //取最大的x与最小的x求平均值来获取中心值
-            ComponentAlignType.CenterHorizontal -> {
-                val lastBase = sortedXComponents.last().baseComponent
-                val center = (transform.minX + transform.maxX + lastBase.width.localDpToPx()) / 2
-
-                actionComponents.forEach {
-                    val halfWidth = it.baseComponent.width.localDpToPx() / 2
-                    it.baseComponent.x = center - halfWidth
-                }
-            }
-
-            ComponentAlignType.CenterVertical -> {
-                val lastBase = sortedYComponents.last().baseComponent
-                val center = (transform.minY + transform.maxY + lastBase.height.localDpToPx()) / 2
-
-                actionComponents.forEach {
-                    val halfHeight = it.baseComponent.height.localDpToPx() / 2
-                    it.baseComponent.y = center - halfHeight
-                }
-            }
-
-            ComponentAlignType.End -> {
-                val lastBase = sortedXComponents.last().baseComponent
-
-                val endX = lastBase.x + lastBase.width.localDpToPx()
-
-                actionComponents.forEach {
-                    it.baseComponent.x = endX - it.baseComponent.width.localDpToPx()
-                }
-            }
-
-            ComponentAlignType.Top -> {
-                actionComponents.forEach { it.baseComponent.y = transform.minY }
-            }
-
-            ComponentAlignType.Bottom -> {
-                val lastBase = sortedYComponents.last().baseComponent
-
-                val endY = lastBase.y + lastBase.height.localDpToPx()
-
-                actionComponents.forEach {
-                    it.baseComponent.y = endY - it.baseComponent.height.localDpToPx()
-                }
-            }
-
-            ComponentAlignType.BothHorizontal -> {
-                val count = sortedXComponents.size - 1
-
-                val lastBase = sortedXComponents.last().baseComponent
-
-                val totalWidth = transform.maxX + lastBase.width.localDpToPx() - transform.minX
-                val spacer = (totalWidth - transform.sumWidth.localDpToPx()) / count
-
-                var offsetX = transform.minX
-
-                sortedXComponents.forEach {
-                    val base = it.baseComponent
-                    base.x = offsetX
-                    offsetX += spacer + base.width.localDpToPx()
-                }
-            }
-
-            ComponentAlignType.BothVertical -> {
-                val count = sortedYComponents.size - 1
-
-                val lastBase = sortedYComponents.last().baseComponent
-
-                val totalWidth = transform.maxY + lastBase.height.localDpToPx() - transform.minY
-                val spacer = (totalWidth - transform.sumHeight.localDpToPx()) / count
-
-                var offsetX = transform.minY
-
-                sortedYComponents.forEach {
-                    val base = it.baseComponent
-                    base.y = offsetX
-                    offsetX += spacer + base.height.localDpToPx()
-                }
-            }
-        }
+        AppWidgetAlignmentHelper.align(actionComponents, type)
     }
 
     fun onClickActionButton(
@@ -621,68 +532,6 @@ class AppWidgetEditActionViewModel(
             val currentValue = configData.getProperty.invoke(it)
             configData.onValueChange.invoke(it).invoke(currentValue + value)
         }
-    }
-
-    private fun getComponentsTransformData(
-        components: List<AppWidgetEditData.Component>
-    ): AppWidgetTransformData {
-
-        if (components.isEmpty()) return AppWidgetTransformData(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
-
-        val firstBase = components.first().baseComponent
-
-        var maxX = firstBase.x
-        var minX = firstBase.x
-        var maxY = firstBase.y
-        var minY = firstBase.y
-
-        var maxWidth = firstBase.width
-        var maxHeight = firstBase.height
-
-        var sumWidth = 0f
-        var sumHeight = 0f
-
-        getSelectedUnLockedComponents().forEach { component ->
-            val base = component.baseComponent
-
-            if (maxX < base.x) {
-                maxX = base.x
-            }
-
-            if (minX > base.x) {
-                minX = base.x
-            }
-
-            if (maxY < base.y) {
-                maxY = base.y
-            }
-
-            if (minY > base.y) {
-                minY = base.y
-            }
-
-            if (maxWidth < base.width) {
-                maxWidth = base.width
-            }
-
-            if (maxHeight < base.height) {
-                maxHeight = base.height
-            }
-
-            sumWidth += base.width
-            sumHeight += base.height
-        }
-
-        return AppWidgetTransformData(
-            maxX = maxX,
-            minX = minX,
-            maxY = maxY,
-            minY = minY,
-            maxWidth = maxWidth,
-            maxHeight = maxHeight,
-            sumWidth = sumWidth,
-            sumHeight = sumHeight
-        )
     }
 
     //更新历史记录操作按钮的状态

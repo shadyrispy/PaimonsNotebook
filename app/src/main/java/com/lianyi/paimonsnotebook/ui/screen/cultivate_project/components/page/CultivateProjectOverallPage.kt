@@ -54,7 +54,7 @@ fun CultivateProjectOverallPage(
                 modifier = Modifier.fillMaxSize()
             ) {
 
-                items(overallMaterialBaseInfoGroupListFlatten) { baseInfo ->
+                items(overallMaterialBaseInfoGroupListFlatten, key = { it.material.Id }) { baseInfo ->
                     CultivateMaterialGroupHeader(
                         materialBaseInfo = baseInfo,
                         imageSize = 55.dp,
@@ -72,7 +72,7 @@ fun CultivateProjectOverallPage(
                 modifier = Modifier.fillMaxSize()
             ) {
 
-                items(overallMaterialBaseInfoGroupList, span = {
+                items(overallMaterialBaseInfoGroupList, key = { it.first().material.Id }, span = {
                     GridItemSpan(this.maxLineSpan)
                 }) { materialBaseInfoList ->
                     var showEntityList by remember {

@@ -35,6 +35,7 @@ fun NetworkImage(
     tint: Color? = null,
     headers: Headers? = null,
     alignment: Alignment = Alignment.Center,
+    contentDescription: String? = null,
 ) {
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
@@ -45,7 +46,7 @@ fun NetworkImage(
         AsyncImage(
             model = requestOf(url = url, headers = headers),
             modifier = Modifier.fillMaxWidth(),
-            contentDescription = null,
+            contentDescription = contentDescription,
             contentScale = contentScale,
             onError = {
             },
@@ -62,11 +63,13 @@ fun NetworkImage(
     modifier: Modifier = Modifier,
     diskCache: DiskCache,
     contentScale: ContentScale = ContentScale.Fit,
+    contentDescription: String? = null,
 ) {
     NetworkImage(
         url = diskCache.url,
         modifier = modifier,
         contentScale = contentScale,
-        diskCache = diskCache
+        diskCache = diskCache,
+        contentDescription = contentDescription
     )
 }

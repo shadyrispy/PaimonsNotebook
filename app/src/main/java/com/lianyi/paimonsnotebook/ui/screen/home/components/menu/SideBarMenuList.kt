@@ -16,7 +16,7 @@ internal fun SideBarMenuList(
     LazyColumn(
         contentPadding = PaddingValues(8.dp),
     ) {
-        items(list) { data ->
+        items(list, key = { it.name }) { data ->
             SideBarMenuListItem(data) {
                 block.invoke(it)
             }

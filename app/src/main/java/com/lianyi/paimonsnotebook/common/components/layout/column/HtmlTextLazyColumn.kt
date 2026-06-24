@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Text
@@ -119,7 +119,7 @@ fun HtmlTextLazyColumn(
             }
         }
 
-        items(htmlSpanData) { item ->
+        itemsIndexed(htmlSpanData, key = { index, _ -> index }) { _, item ->
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

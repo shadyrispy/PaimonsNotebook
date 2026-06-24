@@ -69,7 +69,7 @@ class AchievementOptionScreen : BaseActivity() {
                         title = "选择一个成就记录用户",
                         onDismissRequest = viewModel::onDialogDismissRequest,
                         content = {
-                            items(viewModel.userList) {
+                            items(viewModel.userList, key = { it.id }) {
                                 Text(text = it.name, modifier = Modifier
                                     .radius(4.dp)
                                     .fillMaxWidth()

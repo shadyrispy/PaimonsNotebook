@@ -104,7 +104,7 @@ class HomeScreen : BaseActivity() {
 
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_navigation),
-                                contentDescription = null,
+                                contentDescription = "菜单",
                                 modifier = Modifier
                                     .padding(2.dp)
                                     .radius(3.dp)

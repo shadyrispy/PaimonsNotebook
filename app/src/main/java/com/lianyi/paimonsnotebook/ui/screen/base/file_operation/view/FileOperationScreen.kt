@@ -60,7 +60,7 @@ open class FileOperationScreen : BaseActivity() {
                         PrimaryText(text = viewModel.pageTitle)
                     }
 
-                    itemsIndexed(viewModel.fileList) { index, item ->
+                    itemsIndexed(viewModel.fileList, key = { _, it -> it.name }) { index, item ->
                         Row(
                             modifier = Modifier
                                 .radius(8.dp)
@@ -81,7 +81,7 @@ open class FileOperationScreen : BaseActivity() {
 
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_document),
-                                contentDescription = null,
+                                contentDescription = "文件",
                                 modifier = Modifier
                                     .radius(8.dp)
                                     .size(42.dp)

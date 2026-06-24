@@ -54,7 +54,7 @@ fun UserDialog(
         onClickButton = onButtonClick,
         onDismissRequest = onDismissRequest
     ) {
-        items(stateList) { user ->
+        items(stateList, key = { it.userEntity.mid }) { user ->
             Row(
                 modifier = Modifier
                     .radius(4.dp)

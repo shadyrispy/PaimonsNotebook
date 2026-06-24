@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -83,7 +83,7 @@ internal fun PostStructureContentList(
         }
 
         //正文内容
-        items(structuredContent) { item ->
+        itemsIndexed(structuredContent, key = { index, _ -> index }) { _, item ->
             PostStructureContentItem(
                 fontSize = fontSize,
                 item = item,
@@ -128,7 +128,7 @@ internal fun PostStructureContentList(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_page_view),
-                        contentDescription = null,
+                        contentDescription = "阅读量",
                         tint = Info,
                         modifier = Modifier.size(10.dp)
                     )

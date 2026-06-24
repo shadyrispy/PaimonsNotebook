@@ -49,7 +49,7 @@ class ReliquaryScreen : BaseActivity() {
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
 
-                    items(viewModel.reliquarySetList) { reliquarySet ->
+                    items(viewModel.reliquarySetList, key = { it.SetId }) { reliquarySet ->
                         Column(
                             modifier = Modifier
                                 .radius(6.dp)

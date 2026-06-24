@@ -61,7 +61,7 @@ class AccountManagerScreen : BaseActivity() {
         viewModel.checkStoragePermission = this::checkStoragePermission
         viewModel.requestStoragePermission = this::requestStoragePermission
 
-        viewModel.getGeeTestUtils = this::getGeeTestUtils
+        viewModel.loginHelper.getGeeTestUtils = this::getGeeTestUtils
 
         setContent {
             PaimonsNotebookTheme(this) {
@@ -142,7 +142,7 @@ class AccountManagerScreen : BaseActivity() {
                                     text = "通过Cookie",
                                     onClick = {
                                         viewModel.dismissMenu()
-                                        viewModel.showCookieInputDialog()
+                                        viewModel.loginHelper.showCookieInputDialog()
                                     }
                                 )
                                 IconTextClickableItem(
@@ -150,7 +150,7 @@ class AccountManagerScreen : BaseActivity() {
                                     text = "通过米游社扫码",
                                     onClick = {
                                         viewModel.dismissMenu()
-                                        viewModel.showQRCodePopup()
+                                        viewModel.loginHelper.showQRCodePopup()
                                     }
                                 )
                                 IconTextClickableItem(
@@ -158,7 +158,7 @@ class AccountManagerScreen : BaseActivity() {
                                     text = "通过短信验证码",
                                     onClick = {
                                         viewModel.dismissMenu()
-                                        viewModel.showPhoneNumberInputDialog()
+                                        viewModel.loginHelper.showPhoneNumberInputDialog()
                                     }
                                 )
                             }
@@ -177,13 +177,13 @@ class AccountManagerScreen : BaseActivity() {
                     }
 
                     //通过cookie添加账号对话框
-                    if (viewModel.showAddAccountByCookieDialog) {
+                    if (viewModel.loginHelper.showAddAccountByCookieDialog) {
                         CookieInputDialog(
-                            inputValue = viewModel.cookieInputValue,
-                            viewModel::onInputTextValueChange,
-                            helperTextHints = viewModel.helperTextHints,
-                            onDismissRequest = { viewModel.dismissCookieInputDialog() },
-                            onSuccess = viewModel::checkCookie
+                            inputValue = viewModel.loginHelper.cookieInputValue,
+                            viewModel.loginHelper::onInputTextValueChange,
+                            helperTextHints = viewModel.loginHelper.helperTextHints,
+                            onDismissRequest = { viewModel.loginHelper.dismissCookieInputDialog() },
+                            onSuccess = viewModel.loginHelper::checkCookie
                         )
                     }
 
@@ -205,30 +205,30 @@ class AccountManagerScreen : BaseActivity() {
                     }
 
                     QRCodeLoginPopup(
-                        visible = viewModel.showQRCodePopup,
-                        bitmap = viewModel.loginQrCodeBitmap,
+                        visible = viewModel.loginHelper.showQRCodePopup,
+                        bitmap = viewModel.loginHelper.loginQrCodeBitmap,
                         requestStoragePermission = this@AccountManagerScreen::requestStoragePermission,
-                        onRequestDismiss = viewModel::onRequestQRCodePopupDismiss,
-                        goLoginPage = viewModel::goHoyolabSelfPage
+                        onRequestDismiss = viewModel.loginHelper::onRequestQRCodePopupDismiss,
+                        goLoginPage = viewModel.loginHelper::goHoyolabSelfPage
                     )
 
-                    if (viewModel.showPhoneNumberInputDialog) {
+                    if (viewModel.loginHelper.showPhoneNumberInputDialog) {
                         InputDialog(
                             title = "短信验证码登录",
                             placeholder = "在此输入11位手机号",
                             hint = "仅支持中国大陆的手机号(+86)",
                             textMaxLength = 11,
-                            onConfirm = viewModel::createLoginCaptcha,
-                            onCancel = viewModel::dismissPhoneNumberInputDialog
+                            onConfirm = viewModel.loginHelper::createLoginCaptcha,
+                            onCancel = viewModel.loginHelper::dismissPhoneNumberInputDialog
                         )
                     }
 
-                    if (viewModel.showLoginCaptchaCodeInputDialog) {
+                    if (viewModel.loginHelper.showLoginCaptchaCodeInputDialog) {
                         InputDialog(
                             title = "短信验证码登录",
                             placeholder = "在此输入验证码",
-                            onConfirm = viewModel::loginByMobileCaptcha,
-                            onCancel = viewModel::dismissLoginCaptchaCodeInputDialog,
+                            onConfirm = viewModel.loginHelper::loginByMobileCaptcha,
+                            onCancel = viewModel.loginHelper::dismissLoginCaptchaCodeInputDialog,
                             onlyNumber = true
                         )
                     }

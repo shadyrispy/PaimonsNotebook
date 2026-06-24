@@ -70,7 +70,7 @@ class CultivateProjectOptionScreen : BaseActivity() {
                         title = "选择一个养成计划",
                         onDismissRequest = viewModel::dismissChooseCultivateProjectDialog,
                         content = {
-                            items(viewModel.cultivateProjectList) {
+                            items(viewModel.cultivateProjectList, key = { it.projectId }) {
                                 Text(text = it.projectName, modifier = Modifier
                                     .radius(4.dp)
                                     .fillMaxWidth()

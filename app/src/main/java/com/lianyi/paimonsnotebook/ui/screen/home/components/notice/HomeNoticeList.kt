@@ -13,7 +13,7 @@ internal fun HomeNoticeList(noticeList: List<OfficialRecommendedPostsData.Offici
     LazyColumn(Modifier
         .padding(8.dp, 0.dp)
     ) {
-        items(noticeList) { item ->
+        items(noticeList, key = { it.post_id }) { item ->
         }
     }
 }

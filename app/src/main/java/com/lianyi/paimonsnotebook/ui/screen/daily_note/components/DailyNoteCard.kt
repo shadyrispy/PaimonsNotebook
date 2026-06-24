@@ -303,7 +303,7 @@ fun DailyNoteCard(
                                 .fillMaxWidth()
                                 .height(56.dp + extraHeight)
                         ) {
-                            items(dailyNoteData.expeditions) { item ->
+                            items(dailyNoteData.expeditions, key = { it.avatar_side_icon }) { item ->
                                 Column(
                                     modifier = Modifier.width(36.dp),
                                     horizontalAlignment = Alignment.CenterHorizontally

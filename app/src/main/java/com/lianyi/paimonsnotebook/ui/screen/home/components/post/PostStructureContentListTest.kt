@@ -99,7 +99,7 @@ internal fun PostStructureContentListTest(
             }
         }
 
-        itemsIndexed(structuredContent) { i, item ->
+        itemsIndexed(structuredContent, key = { index, _ -> index }) { i, item ->
             if (item.isEmpty()) return@itemsIndexed
 
             if (item.size > 1) {

@@ -148,7 +148,7 @@ private fun FloorLevelItem(
 
             Icon(
                 painter = painterResource(id = R.drawable.ic_genshin_game_biology),
-                contentDescription = null,
+                contentDescription = "查看怪物",
                 modifier = Modifier
                     .radius(2.dp)
                     .size(20.dp)
@@ -218,7 +218,7 @@ private fun FloorHalf(
             Crossfade(targetState = showMonster, label = "") {
                 if (it) {
                     LazyRow(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        items(monsters) { pair ->
+                        items(monsters, key = { it.first?.id ?: it.second }) { pair ->
                             ItemCard(
                                 url = pair.first?.iconUrl ?: "",
                                 text = "Lv.${pair.second}",

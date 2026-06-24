@@ -207,9 +207,9 @@ class AppWidgetConfigurationScreen : BaseActivity() {
                         title = "背景颜色",
                         colors = viewModel.defaultColorList,
                         customColor = viewModel.configuration.customBackgroundColor,
-                        selectedIndex = viewModel.backgroundColorSelectedIndex,
+                        selectedIndex = viewModel.colorHelper.backgroundColorSelectedIndex,
                     ) { color: Color, i: Int ->
-                        viewModel.changeBackgroundColor(color, i, scope)
+                        viewModel.colorHelper.changeBackgroundColor(color, i, scope)
                     }
                 }
             }
@@ -227,7 +227,7 @@ class AppWidgetConfigurationScreen : BaseActivity() {
                         TextSlider(
                             value = viewModel.configuration.backgroundRadius,
                             onValueChange = {
-                                viewModel.changeBackgroundRadius(it, scope)
+                                viewModel.colorHelper.changeBackgroundRadius(it, scope)
                             },
                             range = (0f..100f),
                             text = {
@@ -256,9 +256,9 @@ class AppWidgetConfigurationScreen : BaseActivity() {
                         title = "图片颜色",
                         colors = viewModel.defaultColorList,
                         customColor = viewModel.configuration.customImageTintColor,
-                        selectedIndex = viewModel.imageTintColorSelectedIndex,
+                        selectedIndex = viewModel.colorHelper.imageTintColorSelectedIndex,
                     ) { color: Color, i: Int ->
-                        viewModel.changeImageTintColor(color, i, scope)
+                        viewModel.colorHelper.changeImageTintColor(color, i, scope)
                     }
                 }
             }
@@ -269,9 +269,9 @@ class AppWidgetConfigurationScreen : BaseActivity() {
                         title = "字体颜色",
                         colors = viewModel.defaultColorList,
                         customColor = viewModel.configuration.customTextColor,
-                        selectedIndex = viewModel.textColorSelectedIndex,
+                        selectedIndex = viewModel.colorHelper.textColorSelectedIndex,
                     ) { color: Color, i: Int ->
-                        viewModel.changeTextColor(color, i, scope)
+                        viewModel.colorHelper.changeTextColor(color, i, scope)
                     }
                 }
             }
@@ -293,10 +293,10 @@ class AppWidgetConfigurationScreen : BaseActivity() {
 
         ColorPickerPopup(
             visible = viewModel.showColorPickerPopup,
-            initialColor = viewModel.getColorPickerPopupInitialColor(),
+            initialColor = viewModel.colorHelper.getColorPickerPopupInitialColor(),
             onRequestDismiss = viewModel::dismissColorPickerPopup,
             onSelectColor = { color, pointF ->
-                viewModel.onColorPickerSelectedColor(color, pointF, scope)
+                viewModel.colorHelper.onColorPickerSelectedColor(color, pointF, scope)
             }
         )
 

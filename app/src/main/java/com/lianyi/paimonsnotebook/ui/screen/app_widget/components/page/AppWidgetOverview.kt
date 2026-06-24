@@ -59,7 +59,7 @@ internal fun AppWidgetOverview(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(12.dp, 6.dp)
     ) {
-        items(list) { pair ->
+        items(list, key = { it.first }) { pair ->
             Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(text = pair.first, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
 

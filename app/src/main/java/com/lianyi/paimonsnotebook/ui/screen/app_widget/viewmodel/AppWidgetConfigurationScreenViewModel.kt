@@ -36,7 +36,7 @@ import com.lianyi.paimonsnotebook.common.util.data_store.PreferenceKeys
 import com.lianyi.paimonsnotebook.common.util.data_store.dataStoreValuesFirst
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.AppWidgetConfigurationData
-import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.ColorPickerType
+import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.AppWidgetColorHelper
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
 import com.lianyi.paimonsnotebook.ui.screen.setting.util.SettingsHelper
 import com.lianyi.paimonsnotebook.ui.theme.Black
@@ -56,7 +56,6 @@ import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerTeal
 import com.lianyi.paimonsnotebook.ui.widgets.common.data.RemoteViewsInfo
 import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetHelper
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsIndexes
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -117,14 +116,13 @@ class AppWidgetConfigurationScreenViewModel : ViewModel() {
 
     var showUserSelectDialog by mutableStateOf(false)
 
-    var textColorSelectedIndex by mutableIntStateOf(1)
-
-    var imageTintColorSelectedIndex by mutableIntStateOf(1)
-
-    var backgroundColorSelectedIndex by mutableIntStateOf(1)
-
-    private var colorPickerType = ColorPickerType.None
-
+    val colorHelper by lazy {
+        AppWidgetColorHelper(
+            configuration = configuration,
+            showColorPickerPopup = { showColorPickerPopup() },
+            dismissColorPickerPopup = ::dismissColorPickerPopup
+        )
+    }
 
     lateinit var finishActivity: () -> Unit
 
@@ -200,7 +198,7 @@ class AppWidgetConfigurationScreenViewModel : ViewModel() {
             if (appWidgetBinding != null) {
                 configuration.setValueForConfiguration(appWidgetBinding.configuration)
 
-                textColorSelectedIndex =
+                colorHelper.updateTextColorSelectedIndex(
                     defaultColorList.indexOf(configuration.textColor).let {
                         if (it != -1) {
                             it
@@ -209,8 +207,9 @@ class AppWidgetConfigurationScreenViewModel : ViewModel() {
                             0
                         }
                     }
+                )
 
-                imageTintColorSelectedIndex =
+                colorHelper.updateImageTintColorSelectedIndex(
                     defaultColorList.indexOf(configuration.imageTintColor).let {
                         if (it != -1) {
                             it
@@ -219,6 +218,7 @@ class AppWidgetConfigurationScreenViewModel : ViewModel() {
                             0
                         }
                     }
+                )
             }
 
             snapshotFlow { user?.userGameRoles?.toList() }.collectLatest { roles ->
@@ -288,91 +288,6 @@ class AppWidgetConfigurationScreenViewModel : ViewModel() {
     ) {
         configuration.setValueForRemoteViewsInfo(remoteViewsInfo)
     }
-
-    fun changeBackgroundColor(color: Color, index: Int, scope: CoroutineScope) {
-        if (index == 0) {
-            showColorPickerPopup()
-            colorPickerType = ColorPickerType.Background
-        }
-
-        backgroundColorSelectedIndex = index
-
-        scope.launch {
-            configuration.setBackgroundColor(color)
-        }
-    }
-
-    fun changeTextColor(color: Color, index: Int, scope: CoroutineScope) {
-        if (index == 0) {
-            showColorPickerPopup()
-            colorPickerType = ColorPickerType.Text
-        }
-        textColorSelectedIndex = index
-
-        scope.launch {
-            configuration.setTextColor(color)
-        }
-    }
-
-    fun changeImageTintColor(color: Color, index: Int, scope: CoroutineScope) {
-        if (index == 0) {
-            showColorPickerPopup()
-            colorPickerType = ColorPickerType.Image
-        }
-
-        imageTintColorSelectedIndex = index
-
-        scope.launch {
-            configuration.setImageTintColor(color)
-        }
-    }
-
-    fun changeBackgroundRadius(float: Float, scope: CoroutineScope) {
-        scope.launch {
-            configuration.setBackgroundRadius(float)
-        }
-    }
-
-    fun onColorPickerSelectedColor(color: Color, pointF: PointF, scope: CoroutineScope) {
-        when (colorPickerType) {
-            ColorPickerType.Image -> {
-                changeImageTintColor(color, 0, scope)
-                configuration.customImageTintColor = color
-            }
-
-            ColorPickerType.Text -> {
-                changeTextColor(color, 0, scope)
-                configuration.customTextColor = color
-            }
-
-            ColorPickerType.Background -> {
-                changeBackgroundColor(color, 0, scope)
-                configuration.customBackgroundColor = color
-            }
-
-            else -> {}
-        }
-        dismissColorPickerPopup()
-    }
-
-    fun getColorPickerPopupInitialColor(): Color =
-        when (colorPickerType) {
-            ColorPickerType.Image -> {
-                configuration.customImageTintColor
-            }
-
-            ColorPickerType.Text -> {
-                configuration.customTextColor
-            }
-
-            ColorPickerType.Background -> {
-                configuration.customBackgroundColor
-            }
-
-            else -> {
-                White
-            }
-        }
 
     fun changeGameRole(user: User, role: UserGameRoleData.Role) {
         configuration.setGameRole(role)

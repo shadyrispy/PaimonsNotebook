@@ -34,7 +34,7 @@ internal fun AlreadyBindingAppWidgetPage(
     ContentSpacerLazyColumn(
         modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(6.dp, 12.dp)
     ) {
-        items(groupBy) { pair ->
+        items(groupBy, key = { it.first }) { pair ->
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(6.dp)

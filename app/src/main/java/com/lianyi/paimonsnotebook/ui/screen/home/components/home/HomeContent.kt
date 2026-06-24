@@ -95,7 +95,7 @@ internal fun HomeContent(
                     )
                 }
 
-                items(nearActivity) {
+                items(nearActivity, key = { it.content_id }) {
                     WebHomeNearActivity(
                         item = it,
                         diskCache = DiskCache(
@@ -123,7 +123,7 @@ internal fun HomeContent(
                 )
             }
 
-            items(noticeList) {
+            items(noticeList, key = { it.post_id }) {
                 HomeEventNotice(
                     item = it,
                     modifier = Modifier

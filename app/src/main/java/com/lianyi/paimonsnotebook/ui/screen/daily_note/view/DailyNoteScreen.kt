@@ -92,7 +92,7 @@ class DailyNoteScreen : ComponentActivity() {
                             )
 
                             Icon(painter = painterResource(id = R.drawable.ic_phone_mobile),
-                                contentDescription = null,
+                                contentDescription = "打开米游社",
                                 tint = Black,
                                 modifier = Modifier
                                     .size(30.dp)
@@ -104,7 +104,7 @@ class DailyNoteScreen : ComponentActivity() {
                             Spacer(modifier = Modifier.width(10.dp))
 
                             Icon(painter = painterResource(id = R.drawable.ic_add),
-                                contentDescription = null,
+                                contentDescription = "添加便笺",
                                 tint = Black,
                                 modifier = Modifier
                                     .size(30.dp)

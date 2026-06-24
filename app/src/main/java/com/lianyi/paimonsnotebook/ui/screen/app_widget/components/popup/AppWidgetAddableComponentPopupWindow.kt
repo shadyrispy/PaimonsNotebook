@@ -150,7 +150,7 @@ fun AppWidgetAddableComponentPopupWindow(
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(items) {
+            items(items, key = { it.first }) {
                 Text(
                     text = it.first, fontSize = 9.sp, color = White,
                     fontWeight = FontWeight.SemiBold,

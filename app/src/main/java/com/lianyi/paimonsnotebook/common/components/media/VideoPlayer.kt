@@ -323,7 +323,7 @@ fun VideoPlayer(
                         .background(Black_30)
                 ) {
                     LazyColumn {
-                        itemsIndexed(videoList) { _: Int, resolution ->
+                        itemsIndexed(videoList, key = { _, it -> it.label }) { _: Int, resolution ->
                             Text(text = resolution.label,
                                 color = if (currentVideo.label == resolution.label) colorPrimary else White,
                                 fontSize = controllerFontSize,

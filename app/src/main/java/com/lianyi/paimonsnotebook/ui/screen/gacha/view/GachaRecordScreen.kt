@@ -82,7 +82,7 @@ class GachaRecordScreen : ComponentActivity() {
 
                     Icon(
                         painter = painterResource(id = R.drawable.ic_navigation),
-                        contentDescription = null,
+                        contentDescription = "设置",
                         modifier = Modifier
                             .padding(2.dp)
                             .radius(3.dp)

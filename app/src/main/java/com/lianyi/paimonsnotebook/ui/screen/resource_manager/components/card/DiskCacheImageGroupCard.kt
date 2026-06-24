@@ -4,7 +4,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
@@ -77,7 +77,7 @@ fun DiskCacheImageGroupCard(
             userScrollEnabled = false
         ) {
 
-            items(list.split(rows)) { split ->
+            itemsIndexed(list.split(rows), key = { index, _ -> index }) { _, split ->
 
                 Row(modifier = Modifier
                     .fillMaxWidth()

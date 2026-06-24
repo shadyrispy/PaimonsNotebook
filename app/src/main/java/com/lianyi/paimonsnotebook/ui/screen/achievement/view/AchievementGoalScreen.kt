@@ -180,7 +180,7 @@ class AchievementGoalScreen : BaseActivity() {
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                     ) {
 
-                        items(viewModel.achievementList) { item ->
+                        items(viewModel.achievementList, key = { it.id }) { item ->
                             Column(
                                 modifier = Modifier
                                     .padding(vertical = 4.dp)
@@ -223,7 +223,7 @@ class AchievementGoalScreen : BaseActivity() {
                                     ) {
                                         Image(
                                             painter = painterResource(id = R.drawable.icon_gemstone),
-                                            contentDescription = null,
+                                            contentDescription = "原石奖励",
                                             modifier = Modifier.size(20.dp)
                                         )
 
@@ -256,7 +256,7 @@ class AchievementGoalScreen : BaseActivity() {
 
                                             Icon(
                                                 painter = painterResource(id = R.drawable.ic_checkmark_circle_full),
-                                                contentDescription = null,
+                                                contentDescription = "已完成",
                                                 modifier = Modifier.size(20.dp),
                                                 tint = Success
                                             )

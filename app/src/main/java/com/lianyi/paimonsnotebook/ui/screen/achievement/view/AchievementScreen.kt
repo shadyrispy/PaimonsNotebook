@@ -123,7 +123,7 @@ class AchievementScreen : BaseActivity() {
                     }
                 }
 
-                items(viewModel.achievementGoalList) { item ->
+                items(viewModel.achievementGoalList, key = { it.goal.id }) { item ->
                     Column(
                         modifier = Modifier
                             .padding(vertical = 4.dp)
@@ -204,7 +204,7 @@ class AchievementScreen : BaseActivity() {
                             Row {
                                 Image(
                                     painter = painterResource(id = R.drawable.emotion_icon_nahida_thinking),
-                                    contentDescription = null,
+                                    contentDescription = "未找到成就",
                                     modifier = Modifier.size(48.dp)
                                 )
 
@@ -219,7 +219,7 @@ class AchievementScreen : BaseActivity() {
                     }
 
                     //结果数据列表
-                    items(viewModel.resultList) { item ->
+                    items(viewModel.resultList, key = { it.id }) { item ->
                         Column(modifier = Modifier
                             .radius(2.dp)
                             .fillMaxWidth()

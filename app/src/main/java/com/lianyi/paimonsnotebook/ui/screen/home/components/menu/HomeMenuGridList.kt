@@ -21,7 +21,7 @@ internal fun HomeMenuGridList(
         verticalArrangement = Arrangement.spacedBy(6.dp),
         contentPadding = PaddingValues(6.dp)
     ) {
-        items(list) { item ->
+        items(list, key = { it.name }) { item ->
             GridMenuListItem(item) {
                 block(it)
             }

@@ -44,7 +44,7 @@ fun UserGameRolesDialog(
         onClickButton = onButtonClick,
         onDismissRequest = onDismissRequest
     ) {
-        items(user.userGameRoles) { role ->
+        items(user.userGameRoles, key = { it.game_uid }) { role ->
             Row(
                 modifier = Modifier
                     .radius(4.dp)
@@ -119,7 +119,7 @@ fun UserGameRolesDialog(
         onClickButton = onButtonClick,
         onDismissRequest = onDismissRequest
     ) {
-        items(userList) { user ->
+        items(userList, key = { it.userEntity.mid }) { user ->
             Column {
                 user.userGameRoles.forEach { role ->
                     Row(
