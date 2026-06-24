@@ -2,7 +2,6 @@ package com.lianyi.paimonsnotebook.ui.screen.gacha.viewmodel
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -13,14 +12,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
 import com.lianyi.paimonsnotebook.common.data.hoyolab.PlayerUid
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.UserAndUid
 import com.lianyi.paimonsnotebook.common.data.repository.GachaRepository
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
-import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.extension.string.notify
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
@@ -37,19 +34,12 @@ import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.BindingClien
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.GameAuthKeyData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.GenAuthKeyData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
-import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordAboutUIGFVersionSlot
-import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordCurrentGameUidSlot
-import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordExportArrowSlot
-import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordExportV3SwitchSlot
-import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordImportResultSlot
-import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordInputUrlSlot
-import com.lianyi.paimonsnotebook.ui.screen.gacha.components.GachaRecordSelectAccountSlot
+import com.lianyi.paimonsnotebook.ui.screen.gacha.provider.GachaRecordOptionListProvider
 import com.lianyi.paimonsnotebook.ui.screen.gacha.service.GachaItemsExportService
 import com.lianyi.paimonsnotebook.ui.screen.gacha.service.GachaItemsImportService
 import com.lianyi.paimonsnotebook.ui.screen.gacha.service.GachaLogService
 import com.lianyi.paimonsnotebook.ui.screen.gacha.view.GachaRecordExportDataScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
-import com.lianyi.paimonsnotebook.ui.screen.setting.data.OptionListData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -59,9 +49,9 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
 
     val gachaRecordGameUidList = mutableStateListOf<String>()
 
-    private var currentGameUid by mutableStateOf("")
+    internal var currentGameUid by mutableStateOf("")
 
-    private var gachaRecordExportToUIGFV3 by mutableStateOf(false)
+    internal var gachaRecordExportToUIGFV3 by mutableStateOf(false)
 
     lateinit var startActivity: ActivityResultLauncher<Intent>
 
@@ -116,14 +106,14 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
 
     var loadingDialogTitle by mutableStateOf("获取祈愿记录")
 
-    private var expandedCurrentGameUidDropMenu by mutableStateOf(false)
-    private var showInputUrlDialog by mutableStateOf(false)
-    private var inputDialogValue by mutableStateOf("")
+    internal var expandedCurrentGameUidDropMenu by mutableStateOf(false)
+    internal var showInputUrlDialog by mutableStateOf(false)
+    internal var inputDialogValue by mutableStateOf("")
 
-    private var showSelectAccountGameRoleDialog by mutableStateOf(false)
+    internal var showSelectAccountGameRoleDialog by mutableStateOf(false)
 
-    private var showImportUIGFJsonResultDialog by mutableStateOf(false)
-    private var importUIGFJsonPropertyList = mutableStateListOf<Pair<String, String>>()
+    internal var showImportUIGFJsonResultDialog by mutableStateOf(false)
+    internal val importUIGFJsonPropertyList = mutableStateListOf<Pair<String, String>>()
 
     var showChooseExportUidDialog by mutableStateOf(false)
 
@@ -145,182 +135,14 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
     //是否显示游戏角色对话框
     var showGameRoleDialog by mutableStateOf(false)
 
-    val gachaSettings = listOf(
-        OptionListData(
-            name = "当前账号",
-            description = "用于显示指定账号的祈愿记录",
-            onClick = {
-                if (gachaRecordGameUidList.isNotEmpty()) {
-                    expandedCurrentGameUidDropMenu = !expandedCurrentGameUidDropMenu
-                } else {
-                    "当前祈愿记录为空".notify()
-                }
-            },
-            slot = {
-                GachaRecordCurrentGameUidSlot(
-                    currentGameUid = currentGameUid,
-                    expanded = expandedCurrentGameUidDropMenu,
-                    gachaRecordGameUidList = gachaRecordGameUidList,
-                    onUidSelected = {
-                        expandedCurrentGameUidDropMenu = false
-                        viewModelScope.launch {
-                            PreferenceKeys.GachaRecordCurrentGameUid.editValue(it)
-                        }
-                    },
-                    onDismissRequest = { expandedCurrentGameUidDropMenu = false }
-                )
-            }
-        ),
-        OptionListData(
-            name = "导出的祈愿记录",
-            description = "查看与管理导出的祈愿记录",
-            onClick = {
-                goGachaRecordExportDataListScreen()
-            },
-            slot = {
-                GachaRecordExportArrowSlot()
-            }
-        ),
-//        OptionListData(
-//            name = "删除记录",
-//            description = "从本地删除某个账号的祈愿记录",
-//            onClick = {
-//
-//            }
-//        ),
-//        OptionListData(
-//            name = "全量增加",
-//            description = "默认关闭,不再对记录进行重复性验证,将所有能够获取的数据保存到本地",
-//            onClick = {
-//
-//            },
-//            slot = {
-//
-//            }
-//        )
-    )
+    internal val scope get() = viewModelScope
 
-    val importSettings = listOf(
-        OptionListData(
-            name = "通过已登录的账号获取祈愿记录(推荐)",
-            description = "使用登录在派蒙笔记本中的账号可以随时随地的获取祈愿记录",
-            onClick = {
-                showSelectAccountGameRoleDialog = !showSelectAccountGameRoleDialog
-            },
-            slot = {
-                if (showSelectAccountGameRoleDialog) {
-                    GachaRecordSelectAccountSlot(
-                        onButtonClick = {
-                            showSelectAccountGameRoleDialog = false
-                        },
-                        onDismissRequest = {
-                            showSelectAccountGameRoleDialog = false
-                        },
-                        onSelectRole = { user, role ->
-                            showSelectAccountGameRoleDialog = false
-                            generateAuthKeyByAccount(
-                                user = user,
-                                roleData = role
-                            )
-                        }
-                    )
-                }
-            }
-        ),
-        OptionListData(
-            name = "通过Url获取祈愿数据",
-            description = "通过输入祈愿Url来进行祈愿数据的获取",
-            onClick = {
-                showInputUrlDialog = !showInputUrlDialog
-            },
-            slot = {
-                if (showInputUrlDialog) {
-                    GachaRecordInputUrlSlot(
-                        inputValue = inputDialogValue,
-                        onValueChange = { inputDialogValue = it },
-                        onConfirm = {
-                            showLoadingDialog = true
-                            getGaLogFromUrl()
-                        },
-                        onDismissRequest = { showInputUrlDialog = false }
-                    )
-                }
-            }
-        ),
-        OptionListData(
-            name = "从UIGF Json导入",
-            description = "从UIGF Json中导入祈愿数据",
-            onClick = {
-                launchSelectJsonActivity()
-            },
-            slot = {
-                if (showImportUIGFJsonResultDialog) {
-                    GachaRecordImportResultSlot(
-                        properties = importUIGFJsonPropertyList,
-                        onConfirm = { saveGachaLogToDB() },
-                        onDismissRequest = { showImportUIGFJsonResultDialog = false }
-                    )
-                }
-            }
-        )
-    )
+    val gachaSettings get() = GachaRecordOptionListProvider.gachaSettings(this)
+    val importSettings get() = GachaRecordOptionListProvider.importSettings(this)
+    val exportSettings get() = GachaRecordOptionListProvider.exportSettings(this)
+    val aboutSettings get() = GachaRecordOptionListProvider.aboutSettings(this)
 
-    val exportSettings = listOf(
-        OptionListData(
-            name = "UIGF Json导出",
-            description = "将当前用户的祈愿记录从本地导出为UIGF Json",
-            onClick = {
-                onClickExportUIGFJson()
-            }
-        ),
-        OptionListData(
-            name = "获取祈愿记录URL",
-            description = "选择一个角色,将对应角色的祈愿记录URL复制到剪切板",
-            onClick = {
-                showGameRoleDialog()
-            }
-        ),
-        OptionListData(
-            name = "启用UIGF V3标准导出",
-            description = "默认关闭,开启后,程序导出的Json将为UIGF V3标准,以兼容未支持高版本UIGF标准的程序",
-            onClick = {
-                viewModelScope.launchIO {
-                    gachaRecordExportToUIGFV3 = !gachaRecordExportToUIGFV3
-                    PreferenceKeys.GachaRecordExportToUIGFV3.editValue(gachaRecordExportToUIGFV3)
-                }
-            },
-            slot = {
-                GachaRecordExportV3SwitchSlot(
-                    checked = gachaRecordExportToUIGFV3
-                )
-            }
-        ),
-    )
-
-    val aboutSettings = listOf(
-        OptionListData(
-            name = "当前UIGF版本",
-            description = "派蒙笔记本当前的UIGF版本",
-            onClick = {
-                "${PaimonsNotebookApplication.name}当前的UIGF版本是${UIGFHelper.UIGF_VERSION}".notify()
-            },
-            slot = {
-                GachaRecordAboutUIGFVersionSlot(version = UIGFHelper.UIGF_VERSION)
-            }
-        ),
-        OptionListData(
-            name = "关于UIGF",
-            description = "点击以查看UIGF的介绍文档以及支持UIGF的相关软件",
-            onClick = {
-                HomeHelper.goActivityByIntentNewTask {
-                    action = Intent.ACTION_VIEW
-                    data = Uri.parse(UIGFHelper.UIGF_HOME_PAGE)
-                }
-            }
-        )
-    )
-
-    private fun showGameRoleDialog() {
+    internal fun showGameRoleDialog() {
         showGameRoleDialog = true
     }
 
@@ -341,7 +163,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
     }
 
     //使用账号生成祈愿密钥
-    private fun generateAuthKeyByAccount(
+    internal fun generateAuthKeyByAccount(
         user: User,
         roleData: UserGameRoleData.Role,
         onlyGetUrl: Boolean = false
@@ -385,7 +207,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
     }
 
     //从祈愿Url中获取authKey并尝试获取记录
-    private fun getGaLogFromUrl() {
+    internal fun getGaLogFromUrl() {
         showLoadingDialog = true
         loadingDialogTitle = "获取祈愿记录"
 
@@ -567,7 +389,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
             loadingDialogCurrentGachaLogIndex.toFloat() / UIGFHelper.uigfGachaTypeCount
     }
 
-    private fun launchSelectJsonActivity() {
+    internal fun launchSelectJsonActivity() {
         startActivity.launch(Intent(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Intent.ACTION_OPEN_DOCUMENT
@@ -617,7 +439,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
         }
     }
 
-    private fun saveGachaLogToDB() {
+    internal fun saveGachaLogToDB() {
         val file = activityResultFile
 
         if (file == null) {
@@ -646,7 +468,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
         }
     }
 
-    private fun onClickExportUIGFJson() {
+    internal fun onClickExportUIGFJson() {
         if (gachaRecordExportToUIGFV3) {
 
             if (currentGameUid.isEmpty()) {
@@ -702,7 +524,7 @@ class GachaRecordOptionScreenViewModel : ViewModel() {
     }
 
     //前往祈愿记录导出数据界面
-    private fun goGachaRecordExportDataListScreen() {
+    internal fun goGachaRecordExportDataListScreen() {
         HomeHelper.goActivityByIntentNewTask {
             setComponentName(GachaRecordExportDataScreen::class.java)
         }
