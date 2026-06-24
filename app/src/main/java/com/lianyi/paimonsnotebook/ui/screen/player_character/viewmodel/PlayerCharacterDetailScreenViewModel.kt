@@ -221,12 +221,20 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         val avatar = this.currentItem ?: return
 
         // 角色与技能等级起点用角色实际值（来自米游社角色详情）
-        val characterLevel = currentCharacterDetail?.base?.level ?: 1
+        // 角色等级上限 90（原神 6.0 开放 95/100，但养成系统暂只支持到 90）
+        val characterLevel = (currentCharacterDetail?.base?.level ?: 1).coerceAtMost(90)
         val skillLevelMap = currentCharacterDetail?.skills?.associate {
             it.skill_id to it.level
         } ?: emptyMap()
 
-        //TODO 角色等级上限提升至100
+        // 命座为技能带来的加成：原神中 C2/4/6 每条各给某一项技能 +3 级
+        // 由于 API 不返回具体哪个技能被加成，我们从每个技能等级统一减 3
+        val hasSkillBoostConstellation =
+            currentCharacterDetail?.constellations?.any {
+                it.is_actived && (it.pos == 2 || it.pos == 4 || it.pos == 6)
+            } ?: false
+        val constellationSkillBonus = if (hasSkillBoostConstellation) 3 else 0
+
         val avatarMaxLevel = 90
         val skillMaxLevel = 10
 
@@ -246,7 +254,8 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         avatar.skillDepot.Skills.forEachIndexed { index, skill ->
             val name = if (index == 0) "普通攻击" else "元素战技"
             // skill_id 对应胡桃元数据中的 Id（技能本身），GroupId 是技能族
-            val actualLevel = skillLevelMap[skill.Id] ?: 1
+            val rawLevel = skillLevelMap[skill.Id] ?: 1
+            val actualLevel = (rawLevel - constellationSkillBonus).coerceAtLeast(1)
             cultivateConfigList += CultivateConfigData(
                 name = name,
                 iconUrl = skill.iconUrl,
@@ -258,7 +267,8 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         }
 
         val energySkill = avatar.skillDepot.EnergySkill
-        val energyActualLevel = skillLevelMap[energySkill.Id] ?: 1
+        val energyRawLevel = skillLevelMap[energySkill.Id] ?: 1
+        val energyActualLevel = (energyRawLevel - constellationSkillBonus).coerceAtLeast(1)
         cultivateConfigList += CultivateConfigData(
             name = "元素爆发",
             iconUrl = energySkill.iconUrl,

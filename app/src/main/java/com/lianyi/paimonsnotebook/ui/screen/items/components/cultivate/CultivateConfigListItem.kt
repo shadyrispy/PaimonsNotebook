@@ -31,10 +31,12 @@ fun CultivateConfigListItem(
                 .size(24.dp)
         )
 
+        // 防御：fromLevel 不能大于 maxLevel，否则 Slider 会因空 range 崩溃
+        val safeMax = maxOf(config.fromLevel, config.maxLevel)
         TextSliderRtL(
             value = config.sliderValue,
             onValueChange = config::setLevel,
-            range = (1f..config.maxLevel.toFloat()),
+            range = (config.fromLevel.toFloat()..safeMax.toFloat()),
             textContentPadding = PaddingValues(0.dp),
             textMinWidth = 90.dp,
             text = {
