@@ -2,9 +2,7 @@ package com.lianyi.paimonsnotebook.ui.theme
 
 import android.app.Activity
 import android.content.res.Configuration
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -19,12 +17,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.lianyi.paimonsnotebook.common.components.components.PaimonsNotebookNotificationComponents
 import com.lianyi.paimonsnotebook.common.components.components.SlideExitBox
-
-private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
-)
 
 private val LightColorPalette = lightColors(
     primary = colorPrimary,
@@ -47,14 +39,9 @@ fun PaimonsNotebookTheme(
     hideStatusBar: Boolean = false,
     hideNavigationBar: Boolean = false,
     lightStatusBar: Boolean = false,
-    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+    val colors = LightColorPalette
 
     val view = LocalView.current
     if (!view.isInEditMode) {
