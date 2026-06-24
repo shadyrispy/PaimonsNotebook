@@ -1,17 +1,11 @@
 package com.lianyi.paimonsnotebook.ui.theme
 
 import android.app.Activity
-import android.content.res.Configuration
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.unit.Density
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -71,34 +65,16 @@ fun PaimonsNotebookTheme(
         }
     }
 
-    //动态设置Density
-    val context = LocalContext.current
-    val fontScale = LocalDensity.current.fontScale
-    val displayMetrics = context.resources.displayMetrics
-    val widthPixels = displayMetrics.widthPixels
-
     MaterialTheme(
         colors = colors,
         typography = Typography,
         shapes = Shapes,
         content = {
-
-            //如果为横屏就将基础值设置为二倍
-            val baseDensity =
-                360f * if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE) 2 else 1
-
-            CompositionLocalProvider(
-                LocalDensity provides Density(
-                    density = widthPixels / baseDensity,
-                    fontScale = fontScale
-                )
-            ) {
-                PaimonsNotebookNotificationComponents()
-                if (activity != null) {
-                    SlideExitBox(activity = activity, content = content)
-                } else {
-                    content()
-                }
+            PaimonsNotebookNotificationComponents()
+            if (activity != null) {
+                SlideExitBox(activity = activity, content = content)
+            } else {
+                content()
             }
         }
     )
