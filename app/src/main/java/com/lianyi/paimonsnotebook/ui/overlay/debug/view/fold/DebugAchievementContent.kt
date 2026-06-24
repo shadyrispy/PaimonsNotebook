@@ -5,7 +5,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.extension.string.show
 import com.lianyi.paimonsnotebook.ui.screen.achievement.util.helper.AchievementHelper
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,7 @@ fun DebugAchievementContent() {
     Column {
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
-                PaimonsNotebookDatabase.database.achievementUserDao.deleteAllUser()
+                AchievementRepository.achievementUserDao.deleteAllUser()
                 launch(Dispatchers.Main) {
                     "成就数据已清空".show()
                 }
@@ -29,7 +29,7 @@ fun DebugAchievementContent() {
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
                 val selectedUserId =
-                    PaimonsNotebookDatabase.database.achievementUserDao.getSelectedUser()?.id
+                    AchievementRepository.achievementUserDao.getSelectedUser()?.id
                         ?: return@launch
 
                 val ids = mutableListOf<Int>()
@@ -48,10 +48,10 @@ fun DebugAchievementContent() {
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
                 val selectedUserId =
-                    PaimonsNotebookDatabase.database.achievementUserDao.getSelectedUser()?.id
+                    AchievementRepository.achievementUserDao.getSelectedUser()?.id
                         ?: return@launch
 
-                val currentAchievements = PaimonsNotebookDatabase.database.achievementsDao.getAchievementListByUserId(selectedUserId).first()
+                val currentAchievements = AchievementRepository.achievementsDao.getAchievementListByUserId(selectedUserId).first()
 
                 val tIds = currentAchievements
                         .map { it.id }

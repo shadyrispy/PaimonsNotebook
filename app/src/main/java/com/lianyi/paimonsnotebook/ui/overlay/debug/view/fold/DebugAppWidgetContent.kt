@@ -15,7 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.components.widget.InputTextFiled
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.entity.AppWidgetBinding
 import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetHelper
 import kotlinx.coroutines.CoroutineScope
@@ -44,7 +44,7 @@ fun DebugAppWidgetContent() {
     LaunchedEffect(showAppWidgetList) {
         if (showAppWidgetList) {
             withContext(Dispatchers.IO) {
-                PaimonsNotebookDatabase.database.appWidgetBindingDao.getAllAppWidgetBinding()
+                AppWidgetRepository.appWidgetBindingDao.getAllAppWidgetBinding()
                     .collect {
                         appWidgetList.clear()
                         appWidgetList += it
@@ -63,7 +63,7 @@ fun DebugAppWidgetContent() {
 //
 //            CoroutineScope(Dispatchers.IO).launch {
 //                val appwidgetBindingData =
-//                    PaimonsNotebookDatabase.database.appWidgetBindingDao.getAppWidgetBindingByAppWidgetId(
+//                    AppWidgetRepository.appWidgetBindingDao.getAppWidgetBindingByAppWidgetId(
 //                        id
 //                    )
 //

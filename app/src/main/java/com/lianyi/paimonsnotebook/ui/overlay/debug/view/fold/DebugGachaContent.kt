@@ -4,7 +4,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.GachaRepository
 import com.lianyi.paimonsnotebook.common.extension.data_store.editValue
 import com.lianyi.paimonsnotebook.common.extension.string.show
 import com.lianyi.paimonsnotebook.common.util.data_store.PreferenceKeys
@@ -17,7 +17,7 @@ fun DebugGachaContent() {
 
     Button(onClick = {
         CoroutineScope(Dispatchers.IO).launch {
-            PaimonsNotebookDatabase.database.gachaItemsDao.deleteAllGachaLogItem()
+            GachaRepository.gachaItemsDao.deleteAllGachaLogItem()
             PreferenceKeys.GachaRecordCurrentGameUid.editValue("")
             launch(Dispatchers.Main) {
                 "祈愿数据已清空".show()

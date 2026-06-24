@@ -5,7 +5,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.common.database.PaimonsNotebookDatabase
+import com.lianyi.paimonsnotebook.common.data.repository.CultivateRepository
 import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateProject
 import com.lianyi.paimonsnotebook.common.extension.string.show
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +17,7 @@ fun DebugCultivateProjectContent() {
     Column {
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
-                val c = PaimonsNotebookDatabase.database.cultivateProjectDao.deleteAll()
+                val c = CultivateRepository.cultivateProjectDao.deleteAll()
                 println("c = $c")
 
                 launch(Dispatchers.Main) {
@@ -29,7 +29,7 @@ fun DebugCultivateProjectContent() {
         }
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
-                val c = PaimonsNotebookDatabase.database.cultivateEntityDao.deleteAll()
+                val c = CultivateRepository.cultivateEntityDao.deleteAll()
                 println("c = $c")
 
                 launch(Dispatchers.Main) {
@@ -41,7 +41,7 @@ fun DebugCultivateProjectContent() {
         }
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
-                val c = PaimonsNotebookDatabase.database.cultivateItemsDao.deleteAll()
+                val c = CultivateRepository.cultivateItemsDao.deleteAll()
                 println("c = $c")
 
                 launch(Dispatchers.Main) {
@@ -53,7 +53,7 @@ fun DebugCultivateProjectContent() {
         }
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
-                val c = PaimonsNotebookDatabase.database.cultivateItemMaterialsDao.deleteAll()
+                val c = CultivateRepository.cultivateItemMaterialsDao.deleteAll()
                 println("c = $c")
 
                 launch(Dispatchers.Main) {
@@ -66,7 +66,7 @@ fun DebugCultivateProjectContent() {
 
         Button(onClick = {
             CoroutineScope(Dispatchers.IO).launch {
-                val c = PaimonsNotebookDatabase.database.cultivateProjectDao.insert(
+                val c = CultivateRepository.cultivateProjectDao.insert(
                     CultivateProject(
                         -100,
                         "测试养成计划",
