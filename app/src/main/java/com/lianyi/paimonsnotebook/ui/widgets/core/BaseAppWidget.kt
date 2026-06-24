@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
 import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.view.HoyolabWebActivity
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.view.AppWidgetConfigurationScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
@@ -76,7 +77,7 @@ open class BaseAppWidget : AppWidgetProvider() {
 
             //前往验证界面
             AppWidgetHelper.ACTION_GO_VALIDATE -> {
-                val mid = intent.getStringExtra("mid") ?: ""
+                val mid = intent.getStringExtra(Routes.EXTRA_MID) ?: ""
                 goValidateScreen(context, mid)
             }
         }
@@ -136,7 +137,7 @@ open class BaseAppWidget : AppWidgetProvider() {
     private fun goValidateScreen(context: Context, mid: String) {
         HomeHelper.goActivityByIntentNewTask {
             component = ComponentName(context, HoyolabWebActivity::class.java)
-            putExtra("mid", mid)
+            putExtra(Routes.EXTRA_MID, mid)
         }
     }
 

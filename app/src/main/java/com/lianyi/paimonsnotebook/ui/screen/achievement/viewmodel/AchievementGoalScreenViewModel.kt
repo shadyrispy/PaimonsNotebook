@@ -17,6 +17,7 @@ import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.extension.string.isEmptyObj
 import com.lianyi.paimonsnotebook.common.extension.string.notify
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.data_store.PreferenceKeys
 import com.lianyi.paimonsnotebook.common.util.data_store.dataStoreValues
 import com.lianyi.paimonsnotebook.common.util.enums.ViewModelAction
@@ -90,9 +91,9 @@ class AchievementGoalScreenViewModel : ViewModel() {
     var goalTotal = 0
 
     fun init(intent: Intent) {
-        val list = JSON.parseList<AchievementData>(intent.getStringExtra("list") ?: JSON.EMPTY_LIST)
+        val list = JSON.parseList<AchievementData>(intent.getStringExtra(Routes.EXTRA_LIST_JSON) ?: JSON.EMPTY_LIST)
 
-        val goalJson = intent.getStringExtra("goal") ?: JSON.EMPTY_OBJ
+        val goalJson = intent.getStringExtra(Routes.EXTRA_GOAL_JSON) ?: JSON.EMPTY_OBJ
         //判断列表与
         if (list.isEmpty() || goalJson.isEmptyObj()) {
             "没有可显示的数据".errorNotify()
@@ -107,7 +108,7 @@ class AchievementGoalScreenViewModel : ViewModel() {
         //此处一定不会为null
         goalOverviewData = JSON.parse<AchievementGoalOverviewData>(goalJson)
 
-        targetId = intent.getIntExtra("target_id", -1)
+        targetId = intent.getIntExtra(Routes.EXTRA_TARGET_ID, -1)
         achievementList += list
 
         //初始化完成数量

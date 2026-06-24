@@ -14,6 +14,7 @@ import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.scope.launchMain
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
 import com.lianyi.paimonsnotebook.common.util.json.JSON
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.achievement.AchievementData
@@ -203,10 +204,10 @@ class AchievementScreenViewModel : ViewModel() {
 
         HomeHelper.goActivityByIntentNewTask {
             setComponentName(AchievementGoalScreen::class.java)
-            putExtra("goal", JSON.stringify(goalOverviewData))
-            putExtra("target_id", targetId)
+            putExtra(Routes.EXTRA_GOAL_JSON, JSON.stringify(goalOverviewData))
+            putExtra(Routes.EXTRA_TARGET_ID, targetId)
 
-            putExtra("list", JSON.stringify(list))
+            putExtra(Routes.EXTRA_LIST_JSON, JSON.stringify(list))
         }
     }
 

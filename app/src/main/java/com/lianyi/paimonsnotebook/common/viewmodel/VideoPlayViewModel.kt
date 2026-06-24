@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.json.JSON
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
 
@@ -18,7 +19,7 @@ class VideoPlayViewModel : ViewModel() {
     var fullScreen by mutableStateOf(false)
 
     fun init(intent: Intent) {
-        val json = intent.getStringExtra("video_list")
+        val json = intent.getStringExtra(Routes.EXTRA_VIDEO_LIST_JSON)
         if(json.isNullOrBlank()){
             "播放列表为空".errorNotify()
             return

@@ -29,6 +29,7 @@ import com.lianyi.paimonsnotebook.common.data.repository.DiskCacheRepository
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.data.AppWidgetConfiguration
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.database.disk_cache.util.DiskCacheDataType
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.convert.TypeUnitConvert
 import com.lianyi.paimonsnotebook.common.util.image.PaimonsNotebookImageLoader
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.game_record.daily_note.DailyNoteData
@@ -137,7 +138,7 @@ open class BaseRemoteViews(
 
     protected fun getValidatePendingIntent(mid: String) =
         basePendingIntent(AppWidgetHelper.ACTION_GO_VALIDATE, bundle = Bundle().apply {
-            putString("mid", mid)
+            putString(Routes.EXTRA_MID, mid)
         })
 
     //加载网络图片至本地

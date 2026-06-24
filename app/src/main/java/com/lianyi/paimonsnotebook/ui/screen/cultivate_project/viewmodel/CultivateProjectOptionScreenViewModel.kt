@@ -17,6 +17,7 @@ import com.lianyi.paimonsnotebook.common.extension.scope.withContextMain
 import com.lianyi.paimonsnotebook.common.extension.string.notify
 import com.lianyi.paimonsnotebook.common.extension.string.show
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.data_store.PreferenceKeys
 import com.lianyi.paimonsnotebook.common.util.data_store.dataStoreValues
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.widgets.SettingsOptionSwitch
@@ -158,7 +159,7 @@ class CultivateProjectOptionScreenViewModel : ViewModel() {
     )
 
     fun init(intent: Intent?) {
-        showAddCultivateProjectDialog = intent?.getBooleanExtra("add", false) ?: false
+        showAddCultivateProjectDialog = intent?.getBooleanExtra(Routes.EXTRA_ADD_FLAG, false) ?: false
     }
 
     fun dismissConfirmDeleteCultivateProjectDialog() {

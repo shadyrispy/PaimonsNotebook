@@ -15,6 +15,7 @@ import androidx.core.text.HtmlCompat
 import coil.imageLoader
 import coil.request.ImageRequest
 import com.lianyi.paimonsnotebook.R
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.view.WebViewScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -84,7 +85,7 @@ fun setTextLinkOpenByWebView(
                                                 context,
                                                 WebViewScreen::class.java
                                             ).apply {
-                                                putExtra("url", url)
+                                                putExtra(Routes.EXTRA_URL, url)
                                             })
                                         }
                                     }, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)

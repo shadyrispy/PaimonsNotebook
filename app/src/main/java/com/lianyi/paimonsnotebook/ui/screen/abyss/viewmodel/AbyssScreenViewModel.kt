@@ -12,6 +12,7 @@ import com.lianyi.paimonsnotebook.common.data.hoyolab.user.UserAndUid
 import com.lianyi.paimonsnotebook.common.database.user.util.AccountHelper
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.common.service.AvatarService
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.common.service.MonsterService
@@ -212,7 +213,7 @@ class AbyssScreenViewModel : ViewModel() {
 
         HomeHelper.goActivityByIntentNewTask {
             setComponentName(HoyolabWebActivity::class.java)
-            putExtra("mid", currentUser?.userEntity?.mid ?: "")
+            putExtra(Routes.EXTRA_MID, currentUser?.userEntity?.mid ?: "")
         }
     }
 }

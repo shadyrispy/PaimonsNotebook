@@ -7,12 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import com.lianyi.paimonsnotebook.common.core.base.BaseActivity
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 class WebViewScreen : BaseActivity() {
 
     private val webUrl: String by lazy {
-        intent.getStringExtra("url") ?: "www.baidu.com"
+        intent.getStringExtra(Routes.EXTRA_URL) ?: "www.baidu.com"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

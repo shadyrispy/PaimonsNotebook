@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
 import com.lianyi.paimonsnotebook.common.util.json.JSON
 import com.lianyi.paimonsnotebook.common.view.HoyolabWebActivity
@@ -88,7 +89,7 @@ class PostDetailViewModel : ViewModel() {
     fun onClickVideo(vod: PostFullData.Post.Vod) {
         HomeHelper.goActivityByIntentNewTask {
             setComponentName(VideoPlayScreen::class.java)
-            putExtra("video_list", JSON.stringify(vod))
+            putExtra(Routes.EXTRA_VIDEO_LIST_JSON, JSON.stringify(vod))
         }
     }
 

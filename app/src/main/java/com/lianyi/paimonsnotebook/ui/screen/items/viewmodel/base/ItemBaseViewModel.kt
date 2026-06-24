@@ -18,6 +18,7 @@ import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.extension.string.notify
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.event.calculate.BatchCalculatePromotionDetail
@@ -331,7 +332,7 @@ open class ItemBaseViewModel<T>(private val observeCurrentItemState: Boolean = t
     fun goCultivateProjectOptionScreen() {
         HomeHelper.goActivityByIntentNewTask {
             setComponentName(CultivateProjectOptionScreen::class.java)
-            putExtra("add", true)
+            putExtra(Routes.EXTRA_ADD_FLAG, true)
         }
         dismissNoCultivateProjectNoticeDialog()
     }

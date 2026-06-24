@@ -14,6 +14,7 @@ import com.lianyi.paimonsnotebook.common.database.user.util.AccountHelper
 import com.lianyi.paimonsnotebook.common.extension.activity.setImmersionMode
 import com.lianyi.paimonsnotebook.common.extension.list.takeFirstIf
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
+import com.lianyi.paimonsnotebook.common.navigation.Routes
 import com.lianyi.paimonsnotebook.common.web.ApiEndpoints
 import com.lianyi.paimonsnotebook.common.web.bridge.MiHoYoJSInterface
 import com.lianyi.paimonsnotebook.common.web.bridge.setMiyouSheWebViewCookie
@@ -26,7 +27,7 @@ class HoyolabWebActivity : BaseActivity() {
         const val EXTRA_URL = "extra_url"
 
         //用户mid
-        const val EXTRA_MID = "mid"
+        const val EXTRA_MID = Routes.EXTRA_MID
 
         //是否在界面关闭时清理cookie
         const val EXTRA_CLEAN_COOKIE = "cleanCookie"
