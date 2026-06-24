@@ -29,7 +29,6 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.ReliquaryTy
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.reliquary.ReliquaryData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
-import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemSearchOptionHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.base.ItemBaseViewModel
 import com.lianyi.paimonsnotebook.ui.screen.player_character.view.PlayerCharacterDetailScreen
 
@@ -58,17 +57,6 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
 
     private val gameRecordClient by lazy {
         GameRecordClient()
-    }
-
-    val itemFilterViewModel by lazy {
-        ItemSearchOptionHelper.getPlayerCharacterItemFilterVieModel(
-            list = characterList.mapNotNull {
-                avatarService.avatarMap[it.id]
-            },
-            getCharacterListDataById = this::getCharacterListDataById
-        ).also {
-            it.showDetailView()
-        }
     }
 
     var showReliquarySetInfoPopupWindow by mutableStateOf(false)
@@ -223,14 +211,6 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         viewModelScope.launchIO {
             setCharacterDetail(item.id)
         }
-    }
-
-    override fun showListView() {
-        itemFilterViewModel.showListView()
-    }
-
-    override fun showDetailView() {
-        itemFilterViewModel.showDetailView()
     }
 
     override fun getItemDataContent(

@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.lazy.ContentSpacerLazyColumn
 import com.lianyi.paimonsnotebook.common.components.media.LazyBanner
-import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpacer
 import com.lianyi.core.ui.components.text.PrimaryText
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.database.disk_cache.util.DiskCacheDataType
@@ -50,9 +49,6 @@ internal fun HomeContent(
         )
 
         ContentSpacerLazyColumn(Modifier.fillMaxSize()) {
-            item {
-                StatusBarPaddingSpacer()
-            }
             //轮播图
             item {
                 LazyBanner(
@@ -94,7 +90,7 @@ internal fun HomeContent(
                     )
                 }
 
-                items(nearActivity, key = { it.content_id }) {
+                items(nearActivity, key = { "near_${it.content_id}_${it.recommend_id}" }) {
                     WebHomeNearActivity(
                         item = it,
                         diskCache = DiskCache(
@@ -122,7 +118,7 @@ internal fun HomeContent(
                 )
             }
 
-            items(noticeList, key = { it.post_id }) {
+            items(noticeList, key = { "notice_${it.post_id}" }) {
                 HomeEventNotice(
                     item = it,
                     modifier = Modifier

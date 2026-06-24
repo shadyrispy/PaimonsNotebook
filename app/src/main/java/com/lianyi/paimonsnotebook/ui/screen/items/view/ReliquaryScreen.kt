@@ -50,7 +50,7 @@ class ReliquaryScreen : BaseActivity() {
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
 
-                    items(viewModel.reliquarySetList, key = { it.SetId }) { reliquarySet ->
+                    items(viewModel.reliquarySetList, key = { "reliquary_${it.SetId}" }) { reliquarySet ->
                         Column(
                             modifier = Modifier
                                 .radius(RadiusMedium6)

@@ -71,6 +71,7 @@ class PlayerCharacterScreen : BaseActivity() {
                                 // 左: 账号切换
                                 Row(
                                     modifier = Modifier
+                                        .padding(end = 12.dp)
                                         .radius(RadiusMedium)
                                         .clickable {
                                             viewModel.showChooseGameRoleDialog()
