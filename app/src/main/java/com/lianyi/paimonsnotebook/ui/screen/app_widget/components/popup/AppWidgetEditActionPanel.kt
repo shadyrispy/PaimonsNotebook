@@ -119,7 +119,7 @@ fun BoxScope.AppWidgetEditActionPanel(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_close_fullscreen),
-                    contentDescription = null,
+                    contentDescription = "收起面板",
                     modifier = Modifier
                         .radius(4.dp)
                         .size(24.dp)
@@ -130,14 +130,14 @@ fun BoxScope.AppWidgetEditActionPanel(
                 )
                 NoRippleThemeProvides {
                     Icon(painter = painterResource(id = R.drawable.ic_arrow_left),
-                        contentDescription = null,
+                        contentDescription = "移至左侧",
                         modifier = Modifier
                             .size(24.dp)
                             .clickable {
                                 alignment = Alignment.TopStart
                             })
                     Icon(painter = painterResource(id = R.drawable.ic_arrow_right),
-                        contentDescription = null,
+                        contentDescription = "移至右侧",
                         modifier = Modifier
                             .size(24.dp)
                             .clickable {
@@ -146,13 +146,13 @@ fun BoxScope.AppWidgetEditActionPanel(
                 }
 
                 Icon(painter = painterResource(id = R.drawable.ic_border_outline),
-                    contentDescription = null,
+                    contentDescription = "边框",
                     modifier = Modifier
                         .size(24.dp)
                         .clickable {})
 
                 Icon(painter = painterResource(id = R.drawable.ic_save_outline),
-                    contentDescription = null,
+                    contentDescription = "保存",
                     modifier = Modifier
                         .size(24.dp)
                         .clickable {})
@@ -256,7 +256,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                 ) {
                     viewModel.alignButtons.forEach {
                         Icon(painter = painterResource(id = it.first),
-                            contentDescription = null,
+                            contentDescription = "对齐组件",
                             modifier = Modifier
                                 .radius(2.dp)
                                 .size(26.dp)
@@ -289,7 +289,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                                 else -> R.drawable.ic_lock_outline
                             }
                         ),
-                        contentDescription = null,
+                        contentDescription = "锁定或解锁组件",
                         modifier = Modifier
                             .radius(2.dp)
                             .size(20.dp)
@@ -323,7 +323,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                 ) {
                     viewModel.textStyleButtons.forEach {
                         Icon(painter = painterResource(id = it),
-                            contentDescription = null,
+                            contentDescription = "切换文本样式",
                             modifier = Modifier
                                 .radius(2.dp)
                                 .size(24.dp)
@@ -358,7 +358,7 @@ fun BoxScope.AppWidgetEditActionPanel(
 
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_url_1),
-                                contentDescription = null,
+                                contentDescription = "绑定字段",
                                 tint = if (item.enabled) Black else Primary,
                                 modifier = Modifier
                                     .radius(2.dp)
@@ -371,7 +371,7 @@ fun BoxScope.AppWidgetEditActionPanel(
 
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_delete),
-                                contentDescription = null,
+                                contentDescription = "删除绑定字段",
                                 tint = Black,
                                 modifier = Modifier
                                     .radius(2.dp)
@@ -425,7 +425,7 @@ fun BoxScope.AppWidgetEditActionPanel(
 
                 Row {
                     Image(painter = painterResource(id = R.drawable.bg_default_name_card),
-                        contentDescription = null,
+                        contentDescription = "选择图片",
                         modifier = Modifier
                             .radius(4.dp)
                             .size(36.dp)
@@ -530,7 +530,7 @@ fun BoxScope.AppWidgetEditActionPanel(
 
                 Row {
                     Image(painter = painterResource(id = R.drawable.bg_default_name_card),
-                        contentDescription = null,
+                        contentDescription = "选择背景图片",
                         modifier = Modifier
                             .radius(4.dp)
                             .size(36.dp)

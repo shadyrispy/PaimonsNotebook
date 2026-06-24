@@ -128,7 +128,7 @@ fun AccountItemV2(
                     if (user.isAvailable && !user.isSelected) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_user_circle_outline),
-                            contentDescription = null,
+                            contentDescription = "设为默认账号",
                             modifier = Modifier
                                 .radius(2.dp)
                                 .size(30.dp)
@@ -140,7 +140,7 @@ fun AccountItemV2(
 
                     Icon(
                         painter = painterResource(id = R.drawable.ic_cookie),
-                        contentDescription = null,
+                        contentDescription = "复制Cookie",
                         modifier = Modifier
                             .radius(2.dp)
                             .size(30.dp)
@@ -152,7 +152,7 @@ fun AccountItemV2(
                     if(user.isAvailable){
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_sync_circle),
-                            contentDescription = null,
+                            contentDescription = "刷新Cookie",
                             modifier = Modifier
                                 .radius(2.dp)
                                 .size(30.dp)
@@ -164,7 +164,7 @@ fun AccountItemV2(
 
                     Icon(
                         painter = painterResource(id = R.drawable.ic_delete),
-                        contentDescription = null,
+                        contentDescription = "删除账号",
                         modifier = Modifier
                             .radius(2.dp)
                             .size(30.dp)
