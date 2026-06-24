@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.core.ui.components.text.InfoText
+import com.lianyi.paimonsnotebook.common.database.user.util.AccountHelper
 import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.AchievementUser
 import com.lianyi.paimonsnotebook.common.extension.intent.setComponentName
@@ -27,7 +28,6 @@ import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.scope.launchMain
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.extension.string.notify
-import com.lianyi.paimonsnotebook.common.extension.string.show
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
 import com.lianyi.paimonsnotebook.common.util.file.FileHelper
 import com.lianyi.paimonsnotebook.common.util.metadata.genshin.uiaf.UIAFHelper
@@ -62,7 +62,24 @@ class AchievementOptionScreenViewModel : ViewModel() {
                 achievementUserDao.getUserListFlow().collect {
                     userList.clear()
                     userList += it
+
+                    // 如果没有成就用户，自动为当前账号UID创建
+                    if (it.isEmpty()) {
+                        ensureDefaultUser()
+                    }
                 }
+            }
+        }
+    }
+
+    private fun ensureDefaultUser() {
+        viewModelScope.launchIO {
+            val currentUser = AccountHelper.selectedUserFlow.value
+            val uid = currentUser?.getSelectedGameRole()?.game_uid
+            if (uid != null && !achievementUserDao.checkUserExistByName(uid)) {
+                val achievementUser = AchievementUser(name = uid, selected = 1)
+                achievementUserDao.add(achievementUser)
+                achievementUserDao.emitSelectedUserFlow()
             }
         }
     }
@@ -94,10 +111,6 @@ class AchievementOptionScreenViewModel : ViewModel() {
     var showSelectAchievementUserDialog by mutableStateOf(false)
         private set
 
-    //显示添加成就管理用户对话框
-    var showAddAchievementUserDialog by mutableStateOf(false)
-        private set
-
     private val importService by lazy {
         AchievementImportService()
     }
@@ -108,21 +121,14 @@ class AchievementOptionScreenViewModel : ViewModel() {
 
     val achievement = listOf(
         OptionListData(
-            name = "当前记录",
-            description = "显示指定记录的数据",
+            name = "当前账号",
+            description = "切换成就记录关联的账号",
             onClick = {
                 showSelectAchievementUserDialog = true
                 actionType = AchievementActionType.SetDefault
             },
             slot = {
                 Text(text = selectedUser?.name ?: "", fontSize = 14.sp, color = Primary_2)
-            }
-        ),
-        OptionListData(
-            name = "添加成就记录用户",
-            description = "添加一个成就记录用户,此用户只用于成就记录功能",
-            onClick = {
-                showAddAchievementUserDialog = true
             }
         ),
         OptionListData(
@@ -139,13 +145,6 @@ class AchievementOptionScreenViewModel : ViewModel() {
                 )
             }
         )
-//        OptionListData(
-//            name = "删除成就记录用户",
-//            description = "选中一个用户,删除该用户的全部记录,此操作不可逆,请谨慎操作",
-//            onClick = {
-//                showConfirmDeleteDialog = true
-//            }
-//        )
     )
 
     val importList = listOf(
@@ -161,11 +160,16 @@ class AchievementOptionScreenViewModel : ViewModel() {
     //当导入成就记录时
     private fun onImportAchievementUIAFJson() {
         if (userList.isEmpty()) {
-            "看来你还没有添加成就用户,添加一个成就用户以指定导入的目标".warnNotify(false)
-            return
+            // 自动为当前账号UID创建成就用户
+            viewModelScope.launchIO {
+                ensureDefaultUser()
+                launchMain {
+                    launchSelectJsonActivity()
+                }
+            }
+        } else {
+            launchSelectJsonActivity()
         }
-
-        launchSelectJsonActivity()
     }
 
     val exportList = listOf(
@@ -216,35 +220,6 @@ class AchievementOptionScreenViewModel : ViewModel() {
 
     fun onDialogDismissRequest() {
         showSelectAchievementUserDialog = false
-    }
-
-    fun createAchievementUser(name: String) {
-        if (name.isEmpty() || name.isBlank()) {
-            "请输入用户名称".show()
-            return
-        }
-
-        viewModelScope.launchIO {
-            if (achievementUserDao.checkUserExistByName(name)) {
-                launchMain {
-                    "${name}已存在,请选择其他名称".show()
-                }
-                return@launchIO
-            }
-
-            //如果当前选中用户为空,则将当前用户添加为选中用户
-            val selected = if (selectedUser == null) 1 else 0
-
-            val achievementUser = AchievementUser(name = name, selected = selected)
-            achievementUserDao.add(achievementUser)
-
-            showAddAchievementUserDialog = false
-            "成就记录用户添加成功".notify()
-        }
-    }
-
-    fun onAddAchievementDialogDismissRequest() {
-        this.showAddAchievementUserDialog = false
     }
 
     private fun launchSelectJsonActivity() {

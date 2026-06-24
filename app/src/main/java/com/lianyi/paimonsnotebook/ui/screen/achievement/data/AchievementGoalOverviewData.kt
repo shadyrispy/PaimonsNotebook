@@ -6,5 +6,7 @@ data class AchievementGoalOverviewData(
     val goal: AchievementGoalData,
     val userId: Int,
     val finishCount: Int,
-    val total: Int
+    val total: Int,
+    val totalPrimogems: Int = 0,
+    val earnedPrimogems: Int = 0
 )

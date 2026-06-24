@@ -117,11 +117,9 @@ class AchievementScreen : BaseActivity() {
                     Spacer(modifier = Modifier.height(36.dp))
                 }
 
-                //当显示详情信息的时候在顶部添加一个空占位
-                if (viewModel.showDetailInfo) {
-                    item {
-                        Spacer(modifier = Modifier.height(64.dp))
-                    }
+                //顶部占位
+                item {
+                    Spacer(modifier = Modifier.height(64.dp))
                 }
 
                 items(viewModel.achievementGoalList, key = { it.goal.id }) { item ->
@@ -151,7 +149,7 @@ class AchievementScreen : BaseActivity() {
 
                             Spacer(modifier = Modifier.width(12.dp))
 
-                            Column {
+                            Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = item.goal.name,
                                     fontSize = 12.sp,
@@ -162,6 +160,20 @@ class AchievementScreen : BaseActivity() {
 
                                 com.lianyi.core.ui.components.text.InfoText(
                                     text = "${item.finishCount}/${item.total}",
+                                    fontSize = 10.sp
+                                )
+                            }
+
+                            // 原石统计
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.icon_gemstone),
+                                    contentDescription = "原石",
+                                    modifier = Modifier.size(12.dp)
+                                )
+                                Spacer(modifier = Modifier.width(2.dp))
+                                com.lianyi.core.ui.components.text.InfoText(
+                                    text = "${item.earnedPrimogems}/${item.totalPrimogems}",
                                     fontSize = 10.sp
                                 )
                             }
@@ -193,11 +205,9 @@ class AchievementScreen : BaseActivity() {
                         Spacer(modifier = Modifier.height(36.dp))
                     }
 
-                    //当显示详情信息的时候在顶部添加一个空占位
-                    if (viewModel.showDetailInfo) {
-                        item {
-                            Spacer(modifier = Modifier.height(64.dp))
-                        }
+                    //顶部占位
+                    item {
+                        Spacer(modifier = Modifier.height(64.dp))
                     }
 
                     if (viewModel.resultList.isEmpty()) {
@@ -261,11 +271,6 @@ class AchievementScreen : BaseActivity() {
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
 
-                    BlurButton(
-                        resId = R.drawable.ic_star_cup,
-                        onClick = viewModel::toggleDetailInfo
-                    )
-
                     InputTextFiled(
                         value = viewModel.inputTextValue,
                         onValueChange = viewModel::onInputTextValueChange,
@@ -294,8 +299,7 @@ class AchievementScreen : BaseActivity() {
                 }
 
                 //成就详情
-                AnimatedVisibility(visible = viewModel.showDetailInfo) {
-                    Column(
+                Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(64.dp)
@@ -338,11 +342,29 @@ class AchievementScreen : BaseActivity() {
                                 fontWeight = FontWeight.SemiBold
                             )
 
-                            Text(
-                                text = "${viewModel.achievementFinishCount}/${viewModel.achievementsCount}",
-                                fontSize = 16.sp,
-                                color = Font_Normal
-                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    text = "${viewModel.achievementFinishCount}/${viewModel.achievementsCount}",
+                                    fontSize = 16.sp,
+                                    color = Font_Normal
+                                )
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                Image(
+                                    painter = painterResource(id = R.drawable.icon_gemstone),
+                                    contentDescription = "原石",
+                                    modifier = Modifier.size(12.dp)
+                                )
+
+                                Spacer(modifier = Modifier.width(2.dp))
+
+                                Text(
+                                    text = "${viewModel.earnedPrimogems}/${viewModel.totalPrimogems}",
+                                    fontSize = 12.sp,
+                                    color = Font_Normal
+                                )
+                            }
                         }
 
                         LinearProgressIndicator(
@@ -356,7 +378,6 @@ class AchievementScreen : BaseActivity() {
                         )
 
                     }
-                }
             }
         }
     }

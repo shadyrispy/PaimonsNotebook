@@ -16,7 +16,6 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
-import com.lianyi.paimonsnotebook.common.components.dialog.InputDialog
 import com.lianyi.paimonsnotebook.common.components.dialog.LazyColumnDialog
 import com.lianyi.paimonsnotebook.common.components.dialog.LoadingDialog
 import com.lianyi.paimonsnotebook.common.components.dialog.PropertiesDialog
@@ -83,16 +82,6 @@ class AchievementOptionScreen : BaseActivity() {
                         }, onClickButton = {
                             viewModel.onDialogDismissRequest()
                         }
-                    )
-                }
-
-                if (viewModel.showAddAchievementUserDialog) {
-                    InputDialog(
-                        title = "添加成就记录用户",
-                        placeholder = "请输入用户名称(名称不可重复)",
-                        onConfirm = viewModel::createAchievementUser,
-                        onCancel = viewModel::onAddAchievementDialogDismissRequest,
-                        textMaxLength = 10
                     )
                 }
 

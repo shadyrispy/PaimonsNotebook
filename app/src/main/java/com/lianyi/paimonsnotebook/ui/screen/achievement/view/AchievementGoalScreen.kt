@@ -2,7 +2,6 @@ package com.lianyi.paimonsnotebook.ui.screen.achievement.view
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -49,7 +48,11 @@ import com.lianyi.paimonsnotebook.ui.screen.achievement.components.achievement.A
 import com.lianyi.paimonsnotebook.ui.screen.achievement.util.enums.AchievementEditActionType
 import com.lianyi.paimonsnotebook.ui.screen.achievement.viewmodel.AchievementGoalScreenViewModel
 import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.Font_Normal
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.core.ui.theme.Success
 import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
@@ -168,6 +171,22 @@ class AchievementGoalScreen : BaseActivity() {
                                     .fillMaxWidth()
                                     .height(4.dp)
                             )
+
+                            Spacer(modifier = Modifier.height(6.dp))
+
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.icon_gemstone),
+                                    contentDescription = "原石",
+                                    modifier = Modifier.size(12.dp)
+                                )
+                                Spacer(modifier = Modifier.width(2.dp))
+                                Text(
+                                    text = "${viewModel.goalEarnedPrimogems} / ${viewModel.goalTotalPrimogems}",
+                                    fontSize = 11.sp,
+                                    color = Font_Normal
+                                )
+                            }
                         }
                     }
                 ) {
@@ -181,7 +200,8 @@ class AchievementGoalScreen : BaseActivity() {
                     ) {
 
                         items(viewModel.achievementList, key = { it.id }) { item ->
-                            Column(
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
                                     .padding(vertical = 4.dp)
                                     .radius(RadiusLarge)
@@ -190,78 +210,98 @@ class AchievementGoalScreen : BaseActivity() {
                                     .clickable {
                                         viewModel.onClickItem(item)
                                     }
-                                    .padding(12.dp)
+                                    .padding(10.dp)
                             ) {
-                                //成就item基本信息
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
+                                // 完成状态 ✓
+                                if (viewModel.getItemStatus(item)) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_checkmark_circle_full),
+                                        contentDescription = "已完成",
+                                        modifier = Modifier.size(22.dp),
+                                        tint = Success
+                                    )
+                                } else {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_circle_empty),
+                                        contentDescription = "未完成",
+                                        modifier = Modifier.size(22.dp),
+                                        tint = Font_Normal
+                                    )
+                                }
 
-                                    Column(modifier = Modifier.weight(1f)) {
+                                Spacer(modifier = Modifier.width(6.dp))
+
+                                Column(
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    // 第一行：原石 + 标题+版本 + 完成时间
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        // 原石
+                                        Image(
+                                            painter = painterResource(id = R.drawable.icon_gemstone),
+                                            contentDescription = "原石",
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(2.dp))
                                         Text(
-                                            text = item.title,
-                                            fontSize = 12.sp,
-                                            fontWeight = FontWeight.SemiBold
+                                            text = "${item.finishReward.Count}",
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Medium
                                         )
 
                                         Spacer(modifier = Modifier.width(8.dp))
 
-                                        com.lianyi.core.ui.components.text.InfoText(
-                                            text = item.description,
-                                            fontSize = 10.sp
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.width(4.dp))
-
-                                    //TODO 此处未来可能出现奖励不为原石的情况,可能需要额外适配
-                                    Column(
-                                        modifier = Modifier.width(24.dp),
-                                        horizontalAlignment = Alignment.CenterHorizontally
-                                    ) {
-                                        Image(
-                                            painter = painterResource(id = R.drawable.icon_gemstone),
-                                            contentDescription = "原石奖励",
-                                            modifier = Modifier.size(20.dp)
-                                        )
-
-                                        com.lianyi.core.ui.components.text.InfoText(
-                                            text = "${item.finishReward.Count}",
-                                            fontSize = 10.sp
-                                        )
-                                    }
-                                }
-
-                                //完成状态下显示的信息
-                                AnimatedVisibility(visible = viewModel.getItemStatus(item)) {
-
-                                    val entity = remember {
-                                        viewModel.getAchievementEntity(item.id)
-                                    }
-
-                                    Column {
-                                        Spacer(modifier = Modifier.height(8.dp))
-
+                                        // 标题 + 版本号
                                         Row(
-                                            modifier = Modifier.fillMaxWidth(),
-                                            horizontalArrangement = Arrangement.SpaceBetween,
-                                            verticalAlignment = Alignment.Bottom
+                                            verticalAlignment = Alignment.Top,
+                                            modifier = Modifier.weight(1f)
                                         ) {
-                                            com.lianyi.core.ui.components.text.InfoText(
-                                                text = "完成于 ${TimeHelper.getTime(entity?.timestamp ?: 0)}",
-                                                fontSize = 10.sp
+                                            Text(
+                                                text = item.title,
+                                                fontSize = 12.sp,
+                                                fontWeight = FontWeight.SemiBold,
+                                                modifier = Modifier.weight(1f, fill = false)
                                             )
+                                            Text(
+                                                text = "v${item.version}",
+                                                fontSize = 9.sp,
+                                                color = Font_Normal
+                                            )
+                                        }
 
-                                            Icon(
-                                                painter = painterResource(id = R.drawable.ic_checkmark_circle_full),
-                                                contentDescription = "已完成",
-                                                modifier = Modifier.size(20.dp),
-                                                tint = Success
+                                        // 完成时间（仅完成时）
+                                        if (viewModel.getItemStatus(item)) {
+                                            val entity = remember {
+                                                viewModel.getAchievementEntity(item.id)
+                                            }
+                                            Text(
+                                                text = TimeHelper.getTime(entity?.timestamp ?: 0),
+                                                fontSize = 10.sp,
+                                                color = Font_Normal
                                             )
                                         }
                                     }
+
+                                    // 第二行：描述
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(start = 6.dp)
+                                    ) {
+                                    // 成就描述
+                                    Text(
+                                        text = item.description,
+                                        fontSize = 10.sp,
+                                        color = Font_Normal,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        modifier = Modifier.weight(1f)
+                                    )
+                                }
                                 }
                             }
                         }

@@ -4,13 +4,11 @@ import androidx.sqlite.db.SupportSQLiteStatement
 import com.google.gson.stream.JsonReader
 import com.lianyi.paimonsnotebook.common.data.repository.AchievementRepository
 import com.lianyi.paimonsnotebook.common.database.achievement.entity.Achievements
-import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.common.util.json.JsonReaderHelper
 import com.lianyi.paimonsnotebook.common.util.metadata.genshin.uiaf.UIAFHelper
 import com.lianyi.paimonsnotebook.ui.screen.achievement.data.UIAFJsonData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.InputStreamReader
@@ -105,8 +103,6 @@ class AchievementImportService {
     ) {
         try {
             withContext(Dispatchers.IO) {
-
-                //注释具体参考UIGF Import Service
                 if (cacheUIAFInfo == null) {
                     tryGetUIAFJsonInfo(file)
                 }
@@ -117,30 +113,16 @@ class AchievementImportService {
 
                 val reader = JsonReader(InputStreamReader(file.inputStream()))
 
-                var objectEnd = false
-
                 JsonReaderHelper.getJsonReaderSingleFieldValue(
                     reader, "list",
                     onFound = {
-                        launchIO {
-                            saveUIAFJsonList(reader, userId)
-
-                            while (!objectEnd) {
-                                delay(1000)
-                            }
-                            it.close()
-                        }
+                        saveUIAFJsonList(reader, userId)
                     },
                     onNotFound = {
                         error("没有找到list字段")
                     },
-                    autoClose = false,
-                    onObjectEnd = {
-                        objectEnd = true
-                    }
+                    autoClose = true
                 )
-
-                reader.close()
             }
         } catch (e: Exception) {
             "发生了异常:${e.message}".errorNotify()
@@ -218,7 +200,6 @@ class AchievementImportService {
             }
 
             list.clear()
-            close()
         }
     }
 

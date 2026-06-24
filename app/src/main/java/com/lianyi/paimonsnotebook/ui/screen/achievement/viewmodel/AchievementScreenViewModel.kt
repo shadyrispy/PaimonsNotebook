@@ -71,6 +71,14 @@ class AchievementScreenViewModel : ViewModel() {
     var achievementGoalCount = 0
         private set
 
+    //原石总数
+    var totalPrimogems = 0
+        private set
+
+    //已领取原石数
+    var earnedPrimogems = 0
+        private set
+
     init {
         //当选中的用户更改时更新数据
         viewModelScope.launchIO {
@@ -117,13 +125,21 @@ class AchievementScreenViewModel : ViewModel() {
 
     var resultList = mutableStateListOf<AchievementData>()
 
+    //防止重复更新
+    private var isUpdating = false
+
     //更新列表
     private fun updateList() {
+        if (isUpdating) return
+        isUpdating = true
+
         loadingState = LoadingState.Loading
         //记录值归零
         achievementFinishCount = 0
         achievementGoalFinishCount = 0
         processPercent = 0f
+        totalPrimogems = 0
+        earnedPrimogems = 0
 
         viewModelScope.launchIO {
             achievementListGoalMap.clear()
@@ -137,13 +153,22 @@ class AchievementScreenViewModel : ViewModel() {
 
             val userId = selectedUser?.id ?: -1
 
+            // 一次查询该用户所有已完成成就的ID集合（分片处理SQLite 999参数限制）
+            val allIds = mAchievementList.map { it.id }
+            val finishedAchievements = if (allIds.isNotEmpty() && userId != -1) {
+                allIds.chunked(900).flatMap { chunk ->
+                    achievementsDao.getAchievementListByUserIdAndIds(userId, chunk).map { it.id }
+                }.toSet()
+            } else {
+                emptySet()
+            }
+
             val mAchievementGoalList =
                 achievementService.achievementGoalList.map { goalData ->
 
                     val list = achievementListGoalMap[goalData.id] ?: listOf()
 
-                    val finishCount =
-                        AchievementHelper.getAchievementsFinishCountByList(userId, list)
+                    val finishCount = list.count { finishedAchievements.contains(it.id) }
                     val goalCount = list.size
 
                     //更新成就专辑完成个数
@@ -153,11 +178,19 @@ class AchievementScreenViewModel : ViewModel() {
 
                     achievementFinishCount += finishCount
 
+                    // 计算原石统计
+                    val goalPrimogems = list.sumOf { it.finishReward.Count }
+                    val goalEarnedPrimogems = list.filter { finishedAchievements.contains(it.id) }.sumOf { it.finishReward.Count }
+                    totalPrimogems += goalPrimogems
+                    earnedPrimogems += goalEarnedPrimogems
+
                     AchievementGoalOverviewData(
                         goal = goalData,
                         userId = userId,
                         finishCount = finishCount,
-                        total = goalCount
+                        total = goalCount,
+                        totalPrimogems = goalPrimogems,
+                        earnedPrimogems = goalEarnedPrimogems
                     )
                 }.sortedBy {
                     it.goal.order
@@ -181,6 +214,8 @@ class AchievementScreenViewModel : ViewModel() {
             } else {
                 LoadingState.Success
             }
+
+            isUpdating = false
         }
     }
 

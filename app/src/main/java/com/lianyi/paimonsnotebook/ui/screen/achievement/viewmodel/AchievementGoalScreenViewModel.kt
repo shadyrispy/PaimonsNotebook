@@ -90,6 +90,12 @@ class AchievementGoalScreenViewModel : ViewModel() {
     //分类总数
     var goalTotal = 0
 
+    //分类原石总数
+    var goalTotalPrimogems by mutableIntStateOf(0)
+
+    //分类已领取原石
+    var goalEarnedPrimogems by mutableIntStateOf(0)
+
     fun init(intent: Intent) {
         val list = JSON.parseList<AchievementData>(intent.getStringExtra(Routes.EXTRA_LIST_JSON) ?: JSON.EMPTY_LIST)
 
@@ -129,7 +135,15 @@ class AchievementGoalScreenViewModel : ViewModel() {
             //设置成就完成的数量
             goalFinishCount = finishAchievementIdMap.values.size
 
-            switchSortType()
+            //默认未完成成就排在前面（null排前面，有current值的排后面）
+            achievementList.sortBy { getAchievementEntity(it.id)?.current }
+
+            // 计算原石总数
+            goalTotalPrimogems = achievementList.sumOf { it.finishReward.Count }
+            // 计算已领取原石
+            goalEarnedPrimogems = achievementList
+                .filter { finishAchievementIdMap.containsKey(it.id) }
+                .sumOf { it.finishReward.Count }
         }
 
         //当传入了Id,使列表滚动到此处
@@ -151,12 +165,14 @@ class AchievementGoalScreenViewModel : ViewModel() {
             finishAchievementIdMap[achievementData.id] =
                 if (mapValue == null) {
                     goalFinishCount++
+                    goalEarnedPrimogems += achievementData.finishReward.Count
                     val achievements = achievementData.toDatabaseEntity(goalOverviewData!!.userId)
 
                     achievementsDao.insert(achievements)
                     achievements
                 } else {
                     goalFinishCount--
+                    goalEarnedPrimogems -= achievementData.finishReward.Count
                     achievementsDao.delete(mapValue)
                     null
                 }
