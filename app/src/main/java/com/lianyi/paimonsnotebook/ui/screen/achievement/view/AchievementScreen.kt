@@ -59,6 +59,8 @@ import com.lianyi.core.ui.theme.Font_Primary
 import com.lianyi.core.ui.theme.GachaStar5Color
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.core.ui.theme.White_40
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 class AchievementScreen : BaseActivity() {
 
     private val viewModel by lazy {
@@ -126,7 +128,7 @@ class AchievementScreen : BaseActivity() {
                     Column(
                         modifier = Modifier
                             .padding(vertical = 4.dp)
-                            .radius(8.dp)
+                            .radius(RadiusLarge)
                             .fillMaxWidth()
                             .background(CardBackGroundColor_Light_1)
                             .clickable {
@@ -220,7 +222,7 @@ class AchievementScreen : BaseActivity() {
                     //结果数据列表
                     items(viewModel.resultList, key = { it.id }) { item ->
                         Column(modifier = Modifier
-                            .radius(2.dp)
+                            .radius(RadiusSmall)
                             .fillMaxWidth()
                             .clickable {
                                 viewModel.onClickSearchResultItem(item)

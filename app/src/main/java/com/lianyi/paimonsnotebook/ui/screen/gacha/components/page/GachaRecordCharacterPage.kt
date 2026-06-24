@@ -28,6 +28,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconC
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.list_card.ItemListCard
 import com.lianyi.core.ui.theme.Black_30
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CharacterPage(
@@ -48,7 +49,7 @@ fun CharacterPage(
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     pair.second.forEach { item ->
-                        Box(modifier = Modifier.radius(4.dp)) {
+                        Box(modifier = Modifier.radius(RadiusMedium)) {
                             ItemIconCard(url = item.first.iconUrl, star = item.first.rankType)
 
                             Text(

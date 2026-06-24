@@ -19,13 +19,14 @@ import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 @Composable
 fun ErrorRemoteViewsPreview(
     content:String = ""
 ) {
     Row(
         modifier = Modifier
-            .radius(8.dp)
+            .radius(RadiusLarge)
             .background(White)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,

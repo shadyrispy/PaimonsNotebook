@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 
 
 @Composable
@@ -20,7 +21,7 @@ internal fun BlurButton(
         painter = painterResource(id = resId),
         contentDescription = "操作按钮",
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .size(36.dp)
             .clickable {
                 onClick.invoke()

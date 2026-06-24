@@ -18,6 +18,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.paimonsnotebook.ui.theme.Primary_7
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 @Composable
 internal fun HomeDailyNoteCard(
     item: DailyNote,
@@ -43,7 +44,7 @@ internal fun HomeDailyNoteCard(
         ) {
             Column(
                 modifier = Modifier
-                    .radius(8.dp)
+                    .radius(RadiusLarge)
                     .size(152.dp)
                     .background(White),
                 horizontalAlignment = Alignment.CenterHorizontally,

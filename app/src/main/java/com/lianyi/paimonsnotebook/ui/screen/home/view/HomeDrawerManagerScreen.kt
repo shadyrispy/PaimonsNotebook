@@ -43,6 +43,7 @@ import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 
 class HomeDrawerManagerScreen : BaseActivity() {
 
@@ -127,7 +128,7 @@ class HomeDrawerManagerScreen : BaseActivity() {
                                                 } else Modifier.animateItemPlacement()
                                             }
                                     )
-                                    .radius(8.dp)
+                                    .radius(RadiusLarge)
                                     .fillMaxWidth()
                                     .background(CardBackGroundColor_Light_1)
                                     .clickable {

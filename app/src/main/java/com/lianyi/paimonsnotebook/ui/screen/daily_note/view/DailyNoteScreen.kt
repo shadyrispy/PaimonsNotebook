@@ -49,6 +49,7 @@ import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 class DailyNoteScreen : ComponentActivity() {
 
@@ -96,7 +97,7 @@ class DailyNoteScreen : ComponentActivity() {
                                 tint = Black,
                                 modifier = Modifier
                                     .size(30.dp)
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .clickable {
                                         viewModel.goHoyolabActivity()
                                     })

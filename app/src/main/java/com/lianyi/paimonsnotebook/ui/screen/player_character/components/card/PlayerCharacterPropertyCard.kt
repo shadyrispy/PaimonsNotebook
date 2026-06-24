@@ -19,6 +19,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.game_record.character.CharacterDetailData
 import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.item.PlayerCharacterPropertyItem
 import com.lianyi.core.ui.theme.White_40
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium6
 @Composable
 fun PlayerCharacterPropertyCard(
     propertyList: List<CharacterDetailData.Property>,
@@ -30,7 +31,7 @@ fun PlayerCharacterPropertyCard(
 
     Column(
         modifier = Modifier
-            .radius(6.dp)
+            .radius(RadiusMedium6)
             .fillMaxWidth()
             .background(White_40)
             .clickable {

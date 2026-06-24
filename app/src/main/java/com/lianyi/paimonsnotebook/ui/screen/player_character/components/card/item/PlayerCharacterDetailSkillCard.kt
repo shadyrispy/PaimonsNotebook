@@ -28,6 +28,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.avatar.AvatarData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.conveter.SkillIconConverter
 import com.lianyi.core.ui.theme.White_40
 import com.lianyi.core.ui.theme.White_70
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun PlayerCharacterDetailTalentCard(
     talents: List<AvatarData.Talent>,
@@ -46,7 +47,7 @@ fun PlayerCharacterDetailTalentCard(
 
     Column(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .fillMaxWidth()
             .background(backgroundColor)
             .padding(6.dp),
@@ -128,7 +129,7 @@ fun PlayerCharacterDetailSkillCard(
 
     Column(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .fillMaxWidth()
             .background(backgroundColor)
             .padding(6.dp),
@@ -219,7 +220,7 @@ fun PlayerCharacterDetailSkillCard(
                 proudDescList.forEach { pair ->
                     Row(
                         modifier = Modifier
-                            .radius(4.dp)
+                            .radius(RadiusMedium)
                             .fillMaxWidth()
                             .background(White_40)
                             .padding(4.dp),

@@ -45,6 +45,8 @@ import com.lianyi.core.ui.theme.Black_60
 import com.lianyi.core.ui.theme.GachaStar4Color2
 import com.lianyi.core.ui.theme.GachaStar5Color
 import com.lianyi.paimonsnotebook.ui.theme.Primary
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -81,7 +83,7 @@ fun GachaRecordCard(
                         contentDescription = "祈愿记录详情",
                         tint = Black_60,
                         modifier = Modifier
-                            .radius(2.dp)
+                            .radius(RadiusSmall)
                             .size(24.dp)
                             .clickable {
                                 item.cardDisplayState = when (item.cardDisplayState) {
@@ -127,7 +129,7 @@ fun GachaRecordCard(
                                 NetworkImageForMetadata(
                                     url = item.iconUrl,
                                     modifier = Modifier
-                                        .radius(4.dp)
+                                        .radius(RadiusMedium)
                                         .size(40.dp)
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))

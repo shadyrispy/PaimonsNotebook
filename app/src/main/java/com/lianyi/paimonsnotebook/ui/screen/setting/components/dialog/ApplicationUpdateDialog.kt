@@ -32,6 +32,7 @@ import com.lianyi.paimonsnotebook.ui.screen.setting.util.UpdateService
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.ElementGrassColor
 import com.lianyi.core.ui.theme.Primary_9
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun ApplicationUpdateDialog(
     downloadState: DownloadState,
@@ -121,7 +122,7 @@ fun ApplicationUpdateDialog(
                                         Text(
                                             text = it,
                                             modifier = Modifier
-                                                .radius(2.dp)
+                                                .radius(RadiusSmall)
                                                 .fillMaxWidth()
                                                 .background(Primary_9)
                                                 .clickable {

@@ -31,6 +31,8 @@ import com.lianyi.paimonsnotebook.ui.screen.app_widget.viewmodel.AppWidgetEditSc
 import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 class AppWidgetEditScreen : BaseActivity(
     enableSensor = false,
     initOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -69,7 +71,7 @@ class AppWidgetEditScreen : BaseActivity(
 
                     Box(
                         modifier = Modifier
-                            .radius(8.dp)
+                            .radius(RadiusLarge)
                             .size(160.dp, 80.dp)
                             .background(White)
                             .align(Alignment.Center)
@@ -92,7 +94,7 @@ class AppWidgetEditScreen : BaseActivity(
                             painter = painterResource(id = R.drawable.ic_circle_empty),
                             contentDescription = "组件操作",
                             modifier = Modifier
-                                .radius(4.dp)
+                                .radius(RadiusMedium)
                                 .size(24.dp)
                                 .clickable {
                                     focusManager.clearFocus()

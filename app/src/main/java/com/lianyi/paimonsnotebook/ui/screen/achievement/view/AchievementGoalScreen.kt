@@ -52,6 +52,7 @@ import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.core.ui.theme.Success
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 class AchievementGoalScreen : BaseActivity() {
 
     private val viewModel by lazy {
@@ -183,7 +184,7 @@ class AchievementGoalScreen : BaseActivity() {
                             Column(
                                 modifier = Modifier
                                     .padding(vertical = 4.dp)
-                                    .radius(8.dp)
+                                    .radius(RadiusLarge)
                                     .fillMaxWidth()
                                     .background(CardBackGroundColor_Light_1)
                                     .clickable {

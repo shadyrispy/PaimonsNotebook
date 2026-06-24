@@ -24,6 +24,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.GachaStar5Color
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun CultivateConfigHeaderSlot(
     iconUrl: String,
@@ -39,7 +40,7 @@ fun CultivateConfigHeaderSlot(
         NetworkImageForMetadata(
             url = iconUrl,
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .size(60.dp),
             contentScale = ContentScale.FillWidth,
             alignment = BiasAlignment(0f, -0.4f)

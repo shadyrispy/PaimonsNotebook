@@ -24,6 +24,7 @@ import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Info
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun GameUserBindPreview(
     user: User?,
@@ -31,7 +32,7 @@ internal fun GameUserBindPreview(
 ) {
     Row(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .fillMaxWidth()
             .clickable {
                 onClick.invoke()

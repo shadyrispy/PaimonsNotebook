@@ -40,6 +40,7 @@ import com.lianyi.core.ui.theme.White
 import com.lianyi.core.ui.theme.White_30
 import com.lianyi.core.ui.theme.White_40
 import com.lianyi.core.ui.theme.White_70
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun PlayerCharacterDetailWeaponCard(
     weaponData: WeaponData,
@@ -55,7 +56,7 @@ fun PlayerCharacterDetailWeaponCard(
 
     Column(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .background(backgroundColor)
             .then(
                 if (clickable) {

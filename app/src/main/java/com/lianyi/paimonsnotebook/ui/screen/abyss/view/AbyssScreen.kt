@@ -28,6 +28,7 @@ import com.lianyi.paimonsnotebook.ui.screen.abyss.components.page.AbyssRecordPag
 import com.lianyi.paimonsnotebook.ui.screen.abyss.viewmodel.AbyssScreenViewModel
 import com.lianyi.paimonsnotebook.ui.screen.account.components.dialog.UserGameRolesDialog
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 class AbyssScreen : BaseActivity() {
     private val viewModel by lazy {
@@ -50,7 +51,7 @@ class AbyssScreen : BaseActivity() {
 
                             Row(
                                 modifier = Modifier
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .clickable {
                                         viewModel.showUserGameRoleDialog()
                                     },

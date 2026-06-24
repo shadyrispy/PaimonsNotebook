@@ -41,6 +41,8 @@ import com.lianyi.core.ui.theme.GachaStar5Color
 import com.lianyi.core.ui.theme.GachaStar5Color2
 import com.lianyi.core.ui.theme.White_40
 import com.lianyi.core.ui.theme.White_70
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium6
 @Composable
 fun PlayerCharacterRelicCard(
     relicList: List<CharacterDetailData.Relic>,
@@ -63,7 +65,7 @@ fun PlayerCharacterRelicCard(
 
     Column(
         modifier = Modifier
-            .radius(6.dp)
+            .radius(RadiusMedium6)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -77,7 +79,7 @@ fun PlayerCharacterRelicCard(
 
                     Column(
                         modifier = Modifier
-                            .radius(6.dp)
+                            .radius(RadiusMedium6)
                             .weight(1f)
                             .background(White_40)
                             .padding(6.dp),
@@ -88,7 +90,7 @@ fun PlayerCharacterRelicCard(
                             var offset = Offset.Zero
                             Box(
                                 modifier = Modifier
-                                    .radius(4.dp)
+                                    .radius(RadiusMedium)
                                     .clickable {
                                         onClickRelicIcon.invoke(reliquaryData, size, offset)
                                     },
@@ -97,7 +99,7 @@ fun PlayerCharacterRelicCard(
                                 NetworkImageForMetadata(
                                     url = RelicIconConverter.iconNameToUrl(reliquaryData.Icon),
                                     modifier = Modifier
-                                        .radius(4.dp)
+                                        .radius(RadiusMedium)
                                         .size(42.dp)
                                         .background(White_40)
                                         .padding(2.dp)

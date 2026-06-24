@@ -35,6 +35,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.GachaStar5Color
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun PlayerCharacterDetailPopupWindow(
     characterData: CharacterListData.CharacterData,
@@ -54,7 +55,7 @@ fun PlayerCharacterDetailPopupWindow(
         NetworkImageForMetadata(
             url = avatarData.gachaAvatarIcon,
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .width(70.dp)
                 .fillMaxHeight(),
             contentScale = ContentScale.FillWidth,

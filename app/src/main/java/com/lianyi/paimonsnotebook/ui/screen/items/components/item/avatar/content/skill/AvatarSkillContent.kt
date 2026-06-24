@@ -35,6 +35,7 @@ import com.lianyi.core.ui.theme.Black_10
 import com.lianyi.core.ui.theme.Transparent
 import com.lianyi.core.ui.theme.White
 import com.lianyi.core.ui.theme.White_40
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun AvatarSkillContent(
     skillList: List<AvatarSkillFormat>,
@@ -111,7 +112,7 @@ internal fun AvatarSkillContent(
                         skill.proud.descriptions(skill.currentLevel).forEach {
                             Row(
                                 modifier = Modifier
-                                    .radius(4.dp)
+                                    .radius(RadiusMedium)
                                     .fillMaxWidth()
                                     .background(White_40)
                                     .padding(6.dp),

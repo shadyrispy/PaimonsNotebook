@@ -19,6 +19,7 @@ import com.lianyi.core.ui.components.text.AutoSizeText
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun ItemCard(
     url:String,
@@ -29,7 +30,7 @@ fun ItemCard(
 ) {
     Column(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .size(width, height)
     ) {
         ItemIconCard(

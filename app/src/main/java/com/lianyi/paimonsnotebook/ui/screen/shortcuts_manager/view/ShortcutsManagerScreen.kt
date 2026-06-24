@@ -40,6 +40,8 @@ import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.core.ui.theme.Error
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.core.ui.theme.Success
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 class ShortcutsManagerScreen : BaseActivity() {
 
     private val viewModel by lazy {
@@ -99,7 +101,7 @@ class ShortcutsManagerScreen : BaseActivity() {
                                 Row(
                                     modifier = Modifier
                                         .padding(vertical = 4.dp)
-                                        .radius(8.dp)
+                                        .radius(RadiusLarge)
                                         .fillMaxWidth()
                                         .background(CardBackGroundColor_Light_1)
                                         .clickable {
@@ -130,7 +132,7 @@ class ShortcutsManagerScreen : BaseActivity() {
                                                 painter = painterResource(id = R.drawable.ic_arrow_down),
                                                 contentDescription = null,
                                                 modifier = Modifier
-                                                    .radius(2.dp)
+                                                    .radius(RadiusSmall)
                                                     .size(24.dp)
                                                     .clickable {
                                                         viewModel.changeShortcutsPosition(
@@ -147,7 +149,7 @@ class ShortcutsManagerScreen : BaseActivity() {
                                                 painter = painterResource(id = R.drawable.ic_arrow_up),
                                                 contentDescription = null,
                                                 modifier = Modifier
-                                                    .radius(2.dp)
+                                                    .radius(RadiusSmall)
                                                     .size(24.dp)
                                                     .clickable {
                                                         viewModel.changeShortcutsPosition(

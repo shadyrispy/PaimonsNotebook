@@ -15,6 +15,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.GachaStar5Color
 import com.lianyi.paimonsnotebook.ui.theme.Primary_1
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 /*
 *
 * */
@@ -30,7 +31,7 @@ internal fun GachaRecordProgressBar(
         LinearProgressIndicator(
             progress = progress,
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .height(40.dp)
                 .fillMaxWidth(),
             color = color.alpha(.25f),

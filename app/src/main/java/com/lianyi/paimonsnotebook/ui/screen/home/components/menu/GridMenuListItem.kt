@@ -20,6 +20,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.home.data.FunctionItemData
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun GridMenuListItem(
     item: FunctionItemData,
@@ -28,7 +29,7 @@ internal fun GridMenuListItem(
 
     Column(
         Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .background(White)
             .size(64.dp)
             .clickable {

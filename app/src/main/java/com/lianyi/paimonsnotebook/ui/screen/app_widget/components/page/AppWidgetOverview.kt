@@ -32,6 +32,7 @@ import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetHelper
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsIndexes
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsPreviewHelper
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsTypeHelper
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 
 @Composable
 internal fun AppWidgetOverview(
@@ -73,7 +74,7 @@ internal fun AppWidgetOverview(
 
                 pair.second.forEach { item ->
                     Box(modifier = Modifier
-                        .radius(8.dp)
+                        .radius(RadiusLarge)
                         .clickable {
                             val remoteViewsInfo =
                                 RemoteViewsIndexes.getRemoteViewsInfoByRemoteViewsClassName(item.first)

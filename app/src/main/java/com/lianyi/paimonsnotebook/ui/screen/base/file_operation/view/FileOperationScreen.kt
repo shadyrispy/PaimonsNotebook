@@ -36,6 +36,7 @@ import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.paimonsnotebook.ui.theme.Primary_8
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 
 open class FileOperationScreen : BaseActivity() {
 
@@ -63,7 +64,7 @@ open class FileOperationScreen : BaseActivity() {
                     itemsIndexed(viewModel.fileList, key = { _, it -> it.name }) { index, item ->
                         Row(
                             modifier = Modifier
-                                .radius(8.dp)
+                                .radius(RadiusLarge)
                                 .fillMaxWidth()
                                 .background(CardBackGroundColor_Light_1)
                                 .combinedClickable(
@@ -83,7 +84,7 @@ open class FileOperationScreen : BaseActivity() {
                                 painter = painterResource(id = R.drawable.ic_document),
                                 contentDescription = "文件",
                                 modifier = Modifier
-                                    .radius(8.dp)
+                                    .radius(RadiusLarge)
                                     .size(42.dp)
                                     .background(Primary_8)
                                     .padding(8.dp),

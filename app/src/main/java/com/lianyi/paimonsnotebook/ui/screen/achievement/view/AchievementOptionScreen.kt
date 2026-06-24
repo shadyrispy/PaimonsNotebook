@@ -27,6 +27,7 @@ import com.lianyi.paimonsnotebook.ui.screen.achievement.viewmodel.AchievementOpt
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.SettingOptionGroup
 import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 
 class AchievementOptionScreen : BaseActivity() {
 
@@ -71,7 +72,7 @@ class AchievementOptionScreen : BaseActivity() {
                         content = {
                             items(viewModel.userList, key = { it.id }) {
                                 Text(text = it.name, modifier = Modifier
-                                    .radius(4.dp)
+                                    .radius(RadiusMedium)
                                     .fillMaxWidth()
                                     .clickable {
                                         viewModel.onSelectUser(it)

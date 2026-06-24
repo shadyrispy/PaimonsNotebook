@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.components.media.NetworkImageForMetadata
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun AbyssOverviewInformationItem(
     name: String,
@@ -25,7 +26,7 @@ internal fun AbyssOverviewInformationItem(
 ) {
     Row(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .fillMaxWidth()
 //            .background(White_50)
 //            .padding(4.dp)

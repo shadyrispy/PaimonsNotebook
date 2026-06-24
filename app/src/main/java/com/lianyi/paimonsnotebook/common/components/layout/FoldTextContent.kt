@@ -36,6 +36,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.FoldTextBackgroundColor
 import com.lianyi.core.ui.theme.Gray_F0
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun FoldTextContent(
     modifier: Modifier = Modifier,
@@ -52,7 +53,7 @@ fun FoldTextContent(
     val angle by animateFloatAsState(targetValue = if (isUnfold) 180f else 0f, label = "")
 
     Column(modifier = modifier
-        .radius(4.dp)
+        .radius(RadiusMedium)
         .border(1.dp, borderColor, RoundedCornerShape(4.dp))
         .background(backgroundColor)
         .clickable {
@@ -120,7 +121,7 @@ fun FoldTextContent(
     val angle by animateFloatAsState(targetValue = if (isUnfold) 180f else 0f, label = "")
 
     Column(modifier = modifier
-        .radius(4.dp)
+        .radius(RadiusMedium)
         .border(1.dp, borderColor, RoundedCornerShape(4.dp))
         .background(backgroundColor)
         .clickable {

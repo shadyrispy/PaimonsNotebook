@@ -41,6 +41,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.core.ui.theme.Black_10
 import com.lianyi.core.ui.theme.White
 import com.lianyi.core.ui.theme.White_40
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun ItemMaterialContent(
@@ -62,7 +63,7 @@ internal fun ItemMaterialContent(
         FlowRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .background(White_40)
                 .padding(8.dp, 0.dp, 8.dp, 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -75,7 +76,7 @@ internal fun ItemMaterialContent(
                 Box(
                     modifier = Modifier
                         .padding(top = 8.dp)
-                        .radius(4.dp)
+                        .radius(RadiusMedium)
                         .onGloballyPositioned {
                             currentPosition = it.positionInRoot()
                             currentSize = it.size

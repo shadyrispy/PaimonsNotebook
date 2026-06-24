@@ -19,6 +19,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.information.Informa
 import com.lianyi.paimonsnotebook.ui.screen.items.data.cultivate.CultivateConfigData
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun AvatarCultivateConfigCard(
     avatarData: AvatarData,
@@ -55,7 +56,7 @@ fun AvatarCultivateConfigCard(
                 NetworkImageForMetadata(
                     url = avatarData.fetterInfo.associationIconUrl,
                     modifier = Modifier
-                        .radius(4.dp)
+                        .radius(RadiusMedium)
                         .size(60.dp),
                     contentScale = ContentScale.FillWidth,
                     alignment = BiasAlignment(0f, -0.4f),

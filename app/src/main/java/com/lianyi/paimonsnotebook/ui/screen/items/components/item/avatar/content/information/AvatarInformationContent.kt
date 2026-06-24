@@ -34,6 +34,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconC
 import com.lianyi.paimonsnotebook.ui.theme.AvatarInfoBackgroundColor
 import com.lianyi.core.ui.theme.Black_10
 import com.lianyi.core.ui.theme.White_40
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun AvatarInformationContent(
     avatar: AvatarData
@@ -80,7 +81,7 @@ internal fun AvatarInformationContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .background(White_40)
                 .padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -117,7 +118,7 @@ internal fun AvatarInformationContent(
             open = costumeOpen, titleSlot = {
                 Text(text = "衣装", fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
             }, modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .background(White_40)
                 .clickable {
                     costumeOpen = !costumeOpen
@@ -144,7 +145,7 @@ internal fun AvatarInformationContent(
                             },
                             modifier = Modifier
                                 .size(60.dp)
-                                .radius(4.dp)
+                                .radius(RadiusMedium)
                                 .background(AvatarInfoBackgroundColor)
                         )
                         Spacer(modifier = Modifier.width(10.dp))
@@ -177,7 +178,7 @@ internal fun AvatarInformationContent(
                 open = showContent, titleSlot = {
                     Text(text = it.first, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                 }, modifier = Modifier
-                    .radius(4.dp)
+                    .radius(RadiusMedium)
                     .background(White_40)
                     .clickable {
                         showContent = !showContent

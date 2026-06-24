@@ -27,6 +27,7 @@ import com.lianyi.core.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.Primary_8
 import com.lianyi.core.ui.theme.Success
 import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun ChooseGameUidDialog(
     uidList: List<String>,
@@ -56,7 +57,7 @@ fun ChooseGameUidDialog(
                 val selected = selectedUidList.indexOf(uid) != -1
                 Row(
                     modifier = Modifier
-                        .radius(2.dp)
+                        .radius(RadiusSmall)
                         .fillMaxWidth()
                         .clickable {
                             if (selected) {

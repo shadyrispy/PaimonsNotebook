@@ -56,6 +56,7 @@ import com.lianyi.core.ui.theme.White_10
 import com.lianyi.core.ui.theme.colorPrimary
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 /*
 * 视频播放器
@@ -200,7 +201,7 @@ fun VideoPlayer(
                     modifier = Modifier
                         .align(Alignment.TopStart)
                         .padding(4.dp)
-                        .radius(2.dp)
+                        .radius(RadiusSmall)
                         .size(controllerIconSize)
                         .clickable {
                             onVideoExit.invoke()
@@ -267,7 +268,7 @@ fun VideoPlayer(
                             Image(painter = painterResource(id = if (videoPlay) R.drawable.ic_pause else R.drawable.ic_play),
                                 contentDescription = "播放",
                                 modifier = Modifier
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .size(controllerIconSize)
                                     .clickable {
                                         videoPlay = !videoPlay
@@ -286,7 +287,7 @@ fun VideoPlayer(
                                 modifier = Modifier
                                     .height(controllerIconSize)
                                     .padding(controllerPadding)
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .background(White_10)
                                     .clickable {
                                         showDefinitionSelector = !showDefinitionSelector
@@ -305,7 +306,7 @@ fun VideoPlayer(
                             Image(painter = painterResource(id = R.drawable.ic_fullscreen),
                                 contentDescription = "全屏",
                                 modifier = Modifier
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .size(controllerIconSize)
                                     .clickable {
                                         onVideoFullScreen.invoke(!videoFullScreen)

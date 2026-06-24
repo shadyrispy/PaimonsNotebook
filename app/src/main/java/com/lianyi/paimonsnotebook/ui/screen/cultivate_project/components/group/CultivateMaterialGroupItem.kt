@@ -19,6 +19,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.EntityBaseInfo
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun CultivateMaterialGroupItem(
     entityBaseInfo: EntityBaseInfo,
@@ -33,7 +34,7 @@ fun CultivateMaterialGroupItem(
 
         Box(
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .size(46.dp)
                 .background(White)
                 .onGloballyPositioned {

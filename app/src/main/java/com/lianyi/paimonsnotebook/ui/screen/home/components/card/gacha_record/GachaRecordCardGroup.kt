@@ -16,6 +16,7 @@ import com.lianyi.paimonsnotebook.common.util.compose.provider.NoOverscrollEffec
 import com.lianyi.core.ui.theme.CardBackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.Primary_2
 import com.lianyi.paimonsnotebook.ui.theme.Primary_8
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun GachaRecordCardGroup(
@@ -29,7 +30,7 @@ internal fun GachaRecordCardGroup(
 
     Column(
         modifier = Modifier
-            .radius(8.dp)
+            .radius(RadiusLarge)
             .background(CardBackGroundColor)
             .padding(0.dp, 12.dp)
     ) {

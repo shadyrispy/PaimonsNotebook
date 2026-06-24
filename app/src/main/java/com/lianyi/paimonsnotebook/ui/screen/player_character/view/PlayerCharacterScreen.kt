@@ -36,6 +36,7 @@ import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.Pla
 import com.lianyi.paimonsnotebook.ui.screen.player_character.viewmodel.PlayerCharacterScreenViewModel
 import com.lianyi.core.ui.theme.BlurCardBackgroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 
 class PlayerCharacterScreen : BaseActivity() {
 
@@ -70,7 +71,7 @@ class PlayerCharacterScreen : BaseActivity() {
                                 // 左: 账号切换
                                 Row(
                                     modifier = Modifier
-                                        .radius(4.dp)
+                                        .radius(RadiusMedium)
                                         .clickable {
                                             viewModel.showChooseGameRoleDialog()
                                         },

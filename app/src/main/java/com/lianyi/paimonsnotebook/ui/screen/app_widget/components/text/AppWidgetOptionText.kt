@@ -18,6 +18,7 @@ import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.Font_Normal
 import com.lianyi.core.ui.theme.Transparent
 import com.lianyi.core.ui.theme.White_60
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun AppWidgetOptionText(
     text: String,
@@ -31,7 +32,7 @@ internal fun AppWidgetOptionText(
         fontSize = 12.sp,
         color = Font_Normal,
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .border(3.dp, borderColor, RoundedCornerShape(4.dp))
             .background(backgroundColor)
             .clickable {

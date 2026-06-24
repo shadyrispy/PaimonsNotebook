@@ -44,6 +44,8 @@ import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.core.ui.theme.Black_60
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.core.ui.theme.White_70
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun ColorPickerPopup(
     visible: Boolean,
@@ -73,7 +75,7 @@ fun ColorPickerPopup(
                     contentDescription = "选择颜色",
                     modifier = Modifier
                         .padding(14.dp)
-                        .radius(4.dp)
+                        .radius(RadiusMedium)
                         .size(32.dp)
                         .clickable {
                             onRequestDismiss.invoke()
@@ -113,7 +115,7 @@ fun ColorPickerPopup(
 
                 Column(
                     modifier = Modifier
-                        .radius(8.dp)
+                        .radius(RadiusLarge)
                         .fillMaxWidth()
                         .background(BackGroundColor)
                         .padding(16.dp, 12.dp),
@@ -161,7 +163,7 @@ fun ColorPickerPopup(
                         AlphaTile(
                             modifier = Modifier
                                 .align(Alignment.CenterHorizontally)
-                                .radius(8.dp)
+                                .radius(RadiusLarge)
                                 .size(60.dp),
                             controller
                         )

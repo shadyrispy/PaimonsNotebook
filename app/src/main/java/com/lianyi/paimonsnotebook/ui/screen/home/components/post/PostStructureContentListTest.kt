@@ -58,6 +58,8 @@ import com.lianyi.core.ui.theme.CardBackGroundColor_Gray_Dark
 import com.lianyi.core.ui.theme.Font_Normal
 import com.lianyi.core.ui.theme.Info
 import com.lianyi.core.ui.theme.LinkColor
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun PostStructureContentListTest(
@@ -128,7 +130,7 @@ internal fun PostStructureContentListTest(
 //                                val modifier = remember(image) {
 //                                    println("url = ${image}")
 //                                    Modifier
-//                                        .radius(4.dp)
+//                                        .radius(RadiusMedium)
 //                                        .apply {
 //                                            if (data.widthDp > maxWidth) {
 //                                                println("this.fillMaxWidth()")
@@ -336,7 +338,7 @@ internal fun PostStructureContentListTest(
                         Text(
                             text = it.name, fontSize = 10.sp, color = Font_Normal,
                             modifier = Modifier
-                                .radius(2.dp)
+                                .radius(RadiusSmall)
                                 .background(CardBackGroundColor_Gray_Dark)
                                 .padding(4.dp, 2.dp)
                         )

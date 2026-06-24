@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black_60
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 /*
 * 展开指示器
 * 用于表示可折叠项是否处于展开状态
@@ -33,7 +34,7 @@ fun ExpansionIndicator(
         contentDescription = "展开/折叠",
         tint = Black_60,
         modifier = Modifier
-            .radius(2.dp)
+            .radius(RadiusSmall)
             .size(size)
             .clickable(onClick = onClick)
             .rotate(dropdownAnim)

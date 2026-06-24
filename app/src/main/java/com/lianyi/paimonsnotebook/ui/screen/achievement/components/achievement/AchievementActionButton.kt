@@ -9,6 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 /*
 * 成就分类顶部操作按钮
 *
@@ -22,7 +23,7 @@ fun AchievementActionButton(
         painter = painterResource(id = resId),
         contentDescription = "成就操作",
         modifier = Modifier
-            .radius(2.dp)
+            .radius(RadiusSmall)
             .size(24.dp)
             .clickable {
                 onClick.invoke()

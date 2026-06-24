@@ -43,6 +43,7 @@ import com.lianyi.core.ui.theme.Black_30
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.paimonsnotebook.ui.theme.Primary_3
 import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium6
 @Composable
 fun AppWidgetFloatComponentInfoPanel(
     popupProvider: FloatPositionProvider,
@@ -72,7 +73,7 @@ fun AppWidgetFloatComponentInfoPanel(
         Box(
             modifier = Modifier
                 .scale(scaleValue)
-                .radius(6.dp)
+                .radius(RadiusMedium6)
                 .background(Black_30)
                 .border(3.dp, menuBorderColor, RoundedCornerShape(6.dp))
                 .padding(12.dp)

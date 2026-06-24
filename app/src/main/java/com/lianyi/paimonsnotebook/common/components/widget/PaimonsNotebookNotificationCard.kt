@@ -28,6 +28,7 @@ import com.lianyi.core.ui.theme.Error_1
 import com.lianyi.core.ui.theme.Primary_9
 import com.lianyi.core.ui.theme.Warning
 import com.lianyi.core.ui.theme.Warning_1
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun PaimonsNotebookNotificationCard(
     data: PaimonsNotebookNotificationData,
@@ -81,7 +82,7 @@ fun PaimonsNotebookNotificationCard(
                         contentDescription = "关闭通知",
                         tint = primaryColor,
                         modifier = Modifier
-                            .radius(2.dp)
+                            .radius(RadiusSmall)
                             .size(20.dp)
                             .clickable {
                                 PaimonsNotebookNotification.removeNotifyById(data.notificationId)

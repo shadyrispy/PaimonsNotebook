@@ -25,6 +25,8 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun VerticalCultivateMaterialItem(
     cultivateItemMaterials: CultivateItemMaterials,
@@ -36,7 +38,7 @@ fun VerticalCultivateMaterialItem(
     val material = getMaterialInfo.invoke(cultivateItemMaterials.itemId)
 
     Row(modifier = Modifier
-        .radius(2.dp)
+        .radius(RadiusSmall)
         .clickable {
             onClickMaterialItem.invoke(cultivateItemMaterials)
         }
@@ -49,7 +51,7 @@ fun VerticalCultivateMaterialItem(
 
         Box(
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .size(30.dp)
                 .background(White)
                 .onGloballyPositioned {

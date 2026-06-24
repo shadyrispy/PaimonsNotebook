@@ -24,6 +24,7 @@ import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.viewmodel.Cultivat
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.SettingOptionGroup
 import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 
 class CultivateProjectOptionScreen : BaseActivity() {
 
@@ -72,7 +73,7 @@ class CultivateProjectOptionScreen : BaseActivity() {
                         content = {
                             items(viewModel.cultivateProjectList, key = { it.projectId }) {
                                 Text(text = it.projectName, modifier = Modifier
-                                    .radius(4.dp)
+                                    .radius(RadiusMedium)
                                     .fillMaxWidth()
                                     .clickable {
                                         viewModel.onSelectedProject(it)

@@ -28,6 +28,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.Font_Normal
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun ImageDetailHeader(
     diskCache: DiskCache,
@@ -49,7 +50,7 @@ fun ImageDetailHeader(
                 contentDescription = "返回",
                 tint = Black,
                 modifier = Modifier
-                    .radius(2.dp)
+                    .radius(RadiusSmall)
                     .size(36.dp)
                     .clickable {
                         onBack.invoke()

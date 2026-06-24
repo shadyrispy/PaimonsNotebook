@@ -27,6 +27,8 @@ import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostLinkCardType
 import com.lianyi.core.ui.theme.LinkColor
 import com.lianyi.core.ui.theme.PriceColor
 import com.lianyi.core.ui.theme.White_50
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 internal fun PostLinkCard(
     item: PostFullData.Post.LinkCard,
@@ -60,7 +62,7 @@ internal fun PostLinkCard(
 
     Row(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .background(White_50)
             .clickable {
                 onClick.invoke(item)
@@ -71,7 +73,7 @@ internal fun PostLinkCard(
         NetworkImage(
             diskCache = diskCache,
             modifier = Modifier
-                .radius(2.dp)
+                .radius(RadiusSmall)
                 .size(size),
             contentScale = ContentScale.Crop
         )

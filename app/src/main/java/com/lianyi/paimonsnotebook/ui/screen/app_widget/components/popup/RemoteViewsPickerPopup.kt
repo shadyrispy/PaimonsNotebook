@@ -37,6 +37,8 @@ import com.lianyi.paimonsnotebook.ui.widgets.common.data.RemoteViewsInfo
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsIndexes
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsPreviewHelper
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsTypeHelper
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 @Composable
 internal fun RemoteViewsPickerPopup(
@@ -95,7 +97,7 @@ internal fun RemoteViewsPickerPopup(
 
                                 pair.second.forEach { item ->
                                     Box(modifier = Modifier
-                                        .radius(8.dp)
+                                        .radius(RadiusLarge)
                                         .clickable {
                                             onSelect.invoke(item)
                                             onRequestDismiss.invoke()
@@ -119,7 +121,7 @@ internal fun RemoteViewsPickerPopup(
                         Icon(painter = painterResource(id = R.drawable.ic_dismiss),
                             contentDescription = "关闭",
                             modifier = Modifier
-                                .radius(2.dp)
+                                .radius(RadiusSmall)
                                 .size(32.dp)
                                 .clickable {
                                     onRequestDismiss.invoke()

@@ -29,6 +29,7 @@ import com.lianyi.paimonsnotebook.common.database.app_widget_binding.util.AppWid
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusExtraSmall
 @Composable
 fun AppWidgetAddableComponentPopupWindow(
     popupProvider: PopupWindowPositionProvider,
@@ -154,7 +155,7 @@ fun AppWidgetAddableComponentPopupWindow(
                     text = it.first, fontSize = 9.sp, color = White,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
-                        .radius(1.dp)
+                        .radius(RadiusExtraSmall)
                         .width(IntrinsicSize.Max)
                         .fillMaxWidth()
                         .clickable {

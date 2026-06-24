@@ -33,6 +33,7 @@ import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.components.group.C
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.EntityBaseInfo
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.MaterialBaseInfo
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CultivateProjectOverallPage(
@@ -80,7 +81,7 @@ fun CultivateProjectOverallPage(
 
                     Column(
                         modifier = Modifier
-                            .radius(8.dp)
+                            .radius(RadiusLarge)
                             .fillMaxSize()
                             .background(CardBackGroundColor_Light_1)
                             .clickable {

@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.format.FightPropertyFormat
 import com.lianyi.core.ui.theme.White_40
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun PropertyItemGroup(
     propertyList: List<FightPropertyFormat>,
@@ -19,7 +20,7 @@ internal fun PropertyItemGroup(
 ) {
     Column(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .fillMaxWidth()
             .wrapContentHeight()
             .background(White_40)

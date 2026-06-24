@@ -47,6 +47,9 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun CultivateAvatarCard(
     avatarData: AvatarData,
@@ -66,7 +69,7 @@ fun CultivateAvatarCard(
 
     Column(
         modifier = Modifier
-            .radius(8.dp)
+            .radius(RadiusLarge)
             .fillMaxWidth()
             .background(CardBackGroundColor_Light_1)
             .clickable {
@@ -82,7 +85,7 @@ fun CultivateAvatarCard(
             NetworkImageForMetadata(
                 url = avatarData.gachaAvatarIcon,
                 modifier = Modifier
-                    .radius(4.dp)
+                    .radius(RadiusMedium)
                     .width(70.dp)
                     .fillMaxHeight(),
                 contentScale = ContentScale.FillWidth,
@@ -125,7 +128,7 @@ fun CultivateAvatarCard(
                         painter = painterResource(id = R.drawable.ic_delete),
                         contentDescription = "角色详情",
                         modifier = Modifier
-                            .radius(2.dp)
+                            .radius(RadiusSmall)
                             .size(22.dp)
                             .clickable {
                                 onClickDelete.invoke(entity, avatarData.name)

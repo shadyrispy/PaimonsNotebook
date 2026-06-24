@@ -58,6 +58,7 @@ import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.core.ui.theme.Error
 import com.lianyi.core.ui.theme.Success
 import com.lianyi.core.ui.theme.Success_1
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium6
 @Composable
 fun DailyNoteCard(
     userGameRole: UserGameRoleData.Role,
@@ -205,7 +206,7 @@ fun DailyNoteCard(
     }
 
     Box(modifier = modifier
-        .radius(6.dp)
+        .radius(RadiusMedium6)
         .fillMaxWidth()
         .background(CardBackGroundColor_Light_1)
         .clickable {

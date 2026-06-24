@@ -21,6 +21,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.AppWidgetAlreadyData
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.RemoteViewsPreviewAnimData
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsPreviewHelper
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 
 @Composable
 internal fun AlreadyBindingAppWidgetPage(
@@ -45,7 +46,7 @@ internal fun AlreadyBindingAppWidgetPage(
                     val preview =
                         RemoteViewsPreviewHelper.getPreviewByRemoteViewsClassName(data.appWidgetBinding.remoteViewsClassName)
                     Box(modifier = Modifier
-                        .radius(8.dp)
+                        .radius(RadiusLarge)
                         .clickable {
                             onClick.invoke(data.appWidgetBinding)
                         }

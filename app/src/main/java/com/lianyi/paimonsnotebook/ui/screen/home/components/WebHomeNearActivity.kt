@@ -27,6 +27,7 @@ import com.lianyi.core.ui.theme.Gray_97
 import com.lianyi.paimonsnotebook.ui.theme.Gray_F5
 import com.lianyi.paimonsnotebook.ui.theme.Primary_4
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun WebHomeNearActivity(
     item: NearActivityData.Hots.Group2.Children.NearActivity,
@@ -38,21 +39,21 @@ internal fun WebHomeNearActivity(
             .fillMaxWidth()
             .background(White)
             .padding(8.dp, 3.dp)
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .clickable {
                 block(item.url)
             }
             .background(Gray_F5)) {
         Row(
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .padding(8.dp), verticalAlignment = Alignment.CenterVertically
         ) {
 
             NetworkImage(
                 url = item.icon,
                 modifier = Modifier
-                    .radius(4.dp)
+                    .radius(RadiusMedium)
                     .size(40.dp),
                 contentScale = ContentScale.Crop,
                 diskCache = diskCache

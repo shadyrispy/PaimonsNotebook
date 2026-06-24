@@ -29,6 +29,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.screen.ReliquaryScre
 import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.core.ui.theme.CardBackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium6
 
 class ReliquaryScreen : BaseActivity() {
 
@@ -52,7 +53,7 @@ class ReliquaryScreen : BaseActivity() {
                     items(viewModel.reliquarySetList, key = { it.SetId }) { reliquarySet ->
                         Column(
                             modifier = Modifier
-                                .radius(6.dp)
+                                .radius(RadiusMedium6)
                                 .background(CardBackGroundColor)
                                 .fillMaxWidth()
                                 .padding(8.dp)

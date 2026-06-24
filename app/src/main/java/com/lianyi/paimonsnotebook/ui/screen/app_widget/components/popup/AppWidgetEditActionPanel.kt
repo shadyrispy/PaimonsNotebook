@@ -59,6 +59,8 @@ import com.lianyi.core.ui.theme.Warning
 import com.lianyi.core.ui.theme.Warning_1
 import com.lianyi.core.ui.theme.White
 import com.lianyi.core.ui.theme.White_50
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun BoxScope.AppWidgetEditActionPanel(
@@ -120,7 +122,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                     painter = painterResource(id = R.drawable.ic_close_fullscreen),
                     contentDescription = "收起面板",
                     modifier = Modifier
-                        .radius(4.dp)
+                        .radius(RadiusMedium)
                         .size(24.dp)
                         .clickable {
                             show = false
@@ -257,7 +259,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                         Icon(painter = painterResource(id = it.first),
                             contentDescription = "对齐组件",
                             modifier = Modifier
-                                .radius(2.dp)
+                                .radius(RadiusSmall)
                                 .size(26.dp)
                                 .then(if (viewModel.enableAlignButton) Modifier.clickable {
                                     viewModel.onAlignComponent(it.second)
@@ -290,7 +292,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                         ),
                         contentDescription = "锁定或解锁组件",
                         modifier = Modifier
-                            .radius(2.dp)
+                            .radius(RadiusSmall)
                             .size(20.dp)
                             .clickable {
                                 viewModel.onClickLockButton()
@@ -324,7 +326,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                         Icon(painter = painterResource(id = it),
                             contentDescription = "切换文本样式",
                             modifier = Modifier
-                                .radius(2.dp)
+                                .radius(RadiusSmall)
                                 .size(24.dp)
                                 .clickable {
                                     viewModel.onClickTextStyle(it)
@@ -360,7 +362,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                                 contentDescription = "绑定字段",
                                 tint = if (item.enabled) Black else Primary,
                                 modifier = Modifier
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .size(24.dp)
                                     .clickable {
                                         viewModel.onBindingField(component, index)
@@ -373,7 +375,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                                 contentDescription = "删除绑定字段",
                                 tint = Black,
                                 modifier = Modifier
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .size(24.dp)
                                     .clickable {
                                         viewModel.onDeleteBindingField(component, index)
@@ -426,7 +428,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                     Image(painter = painterResource(id = R.drawable.bg_default_name_card),
                         contentDescription = "选择图片",
                         modifier = Modifier
-                            .radius(4.dp)
+                            .radius(RadiusMedium)
                             .size(36.dp)
                             .clickable {
 
@@ -509,7 +511,7 @@ fun BoxScope.AppWidgetEditActionPanel(
 
                 Box(
                     modifier = Modifier
-                        .radius(4.dp)
+                        .radius(RadiusMedium)
                         .size(24.dp)
                         .background(Primary)
                 )
@@ -531,7 +533,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                     Image(painter = painterResource(id = R.drawable.bg_default_name_card),
                         contentDescription = "选择背景图片",
                         modifier = Modifier
-                            .radius(4.dp)
+                            .radius(RadiusMedium)
                             .size(36.dp)
                             .clickable {
 

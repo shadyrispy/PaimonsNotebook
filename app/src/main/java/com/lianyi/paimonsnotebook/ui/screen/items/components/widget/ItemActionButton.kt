@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.BlurCardBackgroundColor
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun ItemActionButton(
     iconResId: Int,
@@ -32,7 +33,7 @@ internal fun ItemActionButton(
 ) {
     Row(
         modifier = Modifier
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .background(backgroundColor)
             .clickable {
                 onClick.invoke()

@@ -35,6 +35,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.state.ItemScreenLoa
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.screen.CultivationMaterialScreenViewModel
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 class CultivationMaterialScreen : BaseActivity() {
 
@@ -69,7 +70,7 @@ class CultivationMaterialScreen : BaseActivity() {
                                         fontSize = 16.sp,
                                         modifier = Modifier
                                             .requiredWidthIn(60.dp, 180.dp)
-                                            .radius(2.dp)
+                                            .radius(RadiusSmall)
                                             .clickable {
                                                 viewModel.showDropMenu()
                                             }

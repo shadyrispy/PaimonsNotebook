@@ -39,6 +39,8 @@ import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.CardBackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.FetterColor
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium6
 @Composable
 fun PlayerCharacterListCard(
     characterData: CharacterListData.CharacterData,
@@ -67,7 +69,7 @@ fun PlayerCharacterListCard(
 
     Row(
         modifier = Modifier
-            .radius(6.dp)
+            .radius(RadiusMedium6)
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .background(CardBackGroundColor)
@@ -80,7 +82,7 @@ fun PlayerCharacterListCard(
         NetworkImageForMetadata(
             url = avatarData.gachaAvatarIcon,
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .width(70.dp)
                 .fillMaxHeight(),
             contentScale = ContentScale.FillWidth,

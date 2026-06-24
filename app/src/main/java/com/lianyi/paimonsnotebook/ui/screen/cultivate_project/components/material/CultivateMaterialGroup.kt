@@ -36,6 +36,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.util.CultivateMaterialListDisplayState
 import com.lianyi.core.ui.theme.Black
 import kotlinx.coroutines.delay
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 @Composable
 fun CultivateMaterialGroup(
@@ -145,7 +146,7 @@ fun CultivateMaterialGroup(
                 ),
                 contentDescription = "展开/折叠材料组",
                 modifier = Modifier
-                    .radius(2.dp)
+                    .radius(RadiusSmall)
                     .size(22.dp)
                     .clickable {
                         materialListDisplayState = if (entity.type == CultivateEntityType.Avatar) {

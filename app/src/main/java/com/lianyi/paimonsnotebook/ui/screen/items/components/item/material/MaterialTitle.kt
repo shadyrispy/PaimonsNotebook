@@ -24,6 +24,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.core.ui.theme.Primary_9
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 fun LazyGridScope.materialTitle(
     list: List<Material>,
     onClickMaterial: (Material, IntSize, Offset) -> Unit,
@@ -55,7 +56,7 @@ fun LazyGridScope.materialTitle(
                 var size = IntSize.Zero
                 var offset = Offset.Zero
                 Box(modifier = Modifier
-                    .radius(4.dp)
+                    .radius(RadiusMedium)
                     .onGloballyPositioned {
                         size = it.size
                         offset = it.positionInRoot()

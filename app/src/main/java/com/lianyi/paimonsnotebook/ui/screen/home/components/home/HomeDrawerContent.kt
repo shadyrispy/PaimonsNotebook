@@ -26,6 +26,7 @@ import com.lianyi.paimonsnotebook.ui.screen.home.components.menu.SideBarMenuList
 import com.lianyi.paimonsnotebook.ui.screen.home.data.ModalItemData
 import com.lianyi.paimonsnotebook.ui.screen.setting.view.SettingsScreen
 import com.lianyi.core.ui.theme.Black
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun HomeDrawerContent(
     selectedUser: User?,
@@ -63,7 +64,7 @@ fun HomeDrawerContent(
                 Icon(painter = painterResource(id = R.drawable.ic_settings),
                     contentDescription = "菜单项",
                     modifier = Modifier
-                        .radius(2.dp)
+                        .radius(RadiusSmall)
                         .size(36.dp)
                         .clickable {
                             functionNavigate.invoke(SettingsScreen::class.java)
@@ -75,7 +76,7 @@ fun HomeDrawerContent(
                     painter = painterResource(id = R.drawable.ic_scan),
                     contentDescription = "扫码",
                     modifier = Modifier
-                        .radius(2.dp)
+                        .radius(RadiusSmall)
                         .size(36.dp)
                         .clickable {
                             onScanQRCode.invoke()
@@ -87,7 +88,7 @@ fun HomeDrawerContent(
                     painter = painterResource(id = R.drawable.ic_gift),
                     contentDescription = "礼包",
                     modifier = Modifier
-                        .radius(2.dp)
+                        .radius(RadiusSmall)
                         .size(36.dp)
                         .clickable {
                             goSignWeb.invoke()

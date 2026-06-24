@@ -26,6 +26,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.components.widget.ImageContentList
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.viewmodel.ResourceManagerViewModel
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 
 class ResourceManagerScreen : BaseActivity() {
     private val viewModel by lazy {
@@ -50,7 +51,7 @@ class ResourceManagerScreen : BaseActivity() {
                                     Icon(painter = painterResource(id = R.drawable.ic_delete),
                                         contentDescription = "删除",
                                         modifier = Modifier
-                                            .radius(4.dp)
+                                            .radius(RadiusMedium)
                                             .size(28.dp)
                                             .clickable {
                                                 viewModel.deleteSelectedImage()

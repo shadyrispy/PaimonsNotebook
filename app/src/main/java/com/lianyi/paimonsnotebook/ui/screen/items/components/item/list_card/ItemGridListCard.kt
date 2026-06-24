@@ -28,6 +28,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
 import com.lianyi.core.ui.theme.Black_10
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun <T> ItemGridListCard(
     data: T,
@@ -40,7 +41,7 @@ fun <T> ItemGridListCard(
     Box(contentAlignment = Alignment.Center) {
         Box(
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .size(60.dp, 80.dp)
                 .border(
                     width = if (highlight) 2.dp else 1.dp,

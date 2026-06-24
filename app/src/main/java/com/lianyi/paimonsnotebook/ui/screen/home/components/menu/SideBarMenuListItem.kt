@@ -23,6 +23,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.home.data.ModalItemData
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.Black_90
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
 @Composable
 internal fun SideBarMenuListItem(
     item: ModalItemData,
@@ -30,7 +31,7 @@ internal fun SideBarMenuListItem(
 ) {
     Row(
         modifier = Modifier
-            .radius(8.dp)
+            .radius(RadiusLarge)
             .fillMaxWidth()
             .height(42.dp)
             .clickable {

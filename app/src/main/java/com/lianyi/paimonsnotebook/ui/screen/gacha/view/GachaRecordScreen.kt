@@ -29,6 +29,7 @@ import com.lianyi.paimonsnotebook.ui.screen.gacha.components.page.GachaItemsPage
 import com.lianyi.paimonsnotebook.ui.screen.gacha.components.page.GachaRecordOverviewPage
 import com.lianyi.paimonsnotebook.ui.screen.gacha.viewmodel.GachaRecordScreenViewModel
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall3
 
 class GachaRecordScreen : ComponentActivity() {
 
@@ -85,7 +86,7 @@ class GachaRecordScreen : ComponentActivity() {
                         contentDescription = "设置",
                         modifier = Modifier
                             .padding(2.dp)
-                            .radius(3.dp)
+                            .radius(RadiusSmall3)
                             .size(32.dp)
                             .clickable {
                                 viewModel.goOptionScreen()

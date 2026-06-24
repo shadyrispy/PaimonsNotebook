@@ -24,6 +24,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
 import com.lianyi.core.ui.theme.CardBackGroundColor
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 /*
 * 适用于列表的物品卡
 * */
@@ -38,7 +39,7 @@ internal fun <T> ItemListCard(
 ) {
 
     Row(modifier = Modifier
-        .radius(2.dp)
+        .radius(RadiusSmall)
         .fillMaxWidth()
         .background(CardBackGroundColor)
         .clickable {

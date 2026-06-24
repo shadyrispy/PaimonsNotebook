@@ -39,6 +39,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.monster.MonsterData
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.Black_10
 import com.lianyi.core.ui.theme.Black_30
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun FloorItem(
     floor: SpiralAbyssData.Floor,
@@ -149,7 +150,7 @@ private fun FloorLevelItem(
                 painter = painterResource(id = R.drawable.ic_genshin_game_biology),
                 contentDescription = "查看怪物",
                 modifier = Modifier
-                    .radius(2.dp)
+                    .radius(RadiusSmall)
                     .size(20.dp)
                     .clickable {
                         showMonster = !showMonster

@@ -22,6 +22,7 @@ import com.lianyi.paimonsnotebook.ui.screen.gacha.data.GachaOverviewListItem
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.core.ui.theme.Black_30
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun GachaItemsPage(
     items: List<Pair<Int, List<Pair<GachaOverviewListItem, Int>>>>,
@@ -59,7 +60,7 @@ fun GachaItemsPage(
             ) { item ->
 
                 Box(contentAlignment = Alignment.Center) {
-                    Box(modifier = Modifier.radius(4.dp)) {
+                    Box(modifier = Modifier.radius(RadiusMedium)) {
                         ItemIconCard(
                             url = item.first.iconUrl,
                             star = item.first.rankType,

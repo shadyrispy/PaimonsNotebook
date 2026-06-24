@@ -16,6 +16,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.padding.paddingTop
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 internal fun AppWidgetOptionColor(
     color: Color,
@@ -29,7 +30,7 @@ internal fun AppWidgetOptionColor(
 
     Box(modifier = Modifier
         .paddingTop(6.dp)
-        .radius(4.dp)
+        .radius(RadiusMedium)
         .size(40.dp)
         .background(color)
         .border(3.dp, borderColor, RoundedCornerShape(4.dp))

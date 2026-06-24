@@ -41,6 +41,7 @@ import com.lianyi.paimonsnotebook.ui.screen.setting.util.enums.HomeScreenDisplay
 import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall3
 class HomeScreen : BaseActivity() {
     private val viewModel by lazy {
         ViewModelProvider(this)[HomeScreenViewModel::class.java]
@@ -106,7 +107,7 @@ class HomeScreen : BaseActivity() {
                                 contentDescription = "菜单",
                                 modifier = Modifier
                                     .padding(2.dp)
-                                    .radius(3.dp)
+                                    .radius(RadiusSmall3)
                                     .size(32.dp)
                                     .clickable {
                                         viewModel.toggleModalDrawer(

@@ -33,6 +33,7 @@ import com.lianyi.core.ui.theme.Black
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.ui.theme.Primary_1
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 @Composable
 fun AccountItemGameRole(
@@ -95,7 +96,7 @@ fun AccountItemGameRole(
                 contentDescription = "切换角色",
                 modifier = Modifier
                     .padding(end = 8.dp)
-                    .radius(2.dp)
+                    .radius(RadiusSmall)
                     .size(24.dp)
                     .clickable {
                         onChangeAccountPlayerUid.invoke(role)

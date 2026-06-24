@@ -29,6 +29,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
 import com.lianyi.core.ui.theme.Black_60
 import com.lianyi.core.ui.theme.Info
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 fun UserGameRolesDialog(
     user: User,
@@ -46,7 +47,7 @@ fun UserGameRolesDialog(
         items(user.userGameRoles, key = { it.game_uid }) { role ->
             Row(
                 modifier = Modifier
-                    .radius(4.dp)
+                    .radius(RadiusMedium)
                     .fillMaxWidth()
                     .clickable {
                         onSelectRole.invoke(role)
@@ -123,7 +124,7 @@ fun UserGameRolesDialog(
                 user.userGameRoles.forEach { role ->
                     Row(
                         modifier = Modifier
-                            .radius(4.dp)
+                            .radius(RadiusMedium)
                             .fillMaxWidth()
                             .clickable {
                                 onSelectRole.invoke(user,role)

@@ -27,6 +27,7 @@ import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.core.ui.theme.Black_10
 import com.lianyi.core.ui.theme.Black_30
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 /*
 * 视频播放器占位符
 *
@@ -48,7 +49,7 @@ fun VideoPlayerPlaceholder(
         NetworkImage(
             url = cover,
             modifier = Modifier
-                .radius(4.dp)
+                .radius(RadiusMedium)
                 .fillMaxSize(),
             contentScale = ContentScale.FillWidth
         )

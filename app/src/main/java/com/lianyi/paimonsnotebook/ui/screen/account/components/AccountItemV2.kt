@@ -39,6 +39,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
 import com.lianyi.core.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.Primary_1
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 @Composable
 fun AccountItemV2(
@@ -130,7 +131,7 @@ fun AccountItemV2(
                             painter = painterResource(id = R.drawable.ic_user_circle_outline),
                             contentDescription = "设为默认账号",
                             modifier = Modifier
-                                .radius(2.dp)
+                                .radius(RadiusSmall)
                                 .size(30.dp)
                                 .clickable {
                                     onSetDefault.invoke(user)
@@ -142,7 +143,7 @@ fun AccountItemV2(
                         painter = painterResource(id = R.drawable.ic_cookie),
                         contentDescription = "复制Cookie",
                         modifier = Modifier
-                            .radius(2.dp)
+                            .radius(RadiusSmall)
                             .size(30.dp)
                             .clickable {
                                 onCopyCookie.invoke(user)
@@ -154,7 +155,7 @@ fun AccountItemV2(
                             painter = painterResource(id = R.drawable.ic_arrow_sync_circle),
                             contentDescription = "刷新Cookie",
                             modifier = Modifier
-                                .radius(2.dp)
+                                .radius(RadiusSmall)
                                 .size(30.dp)
                                 .clickable {
                                     onRefreshCookie.invoke(user)
@@ -166,7 +167,7 @@ fun AccountItemV2(
                         painter = painterResource(id = R.drawable.ic_delete),
                         contentDescription = "删除账号",
                         modifier = Modifier
-                            .radius(2.dp)
+                            .radius(RadiusSmall)
                             .size(30.dp)
                             .clickable {
                                 onDelete.invoke(user)

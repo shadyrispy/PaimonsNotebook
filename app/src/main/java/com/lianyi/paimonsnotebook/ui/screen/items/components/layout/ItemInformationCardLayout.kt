@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.BlurCardBackgroundColor
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 /*
 * 物品信息卡片布局
 * */
@@ -25,7 +26,7 @@ internal fun ItemInformationCardLayout(
         modifier = Modifier
             .fillMaxWidth()
             .padding(margin)
-            .radius(4.dp)
+            .radius(RadiusMedium)
             .background(BlurCardBackgroundColor)
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(contentSpacer),

@@ -21,6 +21,7 @@ import com.lianyi.paimonsnotebook.common.components.widget.TextButton
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.util.AppWidgetDataType
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.binding.AppWidgetBindingService
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 @Composable
 fun BoxScope.AppWidgetFieldBindingPanel(
@@ -48,7 +49,7 @@ fun BoxScope.AppWidgetFieldBindingPanel(
                                 text = fieldName,
                                 fontSize = 14.sp,
                                 modifier = Modifier
-                                    .radius(2.dp)
+                                    .radius(RadiusSmall)
                                     .clickable {
                                         onClickField.invoke(appWidgetDataType, fieldName)
                                     }

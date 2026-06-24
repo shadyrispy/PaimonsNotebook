@@ -33,6 +33,8 @@ import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.miyoushe.painter_topic.PainterTopicListData
 import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.paimonsnotebook.ui.theme.RadiusLarge
+import com.lianyi.paimonsnotebook.ui.theme.RadiusMedium
 @Composable
 @OptIn(ExperimentalLayoutApi::class)
 fun TopicPostItem(
@@ -57,7 +59,7 @@ fun TopicPostItem(
     Column(
         modifier = Modifier
             .zIndex(0f)
-            .radius(8.dp)
+            .radius(RadiusLarge)
             .fillMaxWidth()
             .background(CardBackGroundColor_Light_1)
             .clickable {
@@ -94,7 +96,7 @@ fun TopicPostItem(
             NetworkImage(
                 url = cover,
                 modifier = Modifier
-                    .radius(4.dp)
+                    .radius(RadiusMedium)
                     .fillMaxWidth()
                     .heightIn(1.dp, 360.dp),
                 contentScale = ContentScale.FillWidth

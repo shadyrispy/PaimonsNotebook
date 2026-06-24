@@ -35,6 +35,7 @@ import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.components.items.C
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.components.page.CultivateProjectOverallPage
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.viewmodel.CultivateProjectScreenViewModel
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall3
 
 class CultivateProjectScreen : BaseActivity() {
 
@@ -90,7 +91,7 @@ class CultivateProjectScreen : BaseActivity() {
                                             contentDescription = "切换布局",
                                             modifier = Modifier
                                                 .padding(2.dp)
-                                                .radius(3.dp)
+                                                .radius(RadiusSmall3)
                                                 .size(32.dp)
                                                 .clickable {
                                                     viewModel.switchShowOverallPageGridList()
@@ -105,7 +106,7 @@ class CultivateProjectScreen : BaseActivity() {
                                     contentDescription = "导航",
                                     modifier = Modifier
                                         .padding(2.dp)
-                                        .radius(3.dp)
+                                        .radius(RadiusSmall3)
                                         .size(32.dp)
                                         .clickable {
                                             viewModel.goOptionScreen()

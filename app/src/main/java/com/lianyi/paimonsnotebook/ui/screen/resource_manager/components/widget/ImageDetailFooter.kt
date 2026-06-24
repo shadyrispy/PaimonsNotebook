@@ -28,6 +28,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.core.ui.theme.Black_90
 import com.lianyi.core.ui.theme.Font_Normal
 import com.lianyi.core.ui.theme.White
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 @Composable
 fun ImageDetailFooter(
     deleteImage: () -> Unit,
@@ -59,7 +60,7 @@ fun ImageDetailFooter(
             list.forEach {
                 Column(
                     modifier = Modifier
-                        .radius(2.dp)
+                        .radius(RadiusSmall)
                         .requiredWidthIn(40.dp, 120.dp)
                         .clickable {
                             it.third.invoke()

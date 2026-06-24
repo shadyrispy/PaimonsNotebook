@@ -28,6 +28,7 @@ import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.widget.InputTextFiled
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.extension.string.notify
+import com.lianyi.paimonsnotebook.ui.theme.RadiusSmall
 
 @Composable
 fun AppWidgetEditTransformItem(
@@ -90,7 +91,7 @@ fun AppWidgetEditTransformItem(
             painter = painterResource(id = R.drawable.ic_chevron_up),
             contentDescription = "增加",
             modifier = Modifier
-                .radius(2.dp)
+                .radius(RadiusSmall)
                 .size(24.dp)
                 .clickable {
                     onValueChange.invoke(name, realValue + 1)
@@ -101,7 +102,7 @@ fun AppWidgetEditTransformItem(
             painter = painterResource(id = R.drawable.ic_chevron_down),
             contentDescription = "减少",
             modifier = Modifier
-                .radius(2.dp)
+                .radius(RadiusSmall)
                 .size(24.dp)
                 .clickable {
                     onValueChange.invoke(name, realValue - 1)
