@@ -19,13 +19,11 @@ import com.lianyi.paimonsnotebook.common.extension.value.dpToPx
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.AppWidgetEditData
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.binding.AppWidgetBindingService
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.binding.AppWidgetFieldBindingData
-import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.config.AppWidgetEditValueConfigData
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.AppWidgetAlignmentHelper
+import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.AppWidgetEditConfigProvider
+import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.AppWidgetEditHistoryManager
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.enums.ComponentAlignType
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.enums.ComponentSelectType
-import com.lianyi.core.ui.theme.Error
-import com.lianyi.paimonsnotebook.ui.theme.Primary
-import com.lianyi.paimonsnotebook.ui.theme.Primary_3
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -37,12 +35,14 @@ class AppWidgetEditActionViewModel(
     //组件数量上限
     private val componentMaxCount = 30
 
-    //无效值
-    private val invalidValue = -999f
-    val invalidStringValue = "-"
-
     //字符最大数量
     private val textMaxLength = 255
+
+    val config = AppWidgetEditConfigProvider
+
+    private val historyManager = AppWidgetEditHistoryManager()
+
+    private val baseDensity = 720f
 
     //选中的组件
     var selectedComponents = mutableStateListOf<AppWidgetEditData.Component>()
@@ -77,7 +77,7 @@ class AppWidgetEditActionViewModel(
     lateinit var popupPositionProvider: PopupWindowPositionProvider
         private set
 
-    var inputTextShowValue by mutableStateOf(invalidStringValue)
+    var inputTextShowValue by mutableStateOf(config.invalidStringValue)
         private set
 
     var showTextConfig by mutableStateOf(false)
@@ -97,102 +97,6 @@ class AppWidgetEditActionViewModel(
     lateinit var fieldBindingData: AppWidgetFieldBindingData
         private set
 
-    //当前历史记录的索引
-    private var currentHistoryIndex = 0
-
-    //每次操作后都会存储上一次的的数据,用于撤回操作
-    private val historyList = mutableListOf<AppWidgetEditData>()
-
-    private val baseDensity = 720f
-
-    val transformValueConfigMap = mapOf(
-        "X" to createEditValueConfigData(
-            min = 0f,
-            max = 9999f,
-            setProperty = { component -> component.baseComponent::x::set },
-            getProperty = { it.baseComponent.x }),
-        "Y" to createEditValueConfigData(
-            min = 0f,
-            max = 9999f,
-            setProperty = { component -> component.baseComponent::y::set },
-            getProperty = { it.baseComponent.y }),
-        "W" to createEditValueConfigData(
-            min = .5f,
-            max = 9999f,
-            setProperty = { component -> component.baseComponent::width::set },
-            getProperty = { it.baseComponent.width }),
-        "H" to createEditValueConfigData(
-            min = .5f,
-            max = 9999f,
-            setProperty = { component -> component.baseComponent::height::set },
-            getProperty = { it.baseComponent.height }),
-        "R" to createEditValueConfigData(
-            min = -360f,
-            max = 360f,
-            setProperty = { component -> component.baseComponent::rotate::set },
-            getProperty = { it.baseComponent.rotate }),
-    )
-
-    val textValueConfigMap = mapOf(
-        "字号" to createEditValueConfigData(
-            min = 0f,
-            max = 100f,
-            setProperty = { component ->
-                component.text?.let { it::textSize::set }
-                    ?: { _: Float -> "对象异常,数值设置失败".errorNotify(false) }
-            },
-            getProperty = { it.text?.textSize ?: invalidValue }),
-        "间距" to AppWidgetEditValueConfigData(
-            min = 0f,
-            max = 100f,
-            onValueChange = { component ->
-                component.text?.let { it::textSpacer::set }
-                    ?: { _: Float -> "对象异常,数值设置失败".errorNotify(false) }
-            },
-            getProperty = { it.text?.textSpacer ?: invalidValue })
-    )
-
-    val historyActionButtons = listOf(
-        "撤销" to R.drawable.ic_arrow_undo_1,
-        "复原" to R.drawable.ic_arrow_redo_1
-    )
-
-    val componentActionButtons = listOf(
-        Triple("添加", R.drawable.ic_add, Primary),
-        Triple("复制", R.drawable.ic_copy_outline, Primary_3),
-        Triple("删除", R.drawable.ic_delete, Error)
-    )
-
-    //可添加的组件
-    val addableComponent = listOf(
-        "文本" to AppWidgetComponentType.Text,
-        "图片" to AppWidgetComponentType.Image,
-        "进度条" to AppWidgetComponentType.ProgressBar,
-        "线条" to AppWidgetComponentType.Line,
-        "矩形" to AppWidgetComponentType.Rectangle,
-        "三角形" to AppWidgetComponentType.Triangle,
-        "圆形" to AppWidgetComponentType.Circle,
-    )
-
-    //对齐的组件
-    val alignButtons = listOf(
-        R.drawable.ic_align_top_outline to ComponentAlignType.Top,
-        R.drawable.ic_align_center_vertical_outline to ComponentAlignType.CenterVertical,
-        R.drawable.ic_align_bottom_outline to ComponentAlignType.Bottom,
-        R.drawable.ic_align_left_outline to ComponentAlignType.Start,
-        R.drawable.ic_align_center_horizontal_outline to ComponentAlignType.CenterHorizontal,
-        R.drawable.ic_align_right_outline to ComponentAlignType.End,
-        R.drawable.ic_align_both_horizontal_outline to ComponentAlignType.BothHorizontal,
-        R.drawable.ic_align_both_vertical_outline to ComponentAlignType.BothVertical
-    )
-
-    val textStyleButtons = listOf(
-        R.drawable.ic_text_bold,
-        R.drawable.ic_text_italic_1,
-        R.drawable.ic_text_underline_1,
-        R.drawable.ic_text_strike_through_1
-    )
-
     init {
         scope.launch {
             snapshotFlow { selectedComponents.size }.collect {
@@ -211,18 +115,6 @@ class AppWidgetEditActionViewModel(
             }
         }
     }
-
-    private fun createEditValueConfigData(
-        min: Float,
-        max: Float,
-        getProperty: (AppWidgetEditData.Component) -> Float,
-        setProperty: (AppWidgetEditData.Component) -> (Float) -> Unit
-    ) = AppWidgetEditValueConfigData(
-        min = min,
-        max = max,
-        onValueChange = setProperty,
-        getProperty = getProperty
-    )
 
     fun showBindingFieldPanel() {
         showAppWidgetBindingPanel = true
@@ -433,13 +325,13 @@ class AppWidgetEditActionViewModel(
     }
 
     fun getTransformShowValueByName(name: String): Float {
-        if (selectedComponents.isEmpty()) return invalidValue
+        if (selectedComponents.isEmpty()) return config.invalidValue
 
         val firstBase = selectedComponents.first()
-        var value = invalidValue
+        var value = config.invalidValue
 
         val configData =
-            transformValueConfigMap[name] ?: textValueConfigMap[name] ?: return invalidValue
+            config.transformValueConfigMap[name] ?: config.textValueConfigMap[name] ?: return config.invalidValue
         if (selectedComponents.all { configData.getShowPropertyPredicate.invoke(it, firstBase) }) {
             value = configData.getProperty.invoke(firstBase)
         }
@@ -452,7 +344,7 @@ class AppWidgetEditActionViewModel(
         name: String,
         value: Float
     ) {
-        val configData = transformValueConfigMap[name] ?: textValueConfigMap[name]
+        val configData = config.transformValueConfigMap[name] ?: config.textValueConfigMap[name]
 
         if (configData == null) {
             "没有找到key=[${name}]的配置".errorNotify()
@@ -526,7 +418,7 @@ class AppWidgetEditActionViewModel(
     fun onDragEditTransformItem(name: String, value: Float) {
         val components = getSelectedUnLockedComponents()
 
-        val configData = transformValueConfigMap[name] ?: return
+        val configData = config.transformValueConfigMap[name] ?: return
 
         components.forEach {
             val currentValue = configData.getProperty.invoke(it)
@@ -534,15 +426,20 @@ class AppWidgetEditActionViewModel(
         }
     }
 
-    //更新历史记录操作按钮的状态
-    private fun updateHistoryActionButtonsState() {
-        enableHistoryNext = currentHistoryIndex < historyList.size - 1
-        enableHistoryPrev = currentHistoryIndex > 0
+    //操作撤销,更改当前
+    fun historyNext() {
+        historyManager.next()?.let {
+            currentEditData = it
+            updateHistoryActionButtonsState()
+        } ?: "没有更多的历史记录".warnNotify(false)
     }
 
-    //操作撤销,更改当前
-    fun historyNext() = changeCurrentEditDataFromHistory(1)
-    fun historyPrev() = changeCurrentEditDataFromHistory(-1)
+    fun historyPrev() {
+        historyManager.prev()?.let {
+            currentEditData = it
+            updateHistoryActionButtonsState()
+        } ?: "没有更多的历史记录".warnNotify(false)
+    }
 
     //获取选择的组件中未锁定的组件
     private fun getSelectedComponentsUnLockedComponentCount() =
@@ -555,43 +452,14 @@ class AppWidgetEditActionViewModel(
     private fun getUnLockedComponentsByType(type: AppWidgetComponentType) =
         selectedComponents.filter { !it.isLocked && it.type == type }
 
-    private fun changeCurrentEditDataFromHistory(value: Int) {
-        val index = currentHistoryIndex + value
-        if (index < 0 || index >= historyList.size) {
-            "没有更多的历史记录".warnNotify(false)
-            return
-        }
-
-        currentEditData = historyList[index]
-        currentHistoryIndex = index
-
-        updateHistoryActionButtonsState()
+    private fun updateHistoryActionButtonsState() {
+        enableHistoryNext = historyManager.canNext
+        enableHistoryPrev = historyManager.canPrev
     }
 
     //更新历史记录
     private fun recordHistory() {
-
-        //当前索引不等于历史记录的最后一条时,代表从历史记录恢复了数据
-        //需要在记录前移除后续冲突的记录
-        val deleteLastCount = historyList.size - currentHistoryIndex - 1
-
-//        repeat(deleteLastCount) {
-//            historyList.removeLast()
-//        }
-//
-//        //确保历史数据最多只有10条,避免内存占用过高
-//        val deleteCount = historyList.size - 9
-//
-//        //清除最早的数据
-//        repeat(deleteCount) {
-//            historyList.removeFirst()
-//        }
-
-        historyList += currentEditData.clone()
-
-        //更新当前历史记录索引
-        currentHistoryIndex = historyList.size - 1
-
+        historyManager.record(currentEditData)
         updateHistoryActionButtonsState()
     }
 

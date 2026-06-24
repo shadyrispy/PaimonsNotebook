@@ -171,7 +171,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    viewModel.historyActionButtons.forEachIndexed { index, pair ->
+                    viewModel.config.historyActionButtons.forEachIndexed { index, pair ->
                         val background = if (index == 0) {
                             if (viewModel.enableHistoryPrev) Warning else Warning_1
                         } else {
@@ -216,7 +216,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    viewModel.componentActionButtons.forEach {
+                    viewModel.config.componentActionButtons.forEach {
                         var size = IntSize.Zero
                         var offset = Offset.Zero
                         Box(modifier = Modifier
@@ -255,7 +255,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    viewModel.alignButtons.forEach {
+                    viewModel.config.alignButtons.forEach {
                         Icon(painter = painterResource(id = it.first),
                             contentDescription = "对齐组件",
                             modifier = Modifier
@@ -301,7 +301,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                     )
                 }
 
-                viewModel.transformValueConfigMap.keys.forEach {
+                viewModel.config.transformValueConfigMap.keys.forEach {
                     AppWidgetEditTransformItem(
                         name = it,
                         getValueByName = viewModel::getTransformShowValueByName,
@@ -322,7 +322,7 @@ fun BoxScope.AppWidgetEditActionPanel(
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    viewModel.textStyleButtons.forEach {
+                    viewModel.config.textStyleButtons.forEach {
                         Icon(painter = painterResource(id = it),
                             contentDescription = "切换文本样式",
                             modifier = Modifier
@@ -398,7 +398,7 @@ fun BoxScope.AppWidgetEditActionPanel(
 
                 }
 
-                viewModel.textValueConfigMap.keys.forEach {
+                viewModel.config.textValueConfigMap.keys.forEach {
                     AppWidgetEditTransformItem(
                         name = it,
                         getValueByName = viewModel::getTransformShowValueByName,
@@ -569,7 +569,7 @@ fun BoxScope.AppWidgetEditActionPanel(
     if (viewModel.showAddComponentPopupWindow) {
         AppWidgetAddableComponentPopupWindow(
             popupProvider = viewModel.popupPositionProvider,
-            items = viewModel.addableComponent,
+            items = viewModel.config.addableComponent,
             onClickItem = viewModel::onAddComponent,
             onDismissRequest = viewModel::dismissAddComponentPopupWindow
         )
