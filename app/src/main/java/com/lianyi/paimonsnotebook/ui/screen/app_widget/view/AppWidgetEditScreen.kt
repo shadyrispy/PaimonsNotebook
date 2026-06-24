@@ -91,7 +91,7 @@ class AppWidgetEditScreen : BaseActivity(
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_circle_empty),
-                            contentDescription = null,
+                            contentDescription = "组件操作",
                             modifier = Modifier
                                 .radius(4.dp)
                                 .size(24.dp)

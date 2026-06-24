@@ -143,7 +143,7 @@ fun CultivateMaterialGroup(
                         else -> R.drawable.ic_circle_empty
                     }
                 ),
-                contentDescription = null,
+                contentDescription = "展开/折叠材料组",
                 modifier = Modifier
                     .radius(2.dp)
                     .size(22.dp)

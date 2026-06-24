@@ -43,7 +43,7 @@ internal fun ItemActionButton(
     ) {
         Icon(
             painter = painterResource(id = iconResId),
-            contentDescription = null,
+            contentDescription = "操作",
             modifier = Modifier.size(23.dp),
             tint = iconTint
         )

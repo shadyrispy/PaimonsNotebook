@@ -92,7 +92,7 @@ fun AccountItemGameRole(
         if (!role.is_chosen) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_user_outline),
-                contentDescription = null,
+                contentDescription = "切换角色",
                 modifier = Modifier
                     .padding(end = 8.dp)
                     .radius(2.dp)

@@ -156,7 +156,7 @@ internal fun AccountInfoCard(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.function_icon_hutao_database),
-                    contentDescription = null,
+                    contentDescription = "账号信息",
                     modifier = Modifier.size(20.dp), tint = White
                 )
                 Spacer(modifier = Modifier.width(2.dp))

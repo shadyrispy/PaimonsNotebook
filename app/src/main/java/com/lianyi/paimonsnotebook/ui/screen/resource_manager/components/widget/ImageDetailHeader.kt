@@ -47,7 +47,7 @@ fun ImageDetailHeader(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_chevron_left),
-                contentDescription = null,
+                contentDescription = "返回",
                 tint = Black,
                 modifier = Modifier
                     .radius(2.dp)

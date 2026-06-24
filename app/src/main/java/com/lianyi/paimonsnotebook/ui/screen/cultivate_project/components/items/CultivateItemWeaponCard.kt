@@ -120,7 +120,7 @@ fun CultivateItemWeaponCard(
 
                     Icon(
                         painter = painterResource(id = R.drawable.ic_delete),
-                        contentDescription = null,
+                        contentDescription = "武器详情",
                         modifier = Modifier
                             .radius(2.dp)
                             .size(22.dp)

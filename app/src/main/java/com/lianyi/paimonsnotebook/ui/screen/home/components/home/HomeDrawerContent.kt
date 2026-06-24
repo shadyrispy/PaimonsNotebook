@@ -62,7 +62,7 @@ fun HomeDrawerContent(
                 horizontalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Icon(painter = painterResource(id = R.drawable.ic_settings),
-                    contentDescription = null,
+                    contentDescription = "菜单项",
                     modifier = Modifier
                         .radius(2.dp)
                         .size(36.dp)
@@ -74,7 +74,7 @@ fun HomeDrawerContent(
 
                 Icon(
                     painter = painterResource(id = R.drawable.ic_scan),
-                    contentDescription = null,
+                    contentDescription = "扫码",
                     modifier = Modifier
                         .radius(2.dp)
                         .size(36.dp)
@@ -86,7 +86,7 @@ fun HomeDrawerContent(
 
                 Icon(
                     painter = painterResource(id = R.drawable.ic_gift),
-                    contentDescription = null,
+                    contentDescription = "礼包",
                     modifier = Modifier
                         .radius(2.dp)
                         .size(36.dp)

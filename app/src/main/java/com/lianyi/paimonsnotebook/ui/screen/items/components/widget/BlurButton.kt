@@ -18,7 +18,7 @@ internal fun BlurButton(
 ) {
     Icon(
         painter = painterResource(id = resId),
-        contentDescription = null,
+        contentDescription = "操作按钮",
         modifier = Modifier
             .radius(4.dp)
             .size(36.dp)

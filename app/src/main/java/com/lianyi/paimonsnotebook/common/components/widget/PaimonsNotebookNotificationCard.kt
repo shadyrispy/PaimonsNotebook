@@ -79,7 +79,7 @@ fun PaimonsNotebookNotificationCard(
                 if (data.closeable) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_dismiss),
-                        contentDescription = null,
+                        contentDescription = "关闭通知",
                         tint = primaryColor,
                         modifier = Modifier
                             .radius(2.dp)

@@ -36,7 +36,7 @@ fun IconTextClickableItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(id = iconResId), contentDescription = null,
+            painter = painterResource(id = iconResId), contentDescription = "选项",
             modifier = Modifier.size(20.dp)
         )
 

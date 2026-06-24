@@ -235,7 +235,7 @@ fun DailyNoteCard(
                 )
 
                 Icon(painter = painterResource(id = R.drawable.ic_settings),
-                    contentDescription = null,
+                    contentDescription = "设置",
                     modifier = Modifier
                         .size(26.dp)
                         .clip(RoundedCornerShape(2.dp))

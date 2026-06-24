@@ -78,7 +78,7 @@ fun GachaRecordCard(
                     Icon(painter = painterResource(
                         id = iconId
                     ),
-                        contentDescription = null,
+                        contentDescription = "祈愿记录详情",
                         tint = Black_60,
                         modifier = Modifier
                             .radius(2.dp)

@@ -88,7 +88,7 @@ fun AppWidgetEditTransformItem(
         )
         Icon(
             painter = painterResource(id = R.drawable.ic_chevron_up),
-            contentDescription = null,
+            contentDescription = "增加",
             modifier = Modifier
                 .radius(2.dp)
                 .size(24.dp)
@@ -99,7 +99,7 @@ fun AppWidgetEditTransformItem(
 
         Icon(
             painter = painterResource(id = R.drawable.ic_chevron_down),
-            contentDescription = null,
+            contentDescription = "减少",
             modifier = Modifier
                 .radius(2.dp)
                 .size(24.dp)

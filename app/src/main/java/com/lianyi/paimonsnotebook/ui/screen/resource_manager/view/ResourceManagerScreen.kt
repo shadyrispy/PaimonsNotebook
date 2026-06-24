@@ -48,7 +48,7 @@ class ResourceManagerScreen : BaseActivity() {
                             Crossfade(targetState = viewModel.isSelectionMode.value, label = "") {
                                 if (it) {
                                     Icon(painter = painterResource(id = R.drawable.ic_delete),
-                                        contentDescription = null,
+                                        contentDescription = "删除",
                                         modifier = Modifier
                                             .radius(4.dp)
                                             .size(28.dp)

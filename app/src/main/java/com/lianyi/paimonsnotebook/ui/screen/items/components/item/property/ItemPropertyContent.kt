@@ -135,7 +135,7 @@ internal fun ItemPropertyContent(
             if (showPromotedButton) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_chevron_left_2),
-                    contentDescription = null,
+                    contentDescription = "属性详情",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(32.dp)

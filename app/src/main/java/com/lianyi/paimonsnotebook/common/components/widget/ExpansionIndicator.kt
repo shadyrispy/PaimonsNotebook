@@ -31,7 +31,7 @@ fun ExpansionIndicator(
     )
 
     Icon(painter = painterResource(id = R.drawable.ic_chevron_down),
-        contentDescription = null,
+        contentDescription = "展开/折叠",
         tint = Black_60,
         modifier = Modifier
             .radius(2.dp)

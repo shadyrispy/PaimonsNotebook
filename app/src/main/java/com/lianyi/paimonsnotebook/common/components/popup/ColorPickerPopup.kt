@@ -71,7 +71,7 @@ fun ColorPickerPopup(
 
                 Icon(
                     painter = painterResource(id = R.drawable.ic_dismiss),
-                    contentDescription = null,
+                    contentDescription = "选择颜色",
                     modifier = Modifier
                         .padding(14.dp)
                         .radius(4.dp)

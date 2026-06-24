@@ -21,7 +21,7 @@ fun AchievementActionButton(
 ) {
     Icon(
         painter = painterResource(id = resId),
-        contentDescription = null,
+        contentDescription = "成就操作",
         modifier = Modifier
             .radius(2.dp)
             .size(24.dp)

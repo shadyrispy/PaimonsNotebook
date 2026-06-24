@@ -70,7 +70,7 @@ fun ImageDetailFooter(
                 ) {
 
                     Icon(
-                        painter = painterResource(id = it.first), contentDescription = null,
+                        painter = painterResource(id = it.first), contentDescription = "图片操作",
                         modifier = Modifier.size(24.dp),
                         tint = Black_90
                     )

@@ -195,7 +195,7 @@ fun VideoPlayer(
 
                 Icon(
                     painter = painterResource(id = R.drawable.ic_dismiss),
-                    contentDescription = null,
+                    contentDescription = "关闭",
                     tint = White,
                     modifier = Modifier
                         .align(Alignment.TopStart)

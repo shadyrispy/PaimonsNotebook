@@ -87,7 +87,7 @@ class CultivateProjectScreen : BaseActivity() {
                                     if (it) {
                                         Icon(
                                             painter = painterResource(id = if (viewModel.showOverallPageGridList) R.drawable.ic_list_square else R.drawable.ic_grid_1),
-                                            contentDescription = null,
+                                            contentDescription = "切换布局",
                                             modifier = Modifier
                                                 .padding(2.dp)
                                                 .radius(3.dp)
@@ -102,7 +102,7 @@ class CultivateProjectScreen : BaseActivity() {
 
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_navigation),
-                                    contentDescription = null,
+                                    contentDescription = "导航",
                                     modifier = Modifier
                                         .padding(2.dp)
                                         .radius(3.dp)
