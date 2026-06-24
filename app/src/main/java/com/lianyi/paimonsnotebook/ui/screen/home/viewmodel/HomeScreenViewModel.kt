@@ -9,9 +9,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.king.camera.scan.CameraScan
+import com.lianyi.paimonsnotebook.common.core.base.BaseViewModel
 import com.lianyi.paimonsnotebook.common.data.hoyolab.game_record.DailyNote
 import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.database.daily_note.util.DailyNoteHelper
@@ -51,7 +51,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 
-class HomeScreenViewModel : ViewModel() {
+class HomeScreenViewModel : BaseViewModel() {
 
     //配置
     var configurationData by mutableStateOf(ConfigurationData())
@@ -70,48 +70,38 @@ class HomeScreenViewModel : ViewModel() {
 
 
     fun load() {
-        viewModelScope.launch(Dispatchers.IO) {
-            launch {
-                SettingsHelper.configurationFlow.collect {
-                    configurationData = it
-                    checkOverlayPermission()
-                }
-            }
-            launch {
-                HomeHelper.modalItemsFlow.collect {
-                    modalItems.clear()
-                    modalItems += it
-                }
-            }
-            launch {
-                AccountHelper.selectedUserFlow.collect {
-                    selectedUser = it
-                }
-            }
-            launch {
-                DailyNoteHelper.dailyNoteFlow.collect {
-                    dailyNoteList.clear()
-                    dailyNoteList.addAll(it)
-                }
-            }
-            launch {
-                dataStoreValuesFirst {
-                    val checkAppNewVersion = it[PreferenceKeys.EnableCheckNewVersion] ?: true
-                    val checkMetadataNewVersion = it[PreferenceKeys.EnableMetadata] ?: true
+        SettingsHelper.configurationFlow.collectOnMain {
+            configurationData = it
+            checkOverlayPermission()
+        }
+        HomeHelper.modalItemsFlow.collectOnMain {
+            modalItems.clear()
+            modalItems += it
+        }
+        AccountHelper.selectedUserFlow.collectOnMain {
+            selectedUser = it
+        }
+        DailyNoteHelper.dailyNoteFlow.collectOnMain {
+            dailyNoteList.clear()
+            dailyNoteList.addAll(it)
+        }
+        launchIOSafe {
+            dataStoreValuesFirst {
+                val checkAppNewVersion = it[PreferenceKeys.EnableCheckNewVersion] ?: true
+                val checkMetadataNewVersion = it[PreferenceKeys.EnableMetadata] ?: true
 
-                    if (checkAppNewVersion) {
-                        viewModelScope.launchIO {
-                            updateService.checkNewVersion(onFoundNewVersion = {
-                                "发现新版本,可前往设置进行更新[关于->派蒙笔记本]".notify(closeable = true)
-                            }, onFail = {
-                            }, onNotFoundNewVersion = {
-                            })
-                        }
+                if (checkAppNewVersion) {
+                    viewModelScope.launchIO {
+                        updateService.checkNewVersion(onFoundNewVersion = {
+                            "发现新版本,可前往设置进行更新[关于->派蒙笔记本]".notify(closeable = true)
+                        }, onFail = {
+                        }, onNotFoundNewVersion = {
+                        })
                     }
+                }
 
-                    if(checkMetadataNewVersion){
-                        MetadataHelper.checkAndUpdateMetadata()
-                    }
+                if(checkMetadataNewVersion){
+                    MetadataHelper.checkAndUpdateMetadata()
                 }
             }
         }
