@@ -1,13 +1,13 @@
 package com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic
 
 import com.lianyi.paimonsnotebook.R
-import com.lianyi.paimonsnotebook.ui.theme.ElementElectricColor
-import com.lianyi.paimonsnotebook.ui.theme.ElementFireColor
-import com.lianyi.paimonsnotebook.ui.theme.ElementGrassColor
-import com.lianyi.paimonsnotebook.ui.theme.ElementIceColor
-import com.lianyi.paimonsnotebook.ui.theme.ElementRockColor
-import com.lianyi.paimonsnotebook.ui.theme.ElementWaterColor
-import com.lianyi.paimonsnotebook.ui.theme.ElementWindColor
+import com.lianyi.core.ui.theme.ElementElectricColor
+import com.lianyi.core.ui.theme.ElementFireColor
+import com.lianyi.core.ui.theme.ElementGrassColor
+import com.lianyi.core.ui.theme.ElementIceColor
+import com.lianyi.core.ui.theme.ElementRockColor
+import com.lianyi.core.ui.theme.ElementWaterColor
+import com.lianyi.core.ui.theme.ElementWindColor
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 
 /*

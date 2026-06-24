@@ -24,10 +24,9 @@ import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostLinkCardType
-import com.lianyi.paimonsnotebook.ui.theme.LinkColor
-import com.lianyi.paimonsnotebook.ui.theme.PriceColor
-import com.lianyi.paimonsnotebook.ui.theme.White_50
-
+import com.lianyi.core.ui.theme.LinkColor
+import com.lianyi.core.ui.theme.PriceColor
+import com.lianyi.core.ui.theme.White_50
 @Composable
 internal fun PostLinkCard(
     item: PostFullData.Post.LinkCard,

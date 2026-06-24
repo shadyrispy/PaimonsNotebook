@@ -29,11 +29,10 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.util.compose.animate.animateTextStyleAsState
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_20
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_20
 import com.lianyi.paimonsnotebook.ui.theme.Primary_2
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-
+import com.lianyi.core.ui.theme.Transparent
 @Composable
 fun TabBarIndicator(
     modifier: Modifier = Modifier,

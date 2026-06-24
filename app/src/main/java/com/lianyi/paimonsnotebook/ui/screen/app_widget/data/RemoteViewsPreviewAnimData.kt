@@ -2,9 +2,8 @@ package com.lianyi.paimonsnotebook.ui.screen.app_widget.data
 
 import androidx.compose.animation.Animatable
 import androidx.compose.ui.graphics.Color
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.White
 class RemoteViewsPreviewAnimData(
     textColor: Color = Black,
     backgroundColor: Color = White,

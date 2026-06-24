@@ -27,12 +27,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-import com.lianyi.paimonsnotebook.ui.theme.Gray_F0
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.colorPrimary
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_60
+import com.lianyi.core.ui.theme.Gray_F0
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.colorPrimary
 /*
 * 输入框
 *

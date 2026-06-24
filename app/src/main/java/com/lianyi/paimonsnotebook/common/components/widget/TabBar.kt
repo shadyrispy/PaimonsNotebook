@@ -26,9 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.value.toDp
 import com.lianyi.paimonsnotebook.common.util.compose.animate.animateTextStyleAsState
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_20
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_20
 @Composable
 fun TabBar(
     tabs: Array<String>,

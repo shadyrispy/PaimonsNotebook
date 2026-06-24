@@ -20,8 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.R
-import com.lianyi.paimonsnotebook.ui.theme.ElementGrassColor
-
+import com.lianyi.core.ui.theme.ElementGrassColor
 /*
 * 内容加载占位
 * */

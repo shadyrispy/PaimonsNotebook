@@ -20,7 +20,7 @@ import com.lianyi.paimonsnotebook.common.components.lazy.ContentSpacerLazyColumn
 import com.lianyi.paimonsnotebook.common.components.placeholder.ErrorPlaceholder
 import com.lianyi.paimonsnotebook.common.core.base.BaseActivity
 import com.lianyi.paimonsnotebook.common.util.system_service.SystemService
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 class CrashScreen : BaseActivity() {

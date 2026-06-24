@@ -23,8 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor
-
+import com.lianyi.core.ui.theme.CardBackGroundColor
 /*
 * 适用于列表的物品卡
 * */

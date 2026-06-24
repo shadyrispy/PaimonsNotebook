@@ -13,9 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_60
 @Composable
 fun ChartLegend(
     legendColor: Color,

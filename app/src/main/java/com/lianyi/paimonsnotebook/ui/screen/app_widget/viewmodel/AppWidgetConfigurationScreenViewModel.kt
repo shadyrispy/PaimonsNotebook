@@ -39,8 +39,8 @@ import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.AppWidgetConfigurati
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.AppWidgetColorHelper
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
 import com.lianyi.paimonsnotebook.ui.screen.setting.util.SettingsHelper
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.White
 import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerAmber
 import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerBlue
 import com.lianyi.paimonsnotebook.ui.theme.WidgetColorPickerGreen

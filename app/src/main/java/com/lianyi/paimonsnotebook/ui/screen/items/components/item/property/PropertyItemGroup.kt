@@ -11,8 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.format.FightPropertyFormat
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.White_40
 @Composable
 internal fun PropertyItemGroup(
     propertyList: List<FightPropertyFormat>,

@@ -9,8 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.widget.IconTextHintSlotItem
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
-
+import com.lianyi.core.ui.theme.Black_30
 @Composable
 fun TitleAndDescriptionActionButton(
     modifier: Modifier = Modifier,

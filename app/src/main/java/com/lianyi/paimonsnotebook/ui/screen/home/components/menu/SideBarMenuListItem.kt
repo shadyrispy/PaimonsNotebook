@@ -21,9 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.home.data.ModalItemData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_90
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_90
 @Composable
 internal fun SideBarMenuListItem(
     item: ModalItemData,

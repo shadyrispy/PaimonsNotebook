@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.lianyi.paimonsnotebook.common.components.media.VideoPlayer
 import com.lianyi.paimonsnotebook.common.core.base.BaseActivity
 import com.lianyi.paimonsnotebook.common.viewmodel.VideoPlayViewModel
-import com.lianyi.paimonsnotebook.ui.theme.Black
+import com.lianyi.core.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 class VideoPlayScreen : BaseActivity(enableGesture = false) {

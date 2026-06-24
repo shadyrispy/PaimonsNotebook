@@ -13,9 +13,7 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.components.widget.InputTextFiled
 import com.lianyi.paimonsnotebook.common.components.widget.PasswordInputTextFiled
 import com.lianyi.paimonsnotebook.common.web.hoyolab.passport.LoginByAccountModel
-import com.lianyi.paimonsnotebook.ui.theme.Error
-
-
+import com.lianyi.core.ui.theme.Error
 @Composable
 fun InputDialog(
     title: String = "输入框",

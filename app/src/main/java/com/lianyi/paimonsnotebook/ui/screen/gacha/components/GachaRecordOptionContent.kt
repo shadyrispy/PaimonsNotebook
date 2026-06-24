@@ -23,7 +23,7 @@ import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
 import com.lianyi.paimonsnotebook.ui.screen.account.components.dialog.UserGameRolesDialog
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.widgets.SettingsOptionSwitch
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
+import com.lianyi.core.ui.theme.Black_60
 import com.lianyi.paimonsnotebook.ui.theme.Gray_F5
 import com.lianyi.paimonsnotebook.ui.theme.Primary_2
 

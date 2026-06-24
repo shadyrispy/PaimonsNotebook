@@ -38,10 +38,9 @@ import com.lianyi.paimonsnotebook.common.data.popup.IconTitleInformationPopupWin
 import com.lianyi.paimonsnotebook.common.data.popup.PopupWindowPositionProvider
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.White_40
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun ItemMaterialContent(

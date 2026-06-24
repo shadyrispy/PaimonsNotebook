@@ -19,9 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.components.media.NetworkImage
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.OfficialRecommendedPostsData
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black_30
+import com.lianyi.core.ui.theme.White
 /*
 * 首页公告
 * */

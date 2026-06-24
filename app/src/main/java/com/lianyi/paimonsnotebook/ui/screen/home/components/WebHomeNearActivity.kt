@@ -23,11 +23,10 @@ import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.NearActivityData
-import com.lianyi.paimonsnotebook.ui.theme.Gray_97
+import com.lianyi.core.ui.theme.Gray_97
 import com.lianyi.paimonsnotebook.ui.theme.Gray_F5
 import com.lianyi.paimonsnotebook.ui.theme.Primary_4
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 @Composable
 internal fun WebHomeNearActivity(
     item: NearActivityData.Hots.Group2.Children.NearActivity,

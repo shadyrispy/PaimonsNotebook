@@ -13,9 +13,9 @@ import com.lianyi.paimonsnotebook.common.database.app_widget_binding.data.AppWid
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.entity.AppWidgetBinding
 import com.lianyi.paimonsnotebook.common.extension.color.parseColor
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.core.ui.theme.White
 import com.lianyi.paimonsnotebook.ui.widgets.common.data.RemoteViewsInfo
 import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetConfigurationOption
 import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetHelper

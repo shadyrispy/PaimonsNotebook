@@ -39,11 +39,11 @@ import com.lianyi.paimonsnotebook.ui.screen.gacha.data.GachaOverviewListItem
 import com.lianyi.paimonsnotebook.ui.screen.gacha.util.GachaRecordCardDisplayState
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.list_card.ItemGridListCard
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar4Color2
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_30
+import com.lianyi.core.ui.theme.Black_60
+import com.lianyi.core.ui.theme.GachaStar4Color2
+import com.lianyi.core.ui.theme.GachaStar5Color
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 
 @OptIn(ExperimentalLayoutApi::class)

@@ -25,7 +25,7 @@ import com.lianyi.paimonsnotebook.common.core.base.BaseActivity
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.achievement.viewmodel.AchievementOptionScreenViewModel
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.SettingOptionGroup
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 class AchievementOptionScreen : BaseActivity() {

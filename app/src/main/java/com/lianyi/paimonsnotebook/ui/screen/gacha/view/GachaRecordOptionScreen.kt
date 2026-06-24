@@ -28,7 +28,7 @@ import com.lianyi.paimonsnotebook.ui.screen.account.components.dialog.UserGameRo
 import com.lianyi.paimonsnotebook.ui.screen.gacha.components.dialog.ChooseGameUidDialog
 import com.lianyi.paimonsnotebook.ui.screen.gacha.viewmodel.GachaRecordOptionScreenViewModel
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.SettingOptionGroup
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import com.lianyi.paimonsnotebook.ui.theme.Primary_2
 

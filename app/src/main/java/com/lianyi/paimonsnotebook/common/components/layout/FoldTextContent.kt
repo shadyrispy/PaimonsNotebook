@@ -33,10 +33,9 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
+import com.lianyi.core.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.FoldTextBackgroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Gray_F0
-
+import com.lianyi.core.ui.theme.Gray_F0
 @Composable
 fun FoldTextContent(
     modifier: Modifier = Modifier,

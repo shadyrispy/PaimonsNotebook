@@ -38,10 +38,9 @@ import com.lianyi.paimonsnotebook.ui.screen.home.components.home.HomeContent
 import com.lianyi.paimonsnotebook.ui.screen.home.components.home.HomeDrawerContent
 import com.lianyi.paimonsnotebook.ui.screen.home.viewmodel.HomeScreenViewModel
 import com.lianyi.paimonsnotebook.ui.screen.setting.util.enums.HomeScreenDisplayState
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 class HomeScreen : BaseActivity() {
     private val viewModel by lazy {
         ViewModelProvider(this)[HomeScreenViewModel::class.java]

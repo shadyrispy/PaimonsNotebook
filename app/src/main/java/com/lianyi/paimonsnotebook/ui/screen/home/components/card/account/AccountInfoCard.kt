@@ -35,14 +35,13 @@ import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.database.disk_cache.util.DiskCacheDataType
 import com.lianyi.paimonsnotebook.common.extension.modifier.padding.paddingStart
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
-import com.lianyi.paimonsnotebook.ui.theme.Info_1
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.White_10
-import com.lianyi.paimonsnotebook.ui.theme.White_20
-import com.lianyi.paimonsnotebook.ui.theme.White_80
-
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.Black_30
+import com.lianyi.core.ui.theme.Info_1
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.White_10
+import com.lianyi.core.ui.theme.White_20
+import com.lianyi.core.ui.theme.White_80
 @Composable
 internal fun AccountInfoCard(
     user: User?,

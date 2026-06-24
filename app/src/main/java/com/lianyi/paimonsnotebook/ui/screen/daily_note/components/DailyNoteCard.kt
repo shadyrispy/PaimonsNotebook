@@ -54,11 +54,10 @@ import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.game_record.daily_note.DailyNoteData
 import com.lianyi.paimonsnotebook.ui.screen.daily_note.data.DailyNoteCardItemData
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-import com.lianyi.paimonsnotebook.ui.theme.Error
-import com.lianyi.paimonsnotebook.ui.theme.Success
-import com.lianyi.paimonsnotebook.ui.theme.Success_1
-
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.core.ui.theme.Error
+import com.lianyi.core.ui.theme.Success
+import com.lianyi.core.ui.theme.Success_1
 @Composable
 fun DailyNoteCard(
     userGameRole: UserGameRoleData.Role,

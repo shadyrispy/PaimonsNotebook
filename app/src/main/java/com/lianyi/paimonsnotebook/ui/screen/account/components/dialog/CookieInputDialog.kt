@@ -18,9 +18,8 @@ import com.lianyi.paimonsnotebook.common.components.helper_text.view.HelperText
 import com.lianyi.paimonsnotebook.common.components.widget.InputTextFiled
 import com.lianyi.paimonsnotebook.common.extension.list.split
 import com.lianyi.paimonsnotebook.common.extension.modifier.padding.paddingBottom
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.Gray_97
-
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.Gray_97
 @Composable
 fun CookieInputDialog(
     inputValue: String,

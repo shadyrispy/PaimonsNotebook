@@ -40,11 +40,10 @@ import com.lianyi.paimonsnotebook.common.components.spacer.NavigationBarPaddingS
 import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpacer
 import com.lianyi.paimonsnotebook.common.components.widget.TextButton
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
+import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.Black_60
 import com.lianyi.paimonsnotebook.ui.theme.Primary
-import com.lianyi.paimonsnotebook.ui.theme.White_70
-
+import com.lianyi.core.ui.theme.White_70
 @Composable
 fun ColorPickerPopup(
     visible: Boolean,

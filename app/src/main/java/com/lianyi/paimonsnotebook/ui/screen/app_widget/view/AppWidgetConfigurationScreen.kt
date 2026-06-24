@@ -46,11 +46,11 @@ import com.lianyi.paimonsnotebook.ui.screen.app_widget.components.popup.RemoteVi
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.components.preview.GameRoleBindPreview
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.components.preview.GameUserBindPreview
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.viewmodel.AppWidgetConfigurationScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Info
+import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
+import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import kotlin.math.roundToInt
 

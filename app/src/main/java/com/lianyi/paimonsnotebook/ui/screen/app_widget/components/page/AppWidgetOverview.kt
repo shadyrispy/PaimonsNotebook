@@ -27,7 +27,7 @@ import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.RemoteViewsPreviewAnimData
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.view.AppWidgetConfigurationScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.util.HomeHelper
-import com.lianyi.paimonsnotebook.ui.theme.Black_5
+import com.lianyi.core.ui.theme.Black_5
 import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetHelper
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsIndexes
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsPreviewHelper

@@ -31,11 +31,10 @@ import com.lianyi.paimonsnotebook.common.components.media.NetworkImageForMetadat
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.util.compose.provider.NoRippleThemeProvides
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.format.AvatarSkillFormat
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.White_40
 @Composable
 internal fun AvatarSkillContent(
     skillList: List<AvatarSkillFormat>,

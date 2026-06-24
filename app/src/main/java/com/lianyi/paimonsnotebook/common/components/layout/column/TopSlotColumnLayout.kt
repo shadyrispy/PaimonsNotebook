@@ -14,8 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpacer
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-
+import com.lianyi.core.ui.theme.BackGroundColor
 /*
 * 顶部插槽垂直布局
 * */

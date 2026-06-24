@@ -32,8 +32,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.miyoushe.painter_topic.PainterTopicListData
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 @Composable
 @OptIn(ExperimentalLayoutApi::class)
 fun TopicPostItem(

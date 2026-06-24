@@ -44,10 +44,9 @@ import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.components.materia
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.CultivateItemInfoData
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.core.ui.theme.White
 @Composable
 fun CultivateAvatarCard(
     avatarData: AvatarData,

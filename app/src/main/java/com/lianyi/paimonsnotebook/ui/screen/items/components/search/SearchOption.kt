@@ -18,10 +18,9 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.information.Informa
 import com.lianyi.paimonsnotebook.ui.screen.items.data.SearchOptionData
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemContentFilterHelper
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.CardBackGroundColor
+import com.lianyi.core.ui.theme.White
 @Composable
 internal fun SearchOption(
     data: SearchOptionData,

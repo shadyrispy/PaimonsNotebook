@@ -1,9 +1,8 @@
 package com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data
 
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
-import com.lianyi.paimonsnotebook.ui.theme.Success
-import com.lianyi.paimonsnotebook.ui.theme.Warning
-
+import com.lianyi.core.ui.theme.Success
+import com.lianyi.core.ui.theme.Warning
 data class MaterialBaseInfo(
     val material: Material,
     val count: Int,

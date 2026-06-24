@@ -53,10 +53,9 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.ItemTabLayou
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.screen.AvatarScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.Error
+import com.lianyi.core.ui.theme.Error
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 class AvatarScreen : ComponentActivity() {
 
     private val viewModel by lazy {

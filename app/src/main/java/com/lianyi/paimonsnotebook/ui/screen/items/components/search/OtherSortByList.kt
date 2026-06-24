@@ -14,10 +14,9 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.components.dialog.LazyColumnDialog
 import com.lianyi.paimonsnotebook.ui.screen.items.data.SearchOptionData
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemContentFilterHelper
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.core.ui.theme.White
 @Composable
 internal fun OtherSortByList(
     expanded: Boolean,

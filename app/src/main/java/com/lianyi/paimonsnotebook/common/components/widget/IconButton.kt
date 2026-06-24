@@ -23,9 +23,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.White
 /*
 * 带图标的按钮
 * 可自定义圆角与图案

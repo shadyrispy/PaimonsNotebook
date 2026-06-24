@@ -39,7 +39,7 @@ import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.util.enums.ViewModelAction
 import com.lianyi.paimonsnotebook.ui.screen.home.components.post.TopicPostItem
 import com.lianyi.paimonsnotebook.ui.screen.home.viewmodel.TopicScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 /*

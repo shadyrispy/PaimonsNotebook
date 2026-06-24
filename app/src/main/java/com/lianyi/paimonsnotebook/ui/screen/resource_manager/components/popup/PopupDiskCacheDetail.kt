@@ -36,9 +36,9 @@ import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpace
 import com.lianyi.paimonsnotebook.common.extension.modifier.action.doubleClick
 import com.lianyi.paimonsnotebook.common.extension.modifier.action.pointerInputDetectTransformGestures
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.data.DiskCacheGroupData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Font_Normal
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Font_Normal
+import com.lianyi.core.ui.theme.White
 import kotlinx.coroutines.launch
 
 @Composable

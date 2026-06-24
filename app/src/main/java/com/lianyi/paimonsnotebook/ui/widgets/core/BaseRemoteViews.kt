@@ -34,7 +34,7 @@ import com.lianyi.paimonsnotebook.common.util.convert.TypeUnitConvert
 import com.lianyi.paimonsnotebook.common.util.image.PaimonsNotebookImageLoader
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.game_record.daily_note.DailyNoteData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.game_record.daily_note.DailyNoteWidgetData
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.White
 import com.lianyi.paimonsnotebook.ui.widgets.common.extensions.setImageTint
 import com.lianyi.paimonsnotebook.ui.widgets.common.extensions.setTextColor
 import com.lianyi.paimonsnotebook.ui.widgets.util.AppWidgetHelper

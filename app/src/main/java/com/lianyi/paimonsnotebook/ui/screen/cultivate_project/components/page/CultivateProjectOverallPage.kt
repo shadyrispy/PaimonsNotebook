@@ -32,8 +32,7 @@ import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.components.group.C
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.components.group.CultivateMaterialGroupItem
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.EntityBaseInfo
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.MaterialBaseInfo
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CultivateProjectOverallPage(

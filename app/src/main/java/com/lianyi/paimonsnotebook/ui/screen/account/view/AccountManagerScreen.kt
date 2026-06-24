@@ -45,7 +45,7 @@ import com.lianyi.paimonsnotebook.ui.screen.account.components.QRCodeLoginPopup
 import com.lianyi.paimonsnotebook.ui.screen.account.components.dialog.CookieInputDialog
 import com.lianyi.paimonsnotebook.ui.screen.account.components.popup.IconTextClickableItem
 import com.lianyi.paimonsnotebook.ui.screen.account.viewmodel.AccountManagerScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 class AccountManagerScreen : BaseActivity() {

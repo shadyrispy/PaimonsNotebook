@@ -39,12 +39,11 @@ import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.ite
 import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.item.PlayerCharacterDetailTalentCard
 import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.item.PlayerCharacterDetailWeaponCard
 import com.lianyi.paimonsnotebook.ui.screen.player_character.viewmodel.PlayerCharacterDetailScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.Error
+import com.lianyi.core.ui.theme.Error
 import com.lianyi.paimonsnotebook.ui.theme.FetterColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.White_40
 class PlayerCharacterDetailScreen : BaseActivity() {
 
     companion object {

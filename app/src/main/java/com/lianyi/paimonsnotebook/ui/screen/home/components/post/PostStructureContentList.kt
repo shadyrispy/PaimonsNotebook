@@ -37,8 +37,7 @@ import com.lianyi.paimonsnotebook.common.components.widget.RoundedTag
 import com.lianyi.paimonsnotebook.common.util.html.RichTextParser
 import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
-import com.lianyi.paimonsnotebook.ui.theme.Info
-
+import com.lianyi.core.ui.theme.Info
 /*
 * 文章结构内容列表
 * 结构解析还是有一些小问题,不修了,凑合用

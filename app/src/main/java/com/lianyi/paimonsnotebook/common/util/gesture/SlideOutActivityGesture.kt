@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.core.animation.doOnEnd
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.get
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_60
 import kotlin.math.abs
 
 class SlideOutActivityGesture(private val activity: Activity) : GestureDetector.OnGestureListener {

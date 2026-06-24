@@ -20,8 +20,8 @@ import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.modifier.animation.drawArcBorder
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.RemoteViewsPreviewAnimData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Success
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Success
 import kotlin.math.roundToInt
 
 @Composable

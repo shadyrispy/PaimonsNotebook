@@ -10,7 +10,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.value.pxToDp
-import com.lianyi.paimonsnotebook.ui.theme.Black_5
+import com.lianyi.core.ui.theme.Black_5
 import com.lianyi.paimonsnotebook.ui.theme.Primary_3
 import kotlin.math.abs
 

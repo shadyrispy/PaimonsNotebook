@@ -17,8 +17,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.animation.drawArcBor
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.paimonsnotebook.ui.theme.Primary_7
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 @Composable
 internal fun HomeDailyNoteCard(
     item: DailyNote,

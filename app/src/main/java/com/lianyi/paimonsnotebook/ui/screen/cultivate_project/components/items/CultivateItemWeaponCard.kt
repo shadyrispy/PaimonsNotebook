@@ -43,11 +43,10 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.components.material.CultivateMaterialGroup
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5WeaponColor
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.core.ui.theme.GachaStar5WeaponColor
+import com.lianyi.core.ui.theme.White
 @Composable
 fun CultivateItemWeaponCard(
     weaponData: WeaponData,

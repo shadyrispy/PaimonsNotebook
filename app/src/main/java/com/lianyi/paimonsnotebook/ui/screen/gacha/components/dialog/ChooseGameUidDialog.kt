@@ -23,11 +23,10 @@ import com.lianyi.core.ui.components.text.InfoText
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.dialog.LazyColumnDialog
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
+import com.lianyi.core.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.Primary_8
-import com.lianyi.paimonsnotebook.ui.theme.Success
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-
+import com.lianyi.core.ui.theme.Success
+import com.lianyi.core.ui.theme.Transparent
 @Composable
 fun ChooseGameUidDialog(
     uidList: List<String>,

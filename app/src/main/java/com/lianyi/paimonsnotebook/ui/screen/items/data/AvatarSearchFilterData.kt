@@ -16,8 +16,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.WeaponType
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemContentFilterHelper
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color
-
+import com.lianyi.core.ui.theme.GachaStar5Color
 /*
 * 角色搜索排序数据
 * */

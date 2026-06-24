@@ -18,9 +18,7 @@ import com.lianyi.paimonsnotebook.common.data.popup.PopupWindowPositionProvider
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.data.EntityBaseInfo
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
-import com.lianyi.paimonsnotebook.ui.theme.White
-
-
+import com.lianyi.core.ui.theme.White
 @Composable
 fun CultivateMaterialGroupItem(
     entityBaseInfo: EntityBaseInfo,

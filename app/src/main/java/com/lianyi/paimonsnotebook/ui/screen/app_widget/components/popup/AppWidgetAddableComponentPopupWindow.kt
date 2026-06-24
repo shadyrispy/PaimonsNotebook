@@ -27,9 +27,8 @@ import androidx.compose.ui.window.PopupProperties
 import com.lianyi.paimonsnotebook.common.data.popup.PopupWindowPositionProvider
 import com.lianyi.paimonsnotebook.common.database.app_widget_binding.util.AppWidgetComponentType
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.White
 @Composable
 fun AppWidgetAddableComponentPopupWindow(
     popupProvider: PopupWindowPositionProvider,

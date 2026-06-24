@@ -17,8 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.core.ui.components.text.PrimaryText
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 @Composable
 fun IconTextClickableItem(
     iconResId: Int,

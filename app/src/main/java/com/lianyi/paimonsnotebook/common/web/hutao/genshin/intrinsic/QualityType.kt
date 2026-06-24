@@ -1,14 +1,13 @@
 package com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic
 
 import com.lianyi.paimonsnotebook.R
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color2
-import com.lianyi.paimonsnotebook.ui.theme.Quality1Color
-import com.lianyi.paimonsnotebook.ui.theme.Quality2Color
-import com.lianyi.paimonsnotebook.ui.theme.Quality3Color
-import com.lianyi.paimonsnotebook.ui.theme.Quality4Color
-import com.lianyi.paimonsnotebook.ui.theme.Quality5Color
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-
+import com.lianyi.core.ui.theme.GachaStar5Color2
+import com.lianyi.core.ui.theme.Quality1Color
+import com.lianyi.core.ui.theme.Quality2Color
+import com.lianyi.core.ui.theme.Quality3Color
+import com.lianyi.core.ui.theme.Quality4Color
+import com.lianyi.core.ui.theme.Quality5Color
+import com.lianyi.core.ui.theme.Transparent
 /*
 * 稀有度
 * */

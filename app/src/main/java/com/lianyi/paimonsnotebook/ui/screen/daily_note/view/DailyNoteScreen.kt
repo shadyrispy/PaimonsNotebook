@@ -45,9 +45,9 @@ import com.lianyi.paimonsnotebook.common.util.compose.provider.NoRippleThemeProv
 import com.lianyi.paimonsnotebook.ui.screen.account.components.dialog.UserGameRolesDialog
 import com.lianyi.paimonsnotebook.ui.screen.daily_note.components.DailyNoteCard
 import com.lianyi.paimonsnotebook.ui.screen.daily_note.viewmodel.DailyNoteScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Info
+import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 class DailyNoteScreen : ComponentActivity() {

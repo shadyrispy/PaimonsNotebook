@@ -19,7 +19,7 @@ import com.lianyi.paimonsnotebook.ui.screen.home.view.HomeDrawerManagerScreen
 import com.lianyi.paimonsnotebook.ui.screen.home.view.HomeScreen
 import com.lianyi.paimonsnotebook.ui.screen.splash.components.EnableMetadataHint
 import com.lianyi.paimonsnotebook.ui.screen.splash.viewmodel.SplashScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 @SuppressLint("CustomSplashScreen")

@@ -17,7 +17,7 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.extension.value.toPx
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.RemoteViewsPreviewAnimData
 import com.lianyi.paimonsnotebook.ui.theme.Primary_4
-import com.lianyi.paimonsnotebook.ui.theme.Primary_9
+import com.lianyi.core.ui.theme.Primary_9
 import kotlin.math.roundToInt
 
 @Composable

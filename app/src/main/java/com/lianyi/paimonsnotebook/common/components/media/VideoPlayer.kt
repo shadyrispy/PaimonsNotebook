@@ -48,12 +48,12 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.action.doubleClick
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
-import com.lianyi.paimonsnotebook.ui.theme.Black_50
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.White_10
-import com.lianyi.paimonsnotebook.ui.theme.colorPrimary
+import com.lianyi.core.ui.theme.Black_30
+import com.lianyi.core.ui.theme.Black_50
+import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.White_10
+import com.lianyi.core.ui.theme.colorPrimary
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

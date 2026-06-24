@@ -14,8 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.color.alpha
 import com.lianyi.paimonsnotebook.common.extension.modifier.animation.drawArcBorder
-import com.lianyi.paimonsnotebook.ui.theme.*
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_30
+import com.lianyi.core.ui.theme.Transparent
 @Composable
 fun CircleRingChart(
     title: String,

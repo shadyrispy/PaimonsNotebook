@@ -2,8 +2,7 @@ package com.lianyi.paimonsnotebook.common.extension.color
 
 import androidx.compose.ui.graphics.Color
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
-import com.lianyi.paimonsnotebook.ui.theme.Black
-
+import com.lianyi.core.ui.theme.Black
 fun String.parseColor():Color{
     return try {
         Color(android.graphics.Color.parseColor(this))

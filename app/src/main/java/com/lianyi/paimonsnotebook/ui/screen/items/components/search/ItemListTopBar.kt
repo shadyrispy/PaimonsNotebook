@@ -21,8 +21,7 @@ import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.widget.InputTextFiled
 import com.lianyi.paimonsnotebook.common.util.enums.ListLayoutStyle
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.filter.ItemFilterViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
-
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
 @Composable
 internal fun ItemListTopBar(
     itemFilterViewModel: ItemFilterViewModel<*>,

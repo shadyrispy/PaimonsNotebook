@@ -52,14 +52,13 @@ import com.lianyi.paimonsnotebook.ui.screen.app_widget.components.panel.AppWidge
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.viewmodel.AppWidgetEditActionViewModel
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.ClickableInformationItem
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_50
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_50
 import com.lianyi.paimonsnotebook.ui.theme.Primary
-import com.lianyi.paimonsnotebook.ui.theme.Warning
-import com.lianyi.paimonsnotebook.ui.theme.Warning_1
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.White_50
-
+import com.lianyi.core.ui.theme.Warning
+import com.lianyi.core.ui.theme.Warning_1
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.White_50
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun BoxScope.AppWidgetEditActionPanel(

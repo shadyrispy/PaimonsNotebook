@@ -18,10 +18,10 @@ import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpacer
 import com.lianyi.paimonsnotebook.common.extension.value.toPx
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_60
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
+import com.lianyi.core.ui.theme.White
 import kotlin.math.roundToInt
 
 /*

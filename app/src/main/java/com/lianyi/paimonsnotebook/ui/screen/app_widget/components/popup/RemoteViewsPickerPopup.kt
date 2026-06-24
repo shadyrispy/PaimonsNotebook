@@ -31,8 +31,8 @@ import com.lianyi.paimonsnotebook.common.components.popup.BasePopup
 import com.lianyi.paimonsnotebook.common.components.spacer.StatusBarPaddingSpacer
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.RemoteViewsPreviewAnimData
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Black_5
+import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.Black_5
 import com.lianyi.paimonsnotebook.ui.widgets.common.data.RemoteViewsInfo
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsIndexes
 import com.lianyi.paimonsnotebook.ui.widgets.util.RemoteViewsPreviewHelper

@@ -52,13 +52,12 @@ import com.lianyi.paimonsnotebook.common.util.time.TimeStampType
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostStructuredContentData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.StructuredBackupText
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Gray_Dark
-import com.lianyi.paimonsnotebook.ui.theme.Font_Normal
-import com.lianyi.paimonsnotebook.ui.theme.Info
-import com.lianyi.paimonsnotebook.ui.theme.LinkColor
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.CardBackGroundColor_Gray_Dark
+import com.lianyi.core.ui.theme.Font_Normal
+import com.lianyi.core.ui.theme.Info
+import com.lianyi.core.ui.theme.LinkColor
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun PostStructureContentListTest(

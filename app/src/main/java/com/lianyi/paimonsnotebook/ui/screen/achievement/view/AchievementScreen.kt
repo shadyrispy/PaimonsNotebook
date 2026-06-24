@@ -51,15 +51,14 @@ import com.lianyi.paimonsnotebook.common.extension.color.alpha
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.achievement.viewmodel.AchievementScreenViewModel
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.BlurButton
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-import com.lianyi.paimonsnotebook.ui.theme.Font_Normal
-import com.lianyi.paimonsnotebook.ui.theme.Font_Primary
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color
+import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.core.ui.theme.Font_Normal
+import com.lianyi.core.ui.theme.Font_Primary
+import com.lianyi.core.ui.theme.GachaStar5Color
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.White_40
 class AchievementScreen : BaseActivity() {
 
     private val viewModel by lazy {

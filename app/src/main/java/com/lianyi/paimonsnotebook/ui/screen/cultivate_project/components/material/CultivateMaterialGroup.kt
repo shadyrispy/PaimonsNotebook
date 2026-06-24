@@ -34,7 +34,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.avatar.AvatarData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.cultivate_project.util.CultivateMaterialListDisplayState
-import com.lianyi.paimonsnotebook.ui.theme.Black
+import com.lianyi.core.ui.theme.Black
 import kotlinx.coroutines.delay
 
 @Composable

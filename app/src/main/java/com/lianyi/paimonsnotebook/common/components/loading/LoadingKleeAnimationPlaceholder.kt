@@ -34,8 +34,7 @@ import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.string.warnNotify
 import com.lianyi.paimonsnotebook.ui.theme.LoadingKleeAccent
 import com.lianyi.paimonsnotebook.ui.theme.LoadingKleeBackground
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 @Composable
 fun LoadingAnimationPlaceholder(
     height: Dp = 140.dp,

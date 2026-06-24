@@ -34,8 +34,7 @@ import com.lianyi.paimonsnotebook.ui.overlay.debug.view.fold.DebugMetadataConten
 import com.lianyi.paimonsnotebook.ui.overlay.debug.view.fold.DebugPostContent
 import com.lianyi.paimonsnotebook.ui.overlay.debug.view.fold.DebugTempContent
 import com.lianyi.paimonsnotebook.ui.overlay.debug.viewmodel.DebugOverlayViewModel
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 /*
 * 调试面板内容
 * */

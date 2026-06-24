@@ -16,12 +16,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-import com.lianyi.paimonsnotebook.ui.theme.Black_90
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_30
+import com.lianyi.core.ui.theme.Black_60
+import com.lianyi.core.ui.theme.Black_90
+import com.lianyi.core.ui.theme.White
 @Composable
 fun CultivateItemPropertyPromoteInfo(
     iconUrl: String,

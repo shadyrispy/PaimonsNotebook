@@ -33,11 +33,9 @@ import com.lianyi.paimonsnotebook.common.components.layout.blur_card.widget.Item
 import com.lianyi.paimonsnotebook.common.components.media.NetworkImageForMetadata
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.format.FightPropertyFormat
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.White
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.White
+import com.lianyi.core.ui.theme.White_40
 @Composable
 internal fun ItemPropertyContent(
     iconUrl: String,

@@ -38,11 +38,10 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_40
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_40
 import com.lianyi.paimonsnotebook.ui.theme.Primary_1
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 /*
 * 描述对话框
 *

@@ -9,9 +9,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
-
-
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
 fun Modifier.blurCard(blur: Dp = 4.dp, blurBackgroundColor: Color = BlurCardBackgroundColor,padding:Dp = 12.dp) =
     this.clip(RoundedCornerShape(4.dp))
         .background(blurBackgroundColor)

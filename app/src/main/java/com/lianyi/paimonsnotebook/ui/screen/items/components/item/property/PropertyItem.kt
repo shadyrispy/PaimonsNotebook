@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.format.FightPropertyFormat
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Error
-import com.lianyi.paimonsnotebook.ui.theme.Success
-import com.lianyi.paimonsnotebook.ui.theme.White_40
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Error
+import com.lianyi.core.ui.theme.Success
+import com.lianyi.core.ui.theme.White_40
 import kotlin.math.abs
 import kotlin.math.roundToInt
 

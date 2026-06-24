@@ -3,8 +3,7 @@ package com.lianyi.paimonsnotebook.common.data.html
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.compose.ui.graphics.Color
-import com.lianyi.paimonsnotebook.ui.theme.Black
-
+import com.lianyi.core.ui.theme.Black
 /*
 * HTML文本数据
 * 用于记录解析的文字内容、颜色、超链接

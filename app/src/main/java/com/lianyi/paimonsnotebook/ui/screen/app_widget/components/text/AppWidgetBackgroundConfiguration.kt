@@ -13,8 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.ui.theme.Info
-
+import com.lianyi.core.ui.theme.Info
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun AppWidgetBackgroundConfiguration(

@@ -13,8 +13,9 @@ import com.lianyi.paimonsnotebook.common.components.media.Indicator
 import com.lianyi.paimonsnotebook.common.data.hoyolab.game_record.DailyNote
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.util.compose.provider.NoOverscrollEffectThemeProvides
-import com.lianyi.paimonsnotebook.ui.theme.*
-
+import com.lianyi.core.ui.theme.CardBackGroundColor
+import com.lianyi.paimonsnotebook.ui.theme.Primary_2
+import com.lianyi.paimonsnotebook.ui.theme.Primary_8
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun DailyNoteCardGroup(

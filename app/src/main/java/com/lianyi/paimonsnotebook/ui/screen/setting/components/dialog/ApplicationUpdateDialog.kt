@@ -29,11 +29,9 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.extension.string.show
 import com.lianyi.paimonsnotebook.common.util.enums.DownloadState
 import com.lianyi.paimonsnotebook.ui.screen.setting.util.UpdateService
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.ElementGrassColor
-import com.lianyi.paimonsnotebook.ui.theme.Primary_9
-
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.ElementGrassColor
+import com.lianyi.core.ui.theme.Primary_9
 @Composable
 fun ApplicationUpdateDialog(
     downloadState: DownloadState,

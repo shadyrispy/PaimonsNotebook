@@ -17,8 +17,7 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
 import com.lianyi.paimonsnotebook.ui.screen.items.data.SearchOptionData
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.filter.ItemFilterViewModel
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color
-
+import com.lianyi.core.ui.theme.GachaStar5Color
 object ItemSearchOptionHelper {
     private val list by lazy {
         mutableListOf<Pair<String, List<SearchOptionData>>>()

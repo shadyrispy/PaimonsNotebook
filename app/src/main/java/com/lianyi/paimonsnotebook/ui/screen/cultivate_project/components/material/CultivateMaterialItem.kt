@@ -24,8 +24,7 @@ import com.lianyi.paimonsnotebook.common.database.cultivate.entity.CultivateItem
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 @Composable
 fun VerticalCultivateMaterialItem(
     cultivateItemMaterials: CultivateItemMaterials,

@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.animation.drawArcBorder
 import com.lianyi.paimonsnotebook.ui.screen.daily_note.data.DailyNoteCardItemData
-import com.lianyi.paimonsnotebook.ui.theme.Info
+import com.lianyi.core.ui.theme.Info
 import com.lianyi.paimonsnotebook.ui.theme.Primary_1
 import com.lianyi.paimonsnotebook.ui.theme.Primary_7
 

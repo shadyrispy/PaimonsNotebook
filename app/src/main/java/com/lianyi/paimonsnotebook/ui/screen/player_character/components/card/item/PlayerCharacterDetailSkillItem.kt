@@ -19,9 +19,8 @@ import com.lianyi.core.ui.components.text.PrimaryText
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.media.NetworkImageForMetadata
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.ElementType
-import com.lianyi.paimonsnotebook.ui.theme.Black_80
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black_80
+import com.lianyi.core.ui.theme.White
 @Composable
 fun PlayerCharacterDetailSkillItem(
     iconUrl: String,

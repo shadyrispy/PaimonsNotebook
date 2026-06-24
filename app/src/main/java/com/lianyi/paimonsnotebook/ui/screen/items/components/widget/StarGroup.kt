@@ -11,8 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.R
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color
-
+import com.lianyi.core.ui.theme.GachaStar5Color
 @Composable
 fun StarGroup(
     starCount:Int,

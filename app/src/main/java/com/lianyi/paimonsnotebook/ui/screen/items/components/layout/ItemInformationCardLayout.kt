@@ -11,8 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
-
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
 /*
 * 物品信息卡片布局
 * */

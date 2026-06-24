@@ -48,11 +48,10 @@ import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.ui.screen.achievement.components.achievement.AchievementActionButton
 import com.lianyi.paimonsnotebook.ui.screen.achievement.util.enums.AchievementEditActionType
 import com.lianyi.paimonsnotebook.ui.screen.achievement.viewmodel.AchievementGoalScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
-import com.lianyi.paimonsnotebook.ui.theme.Success
-
+import com.lianyi.core.ui.theme.Success
 class AchievementGoalScreen : BaseActivity() {
 
     private val viewModel by lazy {

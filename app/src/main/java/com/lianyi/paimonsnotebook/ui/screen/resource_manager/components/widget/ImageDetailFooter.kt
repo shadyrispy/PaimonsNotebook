@@ -25,10 +25,9 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.spacer.NavigationBarPaddingSpacer
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black_90
-import com.lianyi.paimonsnotebook.ui.theme.Font_Normal
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black_90
+import com.lianyi.core.ui.theme.Font_Normal
+import com.lianyi.core.ui.theme.White
 @Composable
 fun ImageDetailFooter(
     deleteImage: () -> Unit,

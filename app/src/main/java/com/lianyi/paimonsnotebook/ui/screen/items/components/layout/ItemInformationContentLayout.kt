@@ -17,8 +17,7 @@ import androidx.compose.ui.zIndex
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.components.media.NetworkImageForMetadata
 import com.lianyi.paimonsnotebook.common.util.compose.remember.rememberStatusBarHeightDp
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-
+import com.lianyi.core.ui.theme.Black_60
 /*
 * 物品信息内容布局
 * */

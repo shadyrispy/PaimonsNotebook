@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.ui.theme.Primary_2
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.White
 import java.io.File
 
 @Composable

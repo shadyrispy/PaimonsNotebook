@@ -32,9 +32,8 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.conveter.AvatarIconCo
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.AssociationType
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
 import com.lianyi.paimonsnotebook.ui.theme.AvatarInfoBackgroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.White_40
 @Composable
 internal fun AvatarInformationContent(
     avatar: AvatarData

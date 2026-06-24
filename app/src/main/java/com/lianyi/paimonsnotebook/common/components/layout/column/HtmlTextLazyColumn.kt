@@ -44,8 +44,8 @@ import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.string.show
 import com.lianyi.paimonsnotebook.common.extension.string.toAnnotatedString
 import com.lianyi.paimonsnotebook.common.util.html.HtmlSpanType
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.LinkColor
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.LinkColor
 import okhttp3.internal.toHexString
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element

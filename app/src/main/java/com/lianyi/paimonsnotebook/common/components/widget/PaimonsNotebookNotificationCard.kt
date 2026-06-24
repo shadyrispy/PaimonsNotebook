@@ -22,13 +22,12 @@ import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.util.notification.PaimonsNotebookNotification
 import com.lianyi.paimonsnotebook.common.util.notification.PaimonsNotebookNotificationData
 import com.lianyi.paimonsnotebook.common.util.notification.PaimonsNotebookNotificationType
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Error
-import com.lianyi.paimonsnotebook.ui.theme.Error_1
-import com.lianyi.paimonsnotebook.ui.theme.Primary_9
-import com.lianyi.paimonsnotebook.ui.theme.Warning
-import com.lianyi.paimonsnotebook.ui.theme.Warning_1
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Error
+import com.lianyi.core.ui.theme.Error_1
+import com.lianyi.core.ui.theme.Primary_9
+import com.lianyi.core.ui.theme.Warning
+import com.lianyi.core.ui.theme.Warning_1
 @Composable
 fun PaimonsNotebookNotificationCard(
     data: PaimonsNotebookNotificationData,

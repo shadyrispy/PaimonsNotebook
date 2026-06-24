@@ -3,8 +3,7 @@ package com.lianyi.paimonsnotebook.common.data.html
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import com.lianyi.paimonsnotebook.common.util.html.HtmlSpanType
-import com.lianyi.paimonsnotebook.ui.theme.Black
-
+import com.lianyi.core.ui.theme.Black
 /*
 * 默认为text
 * textList颜色与文本，用于创建不同颜色的字符

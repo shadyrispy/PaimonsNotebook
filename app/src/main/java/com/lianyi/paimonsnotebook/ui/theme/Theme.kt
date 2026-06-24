@@ -9,6 +9,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.lianyi.core.ui.theme.colorAccent
+import com.lianyi.core.ui.theme.colorPrimary
+import com.lianyi.core.ui.theme.colorPrimaryDark
 import com.lianyi.paimonsnotebook.common.components.components.PaimonsNotebookNotificationComponents
 import com.lianyi.paimonsnotebook.common.components.components.SlideExitBox
 

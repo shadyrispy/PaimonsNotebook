@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.RemoteViewsPreviewAnimData
-import com.lianyi.paimonsnotebook.ui.theme.Black_40
-import com.lianyi.paimonsnotebook.ui.theme.Black_5
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
+import com.lianyi.core.ui.theme.Black_40
+import com.lianyi.core.ui.theme.Black_5
+import com.lianyi.core.ui.theme.Transparent
 import kotlin.math.roundToInt
 
 @Composable

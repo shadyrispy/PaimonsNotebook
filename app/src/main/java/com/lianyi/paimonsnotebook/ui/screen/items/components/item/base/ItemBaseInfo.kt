@@ -17,8 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.core.ui.components.text.PrimaryText
 import com.lianyi.paimonsnotebook.common.components.media.NetworkImageForMetadata
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.White_40
 @Composable
 internal fun ItemBaseInfo(
     name: String,

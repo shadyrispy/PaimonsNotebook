@@ -22,8 +22,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import com.lianyi.paimonsnotebook.common.extension.modifier.action.doubleClick
 import com.lianyi.paimonsnotebook.common.extension.modifier.action.pointerInputDetectTransformGestures
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
-
+import com.lianyi.core.ui.theme.Black_60
 @Composable
 fun FullScreenImage(
     url: String,

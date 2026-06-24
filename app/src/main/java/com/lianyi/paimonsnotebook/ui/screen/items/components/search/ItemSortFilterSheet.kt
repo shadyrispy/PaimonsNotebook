@@ -15,8 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.filter.ItemFilterViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-
+import com.lianyi.core.ui.theme.BackGroundColor
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun ItemSortFilterSheet(

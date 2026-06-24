@@ -7,10 +7,9 @@ import androidx.compose.ui.graphics.toArgb
 import com.lianyi.paimonsnotebook.R
 import com.lianyi.paimonsnotebook.common.application.PaimonsNotebookApplication
 import com.lianyi.paimonsnotebook.common.data.repository.AppWidgetRepository
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.core.ui.theme.White
 object AppWidgetHelper {
     private val context by lazy {
         PaimonsNotebookApplication.context

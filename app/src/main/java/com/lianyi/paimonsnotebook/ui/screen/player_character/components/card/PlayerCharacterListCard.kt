@@ -35,11 +35,10 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.information.Informa
 import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.StarGroup
 import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.item.PlayerCharacterDetailTalentCard
 import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.item.PlayerCharacterDetailWeaponCard
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.CardBackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.FetterColor
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 @Composable
 fun PlayerCharacterListCard(
     characterData: CharacterListData.CharacterData,

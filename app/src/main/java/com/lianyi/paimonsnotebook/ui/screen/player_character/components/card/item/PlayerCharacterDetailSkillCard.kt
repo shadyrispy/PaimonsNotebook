@@ -26,9 +26,8 @@ import com.lianyi.paimonsnotebook.common.components.widget.Divider_10
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.avatar.AvatarData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.conveter.SkillIconConverter
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-import com.lianyi.paimonsnotebook.ui.theme.White_70
-
+import com.lianyi.core.ui.theme.White_40
+import com.lianyi.core.ui.theme.White_70
 @Composable
 fun PlayerCharacterDetailTalentCard(
     talents: List<AvatarData.Talent>,

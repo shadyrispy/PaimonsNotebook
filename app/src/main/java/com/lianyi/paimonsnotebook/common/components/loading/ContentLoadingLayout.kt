@@ -6,9 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-
-
+import com.lianyi.core.ui.theme.BackGroundColor
 /*
 * 内容加载布局,根据不同的加载状态显示不同的内容
 * */

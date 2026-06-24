@@ -38,12 +38,11 @@ import androidx.compose.ui.window.PopupProperties
 import com.lianyi.paimonsnotebook.common.components.placeholder.TextPlaceholder
 import com.lianyi.paimonsnotebook.common.data.popup.FloatPositionProvider
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_30
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.paimonsnotebook.ui.theme.Primary_3
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-
+import com.lianyi.core.ui.theme.Transparent
 @Composable
 fun AppWidgetFloatComponentInfoPanel(
     popupProvider: FloatPositionProvider,

@@ -12,9 +12,8 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.weapon.WeaponData
 import com.lianyi.paimonsnotebook.ui.screen.items.components.information.InformationItem
 import com.lianyi.paimonsnotebook.ui.screen.items.data.cultivate.CultivateConfigData
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5WeaponColor
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.GachaStar5WeaponColor
+import com.lianyi.core.ui.theme.White
 @Composable
 fun WeaponCultivateConfigCard(
     weapon: WeaponData,

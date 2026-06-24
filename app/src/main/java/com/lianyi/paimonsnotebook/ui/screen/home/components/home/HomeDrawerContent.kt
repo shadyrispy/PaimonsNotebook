@@ -25,8 +25,7 @@ import com.lianyi.paimonsnotebook.ui.screen.home.components.card.account.Account
 import com.lianyi.paimonsnotebook.ui.screen.home.components.menu.SideBarMenuList
 import com.lianyi.paimonsnotebook.ui.screen.home.data.ModalItemData
 import com.lianyi.paimonsnotebook.ui.screen.setting.view.SettingsScreen
-import com.lianyi.paimonsnotebook.ui.theme.Black
-
+import com.lianyi.core.ui.theme.Black
 @Composable
 fun HomeDrawerContent(
     selectedUser: User?,

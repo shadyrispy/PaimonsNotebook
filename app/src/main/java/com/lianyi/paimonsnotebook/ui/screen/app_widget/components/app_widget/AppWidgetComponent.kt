@@ -33,8 +33,7 @@ import com.lianyi.paimonsnotebook.common.database.app_widget_binding.util.AppWid
 import com.lianyi.paimonsnotebook.common.extension.modifier.offset.rotateBy
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.AppWidgetEditData
 import com.lianyi.paimonsnotebook.ui.theme.Primary_3
-import com.lianyi.paimonsnotebook.ui.theme.Warning
-
+import com.lianyi.core.ui.theme.Warning
 @Composable
 fun AppWidgetComponent(
     component: AppWidgetEditData.Component,

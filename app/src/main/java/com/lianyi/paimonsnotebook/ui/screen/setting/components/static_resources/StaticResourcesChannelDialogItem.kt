@@ -11,9 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.ui.screen.setting.data.StaticResourcesChannelData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Font_Normal
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Font_Normal
 @Composable
 fun StaticResourcesChannelDialogItem(
     data: StaticResourcesChannelData,

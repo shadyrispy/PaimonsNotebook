@@ -34,7 +34,7 @@ import com.lianyi.paimonsnotebook.ui.screen.account.components.dialog.UserGameRo
 import com.lianyi.paimonsnotebook.ui.screen.items.components.search.ItemSortFilterSheet
 import com.lianyi.paimonsnotebook.ui.screen.player_character.components.card.PlayerCharacterListCard
 import com.lianyi.paimonsnotebook.ui.screen.player_character.viewmodel.PlayerCharacterScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 
 class PlayerCharacterScreen : BaseActivity() {

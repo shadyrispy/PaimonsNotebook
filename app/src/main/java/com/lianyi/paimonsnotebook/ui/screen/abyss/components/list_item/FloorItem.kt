@@ -36,10 +36,9 @@ import com.lianyi.paimonsnotebook.common.util.time.TimeHelper
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.game_record.abyss.SpiralAbyssData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.avatar.AvatarData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.monster.MonsterData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.Black_30
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.Black_30
 @Composable
 fun FloorItem(
     floor: SpiralAbyssData.Floor,

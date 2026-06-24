@@ -22,8 +22,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.get
 import androidx.window.layout.WindowMetricsCalculator
-import com.lianyi.paimonsnotebook.ui.theme.Black
-
+import com.lianyi.core.ui.theme.Black
 @Composable
 fun SlideExitBox(
     activity: Activity,

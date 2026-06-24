@@ -41,11 +41,10 @@ import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostFullData
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.PostStructuredContent
 import com.lianyi.paimonsnotebook.common.web.hoyolab.bbs.post.StructuredContentType
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-import com.lianyi.paimonsnotebook.ui.theme.LinkColor
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
+import com.lianyi.core.ui.theme.LinkColor
 /*
 * 帖子结构内容列表项
 *

@@ -37,7 +37,7 @@ import com.lianyi.paimonsnotebook.common.data.hoyolab.user.User
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
-import com.lianyi.paimonsnotebook.ui.theme.Black
+import com.lianyi.core.ui.theme.Black
 import com.lianyi.paimonsnotebook.ui.theme.Primary_1
 
 @Composable

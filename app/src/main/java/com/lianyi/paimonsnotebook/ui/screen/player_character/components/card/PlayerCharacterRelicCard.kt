@@ -36,12 +36,11 @@ import com.lianyi.paimonsnotebook.common.web.hutao.genshin.conveter.RelicIconCon
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.FightProperty
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.ReliquaryType
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.reliquary.ReliquaryData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color2
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-import com.lianyi.paimonsnotebook.ui.theme.White_70
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.GachaStar5Color
+import com.lianyi.core.ui.theme.GachaStar5Color2
+import com.lianyi.core.ui.theme.White_40
+import com.lianyi.core.ui.theme.White_70
 @Composable
 fun PlayerCharacterRelicCard(
     relicList: List<CharacterDetailData.Relic>,

@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.AppWidgetConfigurationData
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.White
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

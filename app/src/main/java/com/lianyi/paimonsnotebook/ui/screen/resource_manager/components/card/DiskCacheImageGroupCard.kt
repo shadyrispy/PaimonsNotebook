@@ -19,8 +19,8 @@ import com.lianyi.paimonsnotebook.common.extension.list.split
 import com.lianyi.paimonsnotebook.common.extension.modifier.padding.paddingBottom
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.components.DiskCacheGroupImage
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.data.DiskCacheGroupData
-import com.lianyi.paimonsnotebook.ui.theme.Font_Primary
-import com.lianyi.paimonsnotebook.ui.theme.Info_1
+import com.lianyi.core.ui.theme.Font_Primary
+import com.lianyi.core.ui.theme.Info_1
 import kotlin.math.ceil
 
 @Composable

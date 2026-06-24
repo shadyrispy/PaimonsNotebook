@@ -23,11 +23,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.value.nonScaledSp
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
-import com.lianyi.paimonsnotebook.ui.theme.Black_40
-import com.lianyi.paimonsnotebook.ui.theme.White_60
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_10
+import com.lianyi.core.ui.theme.Black_40
+import com.lianyi.core.ui.theme.White_60
 @Composable
 fun TextSlider(
     value: Float,

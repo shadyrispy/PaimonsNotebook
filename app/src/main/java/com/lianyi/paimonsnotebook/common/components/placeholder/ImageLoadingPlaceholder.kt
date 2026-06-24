@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.R
-import com.lianyi.paimonsnotebook.ui.theme.Black_10
+import com.lianyi.core.ui.theme.Black_10
 import com.lianyi.paimonsnotebook.ui.theme.Gray_F5
 
 /*

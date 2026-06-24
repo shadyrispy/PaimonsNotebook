@@ -15,11 +15,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Black_70
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Light_1
-
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Black_70
+import com.lianyi.core.ui.theme.CardBackGroundColor_Light_1
 @Composable
 fun IconTextHintSlotItem(
     modifier: Modifier = Modifier,

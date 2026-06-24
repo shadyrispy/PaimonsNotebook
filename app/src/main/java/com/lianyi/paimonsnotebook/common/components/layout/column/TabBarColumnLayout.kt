@@ -8,8 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.components.widget.TabBar
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-
+import com.lianyi.core.ui.theme.BackGroundColor
 /*
 * 顶部tab垂直布局
 * */

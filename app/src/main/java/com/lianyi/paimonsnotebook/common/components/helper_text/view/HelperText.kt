@@ -16,8 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 import com.lianyi.paimonsnotebook.common.util.enums.HelperTextStatus
-import com.lianyi.paimonsnotebook.ui.theme.*
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Error
+import com.lianyi.core.ui.theme.Info
+import com.lianyi.core.ui.theme.Info_1
+import com.lianyi.core.ui.theme.Warning
+import com.lianyi.core.ui.theme.colorPrimary
 /*
 * 辅助说明/额外说明/帮助文字
 * 用于输入框下对输入框内的内容进行额外说明

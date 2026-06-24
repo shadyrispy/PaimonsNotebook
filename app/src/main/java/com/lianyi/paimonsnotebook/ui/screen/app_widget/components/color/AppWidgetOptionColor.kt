@@ -14,9 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.extension.modifier.padding.paddingTop
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Transparent
 @Composable
 internal fun AppWidgetOptionColor(
     color: Color,

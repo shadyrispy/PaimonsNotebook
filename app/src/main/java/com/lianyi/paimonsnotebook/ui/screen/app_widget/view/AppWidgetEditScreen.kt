@@ -28,10 +28,9 @@ import com.lianyi.paimonsnotebook.ui.screen.app_widget.components.app_widget.App
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.components.popup.AppWidgetEditActionPanel
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.components.widget.SelectedArea
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.viewmodel.AppWidgetEditScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.BackGroundColor
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 class AppWidgetEditScreen : BaseActivity(
     enableSensor = false,
     initOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE

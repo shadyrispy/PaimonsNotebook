@@ -13,8 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.lianyi.paimonsnotebook.common.components.media.NetworkImageForMetadata
 import com.lianyi.paimonsnotebook.common.components.widget.TextSliderRtL
 import com.lianyi.paimonsnotebook.ui.screen.items.data.cultivate.CultivateConfigData
-import com.lianyi.paimonsnotebook.ui.theme.Black
-
+import com.lianyi.core.ui.theme.Black
 @Composable
 fun CultivateConfigListItem(
     config:CultivateConfigData

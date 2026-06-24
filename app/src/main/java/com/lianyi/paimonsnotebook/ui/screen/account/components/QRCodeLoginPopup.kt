@@ -30,10 +30,9 @@ import com.lianyi.paimonsnotebook.common.components.widget.TextButton
 import com.lianyi.paimonsnotebook.common.util.file.FileHelper
 import com.lianyi.paimonsnotebook.common.util.system_service.sdkVersionLessThanOrEqualTo29
 import com.lianyi.paimonsnotebook.ui.screen.setting.components.SettingOption
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-import com.lianyi.paimonsnotebook.ui.theme.Font_Primary
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-
+import com.lianyi.core.ui.theme.BackGroundColor
+import com.lianyi.core.ui.theme.Font_Primary
+import com.lianyi.core.ui.theme.Transparent
 @Composable
 fun QRCodeLoginPopup(
     visible: Boolean,

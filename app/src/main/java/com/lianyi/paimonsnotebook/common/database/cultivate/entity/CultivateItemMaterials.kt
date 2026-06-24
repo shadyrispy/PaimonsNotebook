@@ -4,10 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Ignore
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Success
-import com.lianyi.paimonsnotebook.ui.theme.Warning
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Success
+import com.lianyi.core.ui.theme.Warning
 /*
 * 养成计划物品所需材料表
 *

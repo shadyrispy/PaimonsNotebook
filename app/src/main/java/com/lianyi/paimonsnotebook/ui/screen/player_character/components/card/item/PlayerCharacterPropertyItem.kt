@@ -19,9 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.game_record.character.CharacterDetailData
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.intrinsic.FightProperty
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.White_40
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.White_40
 @Composable
 fun PlayerCharacterPropertyItem(
     modifier: Modifier,

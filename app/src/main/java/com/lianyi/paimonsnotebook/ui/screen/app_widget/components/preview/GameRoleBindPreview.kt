@@ -25,8 +25,7 @@ import com.lianyi.paimonsnotebook.common.database.app_widget_binding.data.AppWid
 import com.lianyi.paimonsnotebook.common.database.disk_cache.entity.DiskCache
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hoyolab.takumi.binding.UserGameRoleData
-import com.lianyi.paimonsnotebook.ui.theme.Info
-
+import com.lianyi.core.ui.theme.Info
 @Composable
 internal fun GameRoleBindPreview(
     user: User?,

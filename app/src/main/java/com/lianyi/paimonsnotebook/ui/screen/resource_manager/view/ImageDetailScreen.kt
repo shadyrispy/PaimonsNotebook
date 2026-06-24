@@ -35,7 +35,7 @@ import com.lianyi.paimonsnotebook.ui.screen.resource_manager.components.widget.I
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.components.widget.ImageDetailHeader
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.viewmodel.ImageDetailScreenViewModel
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
-import com.lianyi.paimonsnotebook.ui.theme.White
+import com.lianyi.core.ui.theme.White
 import kotlinx.coroutines.launch
 
 class ImageDetailScreen : BaseActivity() {

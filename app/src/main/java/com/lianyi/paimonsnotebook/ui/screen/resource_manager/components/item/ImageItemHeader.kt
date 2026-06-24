@@ -14,8 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.ui.screen.resource_manager.data.ImageHeaderData
-import com.lianyi.paimonsnotebook.ui.theme.BlurCardBackgroundColor
-
+import com.lianyi.core.ui.theme.BlurCardBackgroundColor
 @Composable
 fun ImageItemHeader(
     imageHeaderData: ImageHeaderData,

@@ -18,8 +18,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.search.ItemSortFilt
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemFilterType
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.filter.ItemFilterViewModel
-import com.lianyi.paimonsnotebook.ui.theme.BackGroundColor
-
+import com.lianyi.core.ui.theme.BackGroundColor
 /*
 * 物品界面内容
 * 支持双视图模式: LIST(列表+搜索+筛选) / DETAIL(详情)

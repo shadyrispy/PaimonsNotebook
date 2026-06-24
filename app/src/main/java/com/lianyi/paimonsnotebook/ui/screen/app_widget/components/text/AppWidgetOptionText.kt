@@ -14,11 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
-import com.lianyi.paimonsnotebook.ui.theme.Black
-import com.lianyi.paimonsnotebook.ui.theme.Font_Normal
-import com.lianyi.paimonsnotebook.ui.theme.Transparent
-import com.lianyi.paimonsnotebook.ui.theme.White_60
-
+import com.lianyi.core.ui.theme.Black
+import com.lianyi.core.ui.theme.Font_Normal
+import com.lianyi.core.ui.theme.Transparent
+import com.lianyi.core.ui.theme.White_60
 @Composable
 internal fun AppWidgetOptionText(
     text: String,

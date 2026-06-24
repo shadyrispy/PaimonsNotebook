@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.components.widget.ProgressBar
-import com.lianyi.paimonsnotebook.ui.theme.Black_60
+import com.lianyi.core.ui.theme.Black_60
 import com.lianyi.paimonsnotebook.ui.theme.ProgressBarTrackColor
 
 @Composable

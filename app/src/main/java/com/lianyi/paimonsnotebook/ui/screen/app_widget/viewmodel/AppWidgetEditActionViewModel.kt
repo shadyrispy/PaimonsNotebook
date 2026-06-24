@@ -23,7 +23,7 @@ import com.lianyi.paimonsnotebook.ui.screen.app_widget.data.edit.config.AppWidge
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.AppWidgetAlignmentHelper
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.enums.ComponentAlignType
 import com.lianyi.paimonsnotebook.ui.screen.app_widget.util.enums.ComponentSelectType
-import com.lianyi.paimonsnotebook.ui.theme.Error
+import com.lianyi.core.ui.theme.Error
 import com.lianyi.paimonsnotebook.ui.theme.Primary
 import com.lianyi.paimonsnotebook.ui.theme.Primary_3
 import kotlinx.coroutines.CoroutineScope

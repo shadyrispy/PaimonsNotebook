@@ -23,8 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.lianyi.paimonsnotebook.common.extension.modifier.radius.radius
 import com.lianyi.paimonsnotebook.common.web.hutao.genshin.item.Material
 import com.lianyi.paimonsnotebook.ui.screen.items.components.item.icon.ItemIconCard
-import com.lianyi.paimonsnotebook.ui.theme.Primary_9
-
+import com.lianyi.core.ui.theme.Primary_9
 fun LazyGridScope.materialTitle(
     list: List<Material>,
     onClickMaterial: (Material, IntSize, Offset) -> Unit,

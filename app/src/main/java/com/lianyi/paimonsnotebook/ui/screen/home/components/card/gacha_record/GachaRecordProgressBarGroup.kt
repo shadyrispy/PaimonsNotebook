@@ -9,9 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar4Color
-import com.lianyi.paimonsnotebook.ui.theme.GachaStar5Color
-
+import com.lianyi.core.ui.theme.GachaStar4Color
+import com.lianyi.core.ui.theme.GachaStar5Color
 /*
 *
 * */

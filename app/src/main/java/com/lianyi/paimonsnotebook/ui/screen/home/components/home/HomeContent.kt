@@ -29,8 +29,7 @@ import com.lianyi.paimonsnotebook.ui.screen.home.components.BannerItem
 import com.lianyi.paimonsnotebook.ui.screen.home.components.WebHomeNearActivity
 import com.lianyi.paimonsnotebook.ui.screen.home.components.notice.HomeEventNotice
 import com.lianyi.paimonsnotebook.ui.screen.home.util.PostType
-import com.lianyi.paimonsnotebook.ui.theme.White
-
+import com.lianyi.core.ui.theme.White
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun HomeContent(

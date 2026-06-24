@@ -12,9 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lianyi.paimonsnotebook.ui.theme.CardBackGroundColor_Gray_Dark
-import com.lianyi.paimonsnotebook.ui.theme.Font_Primary
-
+import com.lianyi.core.ui.theme.CardBackGroundColor_Gray_Dark
+import com.lianyi.core.ui.theme.Font_Primary
 /*
 * 全圆角标签
 * */

@@ -51,7 +51,7 @@ import com.lianyi.paimonsnotebook.ui.screen.items.components.widget.ItemTabLayou
 import com.lianyi.paimonsnotebook.ui.screen.items.data.ItemListCardData
 import com.lianyi.paimonsnotebook.ui.screen.items.util.ItemHelper
 import com.lianyi.paimonsnotebook.ui.screen.items.viewmodel.screen.WeaponScreenViewModel
-import com.lianyi.paimonsnotebook.ui.theme.Error
+import com.lianyi.core.ui.theme.Error
 import com.lianyi.paimonsnotebook.ui.theme.PaimonsNotebookTheme
 import androidx.compose.material.Text
 
