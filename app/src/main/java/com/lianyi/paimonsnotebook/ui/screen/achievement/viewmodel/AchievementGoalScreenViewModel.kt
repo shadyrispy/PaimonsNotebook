@@ -144,11 +144,12 @@ class AchievementGoalScreenViewModel : ViewModel() {
             goalEarnedPrimogems = achievementList
                 .filter { finishAchievementIdMap.containsKey(it.id) }
                 .sumOf { it.finishReward.Count }
-        }
 
-        //当传入了Id,使列表滚动到此处
-        if (targetId != -1) {
-            targetItemIndex = achievementList.indexOfFirst { it.id == targetId }
+            // 关键: targetItemIndex 必须在 sortBy 之后计算,否则长列表(如天地万象 922 个)
+            // 排序后索引错位导致滚动不到位
+            if (targetId != -1) {
+                targetItemIndex = achievementList.indexOfFirst { it.id == targetId }
+            }
         }
     }
 
