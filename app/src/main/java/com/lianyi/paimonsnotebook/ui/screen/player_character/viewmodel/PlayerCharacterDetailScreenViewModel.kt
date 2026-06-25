@@ -14,6 +14,8 @@ import com.lianyi.paimonsnotebook.common.data.popup.IconTitleInformationPopupWin
 import com.lianyi.paimonsnotebook.common.data.popup.PopupWindowPositionProvider
 import com.lianyi.paimonsnotebook.common.extension.scope.launchIO
 import com.lianyi.paimonsnotebook.common.extension.string.errorNotify
+import com.lianyi.paimonsnotebook.common.util.ConstellationSkillBonusParser
+import com.lianyi.paimonsnotebook.common.util.ConstellationSkillTarget
 import com.lianyi.paimonsnotebook.common.util.enums.LoadingState
 import com.lianyi.paimonsnotebook.common.util.json.JSON
 import com.lianyi.paimonsnotebook.common.util.parameter.getParameterizedType
@@ -227,6 +229,14 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
             it.skill_id to it.level
         } ?: emptyMap()
 
+        // 命座技能加成：按 effect 文本逐条解析（哪条命座加到了哪个技能 + 几级）
+        val constellationBonus = ConstellationSkillBonusParser.summarize(
+            currentCharacterDetail?.constellations.orEmpty()
+        )
+        val naBonus = constellationBonus[ConstellationSkillTarget.NormalAttack] ?: 0
+        val skillBonus = constellationBonus[ConstellationSkillTarget.ElementalSkill] ?: 0
+        val burstBonus = constellationBonus[ConstellationSkillTarget.ElementalBurst] ?: 0
+
         val avatarMaxLevel = 90
         val skillMaxLevel = 10
 
@@ -246,11 +256,13 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         avatar.skillDepot.Skills.forEachIndexed { index, skill ->
             val name = if (index == 0) "普通攻击" else "元素战技"
             // skill_id 对应胡桃元数据中的 Id（技能本身），GroupId 是技能族
-            val actualLevel = skillLevelMap[skill.Id] ?: 1
+            val rawLevel = skillLevelMap[skill.Id] ?: 1
+            val bonus = if (index == 0) naBonus else skillBonus
+            val baseLevel = (rawLevel - bonus).coerceAtLeast(1)
             cultivateConfigList += CultivateConfigData(
                 name = name,
                 iconUrl = skill.iconUrl,
-                fromLevel = actualLevel,
+                fromLevel = baseLevel,
                 maxLevel = skillMaxLevel,
                 type = CultivateItemType.Skill,
                 id = skill.GroupId
@@ -258,11 +270,12 @@ class PlayerCharacterDetailScreenViewModel : ItemBaseViewModel<AvatarData>() {
         }
 
         val energySkill = avatar.skillDepot.EnergySkill
-        val energyActualLevel = skillLevelMap[energySkill.Id] ?: 1
+        val energyRawLevel = skillLevelMap[energySkill.Id] ?: 1
+        val energyBaseLevel = (energyRawLevel - burstBonus).coerceAtLeast(1)
         cultivateConfigList += CultivateConfigData(
             name = "元素爆发",
             iconUrl = energySkill.iconUrl,
-            fromLevel = energyActualLevel,
+            fromLevel = energyBaseLevel,
             maxLevel = skillMaxLevel,
             type = CultivateItemType.Skill,
             id = energySkill.GroupId
